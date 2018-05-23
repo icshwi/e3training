@@ -1,0 +1,19 @@
+# https://github.com/mdavidsaver/epics-doc
+
+record(ao,"$(INST):a"){
+  field(DTYP,"Soft Channel")
+  field(VAL,0)
+  field(UDF,1)
+  field(FLNK,"$(INST):sum")
+}
+record(ao,"$(INST):b"){
+  field(DTYP,"Soft Channel")
+  field(VAL,0)
+  field(UDF,1)
+  field(FLNK,"$(INST):sum")
+}
+record(calc,"$(INST):sum"){
+  field(INPA,"$(INST):a")
+  field(INPB,"$(INST):b")
+  field(CALC,"A + B")
+}

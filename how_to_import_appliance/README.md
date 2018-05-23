@@ -32,7 +32,10 @@ Mostly, click *Import*
 
 ![Import Example](4.png)
 
+## Running and Done!
+
 ![Import Example](5.png)
+
 
 ![Import Example](6.png)
 

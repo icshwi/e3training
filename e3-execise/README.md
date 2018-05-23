@@ -1,4 +1,4 @@
-Very Simple E3 Training Excesis
+Very Simple E3 Training Execise
 ==
 
 ## Requirements

@@ -39,3 +39,9 @@ Mostly, click *Import*
 
 ![Import Example](6.png)
 
+
+## Select E3onCentOS, Show
+
+![Import Example](7.png)
+
+

@@ -1,4 +1,0 @@
-[submodule "e3-gconpi/kameleon"]
-	path = e3-gconpi/kameleon
-	url = https://github.com/jeonghanlee/kameleon
-	ignore = dirty

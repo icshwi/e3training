@@ -3,10 +3,7 @@ require stream,2.7.7
 require iocStats,1856ef5
 require autosave,5.9.0
 
-epicsEnvSet("TOP","${TOP}")
-epicsEnvSet(P, "20180509")
-epicsEnvSet(R, "E3TRNG")
-epicsEnvSet("IOC",  "$(P):$(R)")
+< $(TOP)/cmds/common_env
 
 epicsEnvSet("STREAM_PROTOCOL_PATH", ".:${TOP}/db")
 drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)

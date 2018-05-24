@@ -27,6 +27,14 @@ source /epics/base-3.15.5/require/3.0.0/bin/setE3Env.bash
 One can add it in ones' .bashrc or others
 
 
+* In the training, one use setenv in e3-execise instead of it.
+It set the E3 variables, and Reset EPICS_CA_ADDR_LIST and EPICS_CA_AUTO_ADDR_LIST in the running terminal only.
+
+```
+source e3-execise/setenv
+```
+
+
 * Check whether caget or iocsh.bash exist
 
 ```

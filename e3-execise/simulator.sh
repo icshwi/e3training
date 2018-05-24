@@ -28,7 +28,10 @@ SC_TOP="${SC_SCRIPT%/*}"
 
 KAM_TOP=${SC_TOP}/kameleon
 
+# We have to go the toplevel of the working tree.
+pushd ${SC_TOP}/../
 git submodule update --init --recursive ;
 git submodule update --remote ;
+popd 
 
 python ${KAM_TOP}/kameleon.py --host="127.0.0.1" --file=${KAM_TOP}/simulators/gconpi/gconpi.kam

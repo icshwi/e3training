@@ -5,9 +5,15 @@
 
 Download the prefered OS via the one of the following links :
 
-* https://artifactory.esss.lu.se/artifactory/list/ioc-rootfs/E3onCentOS.ova
 
-* https://artifactory.esss.lu.se/artifactory/list/ioc-rootfs/E3onDebian.ova
+* CentOS 7.4
+  https://artifactory.esss.lu.se/artifactory/list/ioc-rootfs/E3onCentOS.ova
+
+* CentOS 7.5
+  https://artifactory.esss.lu.se/artifactory/list/ioc-rootfs/E3onCentOS7.5.ova
+
+* Debian 9 
+  https://artifactory.esss.lu.se/artifactory/list/ioc-rootfs/E3onDebian.ova
 
 
 # Step 1
@@ -45,3 +51,8 @@ Mostly, click *Import*
 ![Import Example](7.png)
 
 
+# Step 2
+
+ * The user account is *iocuser*
+ * If one knows its password, please try it.
+ * If one doesn't know it, please contact me directly

@@ -1,19 +1,28 @@
-This script, e3.bash, is not the proper tool to deploy the E3 properly, but it is the system which I can design, develop, and debug E3 in many different scenarios. 
+This script, e3.bash, is not the proper tool to deploy the E3 in any production environment, but it is the system which I can design, develop, and debug E3 in many different scenarios.  One can use it to duplicat the E3 in most Linux flavor without any difficulties. 
+
+Note that the account should be in sudo group, 
+
+## Get e3
+```
+$ git clone https://github.com/icshwi/e3
+
+```
 
 
-## Install base 
+
+## Install base within the e3 directory
 
 ```
 $ ./e3.bash base
 ```
 
-## Install require
+## Install require within the e3 directory
 ```
 $ ./e3.base req
 ```
 
 
-## Install common modulese3 
+## Install common modules within the e3 directory
 
 ```
 $ ./e3.bash -c env
@@ -41,3 +50,7 @@ $ ./e3.bash -c mod
 $ ./e3.bash -c load
 
 ```
+
+## Outside the e3 directory
+
+Each base, Require module, and others modules have its own MAKEFILE and its own configuration files. Thus, one can put e3-base, e3-require, and all other e3-modules in any directories where one would like to keep. 

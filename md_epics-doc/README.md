@@ -35,7 +35,7 @@ md_epics-doc (master)$  caput calc:a 2
 Old : calc:a                         0
 New : calc:a                         2
 
- md_epics-doc (master)$ caget calc:a calc:b calc:sum
+md_epics-doc (master)$ caget calc:a calc:b calc:sum
 calc:a                         2
 calc:b                         0
 calc:sum                       2
@@ -49,4 +49,30 @@ md_epics-doc (master)$ caget calc:a calc:b calc:sum
 calc:a                         2
 calc:b                         3
 calc:sum                       5
+```
+
+In order to use QSRV (V4 Modules) in iocsh.bash, please use the following:
+
+```
+iocsh.bash sumV4.cmd
+```
+
+```
+pvasr 
+VERSION : pvAccess Server v6.0.0
+PROVIDER_NAMES : QSRV, 
+BEACON_ADDR_LIST : 
+AUTO_BEACON_ADDR_LIST : 1
+BEACON_PERIOD : 15
+BROADCAST_PORT : 5076
+SERVER_PORT : 5075
+RCV_BUFFER_SIZE : 16384
+IGNORE_ADDR_LIST: 
+INTF_ADDR_LIST : 0.0.0.0
+```
+
+```
+pvlist
+pvget calc:a
+pvget -r "" calc:a
 ```

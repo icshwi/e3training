@@ -23,7 +23,7 @@ iocsh.bash sum.cmd
 iocsh.bash sum-alarm.db "INST=calc"
 ```
 
-## PV Access from a Shell
+## PV Access from a Shell by default (EPICS 7)
 
 ```
 md_epics-doc (master)$ caget calc:a calc:b calc:sum
@@ -51,7 +51,14 @@ calc:b                         3
 calc:sum                       5
 ```
 
-In order to use QSRV (V4 Modules) in iocsh.bash, please use the following:
+```
+pvlist
+pvget calc:a
+pvget -r "" calc:a
+```
+
+
+In order to use QSRV (V4 Modules) in iocsh.bash with EPICS 3.15.x, please use the following:
 
 ```
 iocsh.bash sumV4.cmd
@@ -69,10 +76,4 @@ SERVER_PORT : 5075
 RCV_BUFFER_SIZE : 16384
 IGNORE_ADDR_LIST: 
 INTF_ADDR_LIST : 0.0.0.0
-```
-
-```
-pvlist
-pvget calc:a
-pvget -r "" calc:a
 ```

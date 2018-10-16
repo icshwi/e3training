@@ -1,6 +1,0 @@
-
-epicsEnvSet("TOP","${TOP}")
-epicsEnvSet(P, "ICS")
-epicsEnvSet(R, "E3TRNG")
-epicsEnvSet("IOC",  "$(P):$(R)")
-

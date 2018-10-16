@@ -1,4 +1,4 @@
 [submodule "e3-execise/kameleon"]
-	path = e3-execise/kameleon
+	path = 1.simple_serial/kameleon
 	url = https://github.com/jeonghanlee/kameleon
 	ignore = all

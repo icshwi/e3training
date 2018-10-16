@@ -25,10 +25,6 @@ function set_ca_addr
 
 
 
-
-source /epics/base-3.15.5/require/3.0.0/bin/setE3Env.bash
-
-
 _HOST_IP="$(ip -4 route get 8.8.8.8 | awk {'print $7'} | tr -d '\n')";
 
 unset_ca_addr

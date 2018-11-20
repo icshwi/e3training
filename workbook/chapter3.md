@@ -9,21 +9,18 @@ In this lesson, you'll learn how to do the following:
 * Install the difference StreamDevice version within e3
 
 
-
-
 ## Check the VARIABLES within the e3
 
 Various Environment variables are used in EPICS and E3, so it is really important to understand what they are. Please remember, our environment is e3 with EPICS, so we have some variables which are unique within e3.
 
 
-0. Make sure you are in ***E3_TOP***
+0. Make sure you are in **E3_TOP**
 
 1. Move in e3-StreamDevice
 
 ```
 e3-3.15.5 (master)$ cd e3-StreamDevice/
 e3-StreamDevice (master)$ 
-
 ```
 
 2. Run the following rule:
@@ -34,16 +31,16 @@ e3-StreamDevice (master)$ make vars
 
 The most interesting VARIABLES are
 
-* ```E3_MODULE_VERSION``` : This is used as ***Module/Application Version*** with require within an IOC startup script. We recommend to use the X.X.X version number as the stable production release, but any combination can be possible. 
+* ```E3_MODULE_VERSION``` : This is used as **Module/Application Version** with require within an IOC startup script. We recommend to use the X.X.X version number as the stable production release, but any combination can be possible. 
 
-* ```EPICS_MODULE_TAG``` : This is the ***snapshot*** of the source code repository, i.e., tags/stream_2_7_14, master, branch_name, or e0a24fe.
+* ```EPICS_MODULE_TAG``` : This is the **snapshot** of the source code repository, i.e., tags/stream_2_7_14, master, branch_name, or e0a24fe.
 
 Two VARIABLES are defined within configure/CONFIG_MODULE and configure/CONFIG_MODULE_DEV.
 
 
 ## Check the installed version of each module
 
-0. Make sure you are in ***E3_TOP***/e3-StreamDevice
+0. Make sure you are in **E3_TOP**/e3-StreamDevice
 
 1. Run the following rule:
 
@@ -98,7 +95,7 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 
 3. Check the configure/CONFIG_MODULE file
 
-```make init`` will download all source files witin StreamDevice as git submodule, and switch to the stream_2_7_14 version of StreamDevice.
+```make init```will download all source files witin StreamDevice as git submodule, and switch to the stream_2_7_14 version of StreamDevice.
 
 
 
@@ -117,12 +114,12 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
   0.0.0, testing, 20181010, or whatever strings and numbers.
   
 * Your changed configure/CONFIG_MODULE may be such as
-
+```
   --- snip snip ---
   EPICS_MODULE_TAG:=tags/2.8.3 
-  #
   E3_MODULE_VERSION:=2.8.3
   --- snip snip ---
+```
 
 * Check them with ```make vars```
 
@@ -132,15 +129,15 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 0. Make sure to be in e3-StreamDevice
 1. ```make vars```
    Can you see the difference between before and now?
+   
 2. ```make init```
    Can you see the difference between before and now?
+   
 3. ```make build```
 
 4. ```make install```
 
 5. ```make existent```
-
-
 
 
 
@@ -154,7 +151,7 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 
 ### Can we combine the following two steps together? 
     1. make build
-	2. make install
+    2. make install
 	
 ### Do the different version of StreamDevice in ***E3_TOP***
     For example, commit hash is 493dc19

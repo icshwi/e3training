@@ -145,7 +145,7 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 
 ### Check the LEVEL=4 existent
 
-### Do ```make init``` in ***E3_TOP***
+### Do ```make init``` in **E3_TOP**
 
 ### Which kind of make rule allows us to uninstall the installed module?
 
@@ -153,7 +153,7 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
     1. make build
     2. make install
 	
-### Do the different version of StreamDevice in ***E3_TOP***
+### Do the different version of StreamDevice in **E3_TOP**
     For example, commit hash is 493dc19
 	
 	

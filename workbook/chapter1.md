@@ -24,7 +24,6 @@ However, by the design concept of e3, we can have multiple e3 configurations in 
 
 ```
 $ git clone https://github.com/icshwi/e3 e3-3.15.5
-
 ```
 , where e3-3.15.5 is called now ***E3_TOP**. We will use it within next chapters also. 
 
@@ -52,7 +51,6 @@ e3-3.15.5 (master)$ ./e3_building_config.bash setup
   EPICS_MODULE_TAG    : 3.15.5
   EPICS_BASE          : /epics/base-3.15.5
   E3_REQUIRE_LOCATION : /epics/base-3.15.5/require/3.0.4
-
 ```
 
 ```
@@ -163,7 +161,6 @@ This group contains the common EPICS modules such as
  Modules List 
     0 : e3-devlib2
     1 : e3-mrfioc2
-
 ```
 ### EPICS V4 Group
 
@@ -180,7 +177,6 @@ e3-3.15.5 (master)$ ./e3.bash -4 vars
     3 : e3-pvDatabase
     4 : e3-normativeTypes
     5 : e3-pvaClient
-
 ```
 ### EtherCAT / Motion Group
 
@@ -214,7 +210,6 @@ e3-3.15.5 (master)$ ./e3.bash -e vars
    21 : e3-ecmc
    22 : e3-ethercatmc
    23 : e3-ecmctraining
-
 ```
 However, one can exclude the dependency modules via
 
@@ -228,7 +223,6 @@ e3-3.15.5 (master)$ ./e3.bash -eo vars
     2 : e3-ecmc
     3 : e3-ethercatmc
     4 : e3-ecmctraining
-
 ```
 Note that one needs the ESS bitbucket account in order to access this.
 
@@ -245,7 +239,6 @@ e3-3.15.5 (master)$ ./e3.bash -io vars
     3 : e3-memDisplay
     4 : e3-regdev
     5 : e3-i2cDev
-
 ```
 
 ### IFC Module Group
@@ -263,7 +256,6 @@ One needs the ESS bitbucket account in order to access this.
     3 : e3-nds3epics
     4 : e3-ifc14edrv
     5 : e3-ifcfastint
-
 ```
 ### AreaDector Group
 
@@ -298,9 +290,7 @@ e3-3.15.5 (master)$ ./e3.bash -ao vars
     3 : e3-sis8300
     4 : e3-sis8300llrfdrv
     5 : e3-sis8300llrf
-
 ```
-
 
 
 ### Install a selected group
@@ -410,7 +400,6 @@ iocRun: All initialization complete
 c5c2fa8.kaffee.9733 > 
 c5c2fa8.kaffee.9733 > 
 c5c2fa8.kaffee.9733 > 
-
 ```
 The command will load all installed modules within a single iocsh.bash. If one see the clear console prompt >, one has the e3 installation done in the local host.
 

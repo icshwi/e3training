@@ -4,11 +4,11 @@
 
 In this lesson, you'll learn how to do the following:
 * Set up the e3 configuration dynamically
-* Switch different versions of e3 within the enviornment tool
-* Run a simple IOC with the existent startup script
+* Switch different versions of e3 within the environment tool
+* Run a simple IOC with the existent start-up script
 
 
-## E3 (EPICS) environemnt
+## E3 (EPICS) environment
 
 
 In order to help each developer, e3 supports multiple EPICS environment dynamically. In that means, one can set it in any EPICS environment terminal via sourcing the ***setE3Env.bash** as follows:
@@ -28,7 +28,7 @@ If the file exists, the existent file will be renamed to
 setenv_YYMMDDHHMM
 ```
 
-Thus, one can still swith to old environment within the source path.
+Thus, one can still switch to old environment within the source path.
 
 
 ### Set up the e3 environment

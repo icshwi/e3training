@@ -1,0 +1,128 @@
+#
+#  Copyright (c) Jeong Han Lee
+#
+#  This gconpi.proto is free software: you can redistribute
+#  it and/or modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation, either version 2 of the
+#  License, or any newer version.
+#
+#  This program is distributed in the hope that it will be useful, but WITHOUT
+#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+#  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+#  more details.
+#
+#  You should have received a copy of the GNU General Public License along with
+#  this program. If not, see https://www.gnu.org/licenses/gpl-2.0.txt
+#
+#
+#  author  : Jeong Han Lee
+#  email   : jeonghan.lee@gmail.com
+#  date    : Tuesday, July 28 18:58:10 KST 2015
+#  version : 0.2
+# 
+#  EPICS STREAM DB with STREAM for mightyohm.com Geiger Counter
+#  https://github.com/jeonghanlee/gconpi
+#
+# 
+#  - 0.1       Tuesday, July 28 18:58:10 KST 2015, jhlee
+# Software Revision
+#  - 0.2       Wednesday, July 29 20:03:37 KST 2015, jhlee
+#              Try to understand CPS_MSG and others, 
+#              Add EGU and DESC to CPS,CPM,uSv,AvgMode records
+#
+
+
+
+record (stringin, "$(SYSDEV)CPS_MSG")
+{
+}
+
+
+record (ai, "$(SYSDEV)CPS") 
+{
+    field(DESC, "Geiger Counter Counter Per Secoud") 
+    field(DTYP, "stream")
+    field( INP, "@gconpi.proto read_CPS($(SYSDEV)CPS_MSG) $(PORT)")
+    field( EGU, "CPS")
+    field(SCAN, "1 second")
+}
+
+
+#      choice(menuAlarmSevrNO_ALARM,"NO_ALARM")
+#      choice(menuAlarmSevrMINOR,"MINOR")
+#      choice(menuAlarmSevrMAJOR,"MAJOR")
+#      choice(menuAlarmSevrINVALID,"INVALID")
+
+# camonitor has the following option, so we can check the ENUM number directly.
+# For example, 
+# 
+# jhlee@kaffee:~$ camonitor -n RPI:RAD1:CPS.SEVR 
+# RPI:RAD1:CPS.SEVR              2015-07-29 19:43:43.321049 0  
+## Turn off the GC
+# RPI:RAD1:CPS.SEVR              2015-07-29 19:43:48.419394 3 TIMEOUT INVALID
+## Turn on the GC
+# RPI:RAD1:CPS.SEVR              2015-07-29 19:43:51.033409 0  
+#
+# jhlee@kaffee:~$ camonitor  RPI:RAD1:CPS.SEVR 
+# RPI:RAD1:CPS.SEVR              2015-07-29 19:43:56.011874 NO_ALARM  
+## Turn off the GC
+# RPI:RAD1:CPS.SEVR              2015-07-29 19:44:00.419370 INVALID TIMEOUT INVALID
+## Turn on the GC
+# RPI:RAD1:CPS.SEVR              2015-07-29 19:44:03.321081 NO_ALARM 
+
+# Enum format:
+#  -n:       Print DBF_ENUM values as number (default is enum string)
+
+# The example in the Section "I have a device that sends mixed data types: numbers or strings"
+# on STREAM device at http://epics.web.psi.ch/software/streamdevice/doc/tipsandtricks.html
+# uses A!=2 in order to represent "you can clean the message record if SEVR is not INVALID. "
+#
+# This example is WRONG! Please use A!=3 or A#3.
+# "!=" is the same operator as "#"
+
+# Wednesday, July 29 19:47:50 KST 2015, jhlee
+
+# Still don't understand CP option in calcout record.....
+
+record (calcout, "$(SYSDEV)CPS_clean1") 
+{
+    field(INPA, "$(SYSDEV)CPS.SEVR CP")
+    field(CALC, "A#3")           # A!=3 
+    field(OOPT, "When Non-zero") # TRUE
+    field( OUT, "$(SYSDEV)CPS_clean2.PROC")
+}
+
+record (stringout, "$(SYSDEV)CPS_clean2") 
+{
+    field(VAL, "CPS.SEVR is NOT INVALID")
+    field(OUT, "$(SYSDEV)CPS_MSG PP")
+}
+
+record (ai, "$(SYSDEV)CPM") 
+{
+    field(DESC, "Geiger Counter Counter Per Min") 
+    field(DTYP, "stream")
+    field( INP, "@gconpi.proto read_CPM $(PORT)")
+    field( EGU, "CPM")
+    field(SCAN, "I/O Intr")
+} 
+
+record (ai, "$(SYSDEV)uSv") 
+{
+    field(DESC, "Geiger Counter uSV/hr") 
+    field(DTYP, "stream")
+    field( INP, "@gconpi.proto read_uSv $(PORT)")
+    field( EGU, "uSv/hr")
+    field(SCAN, "I/O Intr")
+} 
+
+
+record (stringin, "$(SYSDEV)AvgMode") 
+{  
+    field(DESC, "Geiger Counter Mode") 
+    field(DTYP, "stream")
+    field( INP, "@gconpi.proto read_avgMode $(PORT)")
+    field(SCAN, "I/O Intr")
+} 
+
+

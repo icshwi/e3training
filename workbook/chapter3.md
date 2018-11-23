@@ -1,4 +1,4 @@
-# Chapter 3 : Install a StreamDevice with the different version
+# Chapter 3 : Install a Module with the different version number
 
 ## Lesson Overview
 

@@ -4,6 +4,7 @@
 
 In this lesson, you'll learn how to do the following:
 * Build the startup script for an IOC
+* Understand the different method to use the EPICS function within a startup script
 * Understand the local setup for DB and protocol files
 * Add the common (global) module into the IOC
 
@@ -51,6 +52,7 @@ $ source ~/e3-3.15.5/tools/setenv
 
 
 ### 0.cmd
+Please make sure that the simulator is running.
 
 ```
  ch4_supplementry_path (master)$ iocsh.bash cmds/0.cmd
@@ -77,6 +79,7 @@ iocshLoad '0.cmd',''
 ```
 
 ### 1.cmd
+Please make sure that the simulator is running.
 
 ```
  ch4_supplementry_path (master)$ iocsh.bash cmds/1.cmd
@@ -114,6 +117,9 @@ to look at ```ASYN_DEP_VERSION``` and ```PCRE_DEP_VERSION```. Anyway, the depend
 
 
 ### 2.cmd
+
+Please make sure that the simulator is running.
+
 
 * Run the following command
 ```
@@ -222,6 +228,7 @@ epicsEnvSet IOCSH_PS1 "350b5cb.kaffee.9985 > "
 ```
 
 ### 3-2.cmd
+Please make sure that the simulator is running.
 This script has the full information on the single IOC running. Please evaluate all components in 
 ```
 require stream,2.7.14p
@@ -293,10 +300,62 @@ IOC-10585032:KAM-RAD1:AvgMode
 
 
 ### 4.cmd
-From ```3.cmd```, we have the running IOC which can communicate with the simulated device. Moreover, generally, we will add more generic EPICS modules into 
+Please make sure that the simulator is running.
+
+From ```3.cmd```, we have the running IOC which can communicate with the simulated device. Moreover, generally, we will add more generic EPICS modules into that IOC, such as iocStats, autosave, recsync, and so on. 
+
+In this case, we do require the individual module name, and its version, and its corresponding configuration files (EPICS db files, etc).
+
+0. Run the 4.cmd
+```
+ ch4_supplementry_path$ iocsh.bash cmds/4.cmd
+```
+1. Type dbl to check which PVs can be found.
+```
+350b5cb.kaffee.4355 > dbl
+```
+
+2. Get the HEARTBEAT of your IOC
+
+```
+350b5cb.kaffee.4355 > dbpr IOC-80159276:IocStat:HEARTBEAT
+```
+, where the number 80159276 is the random number. One should see the different number in your IOC. If you have the same number, you have a good luck today!
+
+3. Run one more times, the same command to see that the HEARTBEAT is increasing.
+```
+350b5cb.kaffee.4355 > dbpr IOC-80159276:IocStat:HEARTBEAT
+```
+
+4. Please spend some time to look at the following:
+
+* epicsEnvSet : can you see two different ways to be used? 
+
+* dbLoadRecords : can you see two different ways to be used?
+
+Can you rewrite all startup script with only one method? 
 
 
 ### 5.cmd
+Please make sure that the simulator is running.
+
+Here we add the IocStats in the slightly different way, and add more modules exist witin e3 by default. 
+
+
+0. Please go **E3_TOP**, and run the following commands:
+```
+e3-3.15.5$ make -C e3-iocStats/ existent
+e3-3.15.5$ make -C e3-recsync/  existent
+e3-3.15.5$ make -C e3-autosave/ existent
+```
+Can we see the *.iocsh files with the installation path of e3?
+
+The e3 function **loadIocsh** is a similar function which EPICS function iocshLoad, but it acts differently. However, it gives us a modularized startup script which we can reuse in order to build up a startup script without considering technical details a lot. 
+
+1. Please run the following commands to see which PVs exist in your IOC
+```
+ch4_supplementry_path$ bash ../tools/caget_pvs.bash IOC-1_PVs.list 
+```
 
 
 
@@ -307,3 +366,8 @@ From ```3.cmd```, we have the running IOC which can communicate with the simulat
 
 [3] EPICS Application Developer's Guide, IOC Initialization https://epics.anl.gov/base/R3-15/5-docs/AppDevGuide/IOCInitialization.html#x8-2750007.4
 
+[4] EPICS iocStats module http://www.slac.stanford.edu/comp/unix/package/epics/site/devIocStats/
+
+[5] EPICS autosave module http://htmlpreview.github.io/?https://github.com/epics-modules/autosave/blob/R5-7-1/documentation/autoSaveRestore.html
+
+[6] EPICS recsync module https://github.com/ChannelFinder/recsync

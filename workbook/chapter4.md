@@ -4,8 +4,9 @@
 
 In this lesson, you'll learn how to do the following:
 * Build the startup script for an IOC
-* Add the common (global) module into the IOC
 * Understand the local setup for DB and protocol files
+* Add the common (global) module into the IOC
+
 
 
 
@@ -292,6 +293,7 @@ IOC-10585032:KAM-RAD1:AvgMode
 
 
 ### 4.cmd
+From ```3.cmd```, we have the running IOC which can communicate with the simulated device. Moreover, generally, we will add more generic EPICS modules into 
 
 
 ### 5.cmd

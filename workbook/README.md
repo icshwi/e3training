@@ -36,3 +36,14 @@ This workbook is heavily been developing now.
 
 ## Chapter 12
 [Work with EPICS Community](chapter12.md)
+
+## Other Subjects 
+* Multiple e3s in a host
+* Hidden makefile rules (db, hdrs, vlibs, epics, and so on)
+* setE3env.bash
+* e3.bash
+* supplement tools (epics_NIOCs, pkg_automation, pciids, etherlabmaster, ecat-dev, etc)
+* sequencer
+* db, template, subst files (inflating...)
+* e3 configuration variables
+* e3 building system

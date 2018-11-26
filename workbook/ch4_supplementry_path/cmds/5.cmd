@@ -4,7 +4,10 @@ require recsync,1.3.0
 require autosave,5.9.0
 
 epicsEnvSet "TOP" "$(E3_CMD_TOP)/.."
-epicsEnvSet "NUM" "1"
+
+system "bash $(TOP)/tools/random.bash"
+iocshLoad "$(TOP)/tools/random.cmd"
+
 epicsEnvSet("P", "IOC-$(NUM)")
 epicsEnvSet("IOCNAME", "$(P)")
 epicsEnvSet("PORT", "CGONPI")

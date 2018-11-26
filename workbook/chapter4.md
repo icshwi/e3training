@@ -354,9 +354,9 @@ The e3 function **loadIocsh** is a similar function which EPICS function iocshLo
 
 1. Please run the following commands to see which PVs exist in your IOC
 ```
-ch4_supplementry_path$ bash ../tools/caget_pvs.bash IOC-1_PVs.list 
+ch4_supplementry_path$ bash ../tools/caget_pvs.bash IOC-NNNNNNNN_PVs.list 
 ```
-
+, where NNNNNNNN is the randome number. 
 
 
 ## Reference 

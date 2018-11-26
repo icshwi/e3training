@@ -302,5 +302,8 @@ From ```3.cmd```, we have the running IOC which can communicate with the simulat
 
 ## Reference 
 [1] Kameleon Simulator https://bitbucket.org/europeanspallationsource/kameleon
+
 [2] Forked Kameleon  https://github.com/jeonghanlee/kameleon 
+
 [3] EPICS Application Developer's Guide, IOC Initialization https://epics.anl.gov/base/R3-15/5-docs/AppDevGuide/IOCInitialization.html#x8-2750007.4
+

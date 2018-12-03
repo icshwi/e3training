@@ -18,8 +18,8 @@
 #
 #   author  : Jeong Han Lee
 #   email   : jeonghan.lee@gmail.com
-#   date    : Wednesday, May 23 15:22:11 CEST 2018
-#   version : 0.0.0
+#   date    : Monday, December  3 22:42:21 CET 2018
+#   version : 0.0.1
 
 
 SC_SCRIPT="$(realpath "$0")"
@@ -34,7 +34,8 @@ function popd  { builtin popd  "$@" > /dev/null; }
 
 
 # We have to go the toplevel of the working tree.
-pushd ${SC_TOP}/../
+pushd ${SC_TOP}/../../
+echo "Repo TOP %s\n" "${PWD}"
 git submodule update --init --recursive ;
 git submodule update --remote ;
 popd 

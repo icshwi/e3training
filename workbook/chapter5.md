@@ -68,6 +68,7 @@ Please visit https://github.com/icshwi/e3-iocStats
 Check the iocStats link shown in Figure 1. Note that the magic number is **ae5d083**. 
 
 |![Import Example](ch5_supplementry_path/fig1.png)|
+| :---: |
 |**Figure 1** iocStats github site |
 
 

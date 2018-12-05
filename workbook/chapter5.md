@@ -142,7 +142,8 @@ $ make devdistclean
 
 1. Update the `E3_MODULE_DEV_GITURL` in order to use your own repository. For example, the default one is `https://github.com/icshwi/iocStats`
 
-2. Check https://github.com/icshwi/iocStats whether it is the same as the original one or not. One can see the following line `This branch is 1 commit ahead, 1 commit behind epics-modules:master. ` in **Figure 2**. 
+2. Check https://github.com/icshwi/iocStats whether it is the same as the original one or not. One can see the following line `This branch is 1 commit ahead, 1 commit behind epics-modules:master. ` in **Figure 2**.
+
 |![Import Example](ch5_supplementry_path/fig2.png)|
 | :---: |
 |**Figure 2** The screenshot for the forked and modified icshwi iocStats github site. |

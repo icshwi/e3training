@@ -63,9 +63,8 @@ ae5d08388ca3d6c48ec0e37787c865c5db18dc8f iocStats (3.1.15-17-gae5d083)
 Please spend some time to understand these three columns. The reference [2] may be useful. 
 
 1. Check a github site
-
-Please visit https://github.com/icshwi/e3-iocStats
-Check the iocStats link shown in Figure 1. Note that the magic number is **ae5d083**. 
+Please visit https://github.com/icshwi/e3-iocStats, which is shown in **Figure 1**.
+The magic number is **ae5d083**. Please try to find where that number exists. After finding it, please check that number in the output of `git submodule status` also. 
 
 |![Import Example](ch5_supplementry_path/fig1.png)|
 | :---: |

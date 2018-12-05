@@ -83,5 +83,7 @@ With Deployment Mode, we uses the git submodules [1] to make a link with actual 
 
 ## Reference 
 [1] Atomic electron transition : https://en.wikipedia.org/wiki/Atomic_electron_transition
+
 [2] https://git-scm.com/docs/git-submodule
+
 [3] Git Tools - Submodules : https://git-scm.com/book/en/v2/Git-Tools-Submodules

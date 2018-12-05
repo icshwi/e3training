@@ -50,11 +50,14 @@ Each module has the slightly difference directory structure and files, but most 
 * configure         : e3 configuration files
 * iocStats          : git submodule path to link to where iocStats source reposiotory is
 
+### Git submodule
+
+In order to explain how e3 uses git submodules, we have to do the following execise:
 
 0. Run
 
 ```
-git submodule status
+$ git submodule status
 ```
 One may get the following output:
 ```
@@ -69,16 +72,59 @@ The magic number is **ae5d083**. Please try to find where that number exists. Af
 
 |![Import Example](ch5_supplementry_path/fig1.png)|
 | :---: |
-|**Figure 1** iocStats github site |
+|**Figure 1** The screenshot for the iocStats github site. |
 
 
+2. Check its submodule configuration
+
+```
+$ more .gitmodules
+[submodule "iocStats"]
+        path = iocStats
+        url = https://github.com/epics-modules/iocStats
+        ignore = dirty
+```
+
+ 
+## Development Mode
+
+As one sees now, `git  submodule` guides us to a new place where we can work and a new way to handle many different source files which are scattered over many difference facilities. However, in order to use it fully, one should have the proper permission and learn how it works precisely. With the current implementation and limited resources, we cannot use this rich features fully. Thus, e3 will use its minimal feature, which is related with the **magic** number that is the short version of the SHA-1 checksum by git [4]. 
+
+Therefore, we only use a specific commit version of iocStats within e3-iocStats in order to identify which version currently links to. And if source code repositories are stable enough, we can use `git submodule update --init` to download its specific version of source codes within e3 modules. By that means, we can pick a specific version of a module, which we would like to use for stable e3 system. 
+
+However, when source code repositories are changed very frequently, it also create an additional maintenance work which one has to update the SHA-A checksum in order to match a selected version of a module. Thus, with `make init`, it will download latest version of a module, and switch to a specific version defined in `configure/CONFIG_MODULE` through several git and other commands behind its building system. 
+
+The following commands are used for the deployment mode of each module. They will use `git submodule` path to do their jobs properly. 
+
+```
+$ make vars
+$ make init
+$ make patch
+$ make build
+$ make install
+$ make clean
+```
+
+
+ 
 ## Deployment Mode
 
+As one sees now, `git  submodule` guides us to a new place where we can work and a new way to handle many different source files which are scattered over many difference facilities. However, in order to use it fully, one should have the proper permission and learn how it works precisely. With the current implementation and limited resources, we cannot use this rich features fully. Thus, e3 will use its minimal feature, which is related with the **magic** number that is the short version of the SHA-1 checksum by git [4]. 
 
+Therefore, we only use a specific commit version of iocStats within e3-iocStats in order to identify which version currently links to. And if source code repositories are stable enough, we can use `git submodule update --init` to download its specific version of source codes within e3 modules. By that means, we can pick a specific version of a module, which we would like to use for stable e3 system. 
 
-With Deployment Mode, we uses the git submodules [1] to make a link with actual source files. Since e3 doesn't maintain One can build the entire structure by oneself. 
+However, when source code repositories are changed very frequently, it also create an additional maintenance work which one has to update the SHA-A checksum in order to match a selected version of a module. Thus, with `make init`, it will download latest version of a module, and switch to a specific version defined in `configure/CONFIG_MODULE` through several git and other commands behind its building system. 
 
+The following commands are used for the deployment mode of each module. They will use `git submodule` path to do their jobs properly. 
 
+```
+$ make vars
+$ make init
+$ make patch
+$ make build
+$ make install
+$ make clean
+```
 
 
 
@@ -88,3 +134,5 @@ With Deployment Mode, we uses the git submodules [1] to make a link with actual 
 [2] https://git-scm.com/docs/git-submodule
 
 [3] Git Tools - Submodules : https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+[4] https://git-scm.com/book/en/v2/Git-Internals-Git-Objects

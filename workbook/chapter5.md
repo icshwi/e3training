@@ -39,6 +39,7 @@ e3-iocStats (master)$ tree -L 1
 └──  README.md
 ```
 
+
 Each module has the slightly difference directory structure and files, but most of them are the same. 
 
 * cmds              : customized startup scripts should be located in
@@ -85,28 +86,6 @@ $ more .gitmodules
         ignore = dirty
 ```
 
- 
-## Development Mode
-
-As one sees now, `git  submodule` guides us to a new place where we can work and a new way to handle many different source files which are scattered over many difference facilities. However, in order to use it fully, one should have the proper permission and learn how it works precisely. With the current implementation and limited resources, we cannot use this rich features fully. Thus, e3 will use its minimal feature, which is related with the **magic** number that is the short version of the SHA-1 checksum by git [4]. 
-
-Therefore, we only use a specific commit version of iocStats within e3-iocStats in order to identify which version currently links to. And if source code repositories are stable enough, we can use `git submodule update --init` to download its specific version of source codes within e3 modules. By that means, we can pick a specific version of a module, which we would like to use for stable e3 system. 
-
-However, when source code repositories are changed very frequently, it also create an additional maintenance work which one has to update the SHA-A checksum in order to match a selected version of a module. Thus, with `make init`, it will download latest version of a module, and switch to a specific version defined in `configure/CONFIG_MODULE` through several git and other commands behind its building system. 
-
-The following commands are used for the deployment mode of each module. They will use `git submodule` path to do their jobs properly. 
-
-```
-$ make vars
-$ make init
-$ make patch
-$ make build
-$ make install
-$ make clean
-```
-
-
- 
 ## Deployment Mode
 
 As one sees now, `git  submodule` guides us to a new place where we can work and a new way to handle many different source files which are scattered over many difference facilities. However, in order to use it fully, one should have the proper permission and learn how it works precisely. With the current implementation and limited resources, we cannot use this rich features fully. Thus, e3 will use its minimal feature, which is related with the **magic** number that is the short version of the SHA-1 checksum by git [4]. 
@@ -123,8 +102,53 @@ $ make init
 $ make patch
 $ make build
 $ make install
+$ make existent
 $ make clean
 ```
+
+
+## Development Mode
+
+The deployment mode is nice if one has enough domain knowledge on `git submodule` and proper permission on a source repository. As one knows, it is not always the case where we work on Earth. Thus, the e3 has the development mode, which resolve these conflicts by using `git clone`. Please look at `configure` path. One can find few files have the suffix `_DEV`.
+
+```
+$ ls configure/*_DEV
+```
+
+Two files (`CONFIG_MODULE_DEV` and `RELEASE_DEV`) are the counterpart of files (`CONFIG_MODULE` and `RELEASE`) in the deployment mode. Both files are almost identifical except the suffix `_DEV` and following things in the development mode :
+
+* `E3_MODULE_DEV_GITURL` : This shows the repository which one would like to download into an e3 module
+* `E3_MODULE_SRC_PATH` : This shows the source codes path for the deployment mode. It has the suffix `-dev`. For example, e3-iocStats has `iocStats` source path in the deployment, and `iocStats-dev` one in the development mode. 
+
+With `E3_MODULE_DEV_GITURL` variable in `configure/CONFIG_MODULE_DEV` with the most poweful feature of `git`, we may have a plenty of degree of freedom to develop an module without worrying about other system which may use this module. 
+
+
+The following commands are used for the development mode of each module. They will use `git clone` path to do their jobs properly. There is one extra command which one can see `make devdistclean` will remove the clone source directory, for example, iocStats-dev when one would like to clone from scratch. And `make existent` and `make devexistent` are the same output, because it relys on **installed** module versions. 
+
+```
+$ make devvars
+$ make devinit
+$ make devpatch
+$ make devbuild
+$ make devinstall
+$ make devexistent
+$ make devclean
+$ make devdistclean
+```
+
+### Git clone
+
+0. Fork your own copy from the community iocStats [5]
+
+1. Update the `E3_MODULE_DEV_GITURL` in order to use your own repository. For example, the default one is `https://github.com/icshwi/iocStats`
+
+2. Check https://github.com/icshwi/iocStats whether it is the same as the original one or not. One can see the following line `This branch is 1 commit ahead, 1 commit behind epics-modules:master. ` in **Figure 2**. 
+|![Import Example](ch5_supplementry_path/fig2.png)|
+| :---: |
+|**Figure 2** The screenshot for the forked and modified icshwi iocStats github site. |
+
+
+
 
 
 
@@ -136,3 +160,5 @@ $ make clean
 [3] Git Tools - Submodules : https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
 [4] https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+
+[5] https://github.com/epics-modules/iocStats

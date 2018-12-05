@@ -15,11 +15,9 @@ In this lesson, you'll learn how to do the following:
 ## No Source Codes, Yes Configuration Files!
 By default, each e3 module and application has no source codes within e3-module repository, but it only has the e3 configuration files and additional files. These files allow us to build the consistent user environment and building rules in terms of source codes, modules, applications, kernel drivers, and so on, which we may get from anywhere in any forms. 
 
-Therefore, e3 doesn't care each single change in a source code repository, but care much about a snapshot (an interesting release version) which will be selected by one of release versions, user requests, or both. For example, at t=t0, we select the stream 2.7.14 version as the stable release within e3. At t=t1, we will select the stream 2.8.8, because a subsystem needs it. At this moment, we don't care about 2.8.0, 2.8.1, 2.8.2, 2.8.3, 2.8.4, 2.8.5, 2.8.6, and 2.8.7. We don't need to sync their changes into a master branch of a local repository, which we have to clone or fork. Simply, we don't need to do any maintenance jobs. The concept is that to select what we would like to use when we need it. In Atomic Physics, it is the similar concept of an atomic electron transition [1], which is a change of an electron from one energy level to another, which is known as quantum jump or quantum leap. Once e3 has the absorption of energies from user requests, it will release **jumps** version of each module. This approach is called as *Quantized or Quantum Release**.
+Therefore, e3 doesn't care each single change in a source code repository, but care much about a snapshot (an interesting release version) which will be selected by one of release versions, user requests, or both. For example, at t=t0, we select the stream 2.7.14 version as the stable release within e3. At t=t1, we will select the stream 2.8.8, because a subsystem needs it. At this moment, we don't care about 2.8.0, 2.8.1, 2.8.2, 2.8.3, 2.8.4, 2.8.5, 2.8.6, and 2.8.7. We don't need to sync their changes into a master branch of a local repository, which we have to clone or fork. Simply, we don't need to do any maintenance jobs. The concept is that to select what we would like to use when we need it. In Atomic Physics, it is the similar concept of an atomic electron transition [1], which is a change of an electron from one energy level to another, which is known as quantum jump or quantum leap. Once e3 has the absorption of energies from user requests, it will release **jumps** version of each module. This approach is called as **Quantized or Quantum Release**.
 
-Currently, it actually reduces unnecessary maintenance works to sync source code repositories and allows one single maintainer to use his valuable time to focus e3 functionalities instead of them. 
-
-However, an e3 module can hold source files also, is known as *local* mode, which will be discussed later. 
+Currently, it actually reduces unnecessary maintenance works to sync source code repositories and allows one single maintainer to use his valuable time to focus e3 functionalities instead of them. However, an e3 module can hold source files also, is known as *local* mode, which will be discussed later. 
 
 
 
@@ -52,7 +50,9 @@ Each module has the slightly difference directory structure and files, but most 
 * configure         : e3 configuration files
 * iocStats          : git submodule path to link to where iocStats source reposiotory is
 
+
 0. Run
+
 ```
 git submodule status
 ```
@@ -62,10 +62,13 @@ ae5d08388ca3d6c48ec0e37787c865c5db18dc8f iocStats (3.1.15-17-gae5d083)
 ```
 Please spend some time to understand these three columns. The reference [2] may be useful. 
 
-1. Visit https://github.com/icshwi/e3-iocStats
-Through a web brower, please follow the iocStats link within that site. Note that the magic number is **ae5d083**. 
+1. Check a github site
 
-![Import Example](ch5_supplementry_path/fig1.png)
+Please visit https://github.com/icshwi/e3-iocStats
+Check the iocStats link shown in Figure 1. Note that the magic number is **ae5d083**. 
+
+|![Import Example](ch5_supplementry_path/fig1.png)|
+|**Figure 1** iocStats github site |
 
 
 ## Deployment Mode

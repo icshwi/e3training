@@ -9,7 +9,7 @@ In this lesson, you'll learn how to do the following:
 * Understand the Development Mode through git clone
 * Understand two repositories within e3 
 * Understand why there is a Patch path within e3
-* Understand workflows within github
+
 
 
 ## No Source Codes, Yes Configuration Files!
@@ -149,8 +149,116 @@ $ make devdistclean
 |**Figure 2** The screenshot for the forked and modified icshwi iocStats github site. |
 
 
+3. `make devvars`
+
+This will show the e3 module variables with the development mode. 
+```
+$ make devvars
+e3-iocStats$ make devvars
+
+------------------------------------------------------------
+>>>>     Current EPICS and E3 Envrionment Variables     <<<<
+------------------------------------------------------------
+
+E3_MODULES_INSTALL_LOCATION = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee
+E3_MODULES_INSTALL_LOCATION_BIN = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/bin
+E3_MODULES_INSTALL_LOCATION_BIN_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_bin
+E3_MODULES_INSTALL_LOCATION_DB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/db
+E3_MODULES_INSTALL_LOCATION_DBD_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats.dbd.jhlee
+E3_MODULES_INSTALL_LOCATION_DB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_db
+E3_MODULES_INSTALL_LOCATION_INC = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/include
+E3_MODULES_INSTALL_LOCATION_INC_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_include
+E3_MODULES_INSTALL_LOCATION_LIB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/lib
+E3_MODULES_INSTALL_LOCATION_LIB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_lib
+E3_MODULES_LIBLINKNAME = libiocStats.so.jhlee
+E3_MODULES_LIBNAME = libiocStats.so
+E3_MODULES_PATH = /epics/base-3.15.5/require/3.0.4/siteMods
+E3_MODULES_VENDOR_LIBS_LOCATION = /epics/base-3.15.5/require/3.0.4/siteLibs/vendor/iocStats/jhlee
+E3_MODULE_DEV_GITURL = "https://github.com/icshwi/iocStats"
+E3_MODULE_MAKEFILE = iocStats.Makefile
+E3_MODULE_MAKE_CMDS = make -C iocStats-dev -f iocStats.Makefile LIBVERSION="jhlee" PROJECT="iocStats" EPICS_MODULES="/epics/base-3.15.5/require/3.0.4/siteMods" EPICS_LOCATION="/epics/base-3.15.5" BUILDCLASSES="Linux" E3_SITEMODS_PATH="/epics/base-3.15.5/require/3.0.4/siteMods" E3_SITEAPPS_PATH="/epics/base-3.15.5/require/3.0.4/siteApps" E3_SITELIBS_PATH="/epics/base-3.15.5/require/3.0.4/siteLibs"
+E3_MODULE_NAME = iocStats
+E3_MODULE_SRC_PATH = iocStats-dev
+E3_MODULE_VERSION = jhlee
+E3_REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
+E3_REQUIRE_TOOLS = /epics/base-3.15.5/require/3.0.4/tools
+EPICS_MODULE_NAME = iocStats
+EPICS_MODULE_TAG = master
+EXPORT_VARS = E3_MODULES_VENDOR_LIBS_LOCATION E3_MODULES_INSTALL_LOCATION_LIB_LINK EPICS_HOST_ARCH EPICS_BASE MSI E3_MODULE_VERSION E3_SITEMODS_PATH E3_SITEAPPS_PATH E3_SITELIBS_PATH E3_REQUIRE_MAKEFILE_INPUT_OPTIONS E3_REQUIRE_NAME E3_REQUIRE_DB E3_REQUIRE_CONFIG E3_REQUIRE_LOCATION E3_REQUIRE_DBD E3_REQUIRE_VERSION E3_REQUIRE_TOOLS E3_REQUIRE_INC E3_REQUIRE_LIB E3_REQUIRE_BIN QUIET   SUDO2 SUDO_INFO SUDOBASH SUDO
+INIT_E3_MODULE_SRC = 1
+INSTALLED_EPICS_BASE_ARCHS = linux-ppc64e6500 linux-x86_64
+MSI = /epics/base-3.15.5/bin/linux-x86_64/msi
+PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_bin/linux-x86_64
+REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
+```
+
+4. `make devinit`
+
+This will clone the source code with the name of `iocStats-dev`. One can check it by the `tree -L 1` command.
+
+```
+$ make devinit
+$ tree -L 1
+.
+├── cmds
+├── configure
+├── docs
+├── iocsh
+├── iocStats
+├── iocStats-dev
+├── iocStats.Makefile
+├── Makefile
+├── patch
+└── README.md
+```
+
+5. `git status`
+
+Can you see the difference? 
+
+6. `git remote -v`
+
+Please go `iocStats` path, and run the command to check where your source code repository. 
+
+```
+$ cd iocStats
+$ git remote -v
+```
+
+Please go `iocStats-dev` path, and run the command to check where your source code repository. 
+```
+$ cd iocStats-dev
+$ git remote -v 
+```
+
+By default *-dev path within an e3-module is ignored, which can be found in the .gitignore file. With this work-flow, we can expand our repository up to unlimited user cases. We can change them easily without worrying about other repositories. 
 
 
+### Consistent Building and Installing Envrionment
+
+One should remember that e3 is the environment which provides users a similar and consistent interface for downloading, configuring, building, and installing a module and application. Thus the difference between the deployment and the development is only valid up to the configuring a module. Building and installing a module, we exactly the same way to do so. During building, we use the exactly same module.Makefile and its variables which defined in different configuration files. Moreover, during installing, we install a module based on the variables which we define in different configuration files.
+
+Since it is highly flexible and configurable, it will create more degree of freedom on your working environment. Please be careful to define all important variables within `CONFIG_MODULE` and `RELEASE` if one would like to use the deployment mode, and `CONFIG_MODULE_DEV` and `RELEASE_DEV` if one would like to use the development mode. One should consider also which EPICS base version and require version, and any dependent module versions are used within two modes carefully. 
+
+
+## Patch, Patch, and Patch Files
+
+
+
+
+## Questions
+
+* Can you override the default `E3_MODULE_DEV_GITURL` with your own forked repository without any `git status` changes in e3-iocStats? 
+```
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+```
+
+* Do we need `make devdistclean` always? Do we have another way to clean or remove a clone repository `iocStats-dev`? 
+
+* Can we distinguish between `make existent` and `make devexistent`? Is this different? 
 
 
 ## Reference 

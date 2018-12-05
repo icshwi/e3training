@@ -242,7 +242,90 @@ Since it is highly flexible and configurable, it will create more degree of free
 
 ## Patch, Patch, and Patch Files
 
-If one has no experience on patch files, please look at the refenece [6] in order to get minimal glimpse on this within an e3 module. 
+If one has no experience on patch files, please look at the refenece [6] in order to get minimal glimpse on this within an e3 module. Pratically, e3 has many patch files. 
+
+There are two types of patch files defined in e3. 
+
+### EPICS Base
+
+Please go **E3_TOP**, and run `find . -name *.patch`.
+
+```
+$ find e3-base/* -name *.patch 
+e3-base/patch/R3.15.5/osiSockOptMcastLoop_p0.patch
+e3-base/patch/R3.15.5/fix-ipAddrToAscii_p0.patch
+e3-base/patch/R3.15.5/dbCa-warning_p0.patch
+e3-base/patch/R3.15.5/fix-1699445_p0.patch
+e3-base/patch/R3.15.5/fix-1678494_p0.patch
+e3-base/patch/R3.16.1/cvtFast_p0.patch
+e3-base/patch/R3.16.1/cvtFast.patch
+e3-base/patch/R3.16.1/msg503.patch
+e3-base/patch/R3.16.1/msg503_p0.patch
+e3-base/patch/Site/R3.15.5/enable_new_dtags.p0.patch
+e3-base/patch/Site/R3.15.5/cortexa9hf-neon_dbltExpand_lib.p0.patch
+e3-base/patch/Site/R3.15.5/cortexa9hf-neon_ioc_prod_lib.p0.patch
+e3-base/patch/Site/R3.15.5/os_class.p0.patch
+e3-base/patch/Site/R3.15.5/ppc64e6500_epics_host_arch.p0.patch
+e3-base/patch/Site/R3.16.1/enable_new_dtags.p0.patch
+e3-base/patch/Site/R3.16.1/os_class.p0.patch
+e3-base/patch/Site/R7.0.1.1/enable_new_dtags.p0.patch
+e3-base/patch/Site/R7.0.1.1/add_pvdatabase_nt_softIocPVA.p0.patch
+e3-base/patch/Site/R7.0.1.1/os_class.p0.patch
+e3-base/patch/Site/R7.0.1.1/ppc64e6500_epics_host_arch.p0.patch
+e3-base/patch/Site/R3.15.6/enable_new_dtags.p0.patch
+e3-base/patch/Site/R3.15.6/os_class.p0.patch
+e3-base/patch/Site/R3.15.6/ppc64e6500_epics_host_arch.p0.patch
+e3-base/patch/Site/R7.0.2/enable_new_dtags.p0.patch
+e3-base/patch/Site/R7.0.2/add_pvdatabase_nt_softIocPVA.p0.patch
+e3-base/patch/Site/R7.0.2/os_class.p0.patch
+e3-base/patch/Site/R7.0.2/ppc64e6500_epics_host_arch.p0.patch
+```
+
+
+* Community Distributed Patch Files
+
+* Site-specific Patch Files
+
+
+### e3 Module
+Please go **E3_TOP**, and run `find . -name *.p0.patch`. For example, one can see the following :
+
+```
+$ find . -name *.p0.patch | sort -n
+./e3-ADAndor3/patch/Site/2.2.0-include-stdlin.h.p0.patch
+./e3-ADSupport/patch/Site/1.4.0-tiff_extern_rename.p0.patch
+./e3-base/patch/Site/R3.15.5/cortexa9hf-neon_dbltExpand_lib.p0.patch
+./e3-base/patch/Site/R3.15.5/cortexa9hf-neon_ioc_prod_lib.p0.patch
+./e3-base/patch/Site/R3.15.5/enable_new_dtags.p0.patch
+./e3-base/patch/Site/R3.15.5/os_class.p0.patch
+./e3-base/patch/Site/R3.15.5/ppc64e6500_epics_host_arch.p0.patch
+./e3-base/patch/Site/R3.15.6/enable_new_dtags.p0.patch
+./e3-base/patch/Site/R3.15.6/os_class.p0.patch
+./e3-base/patch/Site/R3.15.6/ppc64e6500_epics_host_arch.p0.patch
+./e3-base/patch/Site/R3.16.1/enable_new_dtags.p0.patch
+./e3-base/patch/Site/R3.16.1/os_class.p0.patch
+./e3-base/patch/Site/R7.0.1.1/add_pvdatabase_nt_softIocPVA.p0.patch
+./e3-base/patch/Site/R7.0.1.1/enable_new_dtags.p0.patch
+./e3-base/patch/Site/R7.0.1.1/os_class.p0.patch
+./e3-base/patch/Site/R7.0.1.1/ppc64e6500_epics_host_arch.p0.patch
+./e3-base/patch/Site/R7.0.2/add_pvdatabase_nt_softIocPVA.p0.patch
+./e3-base/patch/Site/R7.0.2/enable_new_dtags.p0.patch
+./e3-base/patch/Site/R7.0.2/os_class.p0.patch
+./e3-base/patch/Site/R7.0.2/ppc64e6500_epics_host_arch.p0.patch
+./e3-calc/patch/Site/3.7.1-cc_linking_release_local.p0.patch
+./e3-modbus/patch/Site/2.11.0p-enable-ft-code16-in-writeUInt32d.p0.patch
+./e3-NDDriverStdArrays/patch/Site/1.2.0-inflating-template.p0.patch
+./e3-nds3/patch/Site/3.0.0-wrong_override_operator_not_error_either.p0.patch
+./e3-nds/patch/Site/2.3.3-suppress-destructor-msg.p0.patch
+./e3-pvDatabase/patch/Site/4.3.0-remove-cout-in-pvDatabase-destructor.p0.patch
+./e3-require/patch/Site/3.0.4-tclsh-path-for-readOnlyFS.p0.patch
+./e3-s7plc/patch/Site/1.4.0p-fixed-unsigned-int-array-types.p0.patch
+./e3-s7plc/patch/Site/a713a78-epics7-support.p0.patch
+./e3-StreamDevice/patch/Site/2.7.14p-add_only_communication_debug.p0.patch
+./e3-StreamDevice/patch/Site/2.7.14p-extend_char_length_to_256.p0.patch
+./e3-StreamDevice/patch/Site/2.7.14p-fix_new_delete_mismatch.p0.patch
+./e3-tsclib/patch/Site/2.3.1-include-headers-driver-makefile.p0.patch
+```
 
 
 ## Questions

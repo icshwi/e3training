@@ -248,43 +248,30 @@ There are two types of patch files defined in e3.
 
 ### EPICS Base
 
-Please go **E3_TOP**, and run `find . -name *.patch`.
+Please go **E3_TOP**, and run the following commad :
 
 ```
-$ find e3-base/* -name *.patch 
-e3-base/patch/R3.15.5/osiSockOptMcastLoop_p0.patch
+$ find e3-base/* -name *.patch |grep 3.15.5
+
 e3-base/patch/R3.15.5/fix-ipAddrToAscii_p0.patch
-e3-base/patch/R3.15.5/dbCa-warning_p0.patch
 e3-base/patch/R3.15.5/fix-1699445_p0.patch
 e3-base/patch/R3.15.5/fix-1678494_p0.patch
-e3-base/patch/R3.16.1/cvtFast_p0.patch
-e3-base/patch/R3.16.1/cvtFast.patch
-e3-base/patch/R3.16.1/msg503.patch
-e3-base/patch/R3.16.1/msg503_p0.patch
+e3-base/patch/R3.15.5/osiSockOptMcastLoop_p0.patch
+e3-base/patch/R3.15.5/dbCa-warning_p0.patch
 e3-base/patch/Site/R3.15.5/enable_new_dtags.p0.patch
-e3-base/patch/Site/R3.15.5/cortexa9hf-neon_dbltExpand_lib.p0.patch
-e3-base/patch/Site/R3.15.5/cortexa9hf-neon_ioc_prod_lib.p0.patch
-e3-base/patch/Site/R3.15.5/os_class.p0.patch
 e3-base/patch/Site/R3.15.5/ppc64e6500_epics_host_arch.p0.patch
-e3-base/patch/Site/R3.16.1/enable_new_dtags.p0.patch
-e3-base/patch/Site/R3.16.1/os_class.p0.patch
-e3-base/patch/Site/R7.0.1.1/enable_new_dtags.p0.patch
-e3-base/patch/Site/R7.0.1.1/add_pvdatabase_nt_softIocPVA.p0.patch
-e3-base/patch/Site/R7.0.1.1/os_class.p0.patch
-e3-base/patch/Site/R7.0.1.1/ppc64e6500_epics_host_arch.p0.patch
-e3-base/patch/Site/R3.15.6/enable_new_dtags.p0.patch
-e3-base/patch/Site/R3.15.6/os_class.p0.patch
-e3-base/patch/Site/R3.15.6/ppc64e6500_epics_host_arch.p0.patch
-e3-base/patch/Site/R7.0.2/enable_new_dtags.p0.patch
-e3-base/patch/Site/R7.0.2/add_pvdatabase_nt_softIocPVA.p0.patch
-e3-base/patch/Site/R7.0.2/os_class.p0.patch
-e3-base/patch/Site/R7.0.2/ppc64e6500_epics_host_arch.p0.patch
+e3-base/patch/Site/R3.15.5/os_class.p0.patch
+....
+
 ```
 
+Please carefully check these patch files in `e3-base/patch/R3.15.5` and `e3-base/patch/Site/R3.15.5`. The first one is a space for the EPICS community patch files and the second one is a space for the ESS site-specific patch files. 
 
-* Community Distributed Patch Files
+* Community Distributed Patch Files `e3-base/patch/R3.15.5`
+EPICS base, the community provides patch files for the significant problems. ESS uses the point release of EPICS base, we also need a method to handle this scenario as well. Accidentally, the community use **p0** patch for Base 3.15.5 and **p1** patch for Base 3.16.X. However, e3 use the only **p0** patch in order to minimize any issues about compatibility. 
 
-* Site-specific Patch Files
+* Site-specific Patch Files `e3-base/patch/Site/R3.15.5`
+At the same time, we also have several patch files for ESS specific customization and discuss-in-progress with the community for EPICS base. 
 
 
 ### e3 Module
@@ -355,3 +342,5 @@ nothing to commit, working directory clean
 [5] https://github.com/epics-modules/iocStats
 
 [6] https://en.wikipedia.org/wiki/Patch_(Unix)
+
+[7] https://epics.anl.gov/base/R3-15/5-docs/KnownProblems.html

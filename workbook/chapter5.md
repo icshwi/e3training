@@ -268,10 +268,35 @@ e3-base/patch/Site/R3.15.5/os_class.p0.patch
 Please carefully check these patch files in `e3-base/patch/R3.15.5` and `e3-base/patch/Site/R3.15.5`. The first one is a space for the EPICS community patch files and the second one is a space for the ESS site-specific patch files. 
 
 * Community Distributed Patch Files `e3-base/patch/R3.15.5`
-EPICS base, the community provides patch files for the significant problems. ESS uses the point release of EPICS base, we also need a method to handle this scenario as well. Accidentally, the community use **p0** patch for Base 3.15.5 and **p1** patch for Base 3.16.X. However, e3 use the only **p0** patch in order to minimize any issues about compatibility. 
+EPICS base, the community provides patch files for the significant problems. ESS uses the point release of EPICS base, we also need a method to handle this scenario as well. Accidentally, the community use **p0** patch for Base 3.15.5 and **p1** patch for Base 3.16.X. However, e3 use the only **p0** patch in order to minimize any issues about any compatibility. 
 
 * Site-specific Patch Files `e3-base/patch/Site/R3.15.5`
-At the same time, we also have several patch files for ESS specific customization and discuss-in-progress with the community for EPICS base. 
+At the same time, we also have several patch files for ESS specific customization and discuss-in-progress with the community for EPICS base. In case, we have to hold our own patch files, we put them into a corresponding EPICS base release folder. 
+
+* How to apply the EPICS base patch files
+
+
+```
+e3-base$ make patch
+```
+* How to revert the applied the EPICS base patch files
+
+```
+e3-base$ make patchrevert
+```
+If one see the following messages, your base has already all patch files. 
+```
+Reversed (or previously applied) patch detected!  Assume -R? [n] 
+```
+
+
+* Patch and Patch Revert Functions
+There are four functions are defined in `configure/E3/DEFINES_FT` for e3-base. 
+..* patch_base
+..* patch_revert_base
+..* patch_site
+..* patch_revert_site
+
 
 
 ### e3 Module

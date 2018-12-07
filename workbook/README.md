@@ -13,10 +13,10 @@ This workbook is heavily been developing now.
 ## Chapter 4 : Release
 [Delve into e3 with startup scripts](chapter4.md)
 
-## Chapter 5 : WIP
+## Chapter 5 : Release
 [Take the Deployment or the Development](chapter5.md)
 
-## Chapter 6
+## Chapter 6 : WIP
 [Understand A Module Dependence](chapter6.md)
 
 ## Chapter 7

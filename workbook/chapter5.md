@@ -306,33 +306,14 @@ There are four functions are defined in `configure/E3/DEFINES_FT` for e3-base.
 Please go **E3_TOP**, and run `find . -name *.p0.patch`. For example, one can see the following :
 
 ```
-$ find . -name *.p0.patch | sort -n
+$ find . -name *.p0.patch |grep -v base | sort -n
 ./e3-ADAndor3/patch/Site/2.2.0-include-stdlin.h.p0.patch
 ./e3-ADSupport/patch/Site/1.4.0-tiff_extern_rename.p0.patch
-./e3-base/patch/Site/R3.15.5/cortexa9hf-neon_dbltExpand_lib.p0.patch
-./e3-base/patch/Site/R3.15.5/cortexa9hf-neon_ioc_prod_lib.p0.patch
-./e3-base/patch/Site/R3.15.5/enable_new_dtags.p0.patch
-./e3-base/patch/Site/R3.15.5/os_class.p0.patch
-./e3-base/patch/Site/R3.15.5/ppc64e6500_epics_host_arch.p0.patch
-./e3-base/patch/Site/R3.15.6/enable_new_dtags.p0.patch
-./e3-base/patch/Site/R3.15.6/os_class.p0.patch
-./e3-base/patch/Site/R3.15.6/ppc64e6500_epics_host_arch.p0.patch
-./e3-base/patch/Site/R3.16.1/enable_new_dtags.p0.patch
-./e3-base/patch/Site/R3.16.1/os_class.p0.patch
-./e3-base/patch/Site/R7.0.1.1/add_pvdatabase_nt_softIocPVA.p0.patch
-./e3-base/patch/Site/R7.0.1.1/enable_new_dtags.p0.patch
-./e3-base/patch/Site/R7.0.1.1/os_class.p0.patch
-./e3-base/patch/Site/R7.0.1.1/ppc64e6500_epics_host_arch.p0.patch
-./e3-base/patch/Site/R7.0.2/add_pvdatabase_nt_softIocPVA.p0.patch
-./e3-base/patch/Site/R7.0.2/enable_new_dtags.p0.patch
-./e3-base/patch/Site/R7.0.2/os_class.p0.patch
-/e3-base/patch/Site/R7.0.2/ppc64e6500_epics_host_arch.p0.patch
 ./e3-calc/patch/Site/3.7.1-cc_linking_release_local.p0.patch
 ./e3-modbus/patch/Site/2.11.0p-enable-ft-code16-in-writeUInt32d.p0.patch
 ./e3-NDDriverStdArrays/patch/Site/1.2.0-inflating-template.p0.patch
 ./e3-nds3/patch/Site/3.0.0-wrong_override_operator_not_error_either.p0.patch
 ./e3-nds/patch/Site/2.3.3-suppress-destructor-msg.p0.patch
-./e3-pvDatabase/patch/Site/4.3.0-remove-cout-in-pvDatabase-destructor.p0.patch
 ./e3-require/patch/Site/3.0.4-tclsh-path-for-readOnlyFS.p0.patch
 ./e3-s7plc/patch/Site/1.4.0p-fixed-unsigned-int-array-types.p0.patch
 ./e3-s7plc/patch/Site/a713a78-epics7-support.p0.patch
@@ -341,6 +322,41 @@ $ find . -name *.p0.patch | sort -n
 ./e3-StreamDevice/patch/Site/2.7.14p-fix_new_delete_mismatch.p0.patch
 ./e3-tsclib/patch/Site/2.3.1-include-headers-driver-makefile.p0.patch
 ```
+
+Each patch file has the unique prefix which is the `E3_MODULE_VERSION`. 
+
+
+#### How to apply specific module patch files
+```
+$ make patch
+```
+
+#### How to revert apply specific module patch files
+
+```
+$ make patchrevert
+```
+If one see the following messages, your module has already all patch files. 
+```
+Reversed (or previously applied) patch detected!  Assume -R? [n] 
+```
+#### How to create a patch file
+
+We will show a very short description for how to create a patch file. And it will be explained in detail later. 
+
+```
+$ cd ${E3_MODULE_SRC_PATH}
+$ git diff  --no-prefix > ../patch/Site/E3_MODULE_VERSION-what_ever_filename.p0.patch
+```
+#### Patch and Patch Revert Functions
+
+There are four functions are defined in ` e3-require/configure/modules/DEFINES_FT` for all e3-modules. This file will be located in
+`${EPICS_BASE}/require/${E3_REQUIRE_VERSION}/configure/modules` after the require module installation.
+
+* patch_site
+* patch_revert_site
+
+Note that these function names are the same as the e3-base ones, but it is slightly different. Can you find out which parts are different from each other?
 
 
 ## Questions
@@ -356,6 +372,14 @@ nothing to commit, working directory clean
 * Do we need `make devdistclean` always? Do we have another way to clean or remove a clone repository `iocStats-dev`? 
 
 * Can we distinguish between `make existent` and `make devexistent`? Is this different? 
+
+* Can we overwrite the same version of a module from the Deployment and the Development Modes?
+
+* What is the difference `p0` patch and `p1` patch?
+
+
+* We have an 1.0.0-awesome.p0.patch file. How do we apply it to Development mode source files?
+
 
 
 ## Reference 

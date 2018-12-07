@@ -140,10 +140,10 @@ $ make devdistclean
 0. Fork your own copy from the community iocStats [5]
 
 1. Update the `E3_MODULE_DEV_GITURL` in order to use your own repository. 
-...For example, the default one is `https://github.com/icshwi/iocStats`
+For example, the default one is `https://github.com/icshwi/iocStats`
 
 2. Check https://github.com/icshwi/iocStats whether it is the same as the original one or not. 
-...One can see the following line `This branch is 1 commit ahead, 1 commit behind epics-modules:master. ` in **Figure 2**.
+One can see the following line `This branch is 1 commit ahead, 1 commit behind epics-modules:master. ` in **Figure 2**.
 
 |![Import Example](ch5_supplementry_path/fig2.png)|
 | :---: |
@@ -152,7 +152,7 @@ $ make devdistclean
 
 3. `make devvars`
 
-...This will show the e3 module variables with the development mode. 
+This will show the e3 module variables with the development mode. 
 ```
 $ make devvars
 e3-iocStats$ make devvars
@@ -195,7 +195,7 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 
 4. `make devinit`
 
-...This will clone the source code with the name of `iocStats-dev`. One can check it by the `tree -L 1` command.
+This will clone the source code with the name of `iocStats-dev`. One can check it by the `tree -L 1` command.
 
 ```
 $ make devinit
@@ -215,18 +215,18 @@ $ tree -L 1
 
 5. `git status`
 
-...Can you see the difference? 
+Can you see the difference? 
 
 6. `git remote -v`
 
-...Please go `iocStats` path, and run the command to check where your source code repository. 
+Please go `iocStats` path, and run the command to check where your source code repository. 
 
 ```
 $ cd iocStats
 $ git remote -v
 ```
 
-...Please go `iocStats-dev` path, and run the command to check where your source code repository. 
+Please go `iocStats-dev` path, and run the command to check where your source code repository. 
 ```
 $ cd iocStats-dev
 $ git remote -v 
@@ -269,11 +269,11 @@ e3-base/patch/Site/R3.15.5/os_class.p0.patch
 
 Please carefully check these patch files in `e3-base/patch/R3.15.5` and `e3-base/patch/Site/R3.15.5`. The first one is a space for the EPICS community patch files and the second one is a space for the ESS site-specific patch files. 
 
-* Community Distributed Patch Files `e3-base/patch/R3.15.5`
-...EPICS base, the community provides patch files for the significant problems. ESS uses the point release of EPICS base, we also need a method to handle this scenario as well. Accidentally, the community use **p0** patch for Base 3.15.5 and **p1** patch for Base 3.16.X. However, e3 use the only **p0** patch in order to minimize any issues about any compatibility. 
+* **Community Distributed Patch Files** `e3-base/patch/R3.15.5`
+EPICS base, the community provides patch files for the significant problems. ESS uses the point release of EPICS base, we also need a method to handle this scenario as well. Accidentally, the community use **p0** patch for Base 3.15.5 and **p1** patch for Base 3.16.X. However, e3 use the only **p0** patch in order to minimize any issues about any compatibility. 
 
-* Site-specific Patch Files `e3-base/patch/Site/R3.15.5`
-...At the same time, we also have several patch files for ESS specific customization and discuss-in-progress with the community for EPICS base. In case, we have to hold our own patch files, we put them into a corresponding EPICS base release folder. 
+* **Site-specific Patch Files** `e3-base/patch/Site/R3.15.5`
+At the same time, we also have several patch files for ESS specific customization and discuss-in-progress with the community for EPICS base. In case, we have to hold our own patch files, we put them into a corresponding EPICS base release folder. 
 
 
 
@@ -292,6 +292,7 @@ If one see the following messages, your base has already all patch files.
 ```
 Reversed (or previously applied) patch detected!  Assume -R? [n] 
 ```
+
 #### Patch and Patch Revert Functions
 
 There are four functions are defined in `configure/E3/DEFINES_FT` for e3-base. 
@@ -299,7 +300,6 @@ There are four functions are defined in `configure/E3/DEFINES_FT` for e3-base.
 * patch_revert_base
 * patch_site
 * patch_revert_site
-
 
 
 ### e3 Module
@@ -326,7 +326,7 @@ $ find . -name *.p0.patch | sort -n
 ./e3-base/patch/Site/R7.0.2/add_pvdatabase_nt_softIocPVA.p0.patch
 ./e3-base/patch/Site/R7.0.2/enable_new_dtags.p0.patch
 ./e3-base/patch/Site/R7.0.2/os_class.p0.patch
-./e3-base/patch/Site/R7.0.2/ppc64e6500_epics_host_arch.p0.patch
+/e3-base/patch/Site/R7.0.2/ppc64e6500_epics_host_arch.p0.patch
 ./e3-calc/patch/Site/3.7.1-cc_linking_release_local.p0.patch
 ./e3-modbus/patch/Site/2.11.0p-enable-ft-code16-in-writeUInt32d.p0.patch
 ./e3-NDDriverStdArrays/patch/Site/1.2.0-inflating-template.p0.patch

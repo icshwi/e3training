@@ -303,6 +303,8 @@ There are four functions are defined in `configure/E3/DEFINES_FT` for e3-base.
 
 
 ### e3 Module
+
+
 Please go **E3_TOP**, and run `find . -name *.p0.patch`. For example, one can see the following :
 
 ```
@@ -323,7 +325,7 @@ $ find . -name *.p0.patch |grep -v base | sort -n
 ./e3-tsclib/patch/Site/2.3.1-include-headers-driver-makefile.p0.patch
 ```
 
-Each patch file has the unique prefix which is the `E3_MODULE_VERSION`. 
+Each patch file has the unique prefix which is the `E3_MODULE_VERSION`. We might think why we use patch files instead of `clone` or `fork`. Technically, we can use all available methods within e3. Thus, users can decide what is the best way to do for them. For the e3 modules, we would like to minimize any further maintenance, because specific patch files could be no more valid if we use the latest `E3_MODULE_VERSION`. There are many difference types of scenarios which one can work with external EPICS community about its modifications. For example, please check `e3-mrfioc2` and `e3-StreamDevice`. The simple golden rule is to use our own `forked` version if we have to change many files which will or may merge into the EPICS community version, and to use our own `patch` files if we have few files to be changed and no idea or have a bit complicated situation how we handle with the community module. 
 
 
 #### How to apply specific module patch files
@@ -377,10 +379,9 @@ nothing to commit, working directory clean
 
 * What is the difference `p0` patch and `p1` patch?
 
-
 * We have an 1.0.0-awesome.p0.patch file. How do we apply it to Development mode source files?
 
-
+* 
 
 ## Reference 
 [1] Atomic electron transition : https://en.wikipedia.org/wiki/Atomic_electron_transition

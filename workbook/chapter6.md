@@ -4,10 +4,10 @@ Chapter 6 : Variables, Parameters and Environment Variables within e3
 ## Lesson Overview
 
 In this lesson, you'll learn how to do the following:
-* Understand variables, parameters and environment variables within an ioc 
-* Run EPICS commands to access them within an ioc correctly
+* Understand variables, parameters and environment variables within an IOC 
+* Run EPICS commands to access them within an IOC correctly
 * Understand EPICS and e3 environment variable when a module is configured
-
+* Combine variable commands to access path or files of any module within an IOC
 
 
 
@@ -36,7 +36,7 @@ This is the IOC Prompt String.
 
 ### Require Internal Variables
 
-It is very useful to access the absolute path when an ioc starts within startup scripts. 
+It is very useful to access the absolute path when an IOC starts within startup scripts. 
 
 The following variables are very powerful. For example, if one uses mrfioc2 as ```MODULE```
 
@@ -96,7 +96,7 @@ Please try to access four variables for recsync module.
 ### EPICS Variables, Parameters, and Environment Variables
 
 
-* Check EPICS functions to access EPICS with the command ```epicsParamShow``` and ```epicsEnvShow``` within an ioc :
+* Check EPICS functions to access EPICS with the command ```epicsParamShow``` and ```epicsEnvShow``` within an IOC :
 
 ```
 # Set the IOC Prompt String One 

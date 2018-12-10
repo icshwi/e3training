@@ -257,7 +257,7 @@ One needs the ESS bitbucket account in order to access this.
     4 : e3-ifc14edrv
     5 : e3-ifcfastint
 ```
-### AreaDector Group
+### AreaDetector Group
 
 ```
 e3-3.15.5 (master)$ ./e3.bash -ao vars

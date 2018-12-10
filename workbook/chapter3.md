@@ -65,7 +65,7 @@ The default is the tree LEVEL 2, i.e., ``` make existent``` is the same as
 ``` make LEVEL=2 existent```
 
 
-## Check the initized StreamDevice version
+## Check the initiated StreamDevice version
 
 * Move into StreamDevice
 
@@ -95,7 +95,7 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 
 3. Check the configure/CONFIG_MODULE file
 
-```make init```will download all source files witin StreamDevice as git submodule, and switch to the stream_2_7_14 version of StreamDevice.
+```make init```will download all source files within StreamDevice as git submodule, and switch to the stream_2_7_14 version of StreamDevice.
 
 
 

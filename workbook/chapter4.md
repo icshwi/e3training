@@ -17,7 +17,7 @@ We will use  the simple simulator based on Kameleon [1] which simulates the simp
 
 0. Open a new terminal or a new tab
 
-1. Move into ```ch4_supplementry_path```
+1. Move into ```ch4_supplementary_path```
 
 2. Run
    ```
@@ -42,7 +42,7 @@ We will use  the simple simulator based on Kameleon [1] which simulates the simp
 
 ## Startup Scripts
 
-In ```ch4_supplementry_path/cmds```, there are several startup scripts according to its step from scratch to final configuration.
+In ```ch4_supplementary_path/cmds```, there are several startup scripts according to its step from scratch to final configuration.
 Before the running iocsh.bash, don't forget to set the e3 dynamic environment if you are in **E3_TOP** as ~/e3-3.15.5 via
 
 ```
@@ -55,7 +55,7 @@ $ source ~/e3-3.15.5/tools/setenv
 Please make sure that the simulator is running.
 
 ```
- ch4_supplementry_path (master)$ iocsh.bash cmds/0.cmd
+ ch4_supplementary_path (master)$ iocsh.bash cmds/0.cmd
 ```
 #### Does it work?
 * Check it whether it works or not
@@ -64,7 +64,7 @@ Please make sure that the simulator is running.
 
 #### E3_IOCSH_TOP and E3_CMD_TOP 
 * Can you see the two VARIABLES such as ```E3_IOCSH_TOP``` and ```E3_CMD_TOP``` ?
-* How two variables are changed if one can execute iocsh.bash witin cmds? 
+* How two variables are changed if one can execute iocsh.bash within cmds? 
 ```
 $ cmds (master)$ iocsh.bash 0.cmd 
 ```
@@ -82,7 +82,7 @@ iocshLoad '0.cmd',''
 Please make sure that the simulator is running.
 
 ```
- ch4_supplementry_path (master)$ iocsh.bash cmds/1.cmd
+ ch4_supplementary_path (master)$ iocsh.bash cmds/1.cmd
 ```
 
 * How many dependency modules of stream are loaded? Please carefully look at few lines outputs similar with the following
@@ -123,7 +123,7 @@ Please make sure that the simulator is running.
 
 * Run the following command
 ```
- ch4_supplementry_path (master)$ iocsh.bash cmds/2.cmd
+ ch4_supplementary_path (master)$ iocsh.bash cmds/2.cmd
 ```
 * What is the iocInit ?
 
@@ -141,10 +141,10 @@ Note that each single line output of the ioc is important. One should make sure 
 
 * Run the following command
 ```
-ch4_supplementry_path (master)$ iocsh.bash cmds/3-1.cmd 
+ch4_supplementary_path (master)$ iocsh.bash cmds/3-1.cmd 
 ```
 
-* IOC is running, however, it doesn't connect to anywhere. Can you see the message which repesents this situation? 
+* IOC is running, however, it doesn't connect to anywhere. Can you see the message which represents this situation? 
 Please remember, it runs at the end of your startup script whether it finds a hardware or not. In 3-1.cmd, we doesn't have db files which actually talk to the hardware. Thus, we don't see any error messages at all. I would like to emphasize the following one more time. Note that each single line output of the ioc is important. One should make sure that each line is correct, and one should understand each line correctly. 
 
 
@@ -157,7 +157,7 @@ drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
 
 * The following log is a snippet of the IOC output
 ```
-ch4_supplementry_path (master)$ iocsh.bash cmds/3-1.cmd
+ch4_supplementary_path (master)$ iocsh.bash cmds/3-1.cmd
 
 ......
 
@@ -308,7 +308,7 @@ In this case, we do require the individual module name, and its version, and its
 
 0. Run the 4.cmd
 ```
- ch4_supplementry_path$ iocsh.bash cmds/4.cmd
+ ch4_supplementary_path$ iocsh.bash cmds/4.cmd
 ```
 1. Type dbl to check which PVs can be found.
 ```
@@ -339,7 +339,7 @@ Can you rewrite all startup script with only one method?
 ### 5.cmd
 Please make sure that the simulator is running.
 
-Here we add the IocStats in the slightly different way, and add more modules exist witin e3 by default. 
+Here we add the IocStats in the slightly different way, and add more modules exist within e3 by default. 
 
 
 0. Please go **E3_TOP**, and run the following commands:
@@ -354,9 +354,9 @@ The e3 function **loadIocsh** is a similar function which EPICS function iocshLo
 
 1. Please run the following commands to see which PVs exist in your IOC
 ```
-ch4_supplementry_path$ bash ../tools/caget_pvs.bash IOC-NNNNNNNN_PVs.list 
+ch4_supplementary_path$ bash ../tools/caget_pvs.bash IOC-NNNNNNNN_PVs.list 
 ```
-, where NNNNNNNN is the randome number. 
+, where NNNNNNNN is the random number. 
 
 
 ## Reference 

@@ -1,4 +1,4 @@
-Chapter 13 : Variables, Parameters and Environment Variables within e3
+Chapter 6 : Variables, Parameters and Environment Variables within e3
 ==
 
 ## Lesson Overview
@@ -30,13 +30,13 @@ This is the absolute path where a startup script (cmd file) is.
 This is the absolute path where the iocsh.bash is executed.
 
 
-*```IOCSH_PS1```
+* ```IOCSH_PS1```
 This is the IOC Prompt String.
 
 
 ### Require Internal Variables
 
-It is very useful to access the absolute path when an ioc starts witin startup scripts. 
+It is very useful to access the absolute path when an ioc starts within startup scripts. 
 
 The following variables are very powerful. For example, if one uses mrfioc2 as ```MODULE```
 
@@ -70,7 +70,7 @@ Please run the following startup script
 0. Run
 
 ```
-$ iocsh.bash ch13_supplementry_path/ch13.cmd
+$ iocsh.bash ch6_supplementary_path/ch13.cmd
 ```
 One may get the following output:
 ```
@@ -107,7 +107,7 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 58bef31.faiserv.18238 > epicsEnvShow 
 ```
 
-* How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the refence [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```?
+* How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the reference [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```?
 
 
 * What is the difference between ```$(TOP)``` and ```${TOP}```?
@@ -116,7 +116,7 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 
 ```
 58bef31.faiserv.18238 > var
-asCaDebug = 0
+sandbag = 0
 atExitDebug = 0
 boHIGHlimit = 100000
 boHIGHprecision = 2

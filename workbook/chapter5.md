@@ -42,17 +42,17 @@ e3-iocStats (master)$ tree -L 1
 Each module has the slightly difference directory structure and files, but most of them are the same. 
 
 * cmds              : customized startup scripts should be located in
-* docs              : documents, log fles or others should be located in
+* docs              : documents, log files or others should be located in
 * iocsh             : modularized startup scripts should be located in. They will be installed into e3 installation path. 
 * patch             : if we need to handle small changes of source codes, we can keep patch files within it. 
 * Makefile          : global e3 module makefile 
 * iocStats.Makefile : e3 makefile for iocStats
 * configure         : e3 configuration files
-* iocStats          : git submodule path to link to where iocStats source reposiotory is
+* iocStats          : git submodule path to link to where iocStats source repository is
 
 ### Git submodule
 
-In order to explain how e3 uses git submodules, we have to do the following execise:
+In order to explain how e3 uses git submodules, we have to do the following exercise:
 
 0. Run
 
@@ -65,14 +65,14 @@ ae5d08388ca3d6c48ec0e37787c865c5db18dc8f iocStats (3.1.15-17-gae5d083)
 ```
 Please spend some time to understand these three columns. The reference [2] may be useful. 
 
-1. Check a github site
+1. Check a GitHub site
 
 Please visit https://github.com/icshwi/e3-iocStats, which is shown in **Figure 1**.
 The magic number is **ae5d083**. Please try to find where that number exists. After finding it, please check that number in the output of `git submodule status` also. 
 
-|![Import Example](ch5_supplementry_path/fig1.png)|
+|![Import Example](ch5_supplementary_path/fig1.png)|
 | :---: |
-|**Figure 1** The screenshot for the iocStats github site. |
+|**Figure 1** The screenshot for the iocStats GitHub site. |
 
 
 2. Check its submodule configuration
@@ -91,7 +91,7 @@ As one sees now, `git  submodule` guides us to a new place where we can work and
 
 Therefore, we only use a specific commit version of iocStats within e3-iocStats in order to identify which version currently links to. And if source code repositories are stable enough, we can use `git submodule update --init` to download its specific version of source codes within e3 modules. By that means, we can pick a specific version of a module, which we would like to use for stable e3 system. 
 
-However, when source code repositories are changed very frequently, it also create an additional maintenance work which one has to update the SHA-A checksum in order to match a selected version of a module. Thus, with `make init`, it will download latest version of a module, and switch to a specific version defined in `configure/CONFIG_MODULE` through several git and other commands behind its building system. 
+However, when source code repositories are changed very frequently, it also create an additional maintenance work which one has to update the SHA-1 checksum in order to match a selected version of a module. Thus, with `make init`, it will download latest version of a module, and switch to a specific version defined in `configure/CONFIG_MODULE` through several git and other commands behind its building system. 
 
 The following commands are used for the deployment mode of each module. They will use `git submodule` path to do their jobs properly. 
 
@@ -114,15 +114,15 @@ The deployment mode is nice if one has enough domain knowledge on `git submodule
 $ ls configure/*_DEV
 ```
 
-Two files (`CONFIG_MODULE_DEV` and `RELEASE_DEV`) are the counterpart of files (`CONFIG_MODULE` and `RELEASE`) in the deployment mode. Both files are almost identifical except the suffix `_DEV` and following things in the development mode :
+Two files (`CONFIG_MODULE_DEV` and `RELEASE_DEV`) are the counterpart of files (`CONFIG_MODULE` and `RELEASE`) in the deployment mode. Both files are almost identical except the suffix `_DEV` and following things in the development mode :
 
 * `E3_MODULE_DEV_GITURL` : This shows the repository which one would like to download into an e3 module
 * `E3_MODULE_SRC_PATH` : This shows the source codes path for the deployment mode. It has the suffix `-dev`. For example, e3-iocStats has `iocStats` source path in the deployment, and `iocStats-dev` one in the development mode. 
 
-With `E3_MODULE_DEV_GITURL` variable in `configure/CONFIG_MODULE_DEV` with the most poweful feature of `git`, we may have a plenty of degree of freedom to develop an module without worrying about other system which may use this module. 
+With `E3_MODULE_DEV_GITURL` variable in `configure/CONFIG_MODULE_DEV` with the most powerful feature of `git`, we may have a plenty of degree of freedom to develop an module without worrying about other system which may use this module. 
 
 
-The following commands are used for the development mode of each module. They will use `git clone` path to do their jobs properly. There is one extra command which one can see `make devdistclean` will remove the clone source directory, for example, iocStats-dev when one would like to clone from scratch. And `make existent` and `make devexistent` are the same output, because it relys on **installed** module versions. 
+The following commands are used for the development mode of each module. They will use `git clone` path to do their jobs properly. There is one extra command which one can see `make devdistclean` will remove the clone source directory, for example, iocStats-dev when one would like to clone from scratch. And `make existent` and `make devexistent` are the same output, because it relies on **installed** module versions. 
 
 ```
 $ make devvars
@@ -145,9 +145,9 @@ For example, the default one is `https://github.com/icshwi/iocStats`
 2. Check https://github.com/icshwi/iocStats whether it is the same as the original one or not. 
 One can see the following line `This branch is 1 commit ahead, 1 commit behind epics-modules:master. ` in **Figure 2**.
 
-|![Import Example](ch5_supplementry_path/fig2.png)|
+|![Import Example](ch5_supplementary_path/fig2.png)|
 | :---: |
-|**Figure 2** The screenshot for the forked and modified icshwi iocStats github site. |
+|**Figure 2** The screenshot for the forked and modified icshwi iocStats GitHub site. |
 
 
 3. `make devvars`
@@ -158,7 +158,7 @@ $ make devvars
 e3-iocStats$ make devvars
 
 ------------------------------------------------------------
->>>>     Current EPICS and E3 Envrionment Variables     <<<<
+>>>>     Current EPICS and E3 Environment Variables     <<<<
 ------------------------------------------------------------
 
 E3_MODULES_INSTALL_LOCATION = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee

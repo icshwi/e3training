@@ -30,7 +30,7 @@ This is the absolute path where a startup script (cmd file) is.
 This is the absolute path where the iocsh.bash is executed.
 
 
-*```IOCSH_PS1```
+* ```IOCSH_PS1```
 This is the IOC Prompt String.
 
 

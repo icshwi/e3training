@@ -17,29 +17,29 @@ This workbook is heavily been developing now.
 [Take the Deployment or the Development](chapter5.md)
 
 ## Chapter 6 : WIP
-[Understand A Module Dependence](chapter6.md)
+[Variables, Parameters and Environment Variables within e3](chapter6.md)
 
-## Chapter 7
-[Build an e3 Application](chapter7.md)
+## Chapter X : 
+[Understand A Module Dependence](6.md)
 
-## Chapter 8
-[Build an e3 Module](chapter8.md)
+## Chapter X
+[Build an e3 Application](7.md)
 
-## Chapter 9
-[Dependence, Dependence, and Dependence](chapter9.md)
+## Chapter X
+[Build an e3 Module](8.md)
 
-## Chapter 10
-[e3 Directory Structure](chapter10.md)
+## Chapter X
+[Dependence, Dependence, and Dependence](9.md)
 
-## Chapter 11
-[Release Rule](chapter11.md)
+## Chapter X
+[e3 Directory Structure](10.md)
 
-## Chapter 12
-[Work with EPICS Community](chapter12.md)
+## Chapter X
+[Release Rule](11.md)
 
+## Chapter X
+[Work with EPICS Community](12.md)
 
-## Chapter 13 : WIP
-[Variables, Parameters and Environment Variables within e3](chapter13.md)
 
 
 

@@ -110,7 +110,7 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 
 
 
-* How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the reference [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```? There are four commands (```date```, ```echo```, ```cd```, and ```echo```) which one can use in the similar way in Linux shell environment.
+* How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the reference [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```? There are four commands (```date```, ```pwd```, ```cd```, and ```echo```) which one can use in the similar way in Linux shell environment.
 
 
 
@@ -200,8 +200,6 @@ Now, it is the self-evidence that ```var``` is defined as a variable within a re
 Note that the upper and lower keys can be used to catch the command list which were used before. 
 
 
-
-
 ## Building a Module or An Application 
 
 
@@ -249,6 +247,17 @@ PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_ae5d083_bin/l
 REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 ```
 
+
+
+##  Assignments
+
+### Access DB files of a module within a running IOC
+
+With the following IOC,
+```
+$ iocsh.bash ch6_supplementary_path/ch6.cmd
+```
+print out all db files of the asyn module within an IOC with two command lines. Note that an IOC supports only few similar commands (date, exit, help, cd, pwd, and echo). Please remember a unique command to run Linux any commands within an IOC. 
 
 ## Reference
 

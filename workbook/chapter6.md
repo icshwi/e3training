@@ -1,7 +1,7 @@
 Chapter 6 : Understand A Module Dependence
 ==
 
-# Lesson Overview
+## Lesson Overview
 
 In this lesson, you'll learn how to do the following:
 * Understand the building dependency when a module is built. 

@@ -37,6 +37,12 @@ This workbook is heavily been developing now.
 ## Chapter 12
 [Work with EPICS Community](chapter12.md)
 
+
+## Chapter 13 : WIP
+[Variables, Parameters and Environment Variables within e3](chapter13.md)
+
+
+
 ## Other Subjects 
 * Multiple e3s in a host
 * Hidden makefile rules (db, hdrs, vlibs, epics, and so on)

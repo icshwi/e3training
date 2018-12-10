@@ -70,7 +70,7 @@ Please run the following startup script
 0. Run
 
 ```
-$ iocsh.bash ch6_supplementary_path/ch13.cmd
+$ iocsh.bash ch6_supplementary_path/ch6.cmd
 ```
 One may get the following output:
 ```
@@ -102,12 +102,16 @@ Please try to access four variables for recsync module.
 # Set the IOC Prompt String One 
 epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 #
-
 58bef31.faiserv.18238 > epicsParamShow 
 58bef31.faiserv.18238 > epicsEnvShow 
 ```
 
-* How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the reference [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```?
+* Run ```epicsPrtEnvParams```. Which command returns the same result?
+
+
+
+* How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the reference [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```? There are four commands (```date```, ```echo```, ```cd```, and ```echo```) which one can use in the similar way in Linux shell environment.
+
 
 
 * What is the difference between ```$(TOP)``` and ```${TOP}```?
@@ -137,7 +141,9 @@ seqDLYlimit = 100000
 seqDLYprecision = 2
 ```
 
-* Now, can you describe differences among them? How they are different from each other? Where are they defined? Can you explain this? 
+* Can you explain answers of the following questions to others? 1) Difference among them and 2) Where are they defined. 
+
+
 
 
 * In the running ioc, please require the recsync with the installed version through:
@@ -237,7 +243,6 @@ EPICS_BASE = /epics/base-3.15.5
 EPICS_HOST_ARCH = linux-x86_64
 EPICS_MODULE_NAME = iocStats
 EPICS_MODULE_TAG = ae5d083
-EXPORT_VARS = E3_MODULES_VENDOR_LIBS_LOCATION E3_MODULES_INSTALL_LOCATION_LIB_LINK EPICS_HOST_ARCH EPICS_BASE MSI E3_MODULE_VERSION E3_SITEMODS_PATH E3_SITEAPPS_PATH E3_SITELIBS_PATH E3_REQUIRE_MAKEFILE_INPUT_OPTIONS E3_REQUIRE_LIB E3_REQUIRE_NAME E3_REQUIRE_DB E3_REQUIRE_CONFIG E3_REQUIRE_LOCATION E3_REQUIRE_DBD E3_REQUIRE_VERSION E3_REQUIRE_TOOLS E3_REQUIRE_INC E3_REQUIRE_BIN QUIET   SUDO_INFO SUDO2 SUDOBASH SUDO
 INSTALLED_EPICS_BASE_ARCHS = linux-ppc64e6500 linux-x86_64
 MSI = /epics/base-3.15.5/bin/linux-x86_64/msi
 PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_ae5d083_bin/linux-x86_64

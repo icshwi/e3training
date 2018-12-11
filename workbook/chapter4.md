@@ -376,7 +376,7 @@ ch4_supplementary_path$ bash ../tools/caget_pvs.bash IOC-NNNNNNNN_PVs.list
 
 
 ------------------
-<< Previous | Here  | Next >>
+:arrow_backward:  | :arrow_up_small:  | :arrow_forward:
 :--- | --- |---: 
 [Chapter3](chapter3.md) | [Chapter4](chapter4.md) | [Chapter5](chapter5.md)
 

@@ -127,7 +127,7 @@ Please explain the following jargon by yourself, they are mixed within EPICS and
 
 
 ------------------
-<< Previous | Here  | Next >>
+:arrow_backward:  | :arrow_up_small:  | :arrow_forward:
 :--- | --- |---: 
 [Chapter1](chapter1.md) | [Chapter2](chapter2.md) | [Chapter3](chapter3.md)
 

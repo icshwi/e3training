@@ -339,7 +339,7 @@ Can you find out which file allow us to run ```make vars``` or ```make env``` wi
 
 
 ------------------
-<< Previous | Here  | Next >>
+:arrow_backward:  | :arrow_up_small:  | :arrow_forward:
 :--- | --- |---: 
 [Chapter5](chapter5.md) | [Chapter6](chapter6.md) | [Chapter7](chapter7.md)
 

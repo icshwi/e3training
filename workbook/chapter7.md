@@ -13,7 +13,7 @@ In this lesson, you'll learn how to do the following:
 
 
 ------------------
-<< Previous | Here  | Next >>
+:arrow_backward:  | :arrow_up_small:  | :arrow_forward:
 :--- | --- |---: 
 [Chapter6](chapter6.md) | [Chapter7](chapter7.md) | [Chapter8](chapter8.md)
 

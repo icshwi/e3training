@@ -160,7 +160,7 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 
 
 ------------------
-<< Previous | Here  | Next >>
+:arrow_backward:  | :arrow_up_small:  | :arrow_forward:
 :--- | --- |---: 
 [Chapter2](chapter2.md) | [Chapter3](chapter3.md) | [Chapter4](chapter4.md)
 

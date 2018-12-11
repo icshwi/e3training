@@ -5,7 +5,7 @@ This workbook is heavily been developing now.
 [e3 installation](chapter1.md)
 
 ## Chapter 2 : Release
-[Your First Running e3 ioc](chapter2.md)
+[Your First Running e3 IOC](chapter2.md)
 
 ## Chapter 3 : Release
 [Install a Module with the different version number](chapter3.md)
@@ -19,8 +19,8 @@ This workbook is heavily been developing now.
 ## Chapter 6 : Release
 [Variables, Parameters and Environment Variables within e3](chapter6.md)
 
-## Chapter X : 
-[Understand A Module Dependence](6.md)
+## Chapter 7 : 
+[Understand A Module Dependence](chapter7.md)
 
 ## Chapter X
 [Build an e3 Application](7.md)

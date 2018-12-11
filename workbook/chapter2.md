@@ -1,4 +1,4 @@
-# Chapter 2 : Your first running e3 ioc
+# Chapter 2 : Your first running e3 IOC
 
 ## Lesson Overview
 

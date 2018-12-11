@@ -16,7 +16,7 @@ This workbook is heavily been developing now.
 ## Chapter 5 : Release
 [Take the Deployment or the Development](chapter5.md)
 
-## Chapter 6 : WIP
+## Chapter 6 : Release
 [Variables, Parameters and Environment Variables within e3](chapter6.md)
 
 ## Chapter X : 

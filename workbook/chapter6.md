@@ -202,50 +202,114 @@ Note that the upper and lower keys can be used to catch the command list which w
 
 ## Building a Module or An Application 
 
+In [Chapter3](chapter3.md), We already discussed two e3 variables : ```E3_MODULE_VERSION``` and  ```EPICS_MODULE_TAG```. In addition, there are many environment variables for e3 when we configure and install a module. 
 
+### e3 environment variables
 
+Once you print out all environment variables of each module via ```make vars``` as follows:
 
 ```
-E3_MODULES_INSTALL_LOCATION = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083
-E3_MODULES_INSTALL_LOCATION_BIN = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/bin
-E3_MODULES_INSTALL_LOCATION_BIN_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_ae5d083_bin
-E3_MODULES_INSTALL_LOCATION_DB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/db
-E3_MODULES_INSTALL_LOCATION_DBD_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats.dbd.ae5d083
-E3_MODULES_INSTALL_LOCATION_DB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_ae5d083_db
-E3_MODULES_INSTALL_LOCATION_INC = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/include
-E3_MODULES_INSTALL_LOCATION_INC_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_ae5d083_include
-E3_MODULES_INSTALL_LOCATION_LIB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/lib
-E3_MODULES_INSTALL_LOCATION_LIB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_ae5d083_lib
-E3_MODULES_LIBLINKNAME = libiocStats.so.ae5d083
-E3_MODULES_LIBNAME = libiocStats.so
+e3-caPutLog$ make vars
+
+------------------------------------------------------------
+>>>>     Current EPICS and E3 Envrionment Variables     <<<<
+------------------------------------------------------------
+
+E3_MODULES_INSTALL_LOCATION = /epics/base-3.15.5/require/3.0.4/siteMods/caPutLog/3.6.0
+E3_MODULES_INSTALL_LOCATION_BIN = /epics/base-3.15.5/require/3.0.4/siteMods/caPutLog/3.6.0/bin
+E3_MODULES_INSTALL_LOCATION_BIN_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/caPutLog_3.6.0_bin
+E3_MODULES_INSTALL_LOCATION_DB = /epics/base-3.15.5/require/3.0.4/siteMods/caPutLog/3.6.0/db
+E3_MODULES_INSTALL_LOCATION_DBD_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/caPutLog.dbd.3.6.0
+E3_MODULES_INSTALL_LOCATION_DB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/caPutLog_3.6.0_db
+E3_MODULES_INSTALL_LOCATION_INC = /epics/base-3.15.5/require/3.0.4/siteMods/caPutLog/3.6.0/include
+E3_MODULES_INSTALL_LOCATION_INC_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/caPutLog_3.6.0_include
+E3_MODULES_INSTALL_LOCATION_LIB = /epics/base-3.15.5/require/3.0.4/siteMods/caPutLog/3.6.0/lib
+E3_MODULES_INSTALL_LOCATION_LIB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/caPutLog_3.6.0_lib
+E3_MODULES_LIBLINKNAME = libcaPutLog.so.3.6.0
+E3_MODULES_LIBNAME = libcaPutLog.so
 E3_MODULES_PATH = /epics/base-3.15.5/require/3.0.4/siteMods
-E3_MODULES_VENDOR_LIBS_LOCATION = /epics/base-3.15.5/require/3.0.4/siteLibs/vendor/iocStats/ae5d083
-E3_MODULE_MAKEFILE = iocStats.Makefile
-E3_MODULE_MAKE_CMDS = make -C iocStats -f iocStats.Makefile LIBVERSION="ae5d083" PROJECT="iocStats" EPICS_MODULES="/epics/base-3.15.5/require/3.0.4/siteMods" EPICS_LOCATION="/epics/base-3.15.5" BUILDCLASSES="Linux" E3_SITEMODS_PATH="/epics/base-3.15.5/require/3.0.4/siteMods" E3_SITEAPPS_PATH="/epics/base-3.15.5/require/3.0.4/siteApps" E3_SITELIBS_PATH="/epics/base-3.15.5/require/3.0.4/siteLibs"
-E3_MODULE_NAME = iocStats
-E3_MODULE_SRC_PATH = iocStats
-E3_MODULE_VERSION = ae5d083
-E3_REQUIRE_BIN = /epics/base-3.15.5/require/3.0.4/bin
+E3_MODULES_VENDOR_LIBS_LOCATION = /epics/base-3.15.5/require/3.0.4/siteLibs/vendor/caPutLog/3.6.0
+E3_MODULE_MAKEFILE = caPutLog.Makefile
+E3_MODULE_MAKE_CMDS = make -C caPutLog -f caPutLog.Makefile LIBVERSION="3.6.0" PROJECT="caPutLog" EPICS_MODULES="/epics/base-3.15.5/require/3.0.4/siteMods" EPICS_LOCATION="/epics/base-3.15.5" BUILDCLASSES="Linux" E3_SITEMODS_PATH="/epics/base-3.15.5/require/3.0.4/siteMods" E3_SITEAPPS_PATH="/epics/base-3.15.5/require/3.0.4/siteApps" E3_SITELIBS_PATH="/epics/base-3.15.5/require/3.0.4/siteLibs"
+E3_MODULE_NAME = caPutLog
+E3_MODULE_SRC_PATH = caPutLog
+E3_MODULE_VERSION = 3.6.0
 E3_REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
-E3_REQUIRE_DB = /epics/base-3.15.5/require/3.0.4/db
-E3_REQUIRE_INC = /epics/base-3.15.5/require/3.0.4/include
-E3_REQUIRE_LIB = /epics/base-3.15.5/require/3.0.4/lib
-E3_REQUIRE_LOCATION = /epics/base-3.15.5/require/3.0.4
-E3_REQUIRE_NAME = require
 E3_REQUIRE_TOOLS = /epics/base-3.15.5/require/3.0.4/tools
-E3_REQUIRE_VERSION = 3.0.4
-E3_SITEAPPS_PATH = /epics/base-3.15.5/require/3.0.4/siteApps
-E3_SITELIBS_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs
-E3_SITEMODS_PATH = /epics/base-3.15.5/require/3.0.4/siteMods
-EPICS_BASE = /epics/base-3.15.5
-EPICS_HOST_ARCH = linux-x86_64
-EPICS_MODULE_NAME = iocStats
-EPICS_MODULE_TAG = ae5d083
+EPICS_MODULE_NAME = caPutLog
+EPICS_MODULE_TAG = tags/R3.6
+EXPORT_VARS = E3_MODULES_VENDOR_LIBS_LOCATION E3_MODULES_INSTALL_LOCATION_LIB_LINK EPICS_HOST_ARCH EPICS_BASE MSI E3_MODULE_VERSION E3_SITEMODS_PATH E3_SITEAPPS_PATH E3_SITELIBS_PATH E3_REQUIRE_MAKEFILE_INPUT_OPTIONS E3_REQUIRE_NAME E3_REQUIRE_DB E3_REQUIRE_CONFIG E3_REQUIRE_LOCATION E3_REQUIRE_DBD E3_REQUIRE_VERSION E3_REQUIRE_TOOLS E3_REQUIRE_INC E3_REQUIRE_LIB E3_REQUIRE_BIN QUIET   SUDO2 SUDO_INFO SUDOBASH SUDO
 INSTALLED_EPICS_BASE_ARCHS = linux-ppc64e6500 linux-x86_64
 MSI = /epics/base-3.15.5/bin/linux-x86_64/msi
-PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_ae5d083_bin/linux-x86_64
+PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/caPutLog_3.6.0_bin/linux-x86_64
 REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 ```
+
+
+### Customized EPICS Environment Variables
+
+* ```EPICS_BASE``` is where the epics base is installed (EPICS Environment Variable).
+
+* ```EPICS_HOST_ARCH``` is what the system host architecture is (EPICS Environment Variable).
+
+* ```EPICS_MODULE_NAME``` is a module name which we would like to use within e3 (e3 Environment variable). Please see ```E3_MODULE_NAME```.
+
+* ```EPICS_MODULE_TAG``` is a point release information of the remote source code repository. For example, it will be one of the following: ```master```, ```tags/R3.6```, ```ae5d083```, and any arguments which can be used with ```git checkout```. 
+
+
+* ```INSTALLED_EPICS_BASE_ARCHS``` shows the EPICS base archtecture installed within local system. Mostly, it is only ```linux-x86_64``` in our environment. 
+
+
+### e3 Environment Variables
+ 
+
+* ```E3_SITEMODS_PATH``` is the e3 site module installation path. 
+* ```E3_SITEAPPS_PATH``` is the e3 site application installation path. 
+* ```E3_SITELIBS_PATH``` is the e3 site library path.
+* ```E3_REQUIRE_NAME``` is the unique e3 module name **require**. Mostly, it is the static string. No one should change this variable. 
+* ```E3_REQUIRE_VERSION``` is the require version number. 
+* ```E3_REQUIRE_BIN``` is the require bin path. 
+* ```E3_REQUIRE_CONFIG``` is the require configure path, which is used for the require module. 
+* ```E3_REQUIRE_DB``` is the require db path. 
+* ```E3_REQUIRE_INC``` is the require include path. 
+* ```E3_REQUIRE_LIB``` is the require lib path.
+* ```E3_REQUIRE_LOCATION``` is the require path. 
+* ```E3_REQUIRE_TOOLS``` is the require tools path. 
+* ```REQUIRE_CONFIG``` is the require configuration path, which is used for each module configuration. It is the same as ```E3_REQUIRE_CONFIG```, however, it is defined before ```E3_REQUIRE_CONFIG```. 
+
+
+### e3 Module Core Environment Variables
+
+
+* ```E3_MODULE_NAME``` is the module name used for ```require E3_MODULE_NAME``` within an IOC startup script. Usually, it is the same as ```EPICS_MODULE_NAME```.
+* ```E3_MODULE_SRC_PATH``` is the where your source codes are downloaded according to difference configurations such as the deployment mode, the development mode, the local mode, and the repository source directory name. 
+* ```E3_MODULE_VERSION``` is the module version used for ```require E3_MODULE_NAME E3_MODULE_VERSION```. There is no limitation to select this version number.
+* ```E3_MODULE_MAKEFILE``` is the name of a module or an application makefile. 
+* ```E3_MODULES_PATH``` is the parent path of a final installation location of each module or each application.  It can be ```E3_SITEMODS_PATH``` or ```E3_SITEAPPS_PATH```. 
+* ```E3_MODULES_LIBNAME``` is the name of the shared library of each module or each application.
+* ```E3_MODULES_INSTALL_LOCATION``` is the installation parent path of a module or an application.
+* ```E3_MODULES_INSTALL_LOCATION_BIN``` is the installation bin path of a module or an application. 
+* ```E3_MODULES_INSTALL_LOCATION_DB```  is the installation db path of a module or an application. 
+* ```E3_MODULES_INSTALL_LOCATION_INC``` is the installation include path of a module or an application.
+* ```E3_MODULES_INSTALL_LOCATION_LIB``` is the installation lib path of a module or an application.
+
+### e3 Module Aux Environment Variables
+
+The following variables are defined within a module or an application by default. However, they are not used for an application or if is not necessary to be used. 
+
+* ```E3_MODULES_LIBLINKNAME```  is the symbolic link name of a module with a module version. 
+* ```E3_MODULES_INSTALL_LOCATION_BIN_LINK``` is the symbolic link name of the module bin path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_bin```. 
+* ```E3_MODULES_INSTALL_LOCATION_DB_LINK``` is the symbolic link name of the module db path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_db```. 
+* ```E3_MODULES_INSTALL_LOCATION_INC_LINK``` is the symbolic link name of the module include path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_include```.
+* ```E3_MODULES_INSTALL_LOCATION_LIB_LINK``` is the symbolic link name of the module lib path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_lib```. 
+* ```E3_MODULES_INSTALL_LOCATION_DBD_LINK``` is the symbolic link name of the module dbd file located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_dbd_E3_MODULE_VERSION```. 
+
+* ```E3_MODULES_VENDOR_LIBS_LOCATION``` is the vendor or 3rd party lib path located in ```E3_SITELIBS_PATH``` as the following form : ```vendor/E3_MODULE_NAME/E3_MODULE_VERSION```. 
+* ```PROD_BIN_PATH``` is the short bin path in case users would like to access module specific executable commands. 
+
+* ```E3_MODULE_MAKE_CMDS``` is the command to execute to build / install each module. 
+
+* ```EXPORT_VARS``` is the collection of exported environment variables within e3 building system in order to transfer them through different makefiles. 
 
 
 
@@ -258,6 +322,15 @@ With the following IOC,
 $ iocsh.bash ch6_supplementary_path/ch6.cmd
 ```
 print out all db files of the asyn module within an IOC with two command lines. Note that an IOC supports only few similar commands (date, exit, help, cd, pwd, and echo). Please remember a unique command to run Linux any commands within an IOC. 
+
+### Vendor Libraries
+Which Module is used for a specific vendor library? Why do we keep these files within e3 structure? 
+
+### Makefile Rules
+
+Can you find out which file allow us to run ```make vars``` or ```make env``` within e3 building system? It is the same for all modules and applications, so where could be located?
+
+
 
 ## Reference
 

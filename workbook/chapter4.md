@@ -378,6 +378,6 @@ ch4_supplementary_path$ bash ../tools/caget_pvs.bash IOC-NNNNNNNN_PVs.list
 ------------------
 [:arrow_backward:](chapter3.md)  | [:arrow_up_small:](chapter4.md)  | [:arrow_forward:](chapter5.md)
 :--- | --- |---: 
-[Chapter3](chapter3.md) | [Chapter4](chapter4.md) | [Chapter5](chapter5.md)
+[Chapter 3](chapter3.md) | [Chapter 4](chapter4.md) | [Chapter 5](chapter5.md)
 
 

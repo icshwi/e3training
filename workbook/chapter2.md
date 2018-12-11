@@ -129,5 +129,5 @@ Please explain the following jargon by yourself, they are mixed within EPICS and
 ------------------
 [:arrow_backward:](chapter1.md)  | [:arrow_up_small:](chapter2.md)  | [:arrow_forward:](chapter3.md)
 :--- | --- |---: 
-[Chapter1](chapter1.md) | [Chapter2](chapter2.md) | [Chapter3](chapter3.md)
+[Chapter 1](chapter1.md) | [Chapter 2](chapter2.md) | [Chapter 3](chapter3.md)
 

@@ -129,5 +129,5 @@ Please explain the following jargon by yourself, they are mixed within EPICS and
 ------------------
 [:arrow_backward:](chapter1.md)  | [:arrow_up_small:](chapter2.md)  | [:arrow_forward:](chapter3.md)
 :--- | --- |---: 
-[Chapter 1](chapter1.md) | [Chapter 2](chapter2.md) | [Chapter 3](chapter3.md)
+[Chapter 1 : e3 installation](chapter1.md) | [Chapter 2](chapter2.md) | [Chapter 3 : install a module with the difference version number](chapter3.md)
 

@@ -86,7 +86,7 @@ epicsEnvSet "IOCSTATS_MODULE_TEMPLATE_PATH" /epics/base-3.15.5/require/3.0.4/sit
 
 ```
 
-One can try to add recsync into ch13.cmd to create ch13-local.cmd. Please enable it through
+One can try to add recsync into ch6.cmd to create ch6-local.cmd. Please enable it through
 ```
 recsync, 1.3.0
 ```

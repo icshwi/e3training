@@ -1,5 +1,6 @@
-This workbook is heavily been developing now. 
-
+This workbook is heavily been developing now.  
+==
+**Release represents that the chapter is ready for your training. WIP does that I am working on currently.**
 
 ## Chapter 1 : Release
 [e3 installation](chapter1.md)

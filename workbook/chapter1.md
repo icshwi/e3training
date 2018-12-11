@@ -407,6 +407,6 @@ The command will load all installed modules within a single iocsh.bash. If one s
 
 
 ------------------
-<< Previous | Here  | Next >>
+:arrow_backward:  | :arrow_up_small:  | :arrow_forward:
 :--- | --- |---: 
-[README.md](README.md) | [Chapter1](chapter1.md) | [Chapter2](chapter2.md)
+[README](README.md) | [Chapter1](chapter1.md) | [Chapter2](chapter2.md)

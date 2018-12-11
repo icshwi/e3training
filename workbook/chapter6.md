@@ -335,3 +335,13 @@ Can you find out which file allow us to run ```make vars``` or ```make env``` wi
 ## Reference
 
 [1] https://epics.anl.gov/base/R3-15/6-docs/AppDevGuide/IOCShell.html#x19-73300018
+
+
+
+------------------
+<< Previous | Here  | Next >>
+:--- | --- |---: 
+[Chapter5](chapter5.md) | [Chapter6](chapter6.md) | [Chapter7](chapter7.md)
+
+
+

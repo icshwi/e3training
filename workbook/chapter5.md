@@ -397,3 +397,13 @@ nothing to commit, working directory clean
 [6] https://en.wikipedia.org/wiki/Patch_(Unix)
 
 [7] https://epics.anl.gov/base/R3-15/5-docs/KnownProblems.html
+
+
+
+------------------
+<< Previous | Here  | Next >>
+:--- | --- |---: 
+[Chapter4](chapter4.md) | [Chapter5](chapter5.md) | [Chapter6](chapter6.md)
+
+
+

@@ -157,3 +157,10 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
     For example, commit hash is 493dc19
 	
 	
+
+
+------------------
+<< Previous | Here  | Next >>
+:--- | --- |---: 
+[Chapter2](chapter2.md) | [Chapter3](chapter3.md) | [Chapter4](chapter4.md)
+

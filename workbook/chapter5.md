@@ -401,7 +401,7 @@ nothing to commit, working directory clean
 
 
 ------------------
-:arrow_backward:  | :arrow_up_small:  | :arrow_forward:
+[:arrow_backward:](chapter4.md)  | [:arrow_up_small:](chapter5.md)  | [:arrow_forward:](chapter6.md)
 :--- | --- |---: 
 [Chapter4](chapter4.md) | [Chapter5](chapter5.md) | [Chapter6](chapter6.md)
 

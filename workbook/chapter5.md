@@ -117,7 +117,7 @@ $ ls configure/*_DEV
 Two files (`CONFIG_MODULE_DEV` and `RELEASE_DEV`) are the counterpart of files (`CONFIG_MODULE` and `RELEASE`) in the deployment mode. Both files are almost identical except the suffix `_DEV` and following things in the development mode :
 
 * `E3_MODULE_DEV_GITURL` : This shows the repository which one would like to download into an e3 module
-* `E3_MODULE_SRC_PATH` : This shows the source codes path for the deployment mode. It has the suffix `-dev`. For example, e3-iocStats has `iocStats` source path in the deployment, and `iocStats-dev` one in the development mode. 
+* `E3_MODULE_SRC_PATH` : This shows the source codes path for the deployment mode. It has the suffix `-dev`. For example, e3-iocStats has `iocStats` source path in the deployment, and `iocStats-dev` one in the development mode. Note that **-dev** will be generated automatically. Thus, you can use the same module name as the deployment mode. 
 
 With `E3_MODULE_DEV_GITURL` variable in `configure/CONFIG_MODULE_DEV` with the most powerful feature of `git`, we may have a plenty of degree of freedom to develop an module without worrying about other system which may use this module. 
 

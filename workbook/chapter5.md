@@ -403,7 +403,5 @@ nothing to commit, working directory clean
 ------------------
 [:arrow_backward:](chapter4.md)  | [:arrow_up_small:](chapter5.md)  | [:arrow_forward:](chapter6.md)
 :--- | --- |---: 
-[Chapter 4](chapter4.md) | [Chapter 5](chapter5.md) | [Chapter 6](chapter6.md)
-
-
+[Chapter 4 : Delve into e3 with startup scripts](chapter4.md) | [Chapter 5](chapter5.md) | [Chapter 6 : Variables, Parameters and Environment Variables within e3](chapter6.md)
 

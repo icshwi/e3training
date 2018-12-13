@@ -341,7 +341,4 @@ Can you find out which file allow us to run ```make vars``` or ```make env``` wi
 ------------------
 [:arrow_backward:](chapter5.md)  | [:arrow_up_small:](chapter6.md)  | [:arrow_forward:](chapter7.md)
 :--- | --- |---: 
-[Chapter 5](chapter5.md) | [Chapter 6](chapter6.md) | [Chapter 7](chapter7.md)
-
-
-
+[Chapter 5 : Take the Deployment or the Development](chapter5.md) | [Chapter 6](chapter6.md) |[Chapter 7 : Understand A Module Dependence](chapter7.md)

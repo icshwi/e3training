@@ -281,7 +281,7 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 ### e3 Module Core Environment Variables
 
 
-* ```E3_MODULE_NAME``` is the module name used for ```require E3_MODULE_NAME``` within an IOC startup script. Usually, it is the same as ```EPICS_MODULE_NAME```.
+* `E3_MODULE_NAME` is the module name used for `require E3_MODULE_NAME` within an IOC startup script. Usually, it is the same as ```EPICS_MODULE_NAME```. **Note that this name should be letters (upper and lower case) and digits.** The underscore character `_` is also permitted. Technically, this name is coverted into char variable within c program. Thus, it should follow the c programming variable rule. 
 * ```E3_MODULE_SRC_PATH``` is the where your source codes are downloaded according to difference configurations such as the deployment mode, the development mode, the local mode, and the repository source directory name. 
 * ```E3_MODULE_VERSION``` is the module version used for ```require E3_MODULE_NAME E3_MODULE_VERSION```. There is no limitation to select this version number.
 * ```E3_MODULE_MAKEFILE``` is the name of a module or an application makefile. 

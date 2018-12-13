@@ -202,7 +202,7 @@ Note that the upper and lower keys can be used to catch the command list which w
 
 ## Building a Module or An Application 
 
-In [Chapter3](chapter3.md), We already discussed two e3 variables : ```E3_MODULE_VERSION``` and  ```EPICS_MODULE_TAG```. In addition, there are many environment variables for e3 when we configure and install a module. 
+In [Chapter3](chapter3.md), we already discussed two e3 variables : ```E3_MODULE_VERSION``` and  ```EPICS_MODULE_TAG```. In addition, there are many environment variables for e3 when we configure and install a module. 
 
 ### e3 environment variables
 
@@ -252,7 +252,7 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 
 * ```EPICS_HOST_ARCH``` is what the system host architecture is (EPICS Environment Variable).
 
-* ```EPICS_MODULE_NAME``` is a module name which we would like to use within e3 (e3 Environment variable). Please see ```E3_MODULE_NAME```.
+* ```EPICS_MODULE_NAME``` is a module name which we would like to use within e3 (e3 Environment variable). Please see ```E3_MODULE_NAME```. **Note that this name should be letters (upper and lower case) and digits.**
 
 * ```EPICS_MODULE_TAG``` is a point release information of the remote source code repository. For example, it will be one of the following: ```master```, ```tags/R3.6```, ```ae5d083```, and any arguments which can be used with ```git checkout```. 
 

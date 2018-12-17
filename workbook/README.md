@@ -20,7 +20,7 @@ This workbook is heavily been developing now.
 ## Chapter 6 : Release
 [Variables, Parameters and Environment Variables within e3](chapter6.md)
 
-## Chapter 7 : 
+## Chapter 7 : WIP
 [Understand A Module Dependence](chapter7.md)
 
 ## Chapter X

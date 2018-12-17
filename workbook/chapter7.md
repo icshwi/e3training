@@ -83,32 +83,15 @@ compilation terminated.
 Can you see `-I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include`? At this point, the building system cannot find where `asynDriver.h` is.  That header file is usded in `src/AsynDriverInterface.cc`. 
 
 
-* Roll back to the asyn version, and set `NULL` in `PCRE_DEP_VERSION` by overwriting `CONFIG_MODULE.local`.
-
+* Roll back to the asyn version and rebuild
 ```
-$ echo "PCRE_DEP_VERSION:=" > configure/CONFIG_MODULE.local
-```
-
-* Check these variables through
-
-```
-$ make vars |grep "DEP_VERSION ="
-ASYN_DEP_VERSION = 4.33.0
-PCRE_DEP_VERSION = 
-```
-* Rebuild it
-
-```
+$ rm configure/CONFIG_MODULE.local
 $ make clean
-$ make buld
+$ make build
 ```
-Can you compile it?  The answer is **YES** or **NO**.  If the answer is **NO**, we understand this, because of the above example for asyn. 
 
-However, if the answer is **YES**, what happens? Even if there is no information in the compiling log such as `-I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include`, one should have no difficult to compile it. Why? Could you explain this?  The header file `pcre.h` is defined in `StreamDevice/src/RegexpConverter.cc`.  
+## 
 
-## Entering the gray zone
- 
- 
  
 ------------------
 [:arrow_backward:](chapter6.md)  | [:arrow_up_small:](chapter7.md)  | [:arrow_forward:](chapter8.md)

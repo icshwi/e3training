@@ -90,8 +90,14 @@ $ make clean
 $ make build
 ```
 
-## 
+## New Dependent Module (Asyn) 
 
+* The same version of StreamDevice with non-existent version of Asyn (We assume that the asyn version is new one) 
+* The old version of StreamDevice with non-existent version of Asyn (We assume that the asyn version is new one) 
+* The new version of StreamDevice with non-existent version of Asyn (We assume that the asyn version is new one)  
+* The same version of StreamDevice with existent but different version of Asyn 
+* The old version of StreamDevice with existent but different version of Asyn 
+* The new version of StreamDevice with existent but different version of Asyn
  
 ------------------
 [:arrow_backward:](chapter6.md)  | [:arrow_up_small:](chapter7.md)  | [:arrow_forward:](chapter8.md)

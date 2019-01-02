@@ -20,11 +20,11 @@ This workbook is heavily been developing now.
 ## Chapter 6 : Release
 [Variables, Parameters and Environment Variables within e3](chapter6.md)
 
-## Chapter 7 : WIP
+## Chapter 7 : Release
 [Understand A Module Dependence](chapter7.md)
 
-## Chapter X
-[Build an e3 Application](7.md)
+## Chapter 8 : WIP
+[Build an e3 Application](chapter8.md)
 
 ## Chapter X
 [Build an e3 Module](8.md)

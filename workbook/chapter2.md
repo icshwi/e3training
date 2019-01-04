@@ -68,12 +68,12 @@ e3-3.15.5 (master)$ source tools/setenv
 ```
 3. Check the all PV list
 ```
-e3-3.15.5 (master)$ bash caget_pvs.bash IOC-09606738_PVs.list
+e3-3.15.5 (master)$ bash caget_pvs.bash -l IOC-09606738_PVs.list
 ```
 4. Check the HEARTBEAT of your IOC
 
 ```
-e3-3.15.5 (master)$ bash caget_pvs.bash IOC-09606738_PVs.list "HEARTBEAT"
+e3-3.15.5 (master)$ bash caget_pvs.bash -l IOC-09606738_PVs.list -f HEARTBEAT
 ```
 
 ```

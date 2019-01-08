@@ -92,4 +92,4 @@ https://github.com/icshwi/fimscb
 ------------------
 [:arrow_backward:](chapter7.md)  | [:arrow_up_small:](chapter8.md)  | [:arrow_forward:](chapter9.md)
 :--- | --- |---: 
-[Chapter 7 : Understand A Module Dependence](chapter7.md) | [Chapter 8](chapter8.md) | [Chapter 9](chapter9.md)
+[Chapter 7 : Understand A Module Dependence](chapter7.md) | [Chapter 8](chapter8.md) | [Chapter 9 : Build an e3 module](chapter9.md)

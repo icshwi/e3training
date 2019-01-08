@@ -26,8 +26,8 @@ This workbook is heavily been developing now.
 ## Chapter 8 : WIP
 [Build an e3 Application](chapter8.md)
 
-## Chapter X
-[Build an e3 Module](8.md)
+## Chapter 9 
+[Build an e3 Module](chapter9.md)
 
 ## Chapter X
 [Dependence, Dependence, and Dependence](9.md)

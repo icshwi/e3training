@@ -84,20 +84,26 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 ### ACTIONS 
 
-- **ACTION 1** : e3TemplateGenerator with the remote mode
-
-This ACTION has the following answers in Questions : Q00-YES, Q01-YES, and Q10-YES. We use the one repository [1] for this ACTION example. 
-
-
-  - Download e3-tools, please remember README.md [2] is your friend. 
-
+- **ACTION 1** : this ACTION has the following answers in Questions : Q00(YES), Q01(YES), and Q10(YES). We will use the developed but not-used one EPICS Application [1]. 
+  - Download e3-tools, please remember README.md [2] is your friend. Please spend some time in order to look around within. 
    ```
    $ mkdir ${HOME}/ics_gitsrc
    $ cd ${HOME}/ics_gitsrc
    $ git clone https://github.com/icshwi/e3-tools
    $ cd e3-tools/e3TemplateGenerator/
+   $ e3TemplateGenerator (master)$ tree -L 2
+     .
+     ├──  e3TemplateGenerator.bash
+     ├──  modules_conf
+     │   ├──  caputlog.conf
+     │   ├──  genesysGEN5kWPS.conf
+     │   ├──  local.conf
+     │   ├──  localexample.conf
+     │   └──  MCoreUtils.conf
+     └──  README.md
    ```
-  - 
+  - Check `modules_conf/genesysGEN5kWPS.conf`
+  
 
 - **ACTION 2** : e3TemplateGenerator with the local mode 
 - **ACTION 3** : Create your source structure with the standard EPICS way
@@ -137,7 +143,7 @@ This ACTION has the following answers in Questions : Q00-YES, Q01-YES, and Q10-Y
 <!-- ## Type 2 : Application with S -->
 
 ## Reference
-[1] https://github.com/icshwi/fimscb : EPICS IOC for ESS RF FIM SCB Monitoring System
+[1] https://github.com/icshwi/fimscb : EPICS IOC for ESS RF FIM SCB Monitoring System  
 [2] [e3TemplateGenerator README.md](https://github.com/icshwi/e3-tools/tree/master/e3TemplateGenerator)
 
 ------------------

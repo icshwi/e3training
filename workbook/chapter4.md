@@ -15,9 +15,16 @@ In this lesson, you'll learn how to do the following:
 
 We will use  the simple simulator based on Kameleon [1] which simulates the simple serial device, which one can access through telnet. This chapter will use the forked version [2] of the original one. The original device and its EPICS IOC can be found at https://github.com/jeonghanlee/gconpi.
 
-0. Open a new terminal or a new tab
+0. Open a new terminal or a new tab in your terminal if you have a tab option. 
+
+**e3training**. 
 
 1. Move into ```ch4_supplementary_path```
+   ```
+   $  workbook (master)$ pwd
+   /home/jhlee/gitsrc/e3training/workboo
+   $ cd ch4_supplementary_path
+   ```
 
 2. Run
    ```

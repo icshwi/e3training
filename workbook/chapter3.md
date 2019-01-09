@@ -153,8 +153,11 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
     1. make build
     2. make install
 	
-### Do the different version of StreamDevice in **E3_TOP**
-    For example, commit hash is 493dc19
+### Do install the different version of StreamDevice in **E3_TOP**, not in **e3-StreamDevice**
+    * You may try to install the following hasdh id version of StreamDevice : `493dc19` 
+	* Hint 1) `make init` uses `git checkout ${EPICS_MODULE_TAG}`. 
+	* Hint 2) One can execute a Makefile outside its directory. Which option can we allow to do this? 
+	
 	
 	
 

@@ -61,34 +61,33 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 ### Questions 
 
-* **Q00** : Do you have source codes? 
-  YES : Go to Q01
-  NO  : Go to Q03
+- **Q00** : Do you have source codes?
+  - YES : Go to Q01
+  - NO  : Go to Q03
 
-* **Q01** : Is your source codes in a remote (git) repository?
-  YES : Go to Q10
-  NO  : You have source codes locally, Go to Q02
+- **Q01** : Is your source codes in a remote (git) repository?
+  - YES : Go to Q10
+  - NO  : You have source codes locally, Go to Q02
 
-* **Q02** : Do you want to keep these source codes in a separated remote repository? 
-  YES : Create your own repository, and push all local files to that repository. And go to ACTION 1
-  NO  : Action 2
+- **Q02** : Do you want to keep these source codes in a separated remote repository? 
+  - YES : Create your own repository, and push all local files to that repository. And go to ACTION 1
+  - NO  : Action 2
 
-* **Q03** : You don't have any source codes, in this case, I would recommend to use the standard EPICS structure. Do you want to accept this suggestion? 
-  YES : Follow Action 3, and then go to Q02
-  NO : Follow Action 2, and put all source files into application-loc path
+- **Q03** : You don't have any source codes, in this case, I would recommend to use the standard EPICS structure. Do you want to accept this suggestion? 
+  - YES : Follow Action 3, and then go to Q02
+  - NO : Follow Action 2, and put all source files into application-loc path
 
-
-* **Q10** : Do you want to keep the old repository with its original forms?
-  YES : Follow Action 1
-  NO : ACTION 0
+- **Q10** : Do you want to keep the old repository with its original forms?
+  - YES : Follow Action 1
+  - NO : ACTION 0
 
 
 ### ACTIONS 
 
-* **ACTION 1** : e3TemplateGenerator with the remote mode
-* **ACTION 2** : e3TemplateGenerator with the local mode 
-* **ACTION 3** : Create your source structure with the standard EPICS way
-* **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
+- **ACTION 1** : e3TemplateGenerator with the remote mode
+- **ACTION 2** : e3TemplateGenerator with the local mode 
+- **ACTION 3** : Create your source structure with the standard EPICS way
+- **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
 
 
 

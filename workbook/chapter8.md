@@ -84,7 +84,8 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 ### ACTIONS 
 
-- **ACTION 1** : this ACTION has the following answers in Questions : Q00(YES), Q01(YES), and Q10(YES). We will use the developed but not-used one EPICS Application [1]. 
+- **ACTION 1** : this ACTION has the following answers in Questions : Q00(YES), Q01(YES), and Q10(YES). We will use one EPICS Application [1] has the standard EPICS Application or IOC structure. We highly recommend users to use the standard EPICS structure, because it gives us backward compatiablity to the standard EPICS if we, EPICS community, or both need it. 
+
   - Download e3-tools, please remember README.md [2] is your friend. Please spend some time in order to look around within. 
    ```
    $ mkdir ${HOME}/ics_gitsrc

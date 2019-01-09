@@ -71,20 +71,34 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 - **Q02** : Do you want to keep these source codes in a separated remote repository? 
   - YES : Create your own repository, and push all local files to that repository. And go to ACTION 1
-  - NO  : Action 2
+  - NO  : ACTION 2
 
 - **Q03** : You don't have any source codes, in this case, I would recommend to use the standard EPICS structure. Do you want to accept this suggestion? 
-  - YES : Follow Action 3, and then go to Q02
-  - NO : Follow Action 2, and put all source files into application-loc path
+  - YES : Follow ACTION 3, and then go to Q02
+  - NO : Follow ACTION 2, and put all source files into application-loc path
 
 - **Q10** : Do you want to keep the old repository with its original forms?
-  - YES : Follow Action 1
+  - YES : Follow ACTION 1
   - NO : ACTION 0
 
 
 ### ACTIONS 
 
 - **ACTION 1** : e3TemplateGenerator with the remote mode
+
+This ACTION has the following answers in Questions : Q00-YES, Q01-YES, and Q10-YES. We use the one repository [1] for this ACTION example. 
+
+
+  - Download e3-tools, please remember README.md [2] is your friend. 
+
+   ```
+   $ mkdir ${HOME}/ics_gitsrc
+   $ cd ${HOME}/ics_gitsrc
+   $ git clone https://github.com/icshwi/e3-tools
+   $ cd e3-tools/e3TemplateGenerator/
+   ```
+  - 
+
 - **ACTION 2** : e3TemplateGenerator with the local mode 
 - **ACTION 3** : Create your source structure with the standard EPICS way
 - **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
@@ -122,6 +136,9 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 <!-- ## Type 2 : Application with S -->
 
+## Reference
+[1] https://github.com/icshwi/fimscb : EPICS IOC for ESS RF FIM SCB Monitoring System
+[2] [e3TemplateGenerator README.md](https://github.com/icshwi/e3-tools/tree/master/e3TemplateGenerator)
 
 ------------------
 [:arrow_backward:](chapter7.md)  | [:arrow_up_small:](chapter8.md)  | [:arrow_forward:](chapter9.md)

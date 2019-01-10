@@ -264,13 +264,13 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  E3_TARGET_URL:=https://github.com/jeonghanlee
 	  E3_MODULE_SRC_PATH:=fimscb
 	  ```
-	- Create the e3-fimscb in your target url. In this example, the target url `E3_TARGET_URL` is https://github.com/jeonghanlee. 
+	- Create the e3-fimscb in your target url. In this example, the target url `E3_TARGET_URL` is https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
 	  
-      |![Creation Repository 1](ch8_supplementary_path/create_repo1.png)                           |
+      |![Creation Repository 1](ch8_supplementary_path/fig8-1.png)                           |
       | :---:                                                                               |
       | **Figure 8.1** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |
 
-      |![Creation Repository 2](ch8_supplementary_path/create_repo2.png)                           |
+      |![Creation Repository 2](ch8_supplementary_path/fig8-2.png)                           |
       | :---:                                                                               |
       | **Figure 8.2** The screenshot for the after repository creation. |
 	
@@ -278,8 +278,11 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  ```
 	  e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/fimscb.conf -d ~/e3-trainings/siteApps
 	  ```
-	  , where `-d` option allows us to define the target directory which has e3-fimscb locally. 
-
+	  , where `-d` option allows us to define the target directory which has e3-fimscb locally. And Please select `y` to push all changes into `E3_TARGET_URL`/e3-`EPICS_MODULE_NAME`. Can you see the same result shown in Figure 8.3?
+	  	  
+      |![Creation Repository 3](ch8_supplementary_path/fig8-3.png)                           |
+      | :---:                                                                               |
+      | **Figure 8.3** The screenshot for the after repository creation. |
 
 	- 
 	  

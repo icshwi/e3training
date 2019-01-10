@@ -282,7 +282,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  	  
       |![Creation Repository 3](ch8_supplementary_path/fig8-3.png)                           |
       | :---:                                                                               |
-      | **Figure 8.3** The screenshot for the after repository creation. |
+      | **Figure 8.3** The screenshot for the repository after the first push all codes. |
 
 	- 
 	  

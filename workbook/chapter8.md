@@ -200,8 +200,8 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	|-- Makefile
 	`-- README.md
 	```
-  - What do you see? And do you understand how we use the above four variables? Before going to a real execise, please try to answer the following questions:
-    - We selected `N` or `Enter` to skip to push the local e3-genesysGEN5kWPS to the remote repository `https://github.com/icshwi/e3-genesysGEN5kWPS`, can you translated the remote reposiotory url by using some of four variables?
+  - What do you see? And do you understand how we use the above four variables? Before going to a real exercise, please try to answer the following questions:
+    - We selected `N` or `Enter` to skip to push the local e3-genesysGEN5kWPS to the remote repository `https://github.com/icshwi/e3-genesysGEN5kWPS`, can you translated the remote repository url by using some of four variables?
 	
 	- What if `Y` is selected? One can see this by the followed commands:
 	  ```
@@ -255,8 +255,34 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  ```
 	  Yes, the remote repository for `https://github.com/icshwi/e3-genesysGEN5kWPS` exists, so it doesn't push anything to. Now let's do one more excise. 
 	  
-  	
- 
+  - Build an e3 application, with the remote repository [1].
+  
+    - Define four variables in fimscb.conf as follows:
+	  ```
+	  EPICS_MODULE_NAME:=fimscb
+	  EPICS_MODULE_URL:=https://github.com/icshwi
+	  E3_TARGET_URL:=https://github.com/jeonghanlee
+	  E3_MODULE_SRC_PATH:=fimscb
+	  ```
+	- Create the e3-fimscb in your target url. In this example, the target url `E3_TARGET_URL` is https://github.com/jeonghanlee. 
+	  
+      |![Creation Repository 1](ch8_supplementary_path/create_repo1.png)                           |
+      | :---:                                                                               |
+      | **Figure 8.1** The screenshot for the repository creation based on `E3_TARGET_URL`. |
+
+      |![Creation Repository 2](ch8_supplementary_path/create_repo2.png)                           |
+      | :---:                                                                               |
+      | **Figure 8.2** The screenshot for the option of the repository creation (default). |
+	
+	- Run e3TemplateGenerator.bash with that file
+	  ```
+	  e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/fimscb.conf -d ~/e3-trainings/siteApps
+	  ```
+	  , where `-d` option allows us to define the target directory which has e3-fimscb locally. 
+
+
+	- 
+	  
 - **ACTION 2** : e3TemplateGenerator with the local mode 
 - **ACTION 3** : Create your source structure with the standard EPICS way
 - **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 

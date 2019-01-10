@@ -268,11 +268,11 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  
       |![Creation Repository 1](ch8_supplementary_path/create_repo1.png)                           |
       | :---:                                                                               |
-      | **Figure 8.1** The screenshot for the repository creation based on `E3_TARGET_URL`. |
+      | **Figure 8.1** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |
 
       |![Creation Repository 2](ch8_supplementary_path/create_repo2.png)                           |
       | :---:                                                                               |
-      | **Figure 8.2** The screenshot for the option of the repository creation (default). |
+      | **Figure 8.2** The screenshot for the after repository creation. |
 	
 	- Run e3TemplateGenerator.bash with that file
 	  ```

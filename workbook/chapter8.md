@@ -112,7 +112,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
    E3_MODULE_SRC_PATH:=genesysGEN5kWPS
    ```
 
-  - Four Varialbes one should understand. 
+  - Four Varialbes one should understand. Two variables `EPICS_MODULE_NAME` and `E3_MODULE_SRC_PATH` are already defined in [Chapter 6](chapter6.md)
     - `EPICS_MODULE_NAME` : used for the E3 module name, where one use it as its name
 	- `EPICS_MODULE_URL`  : shown as the module source repoistory URL
 	- `E3_TARGET_URL`     : used for the E3 module repository 
@@ -174,6 +174,8 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 		   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/CONFIG_MODULE
 		   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/RELEASE
+           * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/genesysGEN5kWPS.Makefile
+
 
 		 One can check the e3- template works via 
 		    cd /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS
@@ -198,13 +200,63 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	|-- Makefile
 	`-- README.md
 	```
-    What do you see? And do you understand how we use the above four variables? 
+  - What do you see? And do you understand how we use the above four variables? Before going to a real execise, please try to answer the following questions:
+    - We selected `N` or `Enter` to skip to push the local e3-genesysGEN5kWPS to the remote repository `https://github.com/icshwi/e3-genesysGEN5kWPS`, can you translated the remote reposiotory url by using some of four variables?
 	
-  
-    These four variables are used to define others within `e3TemplateGenerator`
-    
-	
+	- What if `Y` is selected? One can see this by the followed commands:
+	  ```
+	  e3TemplateGenerator (master)$ rm -rf e3-genesysGEN5kWPS/
+	  e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf
+	  
+	  >>
+	  genesysGEN5kWPS is used as module name.
 
+	  >>
+	  >> Your sources are located in https://github.com/icshwi.
+	  >> git submodule will be used.
+	  >> 
+	  EPICS_MODULE_NAME  : genesysGEN5kWPS
+	  E3_MODULE_SRC_PATH : genesysGEN5kWPS
+	  EPICS_MODULE_URL   : https://github.com/icshwi
+	  E3_TARGET_URL      : https://github.com/icshwi
+	  >> 
+	  e3 module name     : e3-genesysGEN5kWPS
+	  e3 module url full : https://github.com/icshwi/genesysGEN5kWPS
+	  e3 target url full : https://github.com/icshwi/e3-genesysGEN5kWPS.git
+	  >> 
+	  Initialized empty Git repository in /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/.git/
+	  https://github.com/icshwi/genesysGEN5kWPS is adding as submodule...
+	  Cloning into 'genesysGEN5kWPS'...
+	  X11 forwarding request failed on channel 0
+	  remote: Enumerating objects: 155, done.
+	  remote: Total 155 (delta 0), reused 0 (delta 0), pack-reused 155
+	  Receiving objects: 100% (155/155), 41.97 KiB | 0 bytes/s, done.
+	  Resolving deltas: 100% (61/61), done.
+	  Checking connectivity... done.
+	  add ignore = dirty ... 
+
+
+	  >>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS.git for the remote repository?
+		   In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEN5kWPS.git.
+		   If yes, the script will push the local e3-genesysGEN5kWPS to the remote repository. (y/N)? y
+
+	  >>>> Repository exists, please check it first!
+	  
+	  The following files should be modified according to the module : 
+
+	   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/CONFIG_MODULE
+	   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/RELEASE
+	   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/genesysGEN5kWPS.Makefile
+
+	   One can check the e3- template works via 
+	   cd /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS
+	   make init
+	   make vars
+	  ```
+	  Yes, the remote repository for `https://github.com/icshwi/e3-genesysGEN5kWPS` exists, so it doesn't push anything to. Now let's do one more excise. 
+	  
+  	
+ 
 - **ACTION 2** : e3TemplateGenerator with the local mode 
 - **ACTION 3** : Create your source structure with the standard EPICS way
 - **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 

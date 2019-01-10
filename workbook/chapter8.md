@@ -257,14 +257,14 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  
   - Build an e3 application, with the remote repository [1].
   
-    - Define four variables in fimscb.conf as follows:
+    - **ACTION 1.1** Define four variables in fimscb.conf as follows:
 	  ```
 	  EPICS_MODULE_NAME:=fimscb
 	  EPICS_MODULE_URL:=https://github.com/icshwi
 	  E3_TARGET_URL:=https://github.com/jeonghanlee
 	  E3_MODULE_SRC_PATH:=fimscb
 	  ```
-	- Create the e3-fimscb in your target url. In this example, the target url `E3_TARGET_URL` is https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
+	- **ACTION 1.2** Create the e3-fimscb in your target url. In this example, the target url `E3_TARGET_URL` is https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
 	  
       |![Creation Repository 1](ch8_supplementary_path/fig8-1.png)                           |
       | :---:                                                                               |
@@ -284,7 +284,10 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
       | :---:                                                                               |
       | **Figure 8.3** The screenshot for the repository after the first push all codes. |
 
-	- 
+	- **ACTION 1.3** Check your created e3 application
+	
+	- **ACTION 1.4** Modifiy few files in order to build, and install them within the existent e3 environment
+	
 	  
 - **ACTION 2** : e3TemplateGenerator with the local mode 
 - **ACTION 3** : Create your source structure with the standard EPICS way

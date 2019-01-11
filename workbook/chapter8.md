@@ -565,7 +565,7 @@ One can run each IOC for `e3-Clock` and `e3-fimscb`. Are you willing to take the
 
 ### Build an e3 application with a remote repository 
 
-We have the remote repository [4]. Can you build e3-example application? And can you build the startup script to make this application running within e3?
+We have the remote repository [4]. Can you build e3-ch8 application? And can you build the startup script to make this application running within e3?
 
 ### Build an additional e3 application with a remote repository
 
@@ -576,7 +576,7 @@ We have the remote repository [4]. Can you build e3-example application? And can
 [1] https://github.com/icshwi/fimscb : EPICS IOC for ESS RF FIM SCB Monitoring System  
 [2] [e3TemplateGenerator README.md](https://github.com/icshwi/e3-tools/tree/master/e3TemplateGenerator)  
 [3] http://www-linac.kek.jp/cont/epics/second  
-[4] https://github.com/icshwi/example     
+[4] https://github.com/icshwi/ch8     
 [5] https://github.com/icshwi/myexample
 
 

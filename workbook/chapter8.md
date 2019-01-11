@@ -302,222 +302,222 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
        ```
        Let's build `e3-fimscb` now. 
        ```
-	  e3-fimscb (master)$ make build
-	  e3-fimscb (master)$ make install
-	  e3-fimscb (master)$ make existent LEVEL=3
-	  /epics/base-3.15.5/require/3.0.4/siteApps/fimscb
-	  └── master
-      ├── db
-      │   ├── fimscb.db
-      │   └── fimscb.proto
-      └── lib
-		  └── linux-x86_64
-	  ```
-	 
-	  Let's explore it within `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as 
-	  ```
-	  $ bash /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash 
-	  ```
-	  If not, please go to **E3_TOP**, and `source tools/setenv`.  Let's assume that you are in iocsh.bash such as 
-	  ```
-	  effbc10.kaffee.4837 > 
-	  effbc10.kaffee.4837 > require fimscb,master
-	  Module fimscb version master found in /epics/base-3.15.5/require/3.0.4/siteApps/fimscb/master/
-	  Module fimscb has no library
-	  effbc10.kaffee.4837 > require fimscb,master
-	  Module fimscb version master already loaded
-	  effbc10.kaffee.4837 > cd $(fimscb_DB)
-	  effbc10.kaffee.4837 > system (ls)
-	  effbc10.kaffee.4837 > pwd
-	  ```
-	  Here you can find answers for one of assignments in [Chapter 6](chapter6.md). 
+       e3-fimscb (master)$ make build
+       e3-fimscb (master)$ make install
+       e3-fimscb (master)$ make existent LEVEL=3
+       /epics/base-3.15.5/require/3.0.4/siteApps/fimscb
+       └── master
+             ├── db
+	     │   ├── fimscb.db
+	     │   └── fimscb.proto
+	     └── lib
+	     	  └── linux-x86_64
+       ```
+       Let's explore it within `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as
+       ```
+       $ bash /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash
+       ```
+       
+       If not, please go to **E3_TOP**, and `source tools/setenv`.  Let's assume that you are in iocsh.bash such as
+       ```
+       
+       effbc10.kaffee.4837 >
+       effbc10.kaffee.4837 > require fimscb,master
+       Module fimscb version master found in /epics/base-3.15.5/require/3.0.4/siteApps/fimscb/master/
+       Module fimscb has no library
+       effbc10.kaffee.4837 > require fimscb,master
+       Module fimscb version master already loaded
+       effbc10.kaffee.4837 > cd $(fimscb_DB)
+       effbc10.kaffee.4837 > system (ls)
+       effbc10.kaffee.4837 > pwd
+       ```
+       Here you can find answers for one of assignments in [Chapter 6](chapter6.md). 
 
-	- **ACTION 1.5** Commit your changes into the e3 remote repository.
-	  ```
-	  e3-fimscb (master)$ git status
-	  .....
-      modified:   fimscb.Makefile
-	  e3-fimscb (master)$ git add fimscb.Makefile
-	  e3-fimscb (master)$ git commit -m "update makefile"
-	  e3-fimscb (master)$ git push
-	  ```
+     - **ACTION 1.5** Commit your changes into the e3 remote repository.
+       ```
+       e3-fimscb (master)$ git status
+       .....
+       modified:   fimscb.Makefile
+       e3-fimscb (master)$ git add fimscb.Makefile
+       e3-fimscb (master)$ git commit -m "update makefile"
+       e3-fimscb (master)$ git push
+       ```
  
 	 
 - **ACTION 2** : e3TemplateGenerator with the local mode 
   There are many ways one can hold files within e3. Here I would like to show the most recommend way. This is not the mandatory, but you will see the potential advantage in near future if you works with local files in long time. Here is the _fake_ scenario: I find the interesting EPICS application which I would like to integrate into e3. And I don't know how I can handle these source files, because the file is _tar.gz_ file. However, I would like to change their source codes while I am going to study them. 
   
-  - Build an e3 application, with the local files that can be downloaded from the original site [3].
-  
-    - **ACTION 2.1**  Define three variables in Clock.conf as follows:
-	  ```
-	  EPICS_MODULE_NAME:=Clock
-	  E3_TARGET_URL:=https://github.com/jeonghanlee
-	  E3_MODULE_SRC_PATH:=Clock
-	  #
-	  ```
-    - **ACTION 2.2**  Create e3-Clock in your target url. In this example, the target url `E3_TARGET_URL` is  https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
-	
-      | ![Creation Repository 4](ch8_supplementary_path/fig8-4.png)      |
-      | :---:                                                                                                                         |
-      | **Figure 8.4** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |
+  Now we can build an e3 application, with the local files that can be downloaded from the original site [3].
 
-      | ![Creation Repository 5](ch8_supplementary_path/fig8-5.png)      |
-      | :---:                                                            |
-      | **Figure 8.5** The screenshot for the after repository creation. |
+  - **ACTION 2.1**  Define three variables in Clock.conf as follows:
+    ```
+    EPICS_MODULE_NAME:=Clock
+    E3_TARGET_URL:=https://github.com/jeonghanlee
+    E3_MODULE_SRC_PATH:=Clock
+    #
+    ```
+  - **ACTION 2.2**  Create e3-Clock in your target url. In this example, the target url `E3_TARGET_URL` is  https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
+    | ![Creation Repository 4](ch8_supplementary_path/fig8-4.png)      |
+    | :---: |
+    | **Figure 8.4** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |
+    | ![Creation Repository 5](ch8_supplementary_path/fig8-5.png)      |
+    | :---: |
+    | **Figure 8.5** The screenshot for the after repository creation. |
 
-	  - Run e3TemplateGenerator.bash with that file
-	    ```
-	    e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/Clock.conf -d ~/e3-trainings/siteApps/
-		>>
-		Clock is used as module name.
-
-		>>
-		>> Your sources are located in e3-Clock.
-		>> 
-		EPICS_MODULE_NAME  : Clock
-		E3_MODULE_SRC_PATH : Clock
-		E3_TARGET_URL      : https://github.com/jeonghanlee
-		>> 
-		e3 module name     : e3-Clock
-		e3 target url full : https://github.com/jeonghanlee/e3-Clock.git
-		>> 
-		Initialized empty Git repository in /home/jhlee/e3-trainings/siteApps/e3-Clock/.git/
-		Clock-loc
-		
-		>>>> Do you want to add the URL https://github.com/jeonghanlee/e3-Clock.git for the remote repository?
-		In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-Clock.git.
-		If yes, the script will push the local e3-Clock to the remote repository. (y/N)? y
-		
-		>>>> Repository exists!!!     Are you sure this is your first push?
-		You should aware what you are doing now ....
-		If you are not sure, please stop this procedure immediately!
-		
-		>> Do you want to continue (y/N)? y
-
-		>>>> We are going to the further process ...... [master (root-commit) 13536c5] Init..e3-Clock
-		
-		......
-		......
-
-		To git@github.com:jeonghanlee/e3-Clock.git
-		* [new branch]      master -> master
-		Branch master set up to track remote branch master from origin.
-
-
-		The following files should be modified according to the module : 
-
-		* /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/CONFIG_MODULE
-		* /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/RELEASE
-		* /home/jhlee/e3-trainings/siteApps//e3-Clock/Clock.Makefile
-
-		One can check the e3- template works via 
-		cd /home/jhlee/e3-trainings/siteApps//e3-Clock
-		make init
-		make vars
-
-		```
-    - **ACTION 2.3** Check your created e3 application. `e3-Clock` is located in `${HOME}/e3-trainings/siteApps` now. 
-	  ```
-	  e3TemplateGenerator (master)$ cd  ~/e3-trainings/siteApps/e3-Clock/
-	  e3-Clock (master)$ tree -L 1
-	  .
-	  |-- Clock-loc
-	  |-- cmds
-	  |-- configure
-	  |-- docs
-	  |-- iocsh
-	  |-- opi
-	  |-- patch
-	  |-- template
-	  |-- Clock.Makefile
-	  |-- Makefile
-	  `-- README.md
-	  ```
-	  The structure is the exact same as **ACTION 1** except **Clock-loc**. In that directory, now, you can copy or extract all your codes. If you don't want to keep the standard EPICS structure, you can simply copy them all into **Clock-loc** path. 
-	  
-	  ```
-	  e3-Clock (master)$ cd Clock-loc/
-	  Clock-loc (master)$ wget -c http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
-	  Clock-loc (master)$ tar xvzf second-devsup.tar.gz
-	  ```
-	  The source codes has `Clock1App` instead of `ClockApp`. We can use either Clock1App or ClockApp. Here, I will use `Clock1App`, so 
-	  ```
-	  Clock-loc (master)$ rm -rf ClockApp/
-	  ```
-	  And check what they are in that path, and go back to e3-Clock
-	  ```
-	  Clock-loc (master)$ tree Clock1App/
-	  Clock-loc (master)$ cd ..
-	  e3-Clock  (master)$ make vars
-	  ```
-	  One can check `git status` also. 
-		
-	- **ACTION 2.4** Modify few files in order to build, and install them within the existent e3 environment. 
-	  The initiation command or rule has no effect on the local mode. 
-	  ```
-	  e3-Clock (master)$ make init
-      >> You are in the local source mode.
-      >> Nothing happens.
-	  ```
-	  Now you have the e3 structure and its configuration. The next step is to change few files. There are three files you should change. The `configure/CONFIG_MODULE` and `configure/RELEASE` were discussed in earlier chapters. We keep all source files locally, so one can select `E3_MODULE_VERSION` and `EPICS_MODULE_TAG` based on what one would like to do. Here I uses simply `master` as the default values are. The most important thing is `Clock.Makefile`, which is generated by `e3TemplateGenerator` and has only default options. Please edit the makefile as follows:		
+    - Run e3TemplateGenerator.bash with that file
       ```
-	  where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-	  include $(E3_REQUIRE_TOOLS)/driver.makefile
-	  include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
+      e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/Clock.conf -d ~/e3-trainings/siteApps
+      >>
+      Clock is used as module name.
+      >>
+      >> Your sources are located in e3-Clock.
+      >>
+      EPICS_MODULE_NAME  : Clock
+      E3_MODULE_SRC_PATH : Clock
+      E3_TARGET_URL      : https://github.com/jeonghanlee
+      >>
+      e3 module name     : e3-Clock
+      e3 target url full : https://github.com/jeonghanlee/e3-Clock.git
+      >>
+      Initialized empty Git repository in /home/jhlee/e3-trainings/siteApps/e3-Clock/.git/
+      Clock-loc
+      
+      >>>> Do you want to add the URL https://github.com/jeonghanlee/e3-Clock.git for the remote repository?
+           In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-Clock.git.
+	   If yes, the script will push the local e3-Clock to the remote repository. (y/N)? y
+	   
+      >>>> Repository exists!!!     Are you sure this is your first push?
+           You should aware what you are doing now ....
+	   If you are not sure, please stop this procedure immediately!
+	   
+      >> Do you want to continue (y/N)? y
+      
+      >>>> We are going to the further process ...... [master (root-commit) 13536c5] Init..e3-Clock
+      
+      ......
+      ......
+      
+      * [new branch]      master -> master
+      Branch master set up to track remote branch master from origin.
+      
+      The following files should be modified according to the module :
+        * /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/CONFIG_MODULE
+	* /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/RELEASE
+	* /home/jhlee/e3-trainings/siteApps//e3-Clock/Clock.Makefile
+	
+      One can check the e3- template works via
+        cd /home/jhlee/e3-trainings/siteApps//e3-Clock
+	make init
+	make vars
+      ```
+      
+ - **ACTION 2.3** Check your created e3 application. `e3-Clock` is located in `${HOME}/e3-trainings/siteApps` now. 
+   ```
+   e3TemplateGenerator (master)$ cd  ~/e3-trainings/siteApps/e3-Clock/
+   e3-Clock (master)$ tree -L 1
+   .
+   |-- Clock-loc
+   |-- cmds
+   |-- configure
+   |-- docs
+   |-- iocsh
+   |-- opi
+   |-- patch
+   |-- template
+   |-- Clock.Makefile
+   |-- Makefile
+   `-- README.md
+   ```
+   
+   The structure is the exact same as **ACTION 1** except **Clock-loc**. In that directory, now, you can copy or extract all your codes. If you don't want to keep the standard EPICS structure, you can simply copy them all into **Clock-loc** path.
+   
+   ```
+   e3-Clock (master)$ cd Clock-loc/
+   Clock-loc (master)$ wget -c http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
+   Clock-loc (master)$ tar xvzf second-devsup.tar.gz
+   ```
+   
+   The source codes has `Clock1App` instead of `ClockApp`. We can use either Clock1App or ClockApp. Here, I will use `Clock1App`, so
+   ```
+   Clock-loc (master)$ rm -rf ClockApp/
+   ```
+   And check what they are in that path, and go back to e3-Clock
+   ```
+   Clock-loc (master)$ tree Clock1App/
+   Clock-loc (master)$ cd ..
+   e3-Clock  (master)$ make vars
+   ```
+   
+   One can check `git status` also. 
+		
+  - **ACTION 2.4** Modify few files in order to build, and install them within the existent e3 environment.
+    The initiation command or rule has no effect on the local mode.
+    ```
+    e3-Clock (master)$ make init
+    >> You are in the local source mode.
+    >> Nothing happens.
+    ```
+    
+    Now you have the e3 structure and its configuration. The next step is to change few files. There are three files you should change. The `configure/CONFIG_MODULE` and `configure/RELEASE` were discussed in earlier chapters. We keep all source files locally, so one can select `E3_MODULE_VERSION` and `EPICS_MODULE_TAG` based on what one would like to do. Here I uses simply `master` as the default values are. The most important thing is `Clock.Makefile`, which is generated by `e3TemplateGenerator` and has only default options. Please edit the makefile as follows:
+    
+    ```
+    where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+    include $(E3_REQUIRE_TOOLS)/driver.makefile
+    include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
+    
+    APP:=Clock1App
+    APPDB:=$(APP)/Db
+    APPSRC:=$(APP)/src
+    
+    USR_INCLUDES += -I$(where_am_I)$(APPSRC)
+    
+    TEMPLATES += $(wildcard $(APPDB)/*.db)
+    SOURCES += $(APPSRC)/devAiSecond.c
+    
+    DBDS += $(APPSRC)/aiSecond.dbd
+    
+    db:
+    
+    .PHONY: db
+    
+    vlibs:
+    
+    .PHONY: vlibs
+    ```
+    Let's build `e3-Clock` now.
+    ```
+    e3-Clock (master)$ make build
+    e3-Clock (master)$ make install
+    e3-Clock (master)$ make existent LEVEL=4
+    /epics/base-3.15.5/require/3.0.4/siteApps/Clock
+    └── master
+    	├── db
+	│   └── aiSecond.db
+	├── dbd
+	│   └── Clock.dbd
+	└── lib
+	    └── linux-x86_64
+	    	├── Clock.dep
+		└── libClock.so
+    ```
+    
+    Let's explore it within `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as 
+    ```
+    $ bash /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash
+    ```
+    
+    If not, please go to **E3_TOP**, and `source tools/setenv`.  Let's assume that you are in iocsh.bash such as 
+    ```
+    effbc10.kaffee.10034 >
+    effbc10.kaffee.10034 > require Clock,master
+    Module Clock version master found in /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/
+    Loading library /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/lib/linux-x86_64/libClock.so
+    Loaded Clock version master
+    Loading dbd file /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/dbd/Clock.dbd
+    Calling function Clock_registerRecordDeviceDriver
+    ```
 
-	  APP:=Clock1App
-	  APPDB:=$(APP)/Db
-	  APPSRC:=$(APP)/src
-
-	  USR_INCLUDES += -I$(where_am_I)$(APPSRC)
-
-	  TEMPLATES += $(wildcard $(APPDB)/*.db)
-
-	  SOURCES += $(APPSRC)/devAiSecond.c
-
-	  DBDS += $(APPSRC)/aiSecond.dbd
-
-	  db: 
-
-	  .PHONY: db 
-
-	  vlibs:
-
-	  .PHONY: vlibs
-	  ```
-	  Let's build `e3-Clock` now. 
-	  ```
-	  e3-Clock (master)$ make build
-	  e3-Clock (master)$ make install
-	  e3-Clock (master)$ make existent LEVEL=4
-	  /epics/base-3.15.5/require/3.0.4/siteApps/Clock
-	  └── master
-			├── db
-			│   └── aiSecond.db
-			├── dbd
-			│   └── Clock.dbd
-			└── lib
-				└── linux-x86_64
-					├── Clock.dep
-					└── libClock.so
-
-	  ```
-	  Let's explore it within `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as 
-	  ```
-	  $ bash /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash 
-	  ```
-	  If not, please go to **E3_TOP**, and `source tools/setenv`.  Let's assume that you are in iocsh.bash such as 
-	  ```
-	  effbc10.kaffee.10034 > 
-	  effbc10.kaffee.10034 > require Clock,master
-	  Module Clock version master found in /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/
-	  Loading library /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/lib/linux-x86_64/libClock.so
-	  Loaded Clock version master
-	  Loading dbd file /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/dbd/Clock.dbd
-	  Calling function Clock_registerRecordDeviceDriver
-	  ```
-
-	- **ACTION 2.5** Commit your changes into the e3 remote repository.
+  - **ACTION 2.5** Commit your changes into the e3 remote repository.
 
 - **ACTION 3** : Create your source structure with the standard EPICS way.
   - **ACTION 3.1** Define three variables in epicsEx.conf as follows:

@@ -238,12 +238,12 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
       ```
      - **ACTION 1.2** Create the e3-fimscb in your target url. In this example, the target url `E3_TARGET_URL` is https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
 	  
-       |![Creation Repository 1](ch8_supplementary_path/fig8-1.png)                           |
-       | :---:                                                                               |
-       | **Figure 8.1** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |
+       |![Creation Repository 1](ch8_supplementary_path/fig8-1.png)| 
+       | :---: |  
+       | **Figure 8.1** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. | 
 
-       |![Creation Repository 2](ch8_supplementary_path/fig8-2.png)                           |
-       | :---:                                                                               |
+       |![Creation Repository 2](ch8_supplementary_path/fig8-2.png) | 
+       | :---: | 
        | **Figure 8.2** The screenshot for the after repository creation. |
 	
        Please, run e3TemplateGenerator.bash with that file
@@ -265,8 +265,8 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
        ```
        , where `-d` option allows us to define the target directory which has e3-fimscb locally. And Please select `y` to push all changes into `E3_TARGET_URL`/e3-`EPICS_MODULE_NAME`. Can you see the same result shown in Figure 8.3?
 	  	  
-       |![Creation Repository 3](ch8_supplementary_path/fig8-3.png)                           |
-       | :---:                                                                               |
+       |![Creation Repository 3](ch8_supplementary_path/fig8-3.png) | 
+       | :---: | 
        | **Figure 8.3** The screenshot for the repository after the first push all codes. |
 
      - **ACTION 1.3** Check your created e3 application. `e3-fimscb` is located in `${HOME}/e3-trainings/siteApps` now. 
@@ -357,11 +357,11 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
     #
     ```
   - **ACTION 2.2**  Create e3-Clock in your target url. In this example, the target url `E3_TARGET_URL` is  https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
-    | ![Creation Repository 4](ch8_supplementary_path/fig8-4.png)      |
-    | :---: |
+    | ![Creation Repository 4](ch8_supplementary_path/fig8-4.png)      | 
+    | :---: | 
     | **Figure 8.4** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |
-    | ![Creation Repository 5](ch8_supplementary_path/fig8-5.png)      |
-    | :---: |
+    | ![Creation Repository 5](ch8_supplementary_path/fig8-5.png)      | 
+    | :---: | 
     | **Figure 8.5** The screenshot for the after repository creation. |
 
     - Run e3TemplateGenerator.bash with that file

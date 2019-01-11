@@ -23,7 +23,7 @@ This workbook is heavily been developing now.
 ## Chapter 7 : Release
 [Understand A Module Dependence](chapter7.md)
 
-## Chapter 8 : WIP
+## Chapter 8 : Release
 [Build an e3 Application](chapter8.md)
 
 ## Chapter 9 

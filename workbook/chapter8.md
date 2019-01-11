@@ -384,11 +384,11 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
       
       >>>> Do you want to add the URL https://github.com/jeonghanlee/e3-Clock.git for the remote repository?
            In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-Clock.git.
-	   If yes, the script will push the local e3-Clock to the remote repository. (y/N)? y
+		   If yes, the script will push the local e3-Clock to the remote repository. (y/N)? y
 	   
       >>>> Repository exists!!!     Are you sure this is your first push?
            You should aware what you are doing now ....
-	   If you are not sure, please stop this procedure immediately!
+		   If you are not sure, please stop this procedure immediately!
 	   
       >> Do you want to continue (y/N)? y
       
@@ -402,13 +402,13 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
       
       The following files should be modified according to the module :
         * /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/CONFIG_MODULE
-	* /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/RELEASE
-	* /home/jhlee/e3-trainings/siteApps//e3-Clock/Clock.Makefile
+		* /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/RELEASE
+		* /home/jhlee/e3-trainings/siteApps//e3-Clock/Clock.Makefile
 	
       One can check the e3- template works via
         cd /home/jhlee/e3-trainings/siteApps//e3-Clock
-	make init
-	make vars
+		make init
+		make vars
       ```
       
  - **ACTION 2.3** Check your created e3 application. `e3-Clock` is located in `${HOME}/e3-trainings/siteApps` now. 
@@ -492,13 +492,13 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
     /epics/base-3.15.5/require/3.0.4/siteApps/Clock
     └── master
     	├── db
-	│   └── aiSecond.db
-	├── dbd
-	│   └── Clock.dbd
-	└── lib
-	    └── linux-x86_64
-	    	├── Clock.dep
-		└── libClock.so
+		│   └── aiSecond.db
+		├── dbd
+		│   └── Clock.dbd
+		└── lib
+		    └── linux-x86_64
+			   	├── Clock.dep
+				└── libClock.so
     ```
     
     Let's explore it within `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as 
@@ -519,7 +519,9 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
   - **ACTION 2.5** Commit your changes into the e3 remote repository.
 
+
 - **ACTION 3** : Create your source structure with the standard EPICS way.
+
   - **ACTION 3.1** Define three variables in epicsEx.conf as follows:
     ```
 	E3_TARGET_URL:=https://github.com/jeonghanlee
@@ -527,10 +529,10 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	E3_MODULE_SRC_PATH:=epicsEx
 	```
   - **ACTION 3.2**  Create e3-epicsEx in your target url. And please run e3TemplateGenerator.bash with that file such as
+
     ```
-e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/epicsEx.conf -d ~/e3-trainings/siteApps/
-	```
-    ```
+	e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/epicsEx.conf -d ~/e3-trainings/siteApps/
+
 	e3TemplateGenerator (master)$ cd ~/e3-trainings/siteApps/e3-epicsEx/
 	e3-epicsEx (master)$ cd epicsEx-loc/
 	e3-epicsEx (master)$ rm -rf epicsExApp/
@@ -538,50 +540,41 @@ e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/epicsEx
 	e3-epicsEx (master)$ makeBaseApp.pl -i -p epicsEx -t ioc epicsEx
 	e3-epicsEx (master)$ tree 
 	```
+	
   - **ACTION 3.3** Copy your source, sequencer, and other files into `epicsExApp/src` and copy your db, and protocol files into `epicsExApp/Db`. 
 
   - **ACTION 3.4** Modify few files in order to build, and to install them within the existent e3 environment. From here, you can follow **ACTION 2.4** and **ACTION 2.5**.
   
 
-- **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
+- **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do **ACTION 2**. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
 
 
 
-  
+##  Assignments
 
 
-<!-- ### EPICS Standard Strcuture with a remote repository -->
-
-<!-- ### Existent EEE Structure with a remote repository -->
-
-<!-- ### From scratch  -->
-
-<!-- * Would like to keep the standard structure?  -->
-<!-- * Would like to keep all into e3 local structure? -->
-<!-- * Would like to keep them seperated remote repository with e3 structure? -->
-
-<!-- ## Type 1 : To develop an e3 IOC quickly within e3 application structure -->
-
-<!-- * Application with DB and Protocol Files with the existent EPICS IOC -->
-<!-- * Application with DB and Protocol Files from scratch  -->
-
-<!-- ## Type 2 :To develop an e3 IOC within e3 application structure -->
-
-<!-- ### Type 2.1 : Application with DB and Protocol Files with the existent EPICS IOC -->
-<!-- ### Type 2.2 : Source and Sequencer files based on Type 2.1 -->
+### Write two IOC startup scripts
+One can run each IOC for `e3-Clock` and `e3-fimscb`. Are you willing to take these challenges?
 
 
-<!-- ## Type 2 : -->
+### Build e3 application with a remote repository
+We have the remote repository about the EPICS example [4], which can be generated by `makeBaseApp`. Can you build e3-myexample based on the remote source?
 
-<!-- https://github.com/icshwi/fimscb -->
+### Build e3 application with local source files
+It would be better to put `myexample` sources in modified **ACTION3**. Can you try to do this? The following commands may help you to create my example within your local directory.
 
+```
+$ makeBaseApp.pl -t example myexample
+$ makeBaseApp.pl -i -t example myexample
+```
 
-<!-- ## Type 2 : Application with S -->
 
 ## Reference
 [1] https://github.com/icshwi/fimscb : EPICS IOC for ESS RF FIM SCB Monitoring System  
 [2] [e3TemplateGenerator README.md](https://github.com/icshwi/e3-tools/tree/master/e3TemplateGenerator)  
 [3] http://www-linac.kek.jp/cont/epics/second
+[4] https://github.com/icshwi/myexample
+
 
 ------------------
 [:arrow_backward:](chapter7.md)  | [:arrow_up_small:](chapter8.md)  | [:arrow_forward:](chapter9.md)

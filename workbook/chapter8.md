@@ -381,6 +381,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  #
 	  ```
     - **ACTION 2.2**  Create e3-Clock in your target url. In this example, the target url `E3_TARGET_URL` is  https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
+	
       | ![Creation Repository 4](ch8_supplementary_path/fig8-4.png)      |
       | :---:                                                                                                                         |
       | **Figure 8.4** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |

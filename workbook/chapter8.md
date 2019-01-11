@@ -123,65 +123,72 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
   - Run the following command :
     ```
-	e3TemplateGenerator (master)$ bash e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf
-	>>
-	genesysGEN5kWPS is used as module name.
+	 e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/fimscb.conf -d ~/e3-trainings/siteApps
+	 >>
+	 fimscb is used as module name.
 
-	>>
-	>> Your sources are located in https://github.com/icshwi.
-	>> git submodule will be used.
-	>> 
-	EPICS_MODULE_NAME  : genesysGEN5kWPS
-	E3_MODULE_SRC_PATH : genesysGEN5kWPS
-	EPICS_MODULE_URL   : https://github.com/icshwi
-	E3_TARGET_URL      : https://github.com/icshwi
-	>> 
-	e3 module name     : e3-genesysGEN5kWPS
-	e3 module url full : https://github.com/icshwi/genesysGEN5kWPS
-	e3 target url full : https://github.com/icshwi/e3-genesysGEN5kWPS
-	>> 
-	Initialized empty Git repository in /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/.git/
-	https://github.com/icshwi/genesysGEN5kWPS is adding as submodule...
-	Cloning into 'genesysGEN5kWPS'...
-	X11 forwarding request failed on channel 0
-	remote: Enumerating objects: 155, done.
-	remote: Total 155 (delta 0), reused 0 (delta 0), pack-reused 155
-	Receiving objects: 100% (155/155), 41.97 KiB | 0 bytes/s, done.
-	Resolving deltas: 100% (61/61), done.
-	Checking connectivity... done.
-	add ignore = dirty ... 
+	 >>
+	 >> Your sources are located in https://github.com/icshwi.
+	 >> git submodule will be used.
+	 >> 
+	 EPICS_MODULE_NAME  : fimscb
+	 E3_MODULE_SRC_PATH : fimscb
+	 EPICS_MODULE_URL   : https://github.com/icshwi
+	 E3_TARGET_URL      : https://github.com/jeonghanlee
+	 >> 
+	 e3 module name     : e3-fimscb
+	 e3 module url full : https://github.com/icshwi/fimscb
+	 e3 target url full : https://github.com/jeonghanlee/e3-fimscb.git
+	 >> 
+	 Initialized empty Git repository in /home/jhlee/e3-trainings/siteApps/e3-fimscb/.git/
+	 https://github.com/icshwi/fimscb is adding as submodule...
+	 Cloning into 'fimscb'...
+	 X11 forwarding request failed on channel 0
+	 remote: Enumerating objects: 122, done.
+	 remote: Total 122 (delta 0), reused 0 (delta 0), pack-reused 122
+	 Receiving objects: 100% (122/122), 31.29 KiB | 0 bytes/s, done.
+	 Resolving deltas: 100% (38/38), done.
+	 Checking connectivity... done.
+	 add ignore = dirty ... 
 
+	 Submodule 'simulator/kameleon' (https://github.com/jeonghanlee/kameleon.git) registered for path 'simulator/kameleon'
+	 Cloning into 'simulator/kameleon'...
+	 X11 forwarding request failed on channel 0
+	 remote: Enumerating objects: 581, done.
+	 remote: Total 581 (delta 0), reused 0 (delta 0), pack-reused 581
+	 Receiving objects: 100% (581/581), 824.14 KiB | 0 bytes/s, done.
+	 Resolving deltas: 100% (295/295), done.
+	 Checking connectivity... done.
+	 Submodule path 'fimscb/simulator/kameleon': checked out '84065a07c9cf12e094ef13e3fd359a001a55a28b'
 
-	>>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS for the remote repository?
-		 In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEN5kWPS.
-
-		 If yes, the script will push the local e3-genesysGEN5kWPS to the remote repository. (y/N)? 
+	 >>>> Do you want to add the URL https://github.com/jeonghanlee/e3-fimscb.git for the remote repository?
+		  In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-fimscb.git.
+	      If yes, the script will push the local e3-fimscb to the remote repository. (y/N)? 
 	```
   - Type N	or Enter
     ```
-		
-	>>>> Skipping add the remote repository url. 
-		 And skipping push the e3-genesysGEN5kWPS to the remote also.
+		>>>> Skipping add the remote repository url. 
+             And skipping push the e3-fimscb to the remote also.
 
-		 In case, one would like to push this e3 module to git repositories,
-		 Please use the following commands within e3-genesysGEN5kWPS/ :
+	   In case, one would like to push this e3 module to git repositories,
+	   Please use the following commands within e3-fimscb/ :
 
-		   * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS
-		   * git commit -m "First commit"
-		   * git push -u origin master
+          * git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
+		  * git commit -m "First commit"
+		  * git push -u origin master
 
-		 The following files should be modified according to the module : 
+       The following files should be modified according to the module : 
 
-		   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/CONFIG_MODULE
-		   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/RELEASE
-           * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/genesysGEN5kWPS.Makefile
+          * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
+		  * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
+		  * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
 
-
-		 One can check the e3- template works via 
-		    cd /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS
-			make init
-			make vars
-	```
+       One can check the e3- template works via 
+          cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
+		  make init
+		  make vars
+    ```
+	
   - Check how `e3-genesysGEN5kWPS`, which can be translated into `e3-EPICS_MODULE_NAME`
   
     ```
@@ -200,60 +207,47 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	|-- Makefile
 	`-- README.md
 	```
-  - What do you see? And do you understand how we use the above four variables? Before going to a real exercise, please try to answer the following questions:
+	
+  - What do you see? And do you understand how we use the above four variables? Even if you cannot find the answer yet, don't worry about it. We can find answers later. And before going to a real exercise, please try to answer the following questions:
     - We selected `N` or `Enter` to skip to push the local e3-genesysGEN5kWPS to the remote repository `https://github.com/icshwi/e3-genesysGEN5kWPS`, can you translated the remote repository url by using some of four variables?
 	
-	- What if `Y` is selected? One can see this by the followed commands:
+	- What if `Y` is selected? 
+	  Are you ready to see? Please try the following commands:
+	  
 	  ```
 	  e3TemplateGenerator (master)$ rm -rf e3-genesysGEN5kWPS/
 	  e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf
 	  
-	  >>
-	  genesysGEN5kWPS is used as module name.
-
-	  >>
-	  >> Your sources are located in https://github.com/icshwi.
-	  >> git submodule will be used.
-	  >> 
-	  EPICS_MODULE_NAME  : genesysGEN5kWPS
-	  E3_MODULE_SRC_PATH : genesysGEN5kWPS
-	  EPICS_MODULE_URL   : https://github.com/icshwi
-	  E3_TARGET_URL      : https://github.com/icshwi
-	  >> 
-	  e3 module name     : e3-genesysGEN5kWPS
-	  e3 module url full : https://github.com/icshwi/genesysGEN5kWPS
-	  e3 target url full : https://github.com/icshwi/e3-genesysGEN5kWPS.git
-	  >> 
-	  Initialized empty Git repository in /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/.git/
-	  https://github.com/icshwi/genesysGEN5kWPS is adding as submodule...
-	  Cloning into 'genesysGEN5kWPS'...
-	  X11 forwarding request failed on channel 0
-	  remote: Enumerating objects: 155, done.
-	  remote: Total 155 (delta 0), reused 0 (delta 0), pack-reused 155
-	  Receiving objects: 100% (155/155), 41.97 KiB | 0 bytes/s, done.
-	  Resolving deltas: 100% (61/61), done.
-	  Checking connectivity... done.
-	  add ignore = dirty ... 
-
+      ......
+	  ......
 
 	  >>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS.git for the remote repository?
 		   In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEN5kWPS.git.
 		   If yes, the script will push the local e3-genesysGEN5kWPS to the remote repository. (y/N)? y
 
-	  >>>> Repository exists, please check it first!
-	  
-	  The following files should be modified according to the module : 
+      >>>> Repository exists!!!     Are you sure this is your first push?
+	       You should aware what you are doing now ....
+           If you are not sure, please stop this procedure immediately!
 
-	   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/CONFIG_MODULE
-	   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/configure/RELEASE
-	   * /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS/genesysGEN5kWPS.Makefile
-
-	   One can check the e3- template works via 
-	   cd /home/jhlee/ics_gitsrc/e3-tools/e3TemplateGenerator/e3-genesysGEN5kWPS
-	   make init
-	   make vars
+      >> Do you want to continue (y/N)? 
 	  ```
-	  Yes, the remote repository for `https://github.com/icshwi/e3-genesysGEN5kWPS` exists, so it doesn't push anything to. Now let's do one more excise. 
+	  Yes, the remote repository for `https://github.com/icshwi/e3-genesysGEN5kWPS` exists, so it will ask us one more question. If you select `N` or `enter`, it will print out the following messages:
+	  ```
+	  >> Skip here. 
+
+      >>>> Skipping add the remote repository url. 
+           And skipping push the e3-genesysGEN5kWPS to the remote also.
+
+      In case, one would like to push this e3 module to git repositories,
+      Please use the following commands within e3-genesysGEN5kWPS/ :
+
+         * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
+		 * git commit -m "First commit"
+		 * git push -u origin master
+
+	  ```
+	   
+	  If you select `y`, which means that this push is the first one. In this case you can push the just created e3 structure into the repository. We will explain this more with the real example later.  You may try to select `y` to see how it works if you want. Now let's do one real example.
 	  
   - Build an e3 application, with the remote repository [1].
   
@@ -277,6 +271,21 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	- Run e3TemplateGenerator.bash with that file
 	  ```
 	  e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/fimscb.conf -d ~/e3-trainings/siteApps
+	  
+	  ......
+	  ......
+	  
+	  The following files should be modified according to the module : 
+
+         * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
+		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
+		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
+
+      One can check the e3- template works via 
+	      cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
+	      make init
+       	  make vars
+
 	  ```
 	  , where `-d` option allows us to define the target directory which has e3-fimscb locally. And Please select `y` to push all changes into `E3_TARGET_URL`/e3-`EPICS_MODULE_NAME`. Can you see the same result shown in Figure 8.3?
 	  	  
@@ -284,11 +293,82 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
       | :---:                                                                               |
       | **Figure 8.3** The screenshot for the repository after the first push all codes. |
 
-	- **ACTION 1.3** Check your created e3 application
-	
-	- **ACTION 1.4** Modifiy few files in order to build, and install them within the existent e3 environment
-	
+	- **ACTION 1.3** Check your created e3 application. `e3-fimscb` is located in `${HOME}/e3-trainings/siteApps` now. 
+	  ```
+	  e3TemplateGenerator (master)$ tree -L 1 ~/e3-trainings/siteApps/e3-fimscb
+	  e3TemplateGenerator (master)$ make -C  ~/e3-trainings/siteApps/e3-fimscb/ vars
+	  ```
 	  
+	- **ACTION 1.4** Modifiy few files in order to build, and install them within the existent e3 environment. 
+	  ```
+	  e3TemplateGenerator (master)$ cd ~/e3-trainings/siteApps/e3-fimscb/
+	  e3-fimscb (master)$ make init
+	  ```
+	  Now you have the e3 structure and its configuration. The next step is to change few files. There are three files you should change. The `configure/CONFIG_MODULE` and `configure/RELEASE` were discussed in eariler chapters. The most important thing is `fimscb.Makefile`, which is genenerated by `e3TemplateGenerator` and has only default options. Please edit the makefile as follows:
+	  ```
+	  where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+	  include $(E3_REQUIRE_TOOLS)/driver.makefile
+	  include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
+
+      EXCLUDE_ARCHS = linux-ppc64e6500
+
+	  APP:=fimscbApp
+	  APPDB:=$(APP)/Db
+
+      TEMPLATES += $(APPDB)/fimscb.db
+      TEMPLATES += $(APPDB)/fimscb.proto
+
+      db:
+
+	  .PHONY: db 
+
+      vlibs:
+
+      .PHONY: vlibs
+	  ```
+	  Let's build `e3-fimscb` now. 
+	  ```
+	  e3-fimscb (master)$ make build
+	  e3-fimscb (master)$ make install
+	  e3-fimscb (master)$ make existent LEVEL=3
+	  /epics/base-3.15.5/require/3.0.4/siteApps/fimscb
+	  └── master
+      ├── db
+      │   ├── fimscb.db
+      │   └── fimscb.proto
+      └── lib
+		  └── linux-x86_64
+	  ```
+	 
+	  Let's explore it witin `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as 
+	  ```
+	  $ bash /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash 
+	  ```
+	  If not, please go to **E3_TOP**, and `source tools/setenv`.  Let's assume that you are in iocsh.bash such as 
+	  ```
+	  effbc10.kaffee.4837 > 
+	  effbc10.kaffee.4837 > require fimscb,master
+	  Module fimscb version master found in /epics/base-3.15.5/require/3.0.4/siteApps/fimscb/master/
+	  Module fimscb has no library
+	  effbc10.kaffee.4837 > require fimscb,master
+	  Module fimscb version master already loaded
+	  effbc10.kaffee.4837 > cd $(fimscb_DB)
+	  effbc10.kaffee.4837 > system (ls)
+	  effbc10.kaffee.4837 > pwd
+	  ```
+	  Here you can find answers for one of assignments in [Chapter 6](chapter6.md). 
+
+	- **ACTION 1.5** Commit your changes into the e3 remote repository.
+	  ```
+	  e3-fimscb (master)$ git status
+	  .....
+           modified:   fimscb.Makefile
+	  e3-fimscb (master)$ git add fimscb.Makefile
+	  e3-fimscb (master)$ git commit -m "update makefile"
+	  e3-fimscb (master)$ git push
+	  ```
+ 
+	 
 - **ACTION 2** : e3TemplateGenerator with the local mode 
 - **ACTION 3** : Create your source structure with the standard EPICS way
 - **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 

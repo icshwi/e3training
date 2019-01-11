@@ -74,7 +74,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
   - NO  : ACTION 2
 
 - **Q03** : You don't have any source codes, in this case, I would recommend to use the standard EPICS structure. Do you want to accept this suggestion? 
-  - YES : Follow ACTION 3, and then go to Q02
+  - YES : Follow ACTION 3, put all source files into application-loc path
   - NO : Follow ACTION 2, and put all source files into application-loc path
 
 - **Q10** : Do you want to keep the old repository with its original forms?
@@ -272,20 +272,19 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	- Run e3TemplateGenerator.bash with that file
 	  ```
 	  e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/fimscb.conf -d ~/e3-trainings/siteApps
-	  
 	  ......
 	  ......
 	  
 	  The following files should be modified according to the module : 
 
-         * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
-		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
-		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
+              * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
+	      * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
+	      * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
 
-      One can check the e3- template works via 
+          One can check the e3- template works via 
 	      cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
 	      make init
-       	  make vars
+       	      make vars
 
 	  ```
 	  , where `-d` option allows us to define the target directory which has e3-fimscb locally. And Please select `y` to push all changes into `E3_TARGET_URL`/e3-`EPICS_MODULE_NAME`. Can you see the same result shown in Figure 8.3?
@@ -314,16 +313,16 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  APP:=fimscbApp
 	  APPDB:=$(APP)/Db
 
-      TEMPLATES += $(APPDB)/fimscb.db
-      TEMPLATES += $(APPDB)/fimscb.proto
+	  TEMPLATES += $(APPDB)/fimscb.db
+          TEMPLATES += $(APPDB)/fimscb.proto
 
-      db:
+          db:
 
-	  .PHONY: db 
+ 	  .PHONY: db 
 
-      vlibs:
+      	  vlibs:
 
-      .PHONY: vlibs
+          .PHONY: vlibs
 	  ```
 	  Let's build `e3-fimscb` now. 
 	  ```

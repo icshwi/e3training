@@ -362,6 +362,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
     | ![Creation Repository 4](ch8_supplementary_path/fig8-4.png)      |    
     | :---: |    
     | **Figure 8.4** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |   
+
     | ![Creation Repository 5](ch8_supplementary_path/fig8-5.png)      |    
     | :---: |    
     | **Figure 8.5** The screenshot for the after repository creation. |   

@@ -542,8 +542,29 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 	- **ACTION 2.5** Commit your changes into the e3 remote repository.
 
-- **ACTION 3** : Create your source structure with the standard EPICS way
+- **ACTION 3** : Create your source structure with the standard EPICS way.
+  - **ACTION 3.1** Define three variables in epicsEx.conf as follows:
+    ```
+	E3_TARGET_URL:=https://github.com/jeonghanlee
+	EPICS_MODULE_NAME:=epicsEx
+	E3_MODULE_SRC_PATH:=epicsEx
+	```
+  - **ACTION 3.2**  Create e3-epicsEx in your target url. And please run e3TemplateGenerator.bash with that file such as
+    ```
+e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/epicsEx.conf -d ~/e3-trainings/siteApps/
+	```
+    ```
+	e3TemplateGenerator (master)$ cd ~/e3-trainings/siteApps/e3-epicsEx/
+	e3-epicsEx (master)$ cd epicsEx-loc/
+	e3-epicsEx (master)$ rm -rf epicsExApp/
+	e3-epicsEx (master)$ makeBaseApp.pl -t ioc epicsEx
+	e3-epicsEx (master)$ makeBaseApp.pl -i -p epicsEx -t ioc epicsEx
+	e3-epicsEx (master)$ tree 
+	```
+  - **ACTION 3.3** Copy your source, sequencer, and other files into `epicsExApp/src` and copy your db, and protocol files into `epicsExApp/Db`. 
 
+  - **ACTION 3.4** Modify few files in order to build, and to install them within the existent e3 environment. From here, you can follow **ACTION 2.4** and **ACTION 2.5**.
+  
 
 - **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do ACTION 2. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
 

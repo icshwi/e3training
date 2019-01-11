@@ -173,20 +173,20 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	 In case, one would like to push this e3 module to git repositories,
      Please use the following commands within e3-fimscb/ :
 
-         * git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
-		 * git commit -m "First commit"
-		 * git push -u origin master
+		* git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
+		* git commit -m "First commit"
+		* git push -u origin master
 
      The following files should be modified according to the module : 
 
-         * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
-		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
-		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
+        * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
+		* /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
+		* /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
 
      One can check the e3- template works via 
-         cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
-		 make init
-		 make vars
+        cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
+		make init
+		make vars
     ```
 	
   - Check how `e3-genesysGEN5kWPS`, which can be translated into `e3-EPICS_MODULE_NAME`

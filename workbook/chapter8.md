@@ -174,7 +174,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	   Please use the following commands within e3-fimscb/ :
 
           * git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
-		  * git commit -m "First commit"
+          * git commit -m "First commit"
 		  * git push -u origin master
 
        The following files should be modified according to the module : 
@@ -193,7 +193,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
   
     ```
 	e3TemplateGenerator (master)$ cd e3-genesysGEN5kWPS/ 
-	e3-genesysGEN5kWPS (master)$ tree -L 1   
+	e3-genesysGEN5kWPS (master)$ tree -L 1
 	.
 	|-- cmds
 	|-- configure
@@ -236,14 +236,14 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  >> Skip here. 
 
       >>>> Skipping add the remote repository url. 
-           And skipping push the e3-genesysGEN5kWPS to the remote also.
+		   And skipping push the e3-genesysGEN5kWPS to the remote also.
 
       In case, one would like to push this e3 module to git repositories,
       Please use the following commands within e3-genesysGEN5kWPS/ :
 
-         * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
-		 * git commit -m "First commit"
-		 * git push -u origin master
+          * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
+		  * git commit -m "First commit"
+		  * git push -u origin master
 
 	  ```
 	   
@@ -277,15 +277,14 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  
 	  The following files should be modified according to the module : 
 
-              * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
-	      * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
-	      * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
+          * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
+		  * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
+		  * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
 
-          One can check the e3- template works via 
+	  One can check the e3- template works via 
 	      cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
-	      make init
-       	      make vars
-
+		  make init
+		  make vars
 	  ```
 	  , where `-d` option allows us to define the target directory which has e3-fimscb locally. And Please select `y` to push all changes into `E3_TARGET_URL`/e3-`EPICS_MODULE_NAME`. Can you see the same result shown in Figure 8.3?
 	  	  
@@ -314,15 +313,15 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  APPDB:=$(APP)/Db
 
 	  TEMPLATES += $(APPDB)/fimscb.db
-          TEMPLATES += $(APPDB)/fimscb.proto
+	  TEMPLATES += $(APPDB)/fimscb.proto
 
-          db:
+      db:
 
- 	  .PHONY: db 
+	  .PHONY: db 
 
-      	  vlibs:
+      vlibs:
 
-          .PHONY: vlibs
+      .PHONY: vlibs
 	  ```
 	  Let's build `e3-fimscb` now. 
 	  ```
@@ -360,7 +359,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  ```
 	  e3-fimscb (master)$ git status
 	  .....
-           modified:   fimscb.Makefile
+      modified:   fimscb.Makefile
 	  e3-fimscb (master)$ git add fimscb.Makefile
 	  e3-fimscb (master)$ git commit -m "update makefile"
 	  e3-fimscb (master)$ git push
@@ -457,7 +456,8 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  |-- Makefile
 	  `-- README.md
 	  ```
-	  The structure is the exact same as **ACTION 1** except **Clock-loc**. In that directory, now, you can copy or extract all your codes. 
+	  The structure is the exact same as **ACTION 1** except **Clock-loc**. In that directory, now, you can copy or extract all your codes. If you don't want to keep the standard EPICS structure, you can simply copy them all into **Clock-loc** path. 
+	  
 	  ```
 	  e3-Clock (master)$ cd Clock-loc/
 	  Clock-loc (master)$ wget -c http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
@@ -507,7 +507,6 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	  vlibs:
 
 	  .PHONY: vlibs
-
 	  ```
 	  Let's build `e3-Clock` now. 
 	  ```

@@ -439,40 +439,40 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 		make vars
 
 		```
-    	- **ACTION 2.3** Check your created e3 application. `e3-Clock` is located in `${HOME}/e3-trainings/siteApps` now. 
-		```
-		e3TemplateGenerator (master)$ cd  ~/e3-trainings/siteApps/e3-Clock/
-        e3-Clock (master)$ tree -L 1
-		.
-		|-- Clock-loc
-		|-- cmds
-		|-- configure
-		|-- docs
-		|-- iocsh
-		|-- opi
-		|-- patch
-		|-- template
-		|-- Clock.Makefile
-		|-- Makefile
-		`-- README.md
-		```
-		The structure is the exact same as **ACTION 1** except **Clock-loc**. In that directory, now, you can copy or extract all your codes. 
-		```
-		e3-Clock (master)$ cd Clock-loc/
-		Clock-loc (master)$ wget -c http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
-		Clock-loc (master)$ tar xvzf second-devsup.tar.gz
-		```
-        The source codes has `Clock1App` instead of `ClockApp`. We can use either Clock1App or ClockApp. Here, I will use `Clock1App`, so 
-		```
-		Clock-loc (master)$ rm -rf ClockApp/
-		```
-		And check what they are in that path, and go back to e3-Clock
-		```
-        Clock-loc (master)$ tree Clock1App/
-		Clock-loc (master)$ cd ..
-		e3-Clock  (master)$ make vars
-		```
-		One can check `git status` also. 
+    - **ACTION 2.3** Check your created e3 application. `e3-Clock` is located in `${HOME}/e3-trainings/siteApps` now. 
+	  ```
+	  e3TemplateGenerator (master)$ cd  ~/e3-trainings/siteApps/e3-Clock/
+	  e3-Clock (master)$ tree -L 1
+	  .
+	  |-- Clock-loc
+	  |-- cmds
+	  |-- configure
+	  |-- docs
+	  |-- iocsh
+	  |-- opi
+	  |-- patch
+	  |-- template
+	  |-- Clock.Makefile
+	  |-- Makefile
+	  `-- README.md
+	  ```
+	  The structure is the exact same as **ACTION 1** except **Clock-loc**. In that directory, now, you can copy or extract all your codes. 
+	  ```
+	  e3-Clock (master)$ cd Clock-loc/
+	  Clock-loc (master)$ wget -c http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
+	  Clock-loc (master)$ tar xvzf second-devsup.tar.gz
+	  ```
+	  The source codes has `Clock1App` instead of `ClockApp`. We can use either Clock1App or ClockApp. Here, I will use `Clock1App`, so 
+	  ```
+	  Clock-loc (master)$ rm -rf ClockApp/
+	  ```
+	  And check what they are in that path, and go back to e3-Clock
+	  ```
+	  Clock-loc (master)$ tree Clock1App/
+	  Clock-loc (master)$ cd ..
+	  e3-Clock  (master)$ make vars
+	  ```
+	  One can check `git status` also. 
 		
 	- **ACTION 2.4** Modifiy few files in order to build, and install them within the existent e3 environment. 
 	  The initization command or rule has no effect on the local mode. 

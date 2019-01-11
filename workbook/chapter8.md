@@ -114,9 +114,9 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
   - Four Variables one should understand. Two variables `EPICS_MODULE_NAME` and `E3_MODULE_SRC_PATH` are already defined in [Chapter 6](chapter6.md)
     - `EPICS_MODULE_NAME` : used for the E3 module name, where one use it as its name
-	- `EPICS_MODULE_URL`  : shown as the module source repository URL
-	- `E3_TARGET_URL`     : used for the E3 module repository 
-	- `E3_MODULE_SRC_PATH`: shown as the source code directory name in `EPICS_MODULE_URL`
+    - `EPICS_MODULE_URL`  : shown as the module source repository URL
+    - `E3_TARGET_URL`     : used for the E3 module repository 
+    - `E3_MODULE_SRC_PATH`: shown as the source code directory name in `EPICS_MODULE_URL`
 
     The remote repository url of the source files is `https://github.com/icshwi/genesysGEN5kWPS`. Thus, the remote repository url can be translated into `EPICS_MODULE_URL/E3_MODULE_SRC_PATH`.
 	
@@ -211,43 +211,41 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
   - What do you see? And do you understand how we use the above four variables? Even if you cannot find the answer yet, don't worry about it. We can find answers later. And before going to a real exercise, please try to answer the following questions:
     - We selected `N` or `Enter` to skip to push the local e3-genesysGEN5kWPS to the remote repository `https://github.com/icshwi/e3-genesysGEN5kWPS`, can you translated the remote repository url by using some of four variables?
 	
-	- What if `Y` is selected? 
-	  Are you ready to see? Please try the following commands:
+      - What if `Y` is selected? Are you ready to see? Please try the following commands:
+	```
+	e3TemplateGenerator (master)$ rm -rf e3-genesysGEN5kWPS/
+	e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf
 	  
-	  ```
-	  e3TemplateGenerator (master)$ rm -rf e3-genesysGEN5kWPS/
-	  e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf
-	  
-      ......
-	  ......
+        ......
+	......
 
-	  >>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS.git for the remote repository?
-		   In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEN5kWPS.git.
-		   If yes, the script will push the local e3-genesysGEN5kWPS to the remote repository. (y/N)? y
+	>>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS.git for the remote repository?
+	     In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEN5kWPS.git.
+	     If yes, the script will push the local e3-genesysGEN5kWPS to the remote repository. (y/N)? y
 
-      >>>> Repository exists!!!     Are you sure this is your first push?
-	       You should aware what you are doing now ....
-           If you are not sure, please stop this procedure immediately!
+        >>>> Repository exists!!!     Are you sure this is your first push?
+	     You should aware what you are doing now ....
+	     If you are not sure, please stop this procedure immediately!
 
-      >> Do you want to continue (y/N)? 
-	  ```
-	  Yes, the remote repository for `https://github.com/icshwi/e3-genesysGEN5kWPS` exists, so it will ask us one more question. If you select `N` or `enter`, it will print out the following messages:
-	  ```
-	  >> Skip here. 
+        >> Do you want to continue (y/N)? 
+	```
+	Yes, the remote repository for `https://github.com/icshwi/e3-genesysGEN5kWPS` exists, so it will ask us one more question. If you select `N` or `enter`, it will print out the following messages:
+	```
+	>> Skip here. 
 
-      >>>> Skipping add the remote repository url. 
-		   And skipping push the e3-genesysGEN5kWPS to the remote also.
+        >>>> Skipping add the remote repository url. 
+	     And skipping push the e3-genesysGEN5kWPS to the remote also.
 
-      In case, one would like to push this e3 module to git repositories,
-      Please use the following commands within e3-genesysGEN5kWPS/ :
+        In case, one would like to push this e3 module to git repositories,
+	Please use the following commands within e3-genesysGEN5kWPS/ :
 
-          * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
-		  * git commit -m "First commit"
-		  * git push -u origin master
+        * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
+	* git commit -m "First commit"
+	* git push -u origin master
 
-	  ```
+	```
 	   
-	  If you select `y`, which means that this push is the first one. In this case you can push the just created e3 structure into the repository. We will explain this more with the real example later.  You may try to select `y` to see how it works if you want. Now let's do one real example.
+	If you select `y`, which means that this push is the first one. In this case you can push the just created e3 structure into the repository. We will explain this more with the real example later.  You may try to select `y` to see how it works if you want. Now let's do one real example.
 	  
   - Build an e3 application, with the remote repository [1].
   

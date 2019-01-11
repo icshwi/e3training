@@ -584,8 +584,9 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 ## Reference
 [1] https://github.com/icshwi/fimscb : EPICS IOC for ESS RF FIM SCB Monitoring System  
-[2] [e3TemplateGenerator README.md](https://github.com/icshwi/e3-tools/tree/master/e3TemplateGenerator)
-[3] http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
+[2] [e3TemplateGenerator README.md](https://github.com/icshwi/e3-tools/tree/master/e3TemplateGenerator)  
+[3] http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz  
+
 ------------------
 [:arrow_backward:](chapter7.md)  | [:arrow_up_small:](chapter8.md)  | [:arrow_forward:](chapter9.md)
 :--- | --- |---: 

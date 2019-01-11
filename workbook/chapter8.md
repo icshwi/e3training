@@ -162,31 +162,31 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	 Submodule path 'fimscb/simulator/kameleon': checked out '84065a07c9cf12e094ef13e3fd359a001a55a28b'
 
 	 >>>> Do you want to add the URL https://github.com/jeonghanlee/e3-fimscb.git for the remote repository?
-		  In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-fimscb.git.
-	      If yes, the script will push the local e3-fimscb to the remote repository. (y/N)? 
+	      In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-fimscb.git.
+		  If yes, the script will push the local e3-fimscb to the remote repository. (y/N)? 
 	```
   - Type N	or Enter
     ```
-		>>>> Skipping add the remote repository url. 
-             And skipping push the e3-fimscb to the remote also.
+	 >>>> Skipping add the remote repository url. 
+          And skipping push the e3-fimscb to the remote also.
 
-	   In case, one would like to push this e3 module to git repositories,
-	   Please use the following commands within e3-fimscb/ :
+	 In case, one would like to push this e3 module to git repositories,
+     Please use the following commands within e3-fimscb/ :
 
-          * git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
-          * git commit -m "First commit"
-		  * git push -u origin master
+         * git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
+		 * git commit -m "First commit"
+		 * git push -u origin master
 
-       The following files should be modified according to the module : 
+     The following files should be modified according to the module : 
 
-          * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
-		  * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
-		  * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
+         * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
+		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
+		 * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
 
-       One can check the e3- template works via 
-          cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
-		  make init
-		  make vars
+     One can check the e3- template works via 
+         cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
+		 make init
+		 make vars
     ```
 	
   - Check how `e3-genesysGEN5kWPS`, which can be translated into `e3-EPICS_MODULE_NAME`

@@ -165,7 +165,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 	      In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-fimscb.git.
 		  If yes, the script will push the local e3-fimscb to the remote repository. (y/N)? 
 	```
-  - Type N	or Enter
+  - Type `N` or `Enter`
     ```
 	 >>>> Skipping add the remote repository url. 
           And skipping push the e3-fimscb to the remote also.
@@ -176,15 +176,15 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 		* git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
 		* git commit -m "First commit"
 		* git push -u origin master
+		
+	 The following files should be modified according to the module : 
 
-     The following files should be modified according to the module : 
-
-        * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
+		* /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
 		* /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
 		* /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
 
      One can check the e3- template works via 
-        cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
+		cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
 		make init
 		make vars
     ```

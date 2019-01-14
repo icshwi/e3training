@@ -1,46 +1,27 @@
-This workbook is heavily been developing now.  
+European Spallation Source EPICS Environment Workbook
 ==
-**Release represents that the chapter is ready for your training. WIP does that I am working on currently.**
+* The meaning of :book: is ready for your self-training.
+* The meaning of :pencil: is currently the writing chapter.
+* The meaning of :construction: does have only a file.
 
 # Part 1 : 
 
 [Part 1 Introduction](intropart1.md)
 
-## Chapter 1 : Release
-[e3 installation](chapter1.md)
-
-## Chapter 2 : Release
-[Your First Running e3 IOC](chapter2.md)
-
-## Chapter 3 : Release
-[Install a Module with the different version number](chapter3.md)
-
-## Chapter 4 : Release
-[Delve into e3 with startup scripts](chapter4.md)
-
-## Chapter 5 : Release
-[Take the Deployment or the Development](chapter5.md)
-
-## Chapter 6 : Release
-[Variables, Parameters and Environment Variables within e3](chapter6.md)
-
-## Chapter 7 : Release
-[Understand A Module Dependence](chapter7.md)
-
-## Chapter 8 : Release
-[Build an e3 Application](chapter8.md)
-
-## Chapter 9 : WIP
-[Build an e3 Module](chapter9.md)
-
-## Chapter 10 
-[e3 Directory Structure](chapter10.md)
-
-
+### Chapter 1 : [e3 installation](chapter1.md) :book:
+### Chapter 2 : [Your First Running e3 IOC](chapter2.md) :book:
+### Chapter 3 : [Install a Module with the different version number](chapter3.md) :book:
+### Chapter 4 : [Delve into e3 with startup scripts](chapter4.md) :book:
+### Chapter 5 : [Take the Deployment or the Development](chapter5.md) :book:
+### Chapter 6 : [Variables, Parameters and Environment Variables within e3](chapter6.md) :book:
+### Chapter 7 : [Understand A Module Dependence](chapter7.md) :book:
+### Chapter 8 : [Build an e3 Application](chapter8.md) :book:
+### Chapter 9 : [Build an e3 Module](chapter9.md) :pencil:
+### Chapter 10 : [e3 Directory Structure](chapter10.md) :construction: 
 
 # Part 2 : 
 
-[Part 2 Introduction](intropart2.md)
+[Part 2 Introduction](intropart2.md) :construction: 
 
 
 <!-- # Part 2 :  -->

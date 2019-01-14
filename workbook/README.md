@@ -2,6 +2,10 @@ This workbook is heavily been developing now.
 ==
 **Release represents that the chapter is ready for your training. WIP does that I am working on currently.**
 
+# Part 1 : 
+
+[Part 1 Introduction](intropart1.md)
+
 ## Chapter 1 : Release
 [e3 installation](chapter1.md)
 
@@ -26,31 +30,43 @@ This workbook is heavily been developing now.
 ## Chapter 8 : Release
 [Build an e3 Application](chapter8.md)
 
-## Chapter 9 
+## Chapter 9 : WIP
 [Build an e3 Module](chapter9.md)
 
-## Chapter X
-[Dependence, Dependence, and Dependence](9.md)
-
-## Chapter X
-[e3 Directory Structure](10.md)
-
-## Chapter X
-[Release Rule](11.md)
-
-## Chapter X
-[Work with EPICS Community](12.md)
+## Chapter 10 
+[e3 Directory Structure](chapter10.md)
 
 
 
+# Part 2 : 
 
-## Other Subjects 
-* Multiple e3s in a host
-* Hidden makefile rules (db, hdrs, vlibs, epics, and so on)
-* setE3env.bash
-* e3.bash
-* supplement tools (epics_NIOCs, pkg_automation, pciids, etherlabmaster, ecat-dev, etc)
-* sequencer
-* db, template, subst files (inflating...)
-* e3 configuration variables
-* e3 building system
+[Part 2 Introduction](intropart2.md)
+
+
+<!-- # Part 2 :  -->
+
+<!-- ## Chapter 10 -->
+<!-- [Dependence, Dependence, and Dependence](9.md) -->
+
+
+<!-- ## Chapter X -->
+<!-- [Release Rule](11.md) -->
+
+<!-- ## Chapter X -->
+<!-- [Work with EPICS Community](12.md) -->
+
+
+
+
+<!-- ## Other Subjects  -->
+<!-- * Multiple e3s in a host -->
+<!-- * Hidden makefile rules (db, hdrs, vlibs, epics, and so on) -->
+<!-- * setE3env.bash -->
+<!-- * e3.bash -->
+<!-- * supplement tools (epics_NIOCs, pkg_automation, pciids, etherlabmaster, etc) -->
+<!-- * sequencer -->
+<!-- * db, template, subst files (inflating...) -->
+<!-- * e3 configuration variables -->
+<!-- * e3 building system -->
+<!-- * systemd  -->
+<!-- * require  -->

@@ -19,10 +19,14 @@ European Spallation Source EPICS Environment Workbook
 ### Chapter 9 : [Build an e3 Module](chapter9.md) :pencil:
 ### Chapter 10 : [e3 Directory Structure](chapter10.md) :construction: 
 
+
 # Part 2 : 
 
 [Part 2 Introduction](intropart2.md) :construction: 
 
+# Appendix : Troubleshoting
+
+### Appendix A : [Build System Troubleshoting](appendixA.md)
 
 <!-- # Part 2 :  -->
 

@@ -27,6 +27,8 @@ European Spallation Source EPICS Environment Workbook
 # Appendix : Troubleshoting
 
 ### Appendix A : [Build System Troubleshoting](appendixA.md)
+### Appendix A : [Segmentation Fault with GDB](appendixB.md)
+### Appendix A : [GCC7 within CentOS 7](appendixC.md)
 
 <!-- # Part 2 :  -->
 

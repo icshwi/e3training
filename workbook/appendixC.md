@@ -15,20 +15,11 @@ $ yum-config-manager --enable rhel-server-rhscl-7-rpms
 $ yum install devtoolset-7
 ```
 
-## Enable gcc7 or gcc8
-
-```
-$ scl enable devtoolset-7 bash
-```
-
-
-
 ## Enable gcc 7
 
 One needs to setup `PATH` correctly in order to use `sudo`. 
 
 ```
-e3-3.15.5 (master)$ scl enable devtoolset-7 bash
 e3-3.15.5 (master)$ scl enable devtoolset-7 bash
 e3-3.15.5 (master)$ PATH=/usr/bin:$PATH 
 e3-3.15.5 (master)$ echo ${PATH}
@@ -39,4 +30,10 @@ e3-3.15.5 (master)$ echo ${PATH}
 e3-3.15.5 (master)$ bash e3.bash base
 ...
 
+```
+
+## Disabled gcc 7
+
+```
+$ exit
 ```

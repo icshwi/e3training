@@ -23,8 +23,16 @@ ls -lta /epics/base-7.0.1.1/require/3.0.4/
 echo "EPICS_BASE=/home/root/epics/base-7.0.1.1" > configure/RELEASE_DEV.local
 ```
 
+## Case 2
 
+* Problem : when we run `make install` or `make devinstall`, we may see the following message:
 
+```
+rm: cannot remove '..../lib/linux-x86_ 64': Directory not empty
+
+rm: cannot remove '..../lib/linux-x86_64/.nfs000000004c0de98d00000007': Device or resource busy
+```
+* Solution : Plese check whether the corresponding IOC is running in somewhere through NFS. We have to stop an IOC, and exit any running process, then we can delete this directory if we would like to install new one again. What meas `.nfsXXXX` can be found in http://nfs.sourceforge.net/#faq_d2
 
 ------------------
 [:arrow_backward:](README.md)  | [:arrow_up_small:](appendixA.md)  | [:arrow_forward:](appendixB.md)

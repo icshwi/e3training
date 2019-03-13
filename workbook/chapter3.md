@@ -7,7 +7,7 @@ In this lesson, you'll learn how to do the following:
 * Check the current installed StreamDevice (stream) version with different level information
 * Understand two important variables such as E3_MODULE_VERSION and EPICS_MODULE_TAG
 * Install the difference StreamDevice version within e3
-
+* Note that the specific module version can be different.
 
 ## Check the VARIABLES within the e3
 
@@ -33,7 +33,7 @@ The most interesting VARIABLES are
 
 * ```E3_MODULE_VERSION``` : This is used as **Module/Application Version** with require within an IOC startup script. We recommend to use the X.X.X version number as the stable production release, but any combination can be possible. 
 
-* ```EPICS_MODULE_TAG``` : This is the **snapshot** of the source code repository, i.e., tags/stream_2_7_14, master, branch_name, or e0a24fe.
+* ```EPICS_MODULE_TAG``` : This is the **snapshot** of the source code repository, i.e., tags/stream_2_7_14, tags/2.8.8, master, branch_name, or e0a24fe.
 
 Two VARIABLES are defined within configure/CONFIG_MODULE and configure/CONFIG_MODULE_DEV.
 
@@ -53,8 +53,8 @@ e3-StreamDevice (master)$ make existent
 The result shows the existent version of stream modules within e3 :
    
 ```
-/epics/base-3.15.5/require/3.0.4/siteMods/stream
-└── 2.7.14p
+/epics/base-3.15.5/require/3.0.5/siteMods/stream
+└── 2.8.8
     ├── dbd
     ├── include
     ├── lib
@@ -71,7 +71,6 @@ The default is the tree LEVEL 2, i.e., ``` make existent``` is the same as
 
 ```
 e3-StreamDevice (master)$ cd StreamDevice/
-StreamDevice ((stream_2_7_14))$ 
 ```
 If one has no git-prompt setup, please check it via
 
@@ -95,18 +94,17 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 
 3. Check the configure/CONFIG_MODULE file
 
-```make init```will download all source files within StreamDevice as git submodule, and switch to the stream_2_7_14 version of StreamDevice.
-
+```make init```will download all source files within StreamDevice as git submodule, and switch to the `2.8.8` version of StreamDevice.
 
 
 ## Change EPICS_MODULE_TAG and E3_MODULE_VERSION
 
-* Use tags/2.8.3 instead of tags/stream_2_7_14
+* Use master instead of tags/2.8.8
 
   That version can be found within the PSI StreamDevice release :
   https://github.com/paulscherrerinstitute/StreamDevice/releases
 
-* Change E3_MODULE_VERSION to match tags/2.8.3
+* Change E3_MODULE_VERSION to identify this version (e3training)
 
   Here one can select whatever meaningful version number, the basic and
   relevant selection will be 2.8.3. However, if one would like to evaluate
@@ -116,34 +114,49 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 * Your changed configure/CONFIG_MODULE may be such as
 ```
   --- snip snip ---
-  EPICS_MODULE_TAG:=tags/2.8.3 
-  E3_MODULE_VERSION:=2.8.3
+  EPICS_MODULE_TAG:=master
+  E3_MODULE_VERSION:=e3training
   --- snip snip ---
 ```
+
+  Or, create a local CONFIG_MODULE file via
+  ```
+  e3-StreamDevice $ echo "EPICS_MODULE_TAG:=master" > configure/CONFIG_MODULE.local
+  e3-StreamDevice $ echo "E3_MODULE_VERSION:=e3training" >> configure/CONFIG_MODULE.local
+  ```
 
 * Check them with ```make vars```
 
 
-## Switch 2.8.4 StreamDevice Source
+## Build and Install StreamDevice `master` ( b84655e )
 
 0. Make sure to be in e3-StreamDevice
-1. ```make vars```
+
+1. `make vars`
    Can you see the difference between before and now?
    
-2. ```make init```
+2. `make init`
    Can you see the difference between before and now?
-   
-3. ```make build```
 
-4. ```make install```
+3. `make build`
 
-5. ```make existent```
+4. `make install`
 
+5. `make existent`
+
+6. `make dep`
+
+7. `make vers`
+
+8. `make dep | head -1`
 
 
 ## Assignments
 
 ### Check the LEVEL=4 existent
+
+### Check the following commands
+    `iocsh.bash -r stream,e3training`
 
 ### Do ```make init``` in **E3_TOP**
 
@@ -152,11 +165,6 @@ We download the StreamDevice from the PSI github directly, and switch to EPICS_M
 ### Can we combine the following two steps together? 
     1. make build
     2. make install
-	
-### Do install the different version of StreamDevice in **E3_TOP**, not in **e3-StreamDevice**
-    * You may try to install the following hasdh id version of StreamDevice : `493dc19` 
-	* Hint 1) `make init` uses `git checkout ${EPICS_MODULE_TAG}`. 
-	* Hint 2) One can execute a Makefile outside its directory. Which option can we allow to do this? 
 	
 	
 	

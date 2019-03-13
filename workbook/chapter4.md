@@ -94,24 +94,47 @@ Please make sure that the simulator is running.
 
 * How many dependency modules of stream are loaded? Please carefully look at few lines outputs similar with the following
 ```
-require stream,2.7.14p
-Module stream version 2.7.14p found in /epics/base-3.15.5/require/3.0.4/siteMods/stream/2.7.14p/
+iocshLoad 'cmds/1.cmd',''
+require stream,2.8.8
+Module stream version 2.8.8 found in /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/
 Module stream depends on asyn 4.33.0
-Module asyn version 4.33.0 found in /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/
-Loading library /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/lib/linux-x86_64/libasyn.so
+Module asyn version 4.33.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/lib/linux-x86_64/libasyn.so
 Loaded asyn version 4.33.0
-Loading dbd file /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/dbd/asyn.dbd
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/dbd/asyn.dbd
 Calling function asyn_registerRecordDeviceDriver
 Loading module info records for asyn
+Module stream depends on calc 3.7.1
+Module calc version 3.7.1 found in /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/
+Module calc depends on sequencer 2.2.6
+Module sequencer version 2.2.6 found in /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/lib/linux-x86_64/libsequencer.so
+Loaded sequencer version 2.2.6
+sequencer has no dbd file
+Loading module info records for sequencer
+Module calc depends on sscan 1339922
+Module sscan version 1339922 found in /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/
+Module sscan depends on sequencer 2.2.6
+Module sequencer version 2.2.6 already loaded
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/lib/linux-x86_64/libsscan.so
+Loaded sscan version 1339922
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/dbd/sscan.dbd
+Calling function sscan_registerRecordDeviceDriver
+Loading module info records for sscan
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/lib/linux-x86_64/libcalc.so
+Loaded calc version 3.7.1
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/dbd/calc.dbd
+Calling function calc_registerRecordDeviceDriver
+Loading module info records for calc
 Module stream depends on pcre 8.41.0
-Module pcre version 8.41.0 found in /epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/
-Loading library /epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/lib/linux-x86_64/libpcre.so
+Module pcre version 8.41.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/lib/linux-x86_64/libpcre.so
 Loaded pcre version 8.41.0
 pcre has no dbd file
 Loading module info records for pcre
-Loading library /epics/base-3.15.5/require/3.0.4/siteMods/stream/2.7.14p/lib/linux-x86_64/libstream.so
-Loaded stream version 2.7.14p
-Loading dbd file /epics/base-3.15.5/require/3.0.4/siteMods/stream/2.7.14p/dbd/stream.dbd
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/lib/linux-x86_64/libstream.so
+Loaded stream version 2.8.8
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/dbd/stream.dbd
 Calling function stream_registerRecordDeviceDriver
 Loading module info records for stream
 ```
@@ -120,7 +143,7 @@ Loading module info records for stream
 ```
 e3-StreamDevice (master)$ make vars
 ```
-to look at ```ASYN_DEP_VERSION``` and ```PCRE_DEP_VERSION```. Anyway, the dependency will be described later on in more detail. 
+to look at `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. Anyway, the dependency will be described later on in more detail. We can check these variables more easily with `make dep`.
 
 
 ### 2.cmd
@@ -163,30 +186,53 @@ drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
 * One should the run the Kameleon simulator in the different terminal, then run the above command. 
 
 * The following log is a snippet of the IOC output
+
 ```
 ch4_supplementary_path (master)$ iocsh.bash cmds/3-1.cmd
 
 ......
 
 iocshLoad 'cmds/3-1.cmd',''
-require stream,2.7.14p
-Module stream version 2.7.14p found in /epics/base-3.15.5/require/3.0.4/siteMods/stream/2.7.14p/
+require stream,2.8.8
+Module stream version 2.8.8 found in /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/
 Module stream depends on asyn 4.33.0
-Module asyn version 4.33.0 found in /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/
-Loading library /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/lib/linux-x86_64/libasyn.so
+Module asyn version 4.33.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/lib/linux-x86_64/libasyn.so
 Loaded asyn version 4.33.0
-Loading dbd file /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/dbd/asyn.dbd
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/dbd/asyn.dbd
 Calling function asyn_registerRecordDeviceDriver
 Loading module info records for asyn
+Module stream depends on calc 3.7.1
+Module calc version 3.7.1 found in /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/
+Module calc depends on sequencer 2.2.6
+Module sequencer version 2.2.6 found in /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/lib/linux-x86_64/libsequencer.so
+Loaded sequencer version 2.2.6
+sequencer has no dbd file
+Loading module info records for sequencer
+Module calc depends on sscan 1339922
+Module sscan version 1339922 found in /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/
+Module sscan depends on sequencer 2.2.6
+Module sequencer version 2.2.6 already loaded
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/lib/linux-x86_64/libsscan.so
+Loaded sscan version 1339922
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/dbd/sscan.dbd
+Calling function sscan_registerRecordDeviceDriver
+Loading module info records for sscan
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/lib/linux-x86_64/libcalc.so
+Loaded calc version 3.7.1
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/dbd/calc.dbd
+Calling function calc_registerRecordDeviceDriver
+Loading module info records for calc
 Module stream depends on pcre 8.41.0
-Module pcre version 8.41.0 found in /epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/
-Loading library /epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/lib/linux-x86_64/libpcre.so
+Module pcre version 8.41.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/lib/linux-x86_64/libpcre.so
 Loaded pcre version 8.41.0
 pcre has no dbd file
 Loading module info records for pcre
-Loading library /epics/base-3.15.5/require/3.0.4/siteMods/stream/2.7.14p/lib/linux-x86_64/libstream.so
-Loaded stream version 2.7.14p
-Loading dbd file /epics/base-3.15.5/require/3.0.4/siteMods/stream/2.7.14p/dbd/stream.dbd
+Loading library /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/lib/linux-x86_64/libstream.so
+Loaded stream version 2.8.8
+Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/dbd/stream.dbd
 Calling function stream_registerRecordDeviceDriver
 Loading module info records for stream
 drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
@@ -194,20 +240,19 @@ iocInit()
 Starting iocInit
 ############################################################################
 ## EPICS R3.15.5-E3-3.15.5-patch
-## EPICS Base built Nov 20 2018
+## EPICS Base built Mar 13 2019
 ############################################################################
 drvStreamInit: Warning! STREAM_PROTOCOL_PATH not set. Defaults to "."
 iocRun: All initialization complete
 # Set the IOC Prompt String One 
-epicsEnvSet IOCSH_PS1 "350b5cb.kaffee.9985 > "
-#
-350b5cb.kaffee.9985 > 
-
+epicsEnvSet IOCSH_PS1 "791f5f3.faiserv.24402 > "
 ```
 
 * The following log is a snippet of Kameleon :
 
 ```
+jhlee@faiserver: ch4_supplementary_path (master)$ bash simulator.bash 
+
 ****************************************************
 *                                                  *
 *  Kameleon v1.5.0 (2017/SEP/14 - Production)      *
@@ -217,32 +262,27 @@ epicsEnvSet IOCSH_PS1 "350b5cb.kaffee.9985 > "
 *                                                  *
 ****************************************************
 
-[16:53:38.687] Using file '/home/jhlee/gitsrc/e3training/workbook/ch4_supplementry_path/kameleon/simulators/gconpi/gconpi.kam' (contains 0 commands and 1 statuses).
-[16:53:38.687] Start serving from hostname '127.0.0.1' on port '9999'.
-[16:53:40.405] Client connection opened.
-[16:53:40.734] Status 'CPS, 3, CPM, 15, uSv/hr, 0.053, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:41.244] Status 'CPS, 2, CPM, 17, uSv/hr, 0.076, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:41.756] Status 'CPS, 3, CPM, 8, uSv/hr, 0.064, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:42.266] Status 'CPS, 4, CPM, 4, uSv/hr, 0.014, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:42.779] Status 'CPS, 3, CPM, 10, uSv/hr, 0.099, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:43.291] Status 'CPS, 3, CPM, 3, uSv/hr, 0.072, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:43.803] Status 'CPS, 2, CPM, 9, uSv/hr, 0.092, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:44.314] Status 'CPS, 2, CPM, 16, uSv/hr, 0.003, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:44.826] Status 'CPS, 2, CPM, 12, uSv/hr, 0.069, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:45.337] Status 'CPS, 3, CPM, 10, uSv/hr, 0.094, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[16:53:45.849] Status 'CPS, 1, CPM, 10, uSv/hr, 0.038, SLOW<0x0d><0x0a>' (Get Data) sent to client.
+[21:30:40.314] Using file '/home/jhlee/ics_gitsrc/e3training/workbook/ch4_supplementary_path/kameleon/simulators/gconpi/gconpi.kam' (contains 0 commands and 1 statuses).
+[21:30:40.314] Start serving from hostname '127.0.0.1' on port '9999'.
+[21:30:45.461] Client connection opened.
+[21:30:45.896] Status 'CPS, 1, CPM, 7, uSv/hr, 0.044, SLOW<0x0d><0x0a>' (Get Data) sent to client.
+[21:30:46.404] Status 'CPS, 4, CPM, 17, uSv/hr, 0.009, SLOW<0x0d><0x0a>' (Get Data) sent to client.
+[21:30:46.911] Status 'CPS, 4, CPM, 13, uSv/hr, 0.039, SLOW<0x0d><0x0a>' (Get Data) sent to client.
+[21:30:47.418] Status 'CPS, 3, CPM, 15, uSv/hr, 0.017, SLOW<0x0d><0x0a>' (Get Data) sent to client.
 
 ```
 
 ### 3-2.cmd
 Please make sure that the simulator is running.
 This script has the full information on the single IOC running. Please evaluate all components in 
+
 ```
-require stream,2.7.14p
+require stream,2.8.8
 
 epicsEnvSet("TOP","$(E3_CMD_TOP)/..")
 
 system "bash $(TOP)/tools/random.bash"
+
 iocshLoad "$(TOP)/tools/random.cmd"
 
 epicsEnvSet("P", "IOC-$(NUM)")
@@ -256,7 +296,6 @@ drvAsynIPPortConfigure("$(PORT)", "127.0.0.1:9999", 0, 0, 0)
 dbLoadRecords("$(TOP)/db/gconpi-stream.db", "SYSDEV=$(IOCNAME):KAM-RAD1:,PORT=$(PORT)")
 
 iocInit()
-
 ```
 
 * Can you see the Warning? 
@@ -271,38 +310,18 @@ If you would like to play few commands within IOC, feel free to try them out.
 * help
 ```
 350b5cb.kaffee.12199 > help
-Type 'help <command>' to see the arguments of <command>.
-#               ClockTime_Report                ClockTime_Shutdown
-E2050Reboot     E5810Reboot     TDS3000Reboot   afterInit       asDumpHash
-asInit          asSetFilename   asSetSubstitutions              ascar
-
 
 ```
 
 * dbl
 ```
 350b5cb.kaffee.12199 > dbl
-IOC-10585032:KAM-RAD1:CPS_clean1
-REQMOD-350B5CB:KAFFEE-12203:MODULES
-REQMOD-350B5CB:KAFFEE-12203:VERSIONS
-REQMOD-350B5CB:KAFFEE-12203:MOD_VER
-IOC-10585032:KAM-RAD1:CPS
-IOC-10585032:KAM-RAD1:CPM
-IOC-10585032:KAM-RAD1:uSv
-IOC-10585032:KAM-RAD1:CPS_clean2
-REQMOD-350B5CB:KAFFEE-12203:require_VER
-REQMOD-350B5CB:KAFFEE-12203:asyn_VER
-REQMOD-350B5CB:KAFFEE-12203:pcre_VER
-REQMOD-350B5CB:KAFFEE-12203:stream_VER
-IOC-10585032:KAM-RAD1:CPS_MSG
-IOC-10585032:KAM-RAD1:AvgMode
 
 ```
 
 * date
 ```
 350b5cb.kaffee.12199 > date
-2018/11/23 17:07:53.042777
 ```
 
 
@@ -357,7 +376,7 @@ e3-3.15.5$ make -C e3-autosave/ existent
 ```
 Can we see the *.iocsh files with the installation path of e3?
 
-The e3 function **loadIocsh** is a similar function which EPICS function iocshLoad, but it acts differently. However, it gives us a modularized startup script which we can reuse in order to build up a startup script without considering technical details a lot. 
+The e3 function **loadIocsh** is a similar function which EPICS function **iocshLoad**, but it acts differently. However, it gives us a modularized startup script which we can reuse in order to build up a startup script without considering technical details a lot. Even if we can use **loadIocsh**, **iocshLoad** is highly recommended. 
 
 1. Please run the following commands to see which PVs exist in your IOC
 ```

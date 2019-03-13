@@ -17,7 +17,7 @@ In order to help each developer, e3 supports multiple EPICS environment dynamica
 source setE3Env.bash
 ```
 
-The full path is ```/epics/base-3.15.5/require/3.0.4/bin/setE3Env.bash```
+The full path is ```/epics/base-3.15.5/require/3.0.5/bin/setE3Env.bash```
 
 To make a short cut, the e3 building system, at the end of installation procedure of require or modules, creates an alias within tools path as follows:
 ```
@@ -42,14 +42,15 @@ e3-3.15.5 (master)$ source tools/setenv
 
 Set the ESS EPICS Environment as follows:
 THIS Source NAME    : setE3Env.bash
-THIS Source PATH    : /epics/base-3.15.5/require/3.0.4/bin
+THIS Source PATH    : /epics/base-3.15.5/require/3.0.5/bin
 EPICS_BASE          : /epics/base-3.15.5
 EPICS_HOST_ARCH     : linux-x86_64
-E3_REQUIRE_LOCATION : /epics/base-3.15.5/require/3.0.4
-PATH                : /epics/base-3.15.5/require/3.0.4/bin:/epics/base-3.15.5/bin/linux-x86_64:/home/jhlee/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
-LD_LIBRARY_PATH     : /epics/base-3.15.5/lib/linux-x86_64:/epics/base-3.15.5/require/3.0.4/lib/linux-x86_64:/epics/base-3.15.5/require/3.0.4/siteLibs/linux-x86_64
+E3_REQUIRE_LOCATION : /epics/base-3.15.5/require/3.0.5
+PATH                : /epics/base-3.15.5/require/3.0.5/bin:/epics/base-3.15.5/bin/linux-x86_64:/home/jhlee/perl5/bin:/home/jhlee/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+LD_LIBRARY_PATH     : /epics/base-3.15.5/lib/linux-x86_64:/epics/base-3.15.5/require/3.0.5/lib/linux-x86_64:/epics/base-3.15.5/require/3.0.5/siteLibs/linux-x86_64
 
 Enjoy E3!
+
 ```
 4. Check whether your setup is what you want to do or not
 5. Run the previous commands again.
@@ -62,6 +63,8 @@ Enjoy E3!
 ``` 
 e3-3.15.5 (master)$ iocsh.bash cmds/iocStats.cmd 
 ```
+
+
 2. Open another terminal with the corresponding e3 setup
 ```
 e3-3.15.5 (master)$ source tools/setenv
@@ -95,13 +98,24 @@ iocshLoad "$(TOP)/random.cmd"
 epicsEnvSet("P", "IOC-$(NUM)")
 epicsEnvSet("IOCNAME", "$(P)")
 
-loadIocsh("iocStats.iocsh", "IOCNAME=$(IOCNAME)")
+iocshLoad("$(iocStats_DIR)/iocStats.iocsh", "IOCNAME=$(IOCNAME)")
 
 iocInit()
 
 dbl > "$(TOP)/../${IOCNAME}_PVs.list"
 ```
 
+* Type the following commands in the IOC shell :
+
+```
+> help
+> var
+> dbl
+> dbsr
+> echo $(IOCNAME)
+> epicsEnvShow
+
+```
 ## Assignments
 
 Please explain the following jargon by yourself, they are mixed within EPICS and e3 commands.
@@ -110,19 +124,15 @@ Please explain the following jargon by yourself, they are mixed within EPICS and
 
 ### E3_CMD_TOP
 
-### epicsEnvSet
-
 ### system
 
 ### iocshLoad
 
-### loadIocsh
-
 ### iocInit
 
-### dbl
+### >
 
-### > 
+### < 
 
 
 

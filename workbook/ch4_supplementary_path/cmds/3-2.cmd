@@ -1,5 +1,5 @@
 
-require stream,2.7.14p
+require stream,2.8.8
 
 epicsEnvSet("TOP","$(E3_CMD_TOP)/..")
 

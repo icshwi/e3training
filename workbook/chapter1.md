@@ -45,12 +45,14 @@ e3-3.15.5 (master)$ ./e3_building_config.bash setup
 
 >> Set the global configuration as follows:
 >>
-  EPICS TARGET        : /epics
-  EPICS_BASE VERSION  : 3.15.5
-  E3_REQUIRE_VERSION  : 3.0.4
-  EPICS_MODULE_TAG    : 3.15.5
-  EPICS_BASE          : /epics/base-3.15.5
-  E3_REQUIRE_LOCATION : /epics/base-3.15.5/require/3.0.4
+  EPICS TARGET                     : /epics
+  EPICS_BASE                       : /epics/base-3.15.5
+  EPICS_BASE VERSION               : 3.15.5
+  EPICS_MODULE_TAG                 : 3.15.5
+  E3_REQUIRE_VERSION               : 3.0.5
+  E3_REQUIRE_LOCATION              : /epics/base-3.15.5/require/3.0.5
+  E3_CROSS_COMPILER_TOOLCHAIN_PATH : /opt/fsl-qoriq
+  E3_CROSS_COMPILER_TOOLCHAIN_VER  : current
 ```
 
 ```
@@ -60,13 +62,15 @@ e3-7.0.1.1 (master)$ ./e3_building_config.bash -b 7.0.1.1 setup
   will be generated :
 
 >> Set the global configuration as follows:
->>
-  EPICS TARGET        : /epics
-  EPICS_BASE VERSION  : 7.0.1.1
-  E3_REQUIRE_VERSION  : 3.0.4
-  EPICS_MODULE_TAG    : 7.0.1.1
-  EPICS_BASE          : /epics/base-7.0.1.1
-  E3_REQUIRE_LOCATION : /epics/base-7.0.1.1/require/3.0.4
+>>  
+  EPICS TARGET                     : /epics
+  EPICS_BASE                       : /epics/base-7.0.1.1
+  EPICS_BASE VERSION               : 7.0.1.1
+  EPICS_MODULE_TAG                 : 7.0.1.1
+  E3_REQUIRE_VERSION               : 3.0.5
+  E3_REQUIRE_LOCATION              : /epics/base-7.0.1.1/require/3.0.5
+  E3_CROSS_COMPILER_TOOLCHAIN_PATH : /opt/fsl-qoriq
+  E3_CROSS_COMPILER_TOOLCHAIN_VER  : current
 ```
 
 ```
@@ -77,12 +81,14 @@ e3-7.0.1.1 (master)$ ./e3_building_config.bash -b 7.0.1.1 setup
 
 >> Set the global configuration as follows:
 >>
-  EPICS TARGET        : /opt/epics
-  EPICS_BASE VERSION  : 3.15.5
-  E3_REQUIRE_VERSION  : 3.0.4
-  EPICS_MODULE_TAG    : 3.15.5
-  EPICS_BASE          : /opt/epics/base-3.15.5
-  E3_REQUIRE_LOCATION : /opt/epics/base-3.15.5/require/3.0.4
+  EPICS TARGET                     : /home/jhlee
+  EPICS_BASE                       : /home/jhlee/base-3.15.5
+  EPICS_BASE VERSION               : 3.15.5
+  EPICS_MODULE_TAG                 : 3.15.5
+  E3_REQUIRE_VERSION               : 3.0.5
+  E3_REQUIRE_LOCATION              : /home/jhlee/base-3.15.5/require/3.0.5
+  E3_CROSS_COMPILER_TOOLCHAIN_PATH : /opt/fsl-qoriq
+  E3_CROSS_COMPILER_TOOLCHAIN_VER  : current
 ```
 
 ## Global e3 environment settings
@@ -94,16 +100,17 @@ The previous step will generate the following three *.local files.
 E3_EPICS_PATH:=/epics
 EPICS_BASE_TAG:=tags/R3.15.5
 E3_BASE_VERSION:=3.15.5
-#E3_CROSS_COMPILER_TARGET_ARCHS =
+E3_CROSS_COMPILER_TOOLCHAIN_VER=current
+E3_CROSS_COMPILER_TOOLCHAIN_PATH=/opt/fsl-qoriq
 ```
 * RELEASE.local
 ```
 EPICS_BASE:=/epics/base-3.15.5
-E3_REQUIRE_VERSION:=3.0.4
+E3_REQUIRE_VERSION:=3.0.5
 ```
 * REQUIRE_CONFIG_MODULE.local
 ```
-EPICS_MODULE_TAG:=tags/v3.0.4
+EPICS_MODULE_TAG:=tags/v3.0.5
 ```
 
 They will help us to change base, require, and all modules configuration globally without changing source files which are monitored by git. 
@@ -334,72 +341,69 @@ These commands actually call the MAKEFILE rules each modules as
 $ ./e3.bash -c load
 
 ......
-drvStreamInit: Warning! STREAM_PROTOCOL_PATH not set. Defaults to "."
 require: fillModuleListRecord
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[0] = "require"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[0] = "3.0.4"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="require    3.0.4"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[1] = "ess"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[1] = "0.0.1"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="ess        0.0.1"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[2] = "iocStats"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[2] = "ae5d083"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="iocStats   ae5d083"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[3] = "autosave"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[3] = "5.9.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="autosave   5.9.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[4] = "caPutLog"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[4] = "3.6.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="caPutLog   3.6.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[5] = "asyn"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[5] = "4.33.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="asyn       4.33.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[6] = "busy"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[6] = "1.7.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="busy       1.7.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[7] = "modbus"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[7] = "2.11.0p"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="modbus     2.11.0p"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[8] = "ipmiComm"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[8] = "4.0.2"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="ipmiComm   4.0.2"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[9] = "sequencer"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[9] = "2.2.6"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="sequencer  2.2.6"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[10] = "sscan"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[10] = "1339922"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="sscan      1339922"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[11] = "std"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[11] = "3.5.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="std        3.5.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[12] = "ip"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[12] = "2.19.1"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="ip         2.19.1"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[13] = "calc"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[13] = "3.7.1"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="calc       3.7.1"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[14] = "delaygen"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[14] = "1.2.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="delaygen   1.2.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[15] = "pcre"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[15] = "8.41.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="pcre       8.41.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[16] = "stream"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[16] = "2.7.14p"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="stream     2.7.14p"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[17] = "s7plc"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[17] = "1.4.0p"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="s7plc      1.4.0p"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[18] = "recsync"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[18] = "1.3.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="recsync    1.3.0"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MODULES[19] = "MCoreUtils"
-require: REQMOD-C5C2FA8:KAFFEE-9737:VERSIONS[19] = "1.2.1"
-require: REQMOD-C5C2FA8:KAFFEE-9737:MOD_VER+="MCoreUtils 1.2.1"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[0] = "require"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[0] = "3.0.5"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="require    3.0.5"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[1] = "ess"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[1] = "0.0.1"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="ess        0.0.1"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[2] = "iocStats"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[2] = "ae5d083"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="iocStats   ae5d083"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[3] = "autosave"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[3] = "5.9.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="autosave   5.9.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[4] = "caPutLog"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[4] = "3.6.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="caPutLog   3.6.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[5] = "asyn"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[5] = "4.33.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="asyn       4.33.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[6] = "busy"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[6] = "1.7.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="busy       1.7.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[7] = "modbus"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[7] = "2.11.0p"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="modbus     2.11.0p"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[8] = "ipmiComm"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[8] = "4.2.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="ipmiComm   4.2.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[9] = "sequencer"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[9] = "2.2.6"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="sequencer  2.2.6"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[10] = "sscan"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[10] = "1339922"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="sscan      1339922"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[11] = "std"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[11] = "3.5.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="std        3.5.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[12] = "ip"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[12] = "2.19.1"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="ip         2.19.1"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[13] = "calc"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[13] = "3.7.1"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="calc       3.7.1"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[14] = "delaygen"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[14] = "1.2.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="delaygen   1.2.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[15] = "pcre"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[15] = "8.41.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="pcre       8.41.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[16] = "stream"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[16] = "2.8.8"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="stream     2.8.8"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[17] = "s7plc"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[17] = "1.4.0p"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="s7plc      1.4.0p"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[18] = "recsync"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[18] = "1.3.0"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="recsync    1.3.0"
+require: REQMOD-791F5F3:FAISERV-21664:MODULES[19] = "MCoreUtils"
+require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[19] = "1.2.1"
+require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="MCoreUtils 1.2.1"
 iocRun: All initialization complete
-c5c2fa8.kaffee.9733 > 
-c5c2fa8.kaffee.9733 > 
-c5c2fa8.kaffee.9733 > 
+791f5f3.faiserv.21660 > 
 ```
 The command will load all installed modules within a single iocsh.bash. If one see the clear console prompt >, one has the e3 installation done in the local host.
 

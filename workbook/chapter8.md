@@ -83,7 +83,7 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 
 ### ACTIONS 
-
+ 
 - **ACTION 1** : this ACTION has the following answers in Questions : Q00(YES), Q01(YES), and Q10(YES). We will use one EPICS Application [1] has the standard EPICS Application or IOC structure. We highly recommend users to use the standard EPICS structure, because it gives us backward compatibility to the standard EPICS if we, EPICS community, or both need it. 
 
   - Download e3-tools, please remember README.md [2] is your friend. Please spend some time in order to look around within. 
@@ -123,50 +123,50 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
   - Run the following command :
     ```
-    e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/fimscb.conf -d ~/e3-trainings/siteApps
+    e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf -d ~/e3-trainings/siteApps
     >>
     fimscb is used as module name.
     >>
     >> Your sources are located in https://github.com/icshwi.
     >> git submodule will be used.
     >>
-    EPICS_MODULE_NAME  : fimscb
-    E3_MODULE_SRC_PATH : fimscb
-    EPICS_MODULE_URL   : https://github.com/icshwi
-    E3_TARGET_URL      : https://github.com/jeonghanlee
+	EPICS_MODULE_NAME  : genesysGEN5kWPS           
+	E3_MODULE_SRC_PATH : genesysGEN5kWPS           
+	EPICS_MODULE_URL   : https://github.com/icshwi 
+	E3_TARGET_URL      : https://github.com/icshwi 
     >>
-    e3 module name     : e3-fimscb
-    e3 module url full : https://github.com/icshwi/fimscb
-    e3 target url full : https://github.com/jeonghanlee/e3-fimscb.git
+	e3 module name     : e3-genesysGEN5kWPS                              
+	e3 module url full : https://github.com/icshwi/genesysGEN5kWPS       
+	e3 target url full : https://github.com/icshwi/e3-genesysGEN5kWPS.git
     >>
-    Initialized empty Git repository in /home/jhlee/e3-trainings/siteApps/e3-fimscb/.git/
-    https://github.com/icshwi/fimscb is adding as submodule...
-    Cloning into 'fimscb'...
+    Initialized empty Git repository in /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/.git/
+    https://github.com/icshwi/genesysGEN5kWPS is adding as submodule...
+    Cloning into 'genesysGEN5kWPS'...
     
     ......
-    
-    >>>> Do you want to add the URL https://github.com/jeonghanlee/e3-fimscb.git for the remote repository?
-         In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-fimscb.git.
+    >>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS.git for the remote repository?
+     In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEaN5kWPS.git.
+
 	     If yes, the script will push the local e3-fimscb to the remote repository. (y/N)? 
     ```
   - Type `N` or `Enter`
     ```
     >>>> Skipping add the remote repository url. 
-         And skipping push the e3-fimscb to the remote also.
+         And skipping push the e3-genesysGEN5kWPS to the remote also.
 
     In case, one would like to push this e3 module to git repositories,
     Please use the following commands within e3-fimscb/ :
-       * git remote add origin https://github.com/jeonghanlee/e3-fimscb.git
+       * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
        * git commit -m "First commit"
        * git push -u origin master
 		
     The following files should be modified according to the module : 
-       * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
-       * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
-       * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
+       * /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/configure/CONFIG_MODULE
+       * /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/configure/RELEASE
+       * /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/genesysGEN5kWPS.Makefile
 
     One can check the e3- template works via 
-	cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
+	cd /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS
 	make init
 	make vars
     ```

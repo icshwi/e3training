@@ -74,6 +74,7 @@ e3-3.15.5 (master)$ source tools/setenv
 ```
 e3-3.15.5 (master)$ echo $(IOCNAME)
 ```
+for example: IOC-9999
 
 4. Check the all PV list
 ```

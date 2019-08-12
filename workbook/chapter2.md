@@ -69,18 +69,24 @@ e3-3.15.5 (master)$ iocsh.bash cmds/iocStats.cmd
 ```
 e3-3.15.5 (master)$ source tools/setenv
 ```
-3. Check the all PV list
-```
-e3-3.15.5 (master)$ bash caget_pvs.bash -l IOC-09606738_PVs.list
-```
-4. Check the HEARTBEAT of your IOC
 
+3. Check the IOC name
 ```
-e3-3.15.5 (master)$ bash caget_pvs.bash -l IOC-09606738_PVs.list -f HEARTBEAT
+e3-3.15.5 (master)$ echo $(IOCNAME)
 ```
 
+4. Check the all PV list
 ```
-e3-3.15.5 (master)$ camonitor IOC-09606738-IocStats:HEARTBEAT
+e3-3.15.5 (master)$ bash caget_pvs.bash -l (IOCNAME)_PVs.list
+```
+5. Check the HEARTBEAT of your IOC
+
+```
+e3-3.15.5 (master)$ bash caget_pvs.bash -l (IOCNAME)_PVs.list -f HEARTBEAT
+```
+
+```
+e3-3.15.5 (master)$ camonitor (IOCNAME)-IocStats:HEARTBEAT
 ```
 
 

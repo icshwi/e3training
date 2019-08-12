@@ -63,18 +63,18 @@ Enjoy E3!
 ``` 
 e3-3.15.5 (master)$ iocsh.bash cmds/iocStats.cmd 
 ```
+2. Check the IOC name
+```
+echo $(IOCNAME)
+```
+for example: IOC-9999
 
-
-2. Open another terminal with the corresponding e3 setup
+3. Open another terminal with the corresponding e3 setup
 ```
 e3-3.15.5 (master)$ source tools/setenv
 ```
 
-3. Check the IOC name
-```
-e3-3.15.5 (master)$ echo $(IOCNAME)
-```
-for example: IOC-9999
+
 
 4. Check the all PV list
 ```

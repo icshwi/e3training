@@ -63,24 +63,31 @@ Enjoy E3!
 ``` 
 e3-3.15.5 (master)$ iocsh.bash cmds/iocStats.cmd 
 ```
+2. Check the IOC name
+```
+echo $(IOCNAME)
+```
+for example: IOC-9999
 
-
-2. Open another terminal with the corresponding e3 setup
+3. Open another terminal with the corresponding e3 setup
 ```
 e3-3.15.5 (master)$ source tools/setenv
 ```
-3. Check the all PV list
+
+
+
+4. Check the all PV list
 ```
-e3-3.15.5 (master)$ bash caget_pvs.bash -l IOC-09606738_PVs.list
+e3-3.15.5 (master)$ bash caget_pvs.bash -l (IOCNAME)_PVs.list
 ```
-4. Check the HEARTBEAT of your IOC
+5. Check the HEARTBEAT of your IOC
 
 ```
-e3-3.15.5 (master)$ bash caget_pvs.bash -l IOC-09606738_PVs.list -f HEARTBEAT
+e3-3.15.5 (master)$ bash caget_pvs.bash -l (IOCNAME)_PVs.list -f HEARTBEAT
 ```
 
 ```
-e3-3.15.5 (master)$ camonitor IOC-09606738-IocStats:HEARTBEAT
+e3-3.15.5 (master)$ camonitor (IOCNAME)-IocStats:HEARTBEAT
 ```
 
 

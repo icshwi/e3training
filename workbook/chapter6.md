@@ -83,7 +83,36 @@ epicsEnvSet "IOCSTATS_MODULE_VERSION"       ae5d083
 epicsEnvSet "IOCSTATS_MODULE_DB_PATH"       /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/db
 epicsEnvSet "IOCSTATS_MODULE_TEMPLATE_PATH" /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/db
 ----- snip ----- snip -----
+## EPICS Base built Aug  5 2019
+############################################################################
+iocRun: All initialization complete
+#
+echo "E3_IOCSH_TOP       : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path"
+E3_IOCSH_TOP       : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path
+#
+echo "E3_CMD_TOP         : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path"
+E3_CMD_TOP         : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path
+#
+echo "iocStats_DIR       : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/"
+iocStats_DIR       : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/
+#
+echo "iocStats_VERSION   : ae5d083"
+iocStats_VERSION   : ae5d083
+#
+echo "iocStats_DB        : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db"
+iocStats_DB        : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
+#
+echo "iocStats_TEMPLATES : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db"
+iocStats_TEMPLATES : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
+#
+----- snip ----- snip -----
+```
 
+It is important to remember these variables. Especially, `*_DB` variable, because one should use this variable as 
+`STREAM_PROTOCOL_PATH` within a startup script if the script uses the `stream` module. For example,
+
+```
+epicsEnvSet("STREAM_PROTOCOL_PATH", "$(AAAAAA_DIR)")
 ```
 
 One can try to add recsync into ch6.cmd to create ch6-local.cmd. Please enable it through

@@ -75,20 +75,22 @@ $ iocsh.bash ch6_supplementary_path/ch6.cmd
 One may get the following output:
 ```
 ----- snip ----- snip -----
-epicsEnvSet "EXECUTE_TOP"     /home/jhlee/playground/e3training/workbook
-epicsEnvSet "STARTUP_TOP"     /home/jhlee/playground/e3training/workbook/ch13_supplementry_path
-epicsEnvSet "TOP"             /home/jhlee/playground/e3training/workbook/ch13_supplementry_path/..
-epicsEnvSet "IOCSTATS_MODULE_PATH"          /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/
+epicsEnvSet "EXECUTE_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook
+epicsEnvSet "STARTUP_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path
+epicsEnvSet "TOP"             /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path/..
+epicsEnvSet "IOCSTATS_MODULE_PATH"          /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/
 epicsEnvSet "IOCSTATS_MODULE_VERSION"       ae5d083
-epicsEnvSet "IOCSTATS_MODULE_DB_PATH"       /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/db
-epicsEnvSet "IOCSTATS_MODULE_TEMPLATE_PATH" /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/ae5d083/db
+epicsEnvSet "IOCSTATS_MODULE_DB_PATH"       /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
+epicsEnvSet "IOCSTATS_MODULE_TEMPLATE_PATH" /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
+
 ----- snip ----- snip -----
+
 ## EPICS Base built Aug  5 2019
 ############################################################################
 iocRun: All initialization complete
 #
-echo "E3_IOCSH_TOP       : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path"
-E3_IOCSH_TOP       : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path
+echo "E3_IOCSH_TOP       : /home/jhlee/ics_gitsrc/e3training/workbook"
+E3_IOCSH_TOP       : /home/jhlee/ics_gitsrc/e3training/workbook
 #
 echo "E3_CMD_TOP         : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path"
 E3_CMD_TOP         : /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path

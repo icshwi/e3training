@@ -1,4 +1,4 @@
-Chapter 8 : Build an e3 Application
+Chapter 8 : Build an e3 Application (Needed to be updated)
 ==
 
 ## Lesson Overview

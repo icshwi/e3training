@@ -34,6 +34,42 @@ rm: cannot remove '..../lib/linux-x86_64/.nfs000000004c0de98d00000007': Device o
 ```
 * Solution : Plese check whether the corresponding IOC is running in somewhere through NFS. We have to stop an IOC, and exit any running process, then we can delete this directory if we would like to install new one again. What meas `.nfsXXXX` can be found in http://nfs.sourceforge.net/#faq_d2
 
+## Case 3
+
+* Problem : when we run `make init`, we may see the following CONFLICT within the git submodule:
+
+```
+...
+git submodule update --remote --merge opcua/
+X11 forwarding request failed on channel 0
+Auto-merging devOpcuaSup/linkParser.cpp
+Auto-merging devOpcuaSup/devOpcua.cpp
+CONFLICT (content): Merge conflict in devOpcuaSup/devOpcua.cpp
+Auto-merging devOpcuaSup/UaSdk/SessionUaSdk.cpp
+CONFLICT (content): Merge conflict in devOpcuaSup/UaSdk/SessionUaSdk.cpp
+Auto-merging devOpcuaSup/UaSdk/ItemUaSdk.cpp
+Auto-merging devOpcuaSup/UaSdk/DataElementUaSdk.cpp
+CONFLICT (content): Merge conflict in devOpcuaSup/UaSdk/DataElementUaSdk.cpp
+Auto-merging devOpcuaSup/RecordConnector.cpp
+Auto-merging configure/CONFIG_OPCUA_VERSION
+CONFLICT (content): Merge conflict in configure/CONFIG_OPCUA_VERSION
+Automatic merge failed; fix conflicts and then commit the result.
+Unable to merge 'a52002c31e6d5d32a21c130af42e579ae17b5b6f' in submodule path 'opcua'
+make: *** [/epics/base-7.0.3/require/3.1.1/configure/RULES_E3:88: opcua] Error 2
+```
+
+* Reason : That is happened. The main module source repository `opcua` uses the complicated branch, and release rules. So, master codes are changed and doesn't have enough information about the release v0.5.2 exists in branch release/0.5. 
+
+* Solution : Changed the default branch in .gitmodules from master (undefined) to release/0.5 such as 
+```
+[submodule "opcua"]
+	path = opcua
+	url = https://github.com/ralphlange/opcua
+	branch = release/0.5
+```
+
+
+
 ------------------
 [:arrow_backward:](README.md)  | [:arrow_up_small:](appendixA.md)  | [:arrow_forward:](appendixB.md)
 :--- | --- |---: 

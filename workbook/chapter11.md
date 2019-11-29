@@ -56,7 +56,9 @@ value applied to a waveform with values 0..99. The record LINCONV_create is the
 acalcout record which calculates the resultant waveform. Then the resultant 
 waveform is directed to record LINCONV.
 
-More information about acalcout could be found [here](https://epics.anl.gov/bcda/synApps/calc/calc.html)
+More information about acalcout could be found [here](https://epics.anl.gov/bcda/synApps/calc/calc.html).
+
+Besides the db file itself is expected that you change the linconv.Makefile to include the linconv.db.
 
 ### Change e3-linconv to uses acalcout
  
@@ -107,15 +109,118 @@ calc_VERSION=$(CALC_DEP_VERSION)
 endif
 ```
 
+Now you should compile and install the module:
+
+```
+make vars
+make init
+make build
+make install
+```
+
+You can check to see if calc was included as a dependency on your linconv 
+module, on the file $(E3_REQUIRE_LOCATION)/siteMods/linconv/master/lib/linux-x86_64/linconv.dep
+you should see this:
+
+```
+calc 3.7.1
+```
+
+### Testing linconv
+
+Now with this configuration you can try again the same startup script:
+
+```
+require lineonv, 0.0.1
+dbLoadRecords("linconv.db")
+```
+
+Congratulations! Now you should be able to read LINCONV pv and set SLOPE and OFFSET.
+
 ## Using an external db/template file
 
 For this part of the training we will create a simple PID controller using
 the record type EPID defined on [std module](https://github.com/epics-modules/std).
-
-To start this you will need to creat a new module, to do this follow the 
-instructions on [Chapter 8](chapter8.md). For our setup will be considered
-the module name is *mypid*.
+Besides the EPID record we will use one db file present on std mdule.
 
 In our module we will do something similar to the ioc example present at
 std module on the files pid_slow.template and st.cmd on [iocStdTest](https://github.com/epics-modules/std/tree/master/iocBoot/iocStdTest) .
+Our plan is to use the file pid_control.db from std module.
 
+### Create a new module 
+
+To start this you will need to creat a new module, to do this follow the 
+instructions on [Chapter 8](chapter8.md). For our setup the module name will be considered
+*mypid*.
+
+### Create a substitution file
+
+Now we will create in our moudle a substitution file that uses a db file from
+std module. You shoud create a pid.substitutions file within this content:
+
+```
+file pid_control.db
+{
+    pattern
+    {P,        PID,       INP,         OUT,        LOPR,  HOPR,  DRVL,  DRVH,  PREC,   KP,  KI,   KD,  SCAN}
+    {mypid:,  PID1,    pidDemoInp,   pidDemoOut,   0,    100,     0,    5,     3,     0.2,  3.,   0.,  ".1 second"}
+    
+}
+
+```
+
+This file is just an example, and uses as INP and OUT inexistent PVs, but for our test is enough.
+You can see that this substitution file uses pid_control.db, a file from std module.
+
+If you change the mypid.Makefile and try to compile this module you should receive a message like this:
+
+```
+msi: Can't open file 'pid_control.db'
+```
+
+### Add std as a dependency
+
+To solve this, the first step is to set std as a dependency. As we see on p
+revious lesson you should edit mypid.Makefile and CONFIGURE_MODULE files.
+
+On mypid.Makefile you should add:
+``` 
+REQUIRED += std
+
+ifneq ($(strip $(STD_DEP_VERSION)),)
+std_VERSION=$(STD_DEP_VERSION)
+endif
+
+```
+
+And on CONFIGURE_MODULE:
+```
+STD_DEP_VERSION:=3.5.0
+```
+
+### Add std on USR_DBFLAGS
+
+To allow that your substitutions file uses db files from std you should include
+the std db folder on USR_DBFLAGS. So on mypid.Makefile you add this line:
+
+```
+USR_DBFLAGS += -I $(E3_SITEMODS_PATH)/std/$(std_VERSION)/db
+```
+
+This line will tell to msi where find the pid_control.db .
+
+### Checking if everything is ok
+
+After these changes you can compile again your module and you shouldn't see
+any error. If you would like to check, you can go to your module folder 
+and see the pid.db generated file, the file should be at 
+$(E3_REQUIRE_LOCATION)/siteMods/mypid/master/db/pid.db
+
+
+## Example files
+
+The example files showed in this tutorial could be found at 
+[e3-moduleexample](https://gitlab.esss.lu.se/epics-examples/e3-moduleexample.git)
+and [moduleexample](https://gitlab.esss.lu.se/epics-examples/moduleexample.git).
+Note that the module name is moduleexample, but the db and substitutions
+files are the same used on tutorial.

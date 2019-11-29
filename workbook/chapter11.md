@@ -145,7 +145,7 @@ Besides the EPID record we will use one db file present on std mdule.
 
 In our module we will do something similar to the ioc example present at
 std module on the files pid_slow.template and st.cmd on [iocStdTest](https://github.com/epics-modules/std/tree/master/iocBoot/iocStdTest) .
-Our plan is to use the file pid_control.db from std module.
+Our plan is to use the file pid_control.db [1] from std module.
 
 ### Create a new module 
 
@@ -155,11 +155,10 @@ instructions on [Chapter 8](chapter8.md). For our setup the module name will be 
 
 ### Create a substitution file
 
-Now we will create in our moudle a substitution file that uses a db file from
-std module. You shoud create a pid.substitutions file within this content:
+Now we will create in our moudle a substitution file that uses the `pid_control.db` file as a template file [1]. You shoud create a pid.substitutions file within this content:
 
 ```
-file pid_control.db
+file "pid_control.db"
 {
     pattern
     {P,        PID,       INP,         OUT,        LOPR,  HOPR,  DRVL,  DRVH,  PREC,   KP,  KI,   KD,  SCAN}
@@ -169,21 +168,20 @@ file pid_control.db
 
 ```
 
-This file is just an example, and uses as INP and OUT inexistent PVs, but for our test is enough.
-You can see that this substitution file uses pid_control.db, a file from std module.
+This file is just an example, and uses as INP and OUT inexistent PVs, but for our test is enough. Note that there is no hard-code path or variable within the substitution file. 
 
-If you change the mypid.Makefile and try to compile this module you should receive a message like this:
+If you change the `mypid.Makefile` and try to compile this module you should receive a message like this:
 
 ```
 msi: Can't open file 'pid_control.db'
 ```
+This is because `MSI` has no idea where `pid_control.db` file is. One should tell the building system where it is. 
 
 ### Add std as a dependency
 
-To solve this, the first step is to set std as a dependency. As we see on p
-revious lesson you should edit mypid.Makefile and CONFIGURE_MODULE files.
+To solve this, the first step is to set std as a dependency. As we see on previous lesson you should edit `mypid.Makefile` and `CONFIGURE_MODULE` files.
 
-On mypid.Makefile you should add:
+On `mypid.Makefile` you should add:
 ``` 
 REQUIRED += std
 
@@ -224,3 +222,6 @@ The example files showed in this tutorial could be found at
 and [moduleexample](https://gitlab.esss.lu.se/epics-examples/moduleexample.git).
 Note that the module name is moduleexample, but the db and substitutions
 files are the same used on tutorial.
+
+## Reference
+[1] https://github.com/epics-modules/std/blob/master/stdApp/Db/pid_control.db

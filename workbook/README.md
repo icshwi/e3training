@@ -24,6 +24,8 @@ European Spallation Source EPICS Environment Workbook
 
 [Part 2 Introduction](intropart2.md) :construction: 
 
+### Chapter 11 : [Other Dependencies](chapter11.md) :book:
+
 # Appendix : Troubleshoting
 
 ### Appendix A : [Build System Troubleshoting](appendixA.md)

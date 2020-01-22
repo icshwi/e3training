@@ -1,4 +1,4 @@
-# European Spallation Source EPICS Envirionment Training
+# European Spallation Source EPICS Environment Training
 
 
 

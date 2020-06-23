@@ -20,7 +20,7 @@ One should use git in order to get the developing repository of e3.
 $ git clone https://github.com/icshwi/e3 
 ```
 
-However, by the design concept of e3, we can have multiple e3 configurations in a host, so it would be better to use the self-evidence source directories which can tell us where we are in. For example, if one would like to use the EPICS base 3.15.5
+However, by the design concept of e3, we can have multiple e3 configurations in a host, so it would be better to use self-explanatory source directory names that can tell us where we are in. For example, if one would like to use the EPICS base 3.15.5
 
 ```
 $ git clone https://github.com/icshwi/e3 e3-3.15.5
@@ -35,7 +35,7 @@ There are two golden VERSIONS which one should remember.
 * REQUIRE version
 
 In addition, the target path will define where you want to install your e3 environment. For example,
-if one would like to use the default ones, one can run the following command without options.
+if you would like to use the default ones, you can run the following command without options.
 
 ```
 e3-3.15.5 (master)$ ./e3_building_config.bash setup
@@ -187,7 +187,7 @@ e3-3.15.5 (master)$ ./e3.bash -4 vars
 ```
 ### EtherCAT / Motion Group
 
-If the group has the dependency upon others, it will add others automatically. 
+If the group has a dependency upon others, it will add the others automatically. 
 ```
 e3-3.15.5 (master)$ ./e3.bash -e vars
 >> Vertical display for the selected modules :
@@ -231,7 +231,7 @@ e3-3.15.5 (master)$ ./e3.bash -eo vars
     3 : e3-ethercatmc
     4 : e3-ecmctraining
 ```
-Note that one needs the ESS bitbucket account in order to access this.
+Note that one needs an ESS bitbucket account in order to access this.
 
 ### PSI Module Group
 
@@ -326,7 +326,7 @@ The mod option has the following steps :
 * Initiate          : imod
 * Build and Install : bmod
 
-These commands actually call the MAKEFILE rules each modules as
+These commands actually call the MAKEFILE rules of each module as
 
 * make clean
 * make init
@@ -405,7 +405,7 @@ require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="MCoreUtils 1.2.1"
 iocRun: All initialization complete
 791f5f3.faiserv.21660 > 
 ```
-The command will load all installed modules within a single iocsh.bash. If one see the clear console prompt >, one has the e3 installation done in the local host.
+The command will load all installed modules within a single iocsh.bash. If you see the clear console prompt >, you have succesfully done the e3 installation in the local host.
 
 
 

@@ -2,7 +2,7 @@
 
 [Return to Table of Contents](README.md)
 
-## Lesson Overview
+## Lesson overview
 
 In this lesson, you'll learn how to do the following:
 * Load e3 using utility scripts
@@ -35,39 +35,39 @@ Thus, one can easily switch between environments. For example:
 0. Go to **E3_TOP**
 1. Run:
 
-  ```bash
-  [iocuser@host:e3-3.15.5]$ iocsh.bash cmds/iocStats.cmd 
-  ```
+   ```bash
+   [iocuser@host:e3-3.15.5]$ iocsh.bash cmds/iocStats.cmd 
+   ```
 
 2. Check the IOC name
 
-  ```bash
-  echo $(IOCNAME)
-  ```
+   ```bash
+   echo $(IOCNAME)
+   ```
 
-  (Which should output IOC-9999.)
+   (Which should output IOC-9999.)
 
 3. Open another terminal and source the same e3 configuration.
 
-  ```bash
-  [iocuser@host:e3-3.15.5]$ source tools/setenv
-  ```
+   ```bash
+   [iocuser@host:e3-3.15.5]$ source tools/setenv
+   ```
 
 4. Print all of the PVs to a file and skim through it.
 
-  ```bash
-  [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l $(IOCNAME)_PVs.list
-  ```
+   ```bash
+   [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l $(IOCNAME)_PVs.list
+   ```
 
 5. Check the heartbeat of your IOC.
 
-  ```bash
-  [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l (IOCNAME)_PVs.list -f HEARTBEAT
-  ```
+   ```bash
+   [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l (IOCNAME)_PVs.list -f HEARTBEAT
+   ```
 
-  ```bash
-  [iocuser@host:e3-3.15.5]$ camonitor (IOCNAME)-IocStats:HEARTBEAT
-  ```
+   ```bash
+   [iocuser@host:e3-3.15.5]$ camonitor (IOCNAME)-IocStats:HEARTBEAT
+   ```
 
 ## Spend some time with iocStats.cmd 
 

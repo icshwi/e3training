@@ -67,7 +67,7 @@ The default is LEVEL 2---i.e. `make existent` is identical to `make LEVEL=2 exis
    And you can also try:
 
    ```
-   [iocuser@host:x]$ git show --oneline 
+   [iocuser@host:StreamDevice]$ git show --oneline 
    ```
 
 We could here download StreamDevice from PSI's GitHub account directly, and switch `EPICS_MODULE_TAG` when `make init` is executed. If so:

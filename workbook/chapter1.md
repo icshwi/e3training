@@ -1,5 +1,7 @@
  # Chapter 1: Installing e3 
 
+[Return to Table of Contents](README.md)
+
 ## Lesson overview
 
 In this lesson, you'll learn how to do the following:
@@ -10,11 +12,9 @@ In this lesson, you'll learn how to do the following:
 * Set up common e3 module packs
 * Test your installation
 
-[Return to Table of Contents](README.md)
-
 ## Downloading e3
 
-*ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 while exercising this tutorial. you may be prompted to add additional packages while trying things out.*
+*ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 while exercising this tutorial. You may be prompted to add additional packages while trying things out.*
 
 Start by downloading e3 from GitHub:
 ```bash
@@ -27,7 +27,7 @@ Note that by the design concept of e3 one can have multiple e3 configurations in
 [iocuser@host:~]$ git clone https://github.com/icshwi/e3 e3-3.15.5
 ```
 
-The e3 root directory (`e3-3.15.5/`) will henceforth be referred to as **E3_TOP**.
+The e3 root directory (`/home/iocuser/e3-3.15.5/` in the most recent example) will henceforth be referred to as **E3_TOP**.
 
 *Note: typical paths for EPICS installations tend to be `/epics` or `/opt/epics`. for this tutorial series, e3 will be cloned to `$HOME` and EPICS will be installed at `/epics`.*
 
@@ -39,10 +39,10 @@ Configuring an e3 build with default settings can be done like:
 [iocuser@host:e3]$ ./e3_building_config.bash setup
 ```
 
-The utility can however be launched with a number of arguments (to see these, simply run the script without any arguments: `./e3_building_config.bash`); you can modify the building path (`-t <where-you-want-to-install>`) as well as define versions. And on that note, always pay close attention to especially:
+The utility can however be launched with a number of arguments (to see these, simply run the script without any arguments, i.e. `./e3_building_config.bash`); you can modify the building path (e.g. `-t <where-you-want-to-install>`) as well as define versions. And on that note, always pay close attention to especially:
 
-* EPICS base version 
-* require version
+* The version of EPICS base
+* The version of require
 
 Examples:
 
@@ -84,7 +84,7 @@ Examples:
 
 ## Global e3 environment settings
 
-Configuring epics per above directions will generate the following three `*.local` files.
+Configuring EPICS per above directions will generate the following three `*.local` files.
 
 * `CONFIG_BASE.local`
 
@@ -109,9 +109,11 @@ Configuring epics per above directions will generate the following three `*.loca
   EPICS_MODULE_TAG:=tags/v3.0.5
   ```
 
-These will help us to change base, require, and all modules' configuration globally without having to change any source files.
+These will help us to change base, require, and all modules' configuration without having to change any source files.
 
 ## Building and installing EPICS base and require
+
+For EPICS base and require, it's as simple as running:
 
 ```bash
 [iocuser@host:e3]$ ./e3.bash base
@@ -328,13 +330,13 @@ You download, build, and install a group by using the `mod` argument. For exampl
 
 The mod argument contain these---individually accessible---steps:
  
-* Clean
+* Clean  
   `cmod`
-* Clone
+* Clone  
   `gmod`
-* Initiate
+* Initiate  
   `imod`
-* Build and install
+* Build and install  
   `bmod`
 
 The MAKEFILE rules that can be used for a module are:
@@ -347,7 +349,7 @@ The MAKEFILE rules that can be used for a module are:
 
 ### Test your installation
 
-The following command will load all installed modules within a single iocsh.bash. If you after executing `e3.bash -c load` see a clear console prompt (`>`), you have succesfully installed e3 on the host.
+The following command will load all installed modules within a single `iocsh.bash`. If you after executing `e3.bash -c load` see a clear console prompt (`>`), you have succesfully installed e3 on the host.
 
 ```console
 [iocuser@host:e3]$ ./e3.bash -c load
@@ -421,4 +423,4 @@ iocrun: all initialization complete
 
 [:arrow_backward:](README.md)  | [:arrow_up_small:](chapter1.md)  | [:arrow_forward:](chapter2.md)
 :--- | --- |---: 
-[README](README.md) | [Chapter 1](chapter1.md) | [Chapter 2 : Your First Running IOC](chapter2.md)
+[README](README.md) | [Chapter 1](chapter1.md) | [Chapter 2: Your first running e3 IOC](chapter2.md)

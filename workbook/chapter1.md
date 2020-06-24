@@ -88,7 +88,7 @@ Configuring EPICS per above directions will generate the following three `*.loca
 
 * `CONFIG_BASE.local`
 
-<!-- So yeah this is obviously not python, but now highlighting works -->
+<!-- So yeah this is obviously not python, but now syntax highlighting works -->
   ```python
   E3_EPICS_PATH:=/epics
   EPICS_BASE_TAG:=tags/r3.15.5

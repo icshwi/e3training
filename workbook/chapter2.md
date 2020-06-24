@@ -11,9 +11,9 @@ In this lesson, you'll learn how to do the following:
 
 ## The e3 environment
 
-In order to facilitate the development process, e3 supports using multiple EPICS environments dynamically. In order words, you can set the environment for a specific terminal by sourcing the relevant `setE3Env.bash`.
+In order to facilitate the development process, e3 supports using multiple EPICS environments. In order words, you can set the environment for a specific terminal by sourcing the relevant `setE3Env.bash`.
 
-Using a default configuration (e.g. base 3.15.5 with require 3.0.5 installed at `/epics`) the full path for this script would then be `/epics/base-3.15.5/require/3.0.5/bin/setE3Env.bash`.
+Using a default configuration (presently base 3.15.5 with require 3.0.5 installed at `/epics`) the full path for this script would then be `/epics/base-3.15.5/require/3.0.5/bin/setE3Env.bash`.
 
 For your convenience, the e3 building system---at the end of installation procedure of require and modules---creates a utility script within the `tools/` directory called `setenv`:
 

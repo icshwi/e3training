@@ -1,5 +1,7 @@
 # European Spallation Source EPICS Environment Workbook
 
+This workbook is intended to introduce new users to ESS' EPICS environment e3. As it's focused on specifically e3, it will not contain much information about EPICS more specifically, and will assume a certain knowledge. The series is furthermore primarily targeting Linux systems, and as CentOS is ESS' distribution of choice, CentOS7.
+
 As this workbook still is under construction, please refer to the following icons on whether a chapter has been finalized or not. Chapters marked with:
 
 * :book: are ready for your self-training,

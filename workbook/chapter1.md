@@ -1,62 +1,53 @@
- # Chapter 1 : e3 Installation 
+ # Chapter 1: Installing e3 
 
-## Lesson Overview
+## Lesson overview
 
 In this lesson, you'll learn how to do the following:
-* Download the e3 repository by using git
-* Configure the e3 environment settings according to what you want to do
-* Set up the e3 EPICS base
-* Set up the e3 REQUIRE
-* Set up the e3 COMMON modules
-* Test your installation to make sure all components are correct
+* Download e3 using git
+* Configure the e3 environment
+* Set up e3 EPICS base
+* Set up the e3 require module
+* Set up common e3 module packs
+* Test your installation
 
+[Return to Table of Contents](README.md)
 
-## Get the developing repository for e3
+## Downloading e3
 
+*ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 while exercising this tutorial. you may be prompted to add additional packages while trying things out.*
 
-One should use git in order to get the developing repository of e3.
-
-```
-$ git clone https://github.com/icshwi/e3 
-```
-
-However, by the design concept of e3, we can have multiple e3 configurations in a host, so it would be better to use self-explanatory source directory names that can tell us where we are in. For example, if one would like to use the EPICS base 3.15.5
-
-```
-$ git clone https://github.com/icshwi/e3 e3-3.15.5
-```
-, where e3-3.15.5 is called now ***E3_TOP**. We will use it within next chapters also. 
-
-## Configure the e3 environment settings
-
-There are two golden VERSIONS which one should remember.
-
-* EPICS Base version 
-* REQUIRE version
-
-In addition, the target path will define where you want to install your e3 environment. For example,
-if you would like to use the default ones, you can run the following command without options.
-
-```
-e3-3.15.5 (master)$ ./e3_building_config.bash setup
->> 
-  The following configuration for e3 installation
-  will be generated :
-
->> Set the global configuration as follows:
->>
-  EPICS TARGET                     : /epics
-  EPICS_BASE                       : /epics/base-3.15.5
-  EPICS_BASE VERSION               : 3.15.5
-  EPICS_MODULE_TAG                 : 3.15.5
-  E3_REQUIRE_VERSION               : 3.0.5
-  E3_REQUIRE_LOCATION              : /epics/base-3.15.5/require/3.0.5
-  E3_CROSS_COMPILER_TOOLCHAIN_PATH : /opt/fsl-qoriq
-  E3_CROSS_COMPILER_TOOLCHAIN_VER  : current
+Start by downloading e3 from GitHub:
+```bash
+[iocuser@host:~]$ git clone https://github.com/icshwi/e3 
 ```
 
+Note that by the design concept of e3 one can have multiple e3 configurations in a host, and it is therefore recommended to use self-explanatory source directory names. for example, if one would like to use EPICS base 3.15.5:
+
+```bash
+[iocuser@host:~]$ git clone https://github.com/icshwi/e3 e3-3.15.5
 ```
-e3-7.0.1.1 (master)$ ./e3_building_config.bash -b 7.0.1.1 setup
+
+The e3 root directory (`e3-3.15.5/`) will henceforth be referred to as **E3_TOP**.
+
+*Note: typical paths for EPICS installations tend to be `/epics` or `/opt/epics`. for this tutorial series, e3 will be cloned to `$HOME` and EPICS will be installed at `/epics`.*
+
+## Configure e3
+
+Configuring an e3 build with default settings can be done like:
+
+```bash
+[iocuser@host:e3]$ ./e3_building_config.bash setup
+```
+
+The utility can however be launched with a number of arguments (to see these, simply run the script without any arguments: `./e3_building_config.bash`); you can modify the building path (`-t <where-you-want-to-install>`) as well as define versions. And on that note, always pay close attention to especially:
+
+* EPICS base version 
+* require version
+
+Examples:
+
+```console
+[iocuser@host:e3]$ ./e3_building_config.bash -b 7.0.1.1 setup
 >> 
   The following configuration for e3 installation
   will be generated :
@@ -73,69 +64,73 @@ e3-7.0.1.1 (master)$ ./e3_building_config.bash -b 7.0.1.1 setup
   E3_CROSS_COMPILER_TOOLCHAIN_VER  : current
 ```
 
-```
- e3-3.15.5 (master)$ ./e3_building_config.bash -b 3.15.5 -t /opt/epics setup
+```console
+[iocuser@host:e3]$ ./e3_building_config.bash -b 3.15.5 -t /opt/epics setup
 >> 
   The following configuration for e3 installation
   will be generated :
 
 >> Set the global configuration as follows:
 >>
-  EPICS TARGET                     : /home/jhlee
-  EPICS_BASE                       : /home/jhlee/base-3.15.5
+  EPICS TARGET                     : /opt/epics
+  EPICS_BASE                       : /opt/epics/base-3.15.5
   EPICS_BASE VERSION               : 3.15.5
   EPICS_MODULE_TAG                 : 3.15.5
   E3_REQUIRE_VERSION               : 3.0.5
-  E3_REQUIRE_LOCATION              : /home/jhlee/base-3.15.5/require/3.0.5
+  E3_REQUIRE_LOCATION              : /opt/epics/base-3.15.5/require/3.0.5
   E3_CROSS_COMPILER_TOOLCHAIN_PATH : /opt/fsl-qoriq
   E3_CROSS_COMPILER_TOOLCHAIN_VER  : current
 ```
 
 ## Global e3 environment settings
 
-The previous step will generate the following three *.local files.
+Configuring epics per above directions will generate the following three `*.local` files.
 
-* CONFIG_BASE.local
-```
-E3_EPICS_PATH:=/epics
-EPICS_BASE_TAG:=tags/R3.15.5
-E3_BASE_VERSION:=3.15.5
-E3_CROSS_COMPILER_TOOLCHAIN_VER=current
-E3_CROSS_COMPILER_TOOLCHAIN_PATH=/opt/fsl-qoriq
-```
-* RELEASE.local
-```
-EPICS_BASE:=/epics/base-3.15.5
-E3_REQUIRE_VERSION:=3.0.5
-```
-* REQUIRE_CONFIG_MODULE.local
-```
-EPICS_MODULE_TAG:=tags/v3.0.5
+* `CONFIG_BASE.local`
+
+  ```properties
+  E3_EPICS_PATH:=/epics
+  EPICS_BASE_TAG:=tags/r3.15.5
+  E3_BASE_VERSION:=3.15.5
+  E3_CROSS_COMPILER_TOOLCHAIN_VER=current
+  E3_CROSS_COMPILER_TOOLCHAIN_PATH=/opt/fsl-qoriq
+  ```
+
+* `RELEASE.local`
+
+  ```properties
+  EPICS_BASE:=/epics/base-3.15.5
+  E3_REQUIRE_VERSION:=3.0.5
+  ```
+
+* `REQUIRE_CONFIG_MODULE.local`
+
+  ```properties
+  EPICS_MODULE_TAG:=tags/v3.0.5
+  ```
+
+These will help us to change base, require, and all modules' configuration globally without having to change any source files.
+
+## Building and installing EPICS base and require
+
+```bash
+[iocuser@host:e3]$ ./e3.bash base
 ```
 
-They will help us to change base, require, and all modules configuration globally without changing source files which are monitored by git. 
-
-## Install base
-
-```
-$ ./e3.bash base
+```bash
+[iocuser@host:e3]$ ./e3.bash req
 ```
 
-## Install require
+## Module packs
 
-```
-$ ./e3.bash req
-```
+In e3, there are module groups to aid with development. These are:
 
-## Install a selected group of modules
+### Common group
 
-There are module groups which help us to select necessary modules in terms of system requirements as follows:
+This group contains the common EPICS modules. 
 
-### Common Group
-This group contains the common EPICS modules such as 
-
-```
- e3-3.15.5 (master)$ ./e3.bash -c vars
+```console
+[iocuser@host:e3]$ ./e3.bash -c vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -160,21 +155,23 @@ This group contains the common EPICS modules such as
    18 : e3-MCoreUtils
 ```
 
-### Timing Group
-```
- e3-3.15.5 (master)$ ./e3.bash -t vars
->> Vertical display for the selected modules :
+### Timing group
 
- Modules List 
+```console
+ e3-3.15.5 (master)$ ./e3.bash -t vars
+>> vertical display for the selected modules :
+
+ modules list 
     0 : e3-devlib2
     1 : e3-mrfioc2
 ```
-### EPICS V4 Group
 
-Note that this group is not necessary for EPICS BASE 7
+### EPICS V4 group
 
-```
-e3-3.15.5 (master)$ ./e3.bash -4 vars
+*Note that this group is not necessary for EPICS base 7 as they already are included.*
+
+```console
+[iocuser@host:e3]$ ./e3.bash -4 vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -185,11 +182,13 @@ e3-3.15.5 (master)$ ./e3.bash -4 vars
     4 : e3-normativeTypes
     5 : e3-pvaClient
 ```
-### EtherCAT / Motion Group
 
-If the group has a dependency upon others, it will add the others automatically. 
-```
-e3-3.15.5 (master)$ ./e3.bash -e vars
+### EtherCAT / Motion group
+
+This group contains modules commonly used with motion contol. Note here that if a group has depencies upon other modules, these will be added automatically:
+
+```console
+[iocuser@host:e3]$ ./e3.bash -e vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -218,10 +217,11 @@ e3-3.15.5 (master)$ ./e3.bash -e vars
    22 : e3-ethercatmc
    23 : e3-ecmctraining
 ```
-However, one can exclude the dependency modules via
 
-```
-e3-3.15.5 (master)$ ./e3.bash -eo vars
+You can however exclude the dependency modules by adding an `-o` flag, like:
+
+```console
+[iocuser@host:e3]$ ./e3.bash -eo vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -231,12 +231,13 @@ e3-3.15.5 (master)$ ./e3.bash -eo vars
     3 : e3-ethercatmc
     4 : e3-ecmctraining
 ```
-Note that one needs an ESS bitbucket account in order to access this.
 
-### PSI Module Group
+*Note that you need an ESS Bitbucket account in order to access these.*
 
-```
-e3-3.15.5 (master)$ ./e3.bash -io vars
+### PSI module group
+
+```console
+[iocuser@host:e3]$ ./e3.bash -io vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -250,10 +251,10 @@ e3-3.15.5 (master)$ ./e3.bash -io vars
 
 ### IFC Module Group
 
-One needs the ESS bitbucket account in order to access this.
+*Note: You need an ESS bitbucket account in order to access these.*
 
-```
- e3-3.15.5 (master)$ ./e3.bash -fo vars
+```console
+[iocuser@host:e3]$ ./e3.bash -fo vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -264,10 +265,11 @@ One needs the ESS bitbucket account in order to access this.
     4 : e3-ifc14edrv
     5 : e3-ifcfastint
 ```
+
 ### AreaDetector Group
 
-```
-e3-3.15.5 (master)$ ./e3.bash -ao vars
+```console
+[iocuser@host:e3]$ ./e3.bash -ao vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -283,11 +285,10 @@ e3-3.15.5 (master)$ ./e3.bash -ao vars
     9 : e3-ADPluginCalib
 ```
 
-
 ### LLRF Group
 
-```
- e3-3.15.5 (master)$ ./e3.bash -lo vars
+```console
+[iocuser@host:e3]$ ./e3.bash -lo vars
 >> Vertical display for the selected modules :
 
  Modules List 
@@ -299,118 +300,125 @@ e3-3.15.5 (master)$ ./e3.bash -ao vars
     5 : e3-sis8300llrf
 ```
 
+### Downloading and installing a group
 
-### Install a selected group
+You download, build, and install a group by using the `mod` argument. For example:
 
-* Install the COMMON group
-```
-$ ./e3.bash -c mod
-```
+* To install the common group:
 
-* Install the common, timing, areadetector, V4 groups
-For EPICS base 3,
-```
-$ ./e3.bash -cta4 mod 
-```
-Or for EPICS base 7,
-```
-$ ./e3.bash -ctao mod
-```
+  ```bash
+  [iocuser@host:e3]$ ./e3.bash -c mod
+  ```
 
-### Option : mod
+* To install the common, timing, areadetector, and v4 groups:
 
-The mod option has the following steps :
+  * for EPICS base 3:
+
+    ```bash
+    [iocuser@host:e3]$ ./e3.bash -cta4 mod 
+    ```
+
+  * for EPICS base 7:
+
+    ```bash
+    [iocuser@host:e3]$ ./e3.bash -ctao mod
+    ```
+
+### Options
+
+The mod argument contain these---individually accessible---steps:
  
-* Clean             : cmod
-* Clone             : gmod
-* Initiate          : imod
-* Build and Install : bmod
+* Clean
+  `cmod`
+* Clone
+  `gmod`
+* Initiate
+  `imod`
+* Build and install
+  `bmod`
 
-These commands actually call the MAKEFILE rules of each module as
+The MAKEFILE rules that can be used for a module are:
 
-* make clean
-* make init
-* make patch 
-* make build
-* make install
+* `make clean`
+* `make init`
+* `make patch` 
+* `make build`
+* `make install`
 
+### Test your installation
 
-### Check your installation
+The following command will load all installed modules within a single iocsh.bash. If you after executing `e3.bash -c load` see a clear console prompt (`>`), you have succesfully installed e3 on the host.
 
-```
-$ ./e3.bash -c load
+```console
+[iocuser@host:e3]$ ./e3.bash -c load
 
 ......
-require: fillModuleListRecord
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[0] = "require"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[0] = "3.0.5"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="require    3.0.5"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[1] = "ess"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[1] = "0.0.1"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="ess        0.0.1"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[2] = "iocStats"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[2] = "ae5d083"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="iocStats   ae5d083"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[3] = "autosave"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[3] = "5.9.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="autosave   5.9.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[4] = "caPutLog"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[4] = "3.6.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="caPutLog   3.6.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[5] = "asyn"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[5] = "4.33.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="asyn       4.33.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[6] = "busy"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[6] = "1.7.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="busy       1.7.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[7] = "modbus"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[7] = "2.11.0p"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="modbus     2.11.0p"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[8] = "ipmiComm"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[8] = "4.2.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="ipmiComm   4.2.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[9] = "sequencer"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[9] = "2.2.6"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="sequencer  2.2.6"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[10] = "sscan"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[10] = "1339922"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="sscan      1339922"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[11] = "std"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[11] = "3.5.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="std        3.5.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[12] = "ip"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[12] = "2.19.1"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="ip         2.19.1"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[13] = "calc"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[13] = "3.7.1"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="calc       3.7.1"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[14] = "delaygen"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[14] = "1.2.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="delaygen   1.2.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[15] = "pcre"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[15] = "8.41.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="pcre       8.41.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[16] = "stream"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[16] = "2.8.8"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="stream     2.8.8"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[17] = "s7plc"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[17] = "1.4.0p"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="s7plc      1.4.0p"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[18] = "recsync"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[18] = "1.3.0"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="recsync    1.3.0"
-require: REQMOD-791F5F3:FAISERV-21664:MODULES[19] = "MCoreUtils"
-require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[19] = "1.2.1"
-require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="MCoreUtils 1.2.1"
-iocRun: All initialization complete
+require: fillmodulelistrecord
+require: reqmod-791f5f3:faiserv-21664:modules[0] = "require"
+require: reqmod-791f5f3:faiserv-21664:versions[0] = "3.0.5"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="require    3.0.5"
+require: reqmod-791f5f3:faiserv-21664:modules[1] = "ess"
+require: reqmod-791f5f3:faiserv-21664:versions[1] = "0.0.1"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="ess        0.0.1"
+require: reqmod-791f5f3:faiserv-21664:modules[2] = "iocstats"
+require: reqmod-791f5f3:faiserv-21664:versions[2] = "ae5d083"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="iocstats   ae5d083"
+require: reqmod-791f5f3:faiserv-21664:modules[3] = "autosave"
+require: reqmod-791f5f3:faiserv-21664:versions[3] = "5.9.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="autosave   5.9.0"
+require: reqmod-791f5f3:faiserv-21664:modules[4] = "caputlog"
+require: reqmod-791f5f3:faiserv-21664:versions[4] = "3.6.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="caputlog   3.6.0"
+require: reqmod-791f5f3:faiserv-21664:modules[5] = "asyn"
+require: reqmod-791f5f3:faiserv-21664:versions[5] = "4.33.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="asyn       4.33.0"
+require: reqmod-791f5f3:faiserv-21664:modules[6] = "busy"
+require: reqmod-791f5f3:faiserv-21664:versions[6] = "1.7.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="busy       1.7.0"
+require: reqmod-791f5f3:faiserv-21664:modules[7] = "modbus"
+require: reqmod-791f5f3:faiserv-21664:versions[7] = "2.11.0p"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="modbus     2.11.0p"
+require: reqmod-791f5f3:faiserv-21664:modules[8] = "ipmicomm"
+require: reqmod-791f5f3:faiserv-21664:versions[8] = "4.2.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="ipmicomm   4.2.0"
+require: reqmod-791f5f3:faiserv-21664:modules[9] = "sequencer"
+require: reqmod-791f5f3:faiserv-21664:versions[9] = "2.2.6"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="sequencer  2.2.6"
+require: reqmod-791f5f3:faiserv-21664:modules[10] = "sscan"
+require: reqmod-791f5f3:faiserv-21664:versions[10] = "1339922"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="sscan      1339922"
+require: reqmod-791f5f3:faiserv-21664:modules[11] = "std"
+require: reqmod-791f5f3:faiserv-21664:versions[11] = "3.5.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="std        3.5.0"
+require: reqmod-791f5f3:faiserv-21664:modules[12] = "ip"
+require: reqmod-791f5f3:faiserv-21664:versions[12] = "2.19.1"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="ip         2.19.1"
+require: reqmod-791f5f3:faiserv-21664:modules[13] = "calc"
+require: reqmod-791f5f3:faiserv-21664:versions[13] = "3.7.1"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="calc       3.7.1"
+require: reqmod-791f5f3:faiserv-21664:modules[14] = "delaygen"
+require: reqmod-791f5f3:faiserv-21664:versions[14] = "1.2.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="delaygen   1.2.0"
+require: reqmod-791f5f3:faiserv-21664:modules[15] = "pcre"
+require: reqmod-791f5f3:faiserv-21664:versions[15] = "8.41.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="pcre       8.41.0"
+require: reqmod-791f5f3:faiserv-21664:modules[16] = "stream"
+require: reqmod-791f5f3:faiserv-21664:versions[16] = "2.8.8"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="stream     2.8.8"
+require: reqmod-791f5f3:faiserv-21664:modules[17] = "s7plc"
+require: reqmod-791f5f3:faiserv-21664:versions[17] = "1.4.0p"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="s7plc      1.4.0p"
+require: reqmod-791f5f3:faiserv-21664:modules[18] = "recsync"
+require: reqmod-791f5f3:faiserv-21664:versions[18] = "1.3.0"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="recsync    1.3.0"
+require: reqmod-791f5f3:faiserv-21664:modules[19] = "mcoreutils"
+require: reqmod-791f5f3:faiserv-21664:versions[19] = "1.2.1"
+require: reqmod-791f5f3:faiserv-21664:mod_ver+="mcoreutils 1.2.1"
+iocrun: all initialization complete
 791f5f3.faiserv.21660 > 
 ```
-The command will load all installed modules within a single iocsh.bash. If you see the clear console prompt >, you have succesfully done the e3 installation in the local host.
 
 
-
-
-------------------
 [:arrow_backward:](README.md)  | [:arrow_up_small:](chapter1.md)  | [:arrow_forward:](chapter2.md)
 :--- | --- |---: 
 [README](README.md) | [Chapter 1](chapter1.md) | [Chapter 2 : Your First Running IOC](chapter2.md)

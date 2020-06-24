@@ -1,177 +1,148 @@
-# Chapter 3 : Install a Module with the different version number
+# Chapter 3: Installing a module with a different version number
 
-## Lesson Overview
+[Return to Table of Contents](README.md)
+
+## Lesson overview
 
 In this lesson, you'll learn how to do the following:
-* Print out and understand the various EPICS and E3 variables
-* Check the current installed StreamDevice (stream) version with different level information
-* Understand two important variables such as E3_MODULE_VERSION and EPICS_MODULE_TAG
-* Install the difference StreamDevice version within e3
-* Note that the specific module version can be different.
+* Print out, and understand some of, the various EPICS and e3 variables
+* Understand how different versions of the same module are mananaged in e3
+* Understand the difference between two important variables: `E3_MODULE_VERSION` and `EPICS_MODULE_TAG`
+* Install a different StreamDevice version within e3
 
-## Check the VARIABLES within the e3
+## The variables within e3
 
-Various Environment variables are used in EPICS and E3, so it is really important to understand what they are. Please remember, our environment is e3 with EPICS, so we have some variables which are unique within e3.
+Various environment variables are used in EPICS and e3, so it is important to be aware of these and their difference(s). Please remember that e3 is a configuration tool around EPICS, and that we thus we have some variables which are unique to e3.
 
-
-0. Make sure you are in **E3_TOP**
-
-1. Move in e3-StreamDevice
-
-```
-e3-3.15.5 (master)$ cd e3-StreamDevice/
-e3-StreamDevice (master)$ 
-```
-
+0. Make sure you are in **E3_TOP***
+1. Go to `e3-StreamDevice/`
 2. Run the following rule:
 
-```
-e3-StreamDevice (master)$ make vars
-```
+   ```bash
+   [iocuser@host:e3-StreamDevice]$ make vars
+   ```
 
-The most interesting VARIABLES are
+The variables of interest here are:
+* `E3_MODULE_VERSION`: This is used as *Module/Application version* with require within an IOC startup script. We recommend using X.X.X[^1] versioning for production releases. 
+* `EPICS_MODULE_TAG` This is the *snapshot* of the source code repository, e.g. `tags/stream_2_7_14`, `tags/2.8.8`, `master`, `branch_name`, or `e0a24fe`.
 
-* ```E3_MODULE_VERSION``` : This is used as **Module/Application Version** with require within an IOC startup script. We recommend to use the X.X.X version number as the stable production release, but any combination can be possible. 
+These two variables are defined in `configure/CONFIG_MODULE` and `configure/CONFIG_MODULE_DEV`.
 
-* ```EPICS_MODULE_TAG``` : This is the **snapshot** of the source code repository, i.e., tags/stream_2_7_14, tags/2.8.8, master, branch_name, or e0a24fe.
+**We will reiterate starting directory a few more times, but please pay attention to the current working directory in the command prompt: [(user)@(hostname):(**current-working-directory**)]$*
 
-Two VARIABLES are defined within configure/CONFIG_MODULE and configure/CONFIG_MODULE_DEV.
+[^1] Where X.X.X stands for MAJOR.MINOR.PATCH
 
+## List the installed version(s) of a module
 
-## Check the installed version of each module
-
-0. Make sure you are in **E3_TOP**/e3-StreamDevice
-
+0. Make sure you are in `e3-StreamDevice/`
 1. Run the following rule:
 
-```
-e3-StreamDevice (master)$ make existent
-```
+   ```bash
+   [iocuser@host:e3-StreamDevice]$ make existent
+   ```
 
-2. Check the result :
-
-The result shows the existent version of stream modules within e3 :
+2. Look at the output.
+   The result shows the existing version(s) of stream modules within e3:
    
-```
-/epics/base-3.15.5/require/3.0.5/siteMods/stream
-└── 2.8.8
-    ├── dbd
-    ├── include
-    ├── lib
-    └── SetSerialPort.iocsh
-```
+   ```bash
+   /epics/base-3.15.5/require/3.0.5/siteMods/stream
+   └── 2.8.8
+       ├── dbd
+       ├── include
+       ├── lib
+       └── SetSerialPort.iocsh
+   ```
 
-The default is the tree LEVEL 2, i.e., ``` make existent``` is the same as
-``` make LEVEL=2 existent```
+The default is LEVEL 2---i.e. `make existent` is identical to `make LEVEL=2 existent`.
 
+## Check the version of a module
 
-## Check the initiated StreamDevice version
+0. Go to the subdirectory `StreamDevice/`
+1. Run:
 
-* Move into StreamDevice
+   ```bash
+   [iocuser@host:StreamDevice]$ git describe --tags
+   ```
 
-```
-e3-StreamDevice (master)$ cd StreamDevice/
-```
-If one has no git-prompt setup, please check it via
+   And you can also try:
 
-```
-git describe --tags
-```
+   ```
+   [iocuser@host:x]$ git show --oneline 
+   ```
 
-And the following command also is useful to check where you are:
+We could here download StreamDevice from PSI's GitHub account directly, and switch `EPICS_MODULE_TAG` when `make init` is executed. If so:
 
-```
-git show --oneline 
-```
+0. Go back to `e3-StreamDevice/`
+1. Run `make init` to see what kind of messages which you can see.  
+   Can you guess what kind of process will happen behind scenes?
+2. Check `EPICS_MODULE_TAG` with `make vars`
+3. Check the `configure/CONFIG_MODULE` file
 
-We download the StreamDevice from the PSI github directly, and switch to EPICS_MODULE_TAG when ```make init``` is executed.
+Running `make init` will download all source files within StreamDevice as a git submodule, and will switch back to the `2.8.8`* version of StreamDevice.
 
-0. Move to e3-StreamDevice again
+**You may have different versions than the author of these instructions.*
 
-1. Run ```make init``` to see what kind of messages which you can see. Can you guess what kind of process will be done behind scenes. 
+## Change `EPICS_MODULE_TAG` and `E3_MODULE_VERSION`
 
-2. Check  EPICS_MODULE_TAG with ```make vars```
+* Use `master` instead of `tags/2.8.8`  
+  Available tags and branches can be found on the PSI StreamDevice release page: https://github.com/paulscherrerinstitute/StreamDevice/releases  
+  If you already have `master` as default, choose an arbitrary version and modify variables accordingly.
 
-3. Check the configure/CONFIG_MODULE file
-
-```make init```will download all source files within StreamDevice as git submodule, and switch to the `2.8.8` version of StreamDevice.
-
-
-## Change EPICS_MODULE_TAG and E3_MODULE_VERSION
-
-* Use master instead of tags/2.8.8
-
-  That version can be found within the PSI StreamDevice release :
-  https://github.com/paulscherrerinstitute/StreamDevice/releases
-
-* Change E3_MODULE_VERSION to identify this version (e3training)
-
-  Here one can select whatever meaningful version number, the basic and
-  relevant selection will be 2.8.3. However, if one would like to evaluate
-  this version or to do some integration tests with your IOC, one could select
-  0.0.0, testing, 20181010, or whatever strings and numbers.
+* Change `E3_MODULE_VERSION` to a different tag (e.g. `e3training`).  
+  Standard here is to name the e3 module according to the module's version, but any name could be used during e.g. development.
   
-* Your changed configure/CONFIG_MODULE may be such as
-```
-  --- snip snip ---
+* Your modified `configure/CONFIG_MODULE` may then look like:
+
+  ```properties
+  # --- snip snip ---
   EPICS_MODULE_TAG:=master
   E3_MODULE_VERSION:=e3training
-  --- snip snip ---
-```
-
-  Or, create a local CONFIG_MODULE file via
-  ```
-  e3-StreamDevice $ echo "EPICS_MODULE_TAG:=master" > configure/CONFIG_MODULE.local
-  e3-StreamDevice $ echo "E3_MODULE_VERSION:=e3training" >> configure/CONFIG_MODULE.local
+  # --- snip snip ---
   ```
 
-* Check them with ```make vars```
+  Alternatively, you can create a local `CONFIG_MODULE` file, `CONFIG_MODULE.local`, like:
 
+  ```bash
+  [iocuser@host:e3-StreamDevice]$ echo "EPICS_MODULE_TAG:=master" > configure/CONFIG_MODULE.local
+  [iocuser@host:e3-StreamDevice]$ echo "E3_MODULE_VERSION:=e3training" >> configure/CONFIG_MODULE.local
+  ```
 
-## Build and Install StreamDevice `master` ( b84655e )
+* Verify your configuration with `make vars`.
 
-0. Make sure to be in e3-StreamDevice
+## Build and install StreamDevice `master` (b84655e)
 
-1. `make vars`
+0. Go to `e3-StreamDevice/`.
+
+1. Run `make vars`
    Can you see the difference between before and now?
    
-2. `make init`
+2. Run `make init`
    Can you see the difference between before and now?
 
-3. `make build`
+3. Run `make build`
 
-4. `make install`
+4. Run `make install`
 
-5. `make existent`
+5. Run `make existent`
 
-6. `make dep`
+6. Run `make dep`
 
-7. `make vers`
+7. Run `make vers`
 
-8. `make dep | head -1`
-
+8. Run `make dep | head -1`
 
 ## Assignments
 
-### Check the LEVEL=4 existent
-
-### Check the following commands
-    `iocsh.bash -r stream,e3training`
-
-### Do ```make init``` in **E3_TOP**
-
-### Which kind of make rule allows us to uninstall the installed module?
-
-### Can we combine the following two steps together? 
-    1. make build
-    2. make install
-	
-	
-	
+* Try out `make existent` with `LEVEL=4`
+* Try `iocsh.bash -r stream,e3training`
+* Do `make init` in **E3_TOP**. What do you see?
+* Which kind of make rule allows us to uninstall the installed module?
+* Can we combine the following two steps? 
+  1. `make build`
+  2. `make install`
 
 
 ------------------
 [:arrow_backward:](chapter2.md)  | [:arrow_up_small:](chapter3.md)  | [:arrow_forward:](chapter4.md)
 :--- | --- |---: 
-[Chapter 2 : Your first running e3 IOC](chapter2.md) | [Chapter 3](chapter3.md) | [Chapter 4 : Delve into e3 with startup scripts](chapter4.md)
-
+[Chapter 2: Your first running e3 IOC](chapter2.md) | [Chapter 3](chapter3.md) | [Chapter 4: Delve into e3 with startup scripts](chapter4.md)

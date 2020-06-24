@@ -23,14 +23,14 @@ Various environment variables are used in EPICS and e3, so it is important to be
    ```
 
 The variables of interest here are:
-* `E3_MODULE_VERSION`: This is used as *Module/Application version* with require within an IOC startup script. We recommend using X.X.X[^1] versioning for production releases. 
+* `E3_MODULE_VERSION`: This is used as *Module/Application version* with require within an IOC startup script. We recommend using X.X.X** versioning for production releases. 
 * `EPICS_MODULE_TAG` This is the *snapshot* of the source code repository, e.g. `tags/stream_2_7_14`, `tags/2.8.8`, `master`, `branch_name`, or `e0a24fe`.
 
 These two variables are defined in `configure/CONFIG_MODULE` and `configure/CONFIG_MODULE_DEV`.
 
-**We will reiterate starting directory a few more times, but please pay attention to the current working directory in the command prompt: [(user)@(hostname):(**current-working-directory**)]$*
+**We will reiterate starting directory a few more times, but please pay attention to the current working directory in the command prompt: [(user)@(hostname):(**current-working-directory**)]$ .*
 
-[^1] Where X.X.X stands for MAJOR.MINOR.PATCH
+***Where X.X.X stands for Major.Minor.Patch.*
 
 ## List the installed version(s) of a module
 

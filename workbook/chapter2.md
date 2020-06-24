@@ -17,7 +17,7 @@ Using a default configuration (e.g. base 3.15.5 with require 3.0.5 installed at 
 
 For your convenience, the e3 building system---at the end of installation procedure of require and modules---creates a utility script within the `tools/` directory called `setenv`:
 
-```bash
+```console
 [iocuser@host:e3]$ source tools/setenv
 ```
 
@@ -25,7 +25,7 @@ For your convenience, the e3 building system---at the end of installation proced
 
 Thus, one can easily switch between environments. For example:
 
-```bash
+```console
 [iocuser@host:~]$ cd e3-7.0.3.1
 [iocuser@host:e3-7.0.3.1]$ source tools/setenv
 ```
@@ -35,13 +35,13 @@ Thus, one can easily switch between environments. For example:
 0. Go to **E3_TOP**
 1. Run:
 
-   ```bash
+   ```console
    [iocuser@host:e3-3.15.5]$ iocsh.bash cmds/iocStats.cmd 
    ```
 
 2. Check the IOC name
 
-   ```bash
+   ```console
    echo $(IOCNAME)
    ```
 
@@ -49,29 +49,29 @@ Thus, one can easily switch between environments. For example:
 
 3. Open another terminal and source the same e3 configuration.
 
-   ```bash
+   ```console
    [iocuser@host:e3-3.15.5]$ source tools/setenv
    ```
 
 4. Print all of the PVs to a file and skim through it.
 
-   ```bash
+   ```console
    [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l $(IOCNAME)_PVs.list
    ```
 
 5. Check the heartbeat of your IOC.
 
-   ```bash
+   ```console
    [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l (IOCNAME)_PVs.list -f HEARTBEAT
    ```
 
-   ```bash
+   ```console
    [iocuser@host:e3-3.15.5]$ camonitor (IOCNAME)-IocStats:HEARTBEAT
    ```
 
 ## Spend some time with iocStats.cmd 
 
-```bash
+```console
 [iocuser@host:e3-3.15.5]$ cd cmds
 [iocuser@host:cmds]$ cat iocStats.cmd
 require iocStats,ae5d083

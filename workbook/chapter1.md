@@ -14,28 +14,28 @@ In this lesson, you'll learn how to do the following:
 
 ## Downloading e3
 
-*ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 while exercising this tutorial. You may be prompted to add additional packages while trying things out.*
+*ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 whilst exercising this tutorial. You may be prompted to add additional packages while trying things out.*
 
 Start by downloading e3 from GitHub:
-```bash
+```console
 [iocuser@host:~]$ git clone https://github.com/icshwi/e3 
 ```
 
-Note that by the design concept of e3 one can have multiple e3 configurations in a host, and it is therefore recommended to use self-explanatory source directory names. for example, if one would like to use EPICS base 3.15.5:
+Note that e3, by design, can have multiple different configurations in a host, and it is therefore recommended to use self-explanatory source directory names. This will allow you to easily switch between e.g. EPICS base versions 3.15.5 and 7.0.3 during development. For example, if one would like to use EPICS base 3.15.5, it is preferred to clone like:
 
-```bash
+```console
 [iocuser@host:~]$ git clone https://github.com/icshwi/e3 e3-3.15.5
 ```
 
 The e3 root directory (`/home/iocuser/e3-3.15.5/` in the most recent example) will henceforth be referred to as **E3_TOP**.
 
-*Note: typical paths for EPICS installations tend to be `/epics` or `/opt/epics`. for this tutorial series, e3 will be cloned to `$HOME` and EPICS will be installed at `/epics`.*
+*Note: typical paths for EPICS installations tend to be `/epics` or `/opt/epics`. For this tutorial series, e3 will be cloned to `$HOME` and EPICS will be installed at `/epics`.*
 
 ## Configure e3
 
 Configuring an e3 build with default settings can be done like:
 
-```bash
+```console
 [iocuser@host:e3]$ ./e3_building_config.bash setup
 ```
 
@@ -88,7 +88,7 @@ Configuring EPICS per above directions will generate the following three `*.loca
 
 * `CONFIG_BASE.local`
 
-  ```properties
+  ```go
   E3_EPICS_PATH:=/epics
   EPICS_BASE_TAG:=tags/r3.15.5
   E3_BASE_VERSION:=3.15.5
@@ -98,14 +98,14 @@ Configuring EPICS per above directions will generate the following three `*.loca
 
 * `RELEASE.local`
 
-  ```properties
+  ```go
   EPICS_BASE:=/epics/base-3.15.5
   E3_REQUIRE_VERSION:=3.0.5
   ```
 
 * `REQUIRE_CONFIG_MODULE.local`
 
-  ```properties
+  ```go
   EPICS_MODULE_TAG:=tags/v3.0.5
   ```
 
@@ -115,11 +115,11 @@ These will help us to change base, require, and all modules' configuration witho
 
 For EPICS base and require, it's as simple as running:
 
-```bash
+```console
 [iocuser@host:e3]$ ./e3.bash base
 ```
 
-```bash
+```console
 [iocuser@host:e3]$ ./e3.bash req
 ```
 
@@ -308,7 +308,7 @@ You download, build, and install a group by using the `mod` argument. For exampl
 
 * To install the common group:
 
-  ```bash
+  ```console
   [iocuser@host:e3]$ ./e3.bash -c mod
   ```
 
@@ -316,13 +316,13 @@ You download, build, and install a group by using the `mod` argument. For exampl
 
   * for EPICS base 3:
 
-    ```bash
+    ```console
     [iocuser@host:e3]$ ./e3.bash -cta4 mod 
     ```
 
   * for EPICS base 7:
 
-    ```bash
+    ```console
     [iocuser@host:e3]$ ./e3.bash -ctao mod
     ```
 

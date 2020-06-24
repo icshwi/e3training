@@ -57,6 +57,8 @@ The default is LEVEL 2---i.e. `make existent` is identical to `make LEVEL=2 exis
 
 ## Check the version of a module
 
+Let's first see what our current version of StreamDevice is.
+
 0. Go to the subdirectory `StreamDevice/`
 1. Run:
 

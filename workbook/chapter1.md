@@ -88,6 +88,7 @@ Configuring EPICS per above directions will generate the following three `*.loca
 
 * `CONFIG_BASE.local`
 
+<!-- So yeah this is obviously not python, but now highlighting works -->
   ```python
   E3_EPICS_PATH:=/epics
   EPICS_BASE_TAG:=tags/r3.15.5
@@ -159,8 +160,10 @@ This group contains the common EPICS modules.
 
 ### Timing group
 
+This group contains modules important for fast timestamping.
+
 ```console
- e3-3.15.5 (master)$ ./e3.bash -t vars
+[iocuser@host:e3]$ ./e3.bash -t vars
 >> vertical display for the selected modules :
 
  modules list 

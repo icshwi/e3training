@@ -39,10 +39,10 @@ Thus, one can easily switch between environments. For example:
    [iocuser@host:e3-3.15.5]$ iocsh.bash cmds/iocStats.cmd 
    ```
 
-2. Check the IOC name
+2. Check the IOC name:
 
    ```console
-   echo $(IOCNAME)
+   [iocuser@host:e3-3.15.5]$ echo $(IOCNAME)
    ```
 
    (Which should output IOC-9999.)
@@ -69,40 +69,40 @@ Thus, one can easily switch between environments. For example:
    [iocuser@host:e3-3.15.5]$ camonitor (IOCNAME)-IocStats:HEARTBEAT
    ```
 
-## Spend some time with iocStats.cmd 
+## Play around with the sample IOC
 
-```console
-[iocuser@host:e3-3.15.5]$ cd cmds
-[iocuser@host:cmds]$ cat iocStats.cmd
-require iocStats,ae5d083
+* Have a look at the contents of `cmds/iocStats.cmd` and make sure you understand it:
 
-epicsEnvSet("TOP", "$(E3_CMD_TOP)")
+  ```bash
+  require iocStats,ae5d083
 
-system "bash $(TOP)/random.bash"
+  epicsEnvSet("TOP", "$(E3_CMD_TOP)")
 
-iocshLoad "$(TOP)/random.cmd"
+  system "bash $(TOP)/random.bash"
 
-epicsEnvSet("P", "IOC-$(NUM)")
-epicsEnvSet("IOCNAME", "$(P)")
+  iocshLoad "$(TOP)/random.cmd"
 
-iocshLoad("$(iocStats_DIR)/iocStats.iocsh", "IOCNAME=$(IOCNAME)")
+  epicsEnvSet("P", "IOC-$(NUM)")
+  epicsEnvSet("IOCNAME", "$(P)")
 
-iocInit()
+  iocshLoad("$(iocStats_DIR)/iocStats.iocsh", "IOCNAME=$(IOCNAME)")
 
-dbl > "$(TOP)/../${IOCNAME}_PVs.list"
-```
+  iocInit()
 
-Try the following commands in the IOC shell:
-- `help`
-- `var`
-- `dbl`
-- `dbsr`
-- `echo $(IOCNAME)`
-- `epicsEnvShow`
+  dbl > "$(TOP)/../${IOCNAME}_PVs.list"
+  ```
+
+* Try the following commands in the IOC shell:
+  - `help`
+  - `var`
+  - `dbl`
+  - `dbsr`
+  - `echo $(IOCNAME)`
+  - `epicsEnvShow`
 
 ## Assignments
 
-Please explain the following jargon by yourself---they are mixed EPICS and e3 commands:
+Please explain the following jargon by yourself---they are mixed EPICS and e3 terms:
 
 - `require`
 - `E3_CMD_TOP`

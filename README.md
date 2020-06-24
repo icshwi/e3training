@@ -1,6 +1,6 @@
 # European Spallation Source EPICS Environment e3 training
 
-This is a training series for using ESS' EPICS environment [e3](https://github.com/icshwi/e3).
+This is a training series for using ESS' EPICS environment [e3](https://github.com/icshwi/e3). The tutorial series assumes familiarity with EPICS, albeit you may be able to follow along regardless.
 
 ## Workbook
 

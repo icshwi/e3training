@@ -7,13 +7,13 @@
 In this lesson, you'll learn how to do the following:
 * Load e3 using utility scripts
 * Switch between different versions of e3
-* Run a simple IOC with the existing startup script
+* Run a simple IOC with an example startup script
 
 ## The e3 environment
 
-In order to facilitate the development process, e3 supports using multiple EPICS environments. In order words, you can set the environment for a specific terminal by sourcing the relevant `setE3Env.bash`.
+In order to facilitate the development process, e3 supports using multiple EPICS environments. In other words, you can set the environment for a specific terminal by sourcing the relevant `setE3Env.bash`.
 
-Using a default configuration (presently base 3.15.5 with require 3.0.5 installed at `/epics`) the full path for this script would then be `/epics/base-3.15.5/require/3.0.5/bin/setE3Env.bash`.
+> Using a default configuration (presently base 3.15.5 with require 3.0.5 installed at `/epics`) the full path for this script would then be `/epics/base-3.15.5/require/3.0.5/bin/setE3Env.bash`.
 
 For your convenience, the e3 building system---at the end of installation procedure of require and modules---creates a utility script within the `tools/` directory called `setenv`:
 
@@ -21,7 +21,7 @@ For your convenience, the e3 building system---at the end of installation proced
 [iocuser@host:e3]$ source tools/setenv
 ```
 
-*Note: If such a file already exists, the old file will be renamed to `setenv_YYMMDDHHMM`.*
+*N.B.! If such a file already exists, the old file will be renamed to `setenv_YYMMDDHHMM`.*
 
 Thus, one can easily switch between environments. For example:
 
@@ -30,7 +30,7 @@ Thus, one can easily switch between environments. For example:
 [iocuser@host:e3-7.0.3.1]$ source tools/setenv
 ```
 
-## Run the first predefined IOC
+## Run an example IOC
 
 0. Go to **E3_TOP**
 1. Run:
@@ -42,7 +42,7 @@ Thus, one can easily switch between environments. For example:
 2. Check the IOC name:
 
    ```console
-   [iocuser@host:e3-3.15.5]$ echo $(IOCNAME)
+   [iocuser@host:e3-3.15.5]$ echo ${IOCNAME}
    ```
 
    (Which should output IOC-9999.)
@@ -53,23 +53,19 @@ Thus, one can easily switch between environments. For example:
    [iocuser@host:e3-3.15.5]$ source tools/setenv
    ```
 
-4. Print all of the PVs to a file and skim through it.
+4. Print all of the PVs to a file and skim through it:
 
    ```console
-   [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l $(IOCNAME)_PVs.list
+   [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l ${IOCNAME}_PVs.list
    ```
 
 5. Check the heartbeat of your IOC.
 
    ```console
-   [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l (IOCNAME)_PVs.list -f HEARTBEAT
+   [iocuser@host:e3-3.15.5]$ camonitor ${IOCNAME}-IocStats:HEARTBEAT
    ```
 
-   ```console
-   [iocuser@host:e3-3.15.5]$ camonitor (IOCNAME)-IocStats:HEARTBEAT
-   ```
-
-## Play around with the sample IOC
+## Play around with the example IOC
 
 * Have a look at the contents of `cmds/iocStats.cmd` and make sure you understand it:
 
@@ -97,12 +93,12 @@ Thus, one can easily switch between environments. For example:
   - `var`
   - `dbl`
   - `dbsr`
-  - `echo $(IOCNAME)`
+  - `echo ${IOCNAME}`
   - `epicsEnvShow`
 
 ## Assignments
 
-Please explain the following jargon by yourself---they are mixed EPICS and e3 terms:
+Please explain the following jargon by yourself---these are mixed EPICS and e3 terms:
 
 - `require`
 - `E3_CMD_TOP`
@@ -116,4 +112,4 @@ Please explain the following jargon by yourself---they are mixed EPICS and e3 te
 ------------------
 [:arrow_backward:](chapter1.md)  | [:arrow_up_small:](chapter2.md)  | [:arrow_forward:](chapter3.md)
 :--- | --- |---: 
-[Chapter 1: Installing e3](chapter1.md) | [Chapter 2](chapter2.md) | [Chapter 3: Installing a module with a difference version number](chapter3.md)
+[Chapter 1: Installing e3](chapter1.md) | [Chapter 2](chapter2.md) | [Chapter 3: Installing a module with a different version number](chapter3.md)

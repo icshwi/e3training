@@ -12,8 +12,6 @@ For some of the chapters there are supplementary directories containing code, so
 
 ## Part 1
 
-[Part 1 Introduction](intropart1.md)
-
 ##### Chapter 1: [Installing e3](chapter1.md) :book:
 ##### Chapter 2: [Your first running e3 IOC](chapter2.md) :book:
 ##### Chapter 3: [Installing a module with a different version number](chapter3.md) :book:
@@ -26,8 +24,6 @@ For some of the chapters there are supplementary directories containing code, so
 ##### Chapter 10: [Understanding e3 directory structure](chapter10.md) :construction: 
 
 ## Part 2
-
-[Part 2 Introduction](intropart2.md) :construction: 
 
 ##### Chapter 11: [Other dependencies](chapter11.md) :book:
 

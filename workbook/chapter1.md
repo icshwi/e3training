@@ -8,7 +8,7 @@ In this lesson, you'll learn how to do the following:
 * Download e3 using git
 * Configure the e3 environment
 * Set up e3 EPICS base
-* Set up the e3 require module
+* Set up the e3 *require* module
 * Set up common e3 module packs
 * Test your installation
 
@@ -327,7 +327,7 @@ This group contains modules commonly used with motion contol. Note here that if 
 
 ### Downloading and installing a group
 
-You download, build, and install a group by using the `mod` argument. For example:
+You download, build, and install a group by using the `mod` argument (as in **mod**ules). For example:
 
 * To install the common group:
 
@@ -335,7 +335,7 @@ You download, build, and install a group by using the `mod` argument. For exampl
   [iocuser@host:e3]$ ./e3.bash -c mod
   ```
 
-* To install the common, timing, areadetector, and v4 groups:
+* To install the Common, Timing, AreaDetector, and V4 groups:
 
   * for EPICS base 3:
 

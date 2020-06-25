@@ -14,4 +14,4 @@ This workbook is a work-in-progress and is therefore still missing information. 
 
 Please keep in mind that new releases may have happened since the writing of this workbook, and that default versions may be different for you compared to the author(s) of this tutorial.
 
-[Table of Contents](workbook/README.md)
+[Continue (Table of Contents)](workbook/README.md)

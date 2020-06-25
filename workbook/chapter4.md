@@ -28,7 +28,7 @@ Before commencing, you should clone this tutorial repository if you haven't alre
 
 2. Open another terminal, and connect to the simulator using telnet.*
 
-   ```
+   ```console
    [iocuser@host:ch4_supplementary_training]$ telnet 127.0.0.1 9999
    ```
 
@@ -75,7 +75,7 @@ Does it work?
 * How two variables are changed if one can execute iocsh.bash within cmds? 
 
 ```
-$ cmds (master)$ iocsh.bash 0.cmd 
+[iocuser@host:cmds]$ iocsh.bash 0.cmd 
 ```
 
 #### How 0.cmd can be handle within this command?
@@ -84,19 +84,18 @@ The ```0.cmd``` is used as "arguments" of iocshLoad internally. One can see the 
 
 ```
 iocshLoad '0.cmd',''
-
 ```
 
 ### 1.cmd
 Please make sure that the simulator is running.
 
 ```
- ch4_supplementary_path (master)$ iocsh.bash cmds/1.cmd
+[iocuser@host:ch4_supplementary_training]$ iocsh.bash cmds/1.cmd
 ```
 
 * How many dependency modules of stream are loaded? Please carefully look at few lines outputs similar with the following
 
-```
+```console
 iocshLoad 'cmds/1.cmd',''
 require stream,2.8.8
 Module stream version 2.8.8 found in /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/
@@ -155,8 +154,8 @@ to look at `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. Anyway, the dependency wil
 Please make sure that the simulator is running.
 
 * Run the following command
-```
- ch4_supplementary_path (master)$ iocsh.bash cmds/2.cmd
+```console
+[iocuser@host:ch4_supplementary_training]$ iocsh.bash cmds/2.cmd
 ```
 * What is the iocInit ?
 
@@ -172,8 +171,8 @@ Note that each single line output of the ioc is important. One should make sure 
 
 * Run the following command
 
-```
-ch4_supplementary_path (master)$ iocsh.bash cmds/3-1.cmd 
+```console
+[iocuser@host:ch4_supplementary_training]$ iocsh.bash cmds/3-1.cmd 
 ```
 
 * IOC is running, however, it doesn't connect to anywhere. Can you see the message which represents this situation? 
@@ -181,7 +180,7 @@ Please remember, it runs at the end of your startup script whether it finds a ha
 
 This script has the asyn configuration for the simulated device such as
 
-```
+```bash
 drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
 ```
 

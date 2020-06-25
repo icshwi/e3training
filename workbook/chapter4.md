@@ -6,13 +6,15 @@
 
 In this lesson, you'll learn how to do the following:
 * Build the startup script for an IOC in e3
-* Understand the different method to use the EPICS function within a startup script  <!-- fixme -->
-* Understand the local setup for DB and protocol files
-* Add the common (global) module into the IOC
+* Understand different methods of using EPICS functions within startup scripts
+* Understand the local setup for `.db` and `.protocol` files
+* Add common (global) modules to the IOC
 
 ## A simulated serial device
 
-We will use a simple simulator based on [Kameleon](https://bitbucket.org/europeanspallationsource/kameleon) to simulate a serial device, accessible by use of e.g. telnet. This chapter will use [this](https://github.com/jeonghanlee/kameleon) fork of the original repository. The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi.
+We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europeanspallationsource/kameleon)* to simulate a serial device, accessible by use of e.g. telnet. This chapter will use [this](https://github.com/jeonghanlee/kameleon) fork of the original repository. The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi. <!-- verify this, to see exactly what needs to be cloned -->
+
+*N.B.! Kameleon was written for Python2 (tested on 2.7), so make sure you have that installed.*
 
 > Before continuing you should clone this tutorial repository if you haven't already:
 > 
@@ -28,7 +30,7 @@ We will use a simple simulator based on [Kameleon](https://bitbucket.org/europea
    [iocuser@host:ch4_supplementary_training]$ ./simulator.bash
    ```
 
-2. Open another terminal, and connect to the simulator using telnet.
+2. Open another terminal, and connect to the simulator using telnet:
 
    ```console
    [iocuser@host:ch4_supplementary_training]$ telnet 127.0.0.1 9999
@@ -97,63 +99,17 @@ Execute the next script:
 [iocuser@host:ch4_supplementary_training]$ iocsh.bash cmds/1.cmd
 ```
 
-* How many dependency modules of stream are loaded? Look carefully at the output:
+* How many dependency modules of stream are loaded? Look carefully at the output.
 
-```
-iocshLoad 'cmds/1.cmd',''
-require stream,2.8.8
-Module stream version 2.8.8 found in /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/
-Module stream depends on asyn 4.33.0
-Module asyn version 4.33.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/lib/linux-x86_64/libasyn.so
-Loaded asyn version 4.33.0
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/dbd/asyn.dbd
-Calling function asyn_registerRecordDeviceDriver
-Loading module info records for asyn
-Module stream depends on calc 3.7.1
-Module calc version 3.7.1 found in /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/
-Module calc depends on sequencer 2.2.6
-Module sequencer version 2.2.6 found in /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/lib/linux-x86_64/libsequencer.so
-Loaded sequencer version 2.2.6
-sequencer has no dbd file
-Loading module info records for sequencer
-Module calc depends on sscan 1339922
-Module sscan version 1339922 found in /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/
-Module sscan depends on sequencer 2.2.6
-Module sequencer version 2.2.6 already loaded
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/lib/linux-x86_64/libsscan.so
-Loaded sscan version 1339922
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/dbd/sscan.dbd
-Calling function sscan_registerRecordDeviceDriver
-Loading module info records for sscan
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/lib/linux-x86_64/libcalc.so
-Loaded calc version 3.7.1
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/dbd/calc.dbd
-Calling function calc_registerRecordDeviceDriver
-Loading module info records for calc
-Module stream depends on pcre 8.41.0
-Module pcre version 8.41.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/lib/linux-x86_64/libpcre.so
-Loaded pcre version 8.41.0
-pcre has no dbd file
-Loading module info records for pcre
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/lib/linux-x86_64/libstream.so
-Loaded stream version 2.8.8
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/dbd/stream.dbd
-Calling function stream_registerRecordDeviceDriver
-Loading module info records for stream
-```
-
-* Is it what we defined---and how would we check that?
+* Is it what we defined? How would we check that?
 
   ```
   [iocuser@host:e3-StreamDevice]$ make vars
   ```
 
-Look at `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. These dependency will be described in more detail later on.
+  Look at `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. These dependencies will be described in more detail later on.
 
-> We can print these variables more easily with `make dep`.
+  > We can print these variables more easily with `make dep`.
 
 ### 2.cmd
 
@@ -187,96 +143,10 @@ Execute the next command:
 
   > Beware that the application launches regardless of if it finds hardware or not. In `3-1.cmd` there are no `.db.`-files to specify records and fields, which is why no errors appear.
 
-This script contains the asyn configuration for the simulated device:
+This script contains the correct asyn configuration for the simulated device:
 
 ```bash
 drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
-```
-
-* One should the run the Kameleon simulator in the different terminal, then run the above command. 
-
-The following log is a snippet of the IOC output:
-
-```console
-[iocuser@host:ch4_supplementary_path]$ iocsh.bash cmds/3-1.cmd
-# --- snip snip ---
-iocshLoad 'cmds/3-1.cmd',''
-require stream,2.8.8
-Module stream version 2.8.8 found in /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/
-Module stream depends on asyn 4.33.0
-Module asyn version 4.33.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/lib/linux-x86_64/libasyn.so
-Loaded asyn version 4.33.0
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/asyn/4.33.0/dbd/asyn.dbd
-Calling function asyn_registerRecordDeviceDriver
-Loading module info records for asyn
-Module stream depends on calc 3.7.1
-Module calc version 3.7.1 found in /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/
-Module calc depends on sequencer 2.2.6
-Module sequencer version 2.2.6 found in /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sequencer/2.2.6/lib/linux-x86_64/libsequencer.so
-Loaded sequencer version 2.2.6
-sequencer has no dbd file
-Loading module info records for sequencer
-Module calc depends on sscan 1339922
-Module sscan version 1339922 found in /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/
-Module sscan depends on sequencer 2.2.6
-Module sequencer version 2.2.6 already loaded
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/lib/linux-x86_64/libsscan.so
-Loaded sscan version 1339922
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/sscan/1339922/dbd/sscan.dbd
-Calling function sscan_registerRecordDeviceDriver
-Loading module info records for sscan
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/lib/linux-x86_64/libcalc.so
-Loaded calc version 3.7.1
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/calc/3.7.1/dbd/calc.dbd
-Calling function calc_registerRecordDeviceDriver
-Loading module info records for calc
-Module stream depends on pcre 8.41.0
-Module pcre version 8.41.0 found in /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/pcre/8.41.0/lib/linux-x86_64/libpcre.so
-Loaded pcre version 8.41.0
-pcre has no dbd file
-Loading module info records for pcre
-Loading library /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/lib/linux-x86_64/libstream.so
-Loaded stream version 2.8.8
-Loading dbd file /epics/base-3.15.5/require/3.0.5/siteMods/stream/2.8.8/dbd/stream.dbd
-Calling function stream_registerRecordDeviceDriver
-Loading module info records for stream
-drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
-iocInit()
-Starting iocInit
-############################################################################
-## EPICS R3.15.5-E3-3.15.5-patch
-## EPICS Base built Mar 13 2019
-############################################################################
-drvStreamInit: Warning! STREAM_PROTOCOL_PATH not set. Defaults to "."
-iocRun: All initialization complete
-# Set the IOC Prompt String One 
-epicsEnvSet IOCSH_PS1 "791f5f3.faiserv.24402 > "
-```
-
-The following log is a snippet of Kameleon:
-
-```console
-[iocuser@host:ch4_supplementary_path]$ bash simulator.bash 
-
-****************************************************
-*                                                  *
-*  Kameleon v1.5.0 (2017/SEP/14 - Production)      *
-*                                                  *
-*                                                  *
-*  (C) 2015-2017 European Spallation Source (ESS)  *
-*                                                  *
-****************************************************
-
-[21:30:40.314] Using file '/home/jhlee/ics_gitsrc/e3training/workbook/ch4_supplementary_path/kameleon/simulators/gconpi/gconpi.kam' (contains 0 commands and 1 statuses).
-[21:30:40.314] Start serving from hostname '127.0.0.1' on port '9999'.
-[21:30:45.461] Client connection opened.
-[21:30:45.896] Status 'CPS, 1, CPM, 7, uSv/hr, 0.044, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[21:30:46.404] Status 'CPS, 4, CPM, 17, uSv/hr, 0.009, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[21:30:46.911] Status 'CPS, 4, CPM, 13, uSv/hr, 0.039, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-[21:30:47.418] Status 'CPS, 3, CPM, 15, uSv/hr, 0.017, SLOW<0x0d><0x0a>' (Get Data) sent to client.
 ```
 
 ### 3-2.cmd
@@ -330,9 +200,9 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
 
    * Can we see the `*.iocsh` files with the installation path of e3?
 
-   The e3 function **loadIocsh** is a similar function to EPICS' function **iocshLoad**. It supplies us with a reusable modularized startup script to simplify development.
+   The e3 function `loadIocsh` is a function similar to EPICS' function `iocshLoad`. It supplies us with a reusable modularized startup script to simplify development.
 
-   > **loadIocsh** can of course still be used, but **iocshLoad** is highly recommended. 
+   > `loadIocsh` can of course still be used, but `iocshLoad` is highly recommended. 
 
 1. Run the following command to print your PVs, and inspect the output file:
 

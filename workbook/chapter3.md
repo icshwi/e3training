@@ -69,13 +69,15 @@ Let's see what our current version of StreamDevice is:
 We could here download StreamDevice directly from PSI's GitHub account, and switch `EPICS_MODULE_TAG` when `make init` is executed:
 
 1. Go back to `e3-StreamDevice/`
-2. Run `make init` to see what kind of messages which you can see.  
-   Can you guess what kind of process will happen behind scenes?
+2. Run `make init` to see what kind of messages which you can see.
+
+   Can you guess what kind of process that is happening behind scenes?
+
 3. Check `EPICS_MODULE_TAG` with `make vars`
 4. Check the `configure/CONFIG_MODULE` file
 
 > Running `make init` will download all source files within StreamDevice as a git submodule, and will switch back to the `2.8.8` version of StreamDevice.
-
+> 
 > *N.B.! You may have different versions than the author of these instructions.*
 
 ## Change `EPICS_MODULE_TAG` and `E3_MODULE_VERSION`

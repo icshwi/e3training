@@ -16,6 +16,8 @@ In this lesson, you'll learn how to do the following:
 
 *N.B.! ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 whilst exercising this tutorial.*
 
+> As e3 heavily relies on git, it's recommended to first be familiar with especially git submodules.
+
 If you're on a mostly blank CentOS7 machine, you can copy, paste, and run the following code segment before beginning:
 
 ```bash
@@ -29,7 +31,7 @@ libusbx-devel systemd-devel libraw1394.x86_64 hg libtirpc-devel \
 liberation-fonts-common liberation-narrow-fonts \
 liberation-mono-fonts liberation-serif-fonts liberation-sans-fonts \
 logrotate xorg-x11-fonts-misc cpan kernel-devel symlinks \
-dkms procServ curl netcdf netcdf-devel
+dkms procServ curl netcdf netcdf-devel telnet
 ```
 
 Start by downloading e3 from GitHub:

@@ -1,6 +1,6 @@
 # European Spallation Source EPICS Environment Workbook
 
-This workbook is intended to introduce new users to ESS' EPICS environment e3. As it's focused on specifically e3, it will not contain much information about EPICS more specifically, and will assume a certain knowledge. The series is furthermore primarily targeting Linux systems, and as CentOS is ESS' distribution of choice, CentOS7.
+This workbook is intended to introduce new users to ESS' EPICS environment e3. As it's focused on specifically e3, it will not contain much information about EPICS standard functionality.
 
 As this workbook still is under construction, please refer to the following icons on whether a chapter has been finalized or not. Chapters marked with:
 
@@ -8,31 +8,31 @@ As this workbook still is under construction, please refer to the following icon
 * :pencil: are still being written,
 * :construction: have merely been outlined.
 
-# Part 1
+## Part 1
 
 [Part 1 Introduction](intropart1.md)
 
-### Chapter 1: [Installing e3](chapter1.md) :book:
-### Chapter 2: [Your first running e3 IOC](chapter2.md) :book:
-### Chapter 3: [Installing a module with a different version number](chapter3.md) :book:
-### Chapter 4: [Delve into e3 with startup scripts](chapter4.md) :book:
-### Chapter 5: [Take the Deployment or the Development](chapter5.md) :book:
-### Chapter 6: [Variables and parameters within e3](chapter6.md) :book:
-### Chapter 7: [Understanding module dependence](chapter7.md) :book:
-### Chapter 8: [Building an e3 Application](chapter8.md) :book:
-### Chapter 9: [Building an e3 Module](chapter9.md) :pencil:
-### Chapter 10: [Understanding e3 directory structure](chapter10.md) :construction: 
+##### Chapter 1: [Installing e3](chapter1.md) :book:
+##### Chapter 2: [Your first running e3 IOC](chapter2.md) :book:
+##### Chapter 3: [Installing a module with a different version number](chapter3.md) :book:
+##### Chapter 4: [Delve into e3 with startup scripts](chapter4.md) :book:
+##### Chapter 5: [Deployment and development](chapter5.md) :book:
+##### Chapter 6: [Variables and parameters within e3](chapter6.md) :book:
+##### Chapter 7: [Understanding module dependence](chapter7.md) :book:
+##### Chapter 8: [Building an e3 Application](chapter8.md) :book:
+##### Chapter 9: [Building an e3 Module](chapter9.md) :pencil:
+##### Chapter 10: [Understanding e3 directory structure](chapter10.md) :construction: 
 
-# Part 2
+## Part 2
 
 [Part 2 Introduction](intropart2.md) :construction: 
 
-### Chapter 11: [Other dependencies](chapter11.md) :book:
+##### Chapter 11: [Other dependencies](chapter11.md) :book:
 
-# Appendix: Troubleshoting
+## Appendix: Troubleshoting
 
-### Appendix A: [Build system troubleshoting](appendixA.md)
-### Appendix B: [Segmentation fault with GDB](appendixB.md)
+##### Appendix A: [Build system troubleshoting](appendixA.md)
+##### Appendix B: [Segmentation fault with GDB](appendixB.md)
 
 <!-- # Part 2 :  -->
 

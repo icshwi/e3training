@@ -1,77 +1,79 @@
-# Chapter 4 : Delve into e3 with startup scripts
+# Chapter 4: Delve into e3 with startup scripts
 
-## Lesson Overview
+## Lesson overview
 
 In this lesson, you'll learn how to do the following:
-* Build the startup script for an IOC
-* Understand the different method to use the EPICS function within a startup script
+* Build the startup script for an IOC in e3
+* Understand the different method to use the EPICS function within a startup script  <!-- fixme -->
 * Understand the local setup for DB and protocol files
 * Add the common (global) module into the IOC
 
-
-
-
 ## A Simulated Serial Device by Kameleon 
 
-We will use  the simple simulator based on Kameleon [1] which simulates the simple serial device, which one can access through telnet. This chapter will use the forked version [2] of the original one. The original device and its EPICS IOC can be found at https://github.com/jeonghanlee/gconpi.
+We will use a simple simulator based on [Kameleon](https://bitbucket.org/europeanspallationsource/kameleo) to simulate a simple serial device, accessible by use of telnet. This chapter will use [this](https://github.com/jeonghanlee/kameleon) fork of the original repository. The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi.
 
-0. Open a new terminal or a new tab in your terminal if you have a tab option. 
+Before commencing, you should clone this tutorial repository if you haven't already:
 
-**e3training**. 
+```console
+[iocuser@host:~]$ git clone https://github.com/icshwi/e3training
+```
 
-1. Move into ```ch4_supplementary_path```
-   ```
-   $  workbook (master)$ pwd
-   /home/jhlee/gitsrc/e3training/workboo
-   $ cd ch4_supplementary_path
-   ```
+0. Open a new terminal and go to `~/e3training/ch4_supplementary_path`.
 
-2. Run
-   ```
-   ./simulator.bash
+1. Run:
+
+   ```console
+   [iocuser@host:ch4_supplementary_training]$ ./simulator.bash
    ```
 
-3. Open yet another terminal, connect that simulator through telnet
-   ```
-   telnet 127.0.0.1 9999
-   ```
-4. One can see many messages within the telnet session and the running IOC
+2. Open another terminal, and connect to the simulator using telnet.*
 
-5. End the telnet connection 
    ```
+   [iocuser@host:ch4_supplementary_training]$ telnet 127.0.0.1 9999
+   ```
+
+3. You should be able to interact with the simulator. <!-- try out first -->
+
+4. End the telnet connection 
+
+   ```telnet
    ^]
    telnet> quit
    Connection closed.
    ```
-   , where ^ is the Ctrl key. 
 
+   (, where ^ is the Ctrl key.)
 
+*You may have to install telnet.
 
-## Startup Scripts
+## Startup scripts
 
 In ```ch4_supplementary_path/cmds```, there are several startup scripts according to its step from scratch to final configuration.
 Before the running iocsh.bash, don't forget to set the e3 dynamic environment if you are in **E3_TOP** as ~/e3-3.15.5 via
 
+```console
+[iocuser@host:ch4_supplementary_training]$ source ~/e3-3.15.5/tools/setenv
 ```
-$ source ~/e3-3.15.5/tools/setenv
-```
-
-
 
 ### 0.cmd
-Please make sure that the simulator is running.
 
+For all subsequent steps, ensure that the simulator is running. <!-- move this -->
+
+```console
+[iocuser@host:ch4_supplementary_training]$ iocsh.bash cmds/0.cmd
 ```
- ch4_supplementary_path (master)$ iocsh.bash cmds/0.cmd
-```
-#### Does it work?
+
+Does it work?
+
 * Check it whether it works or not
 * If not, explain why?
 * Can you fix this startup script?
 
 #### E3_IOCSH_TOP and E3_CMD_TOP 
+
 * Can you see the two VARIABLES such as ```E3_IOCSH_TOP``` and ```E3_CMD_TOP``` ?
 * How two variables are changed if one can execute iocsh.bash within cmds? 
+
 ```
 $ cmds (master)$ iocsh.bash 0.cmd 
 ```
@@ -93,6 +95,7 @@ Please make sure that the simulator is running.
 ```
 
 * How many dependency modules of stream are loaded? Please carefully look at few lines outputs similar with the following
+
 ```
 iocshLoad 'cmds/1.cmd',''
 require stream,2.8.8
@@ -140,16 +143,16 @@ Loading module info records for stream
 ```
 
 * Is it the same as what we defined? How do we check this? One can check it through
+
 ```
 e3-StreamDevice (master)$ make vars
 ```
-to look at `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. Anyway, the dependency will be described later on in more detail. We can check these variables more easily with `make dep`.
 
+to look at `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. Anyway, the dependency will be described later on in more detail. We can check these variables more easily with `make dep`.
 
 ### 2.cmd
 
 Please make sure that the simulator is running.
-
 
 * Run the following command
 ```
@@ -162,14 +165,13 @@ Please spend some time to read the EPICS Application Developer's Guide [3].
 * What is the difference between 1.cmd and 2.cmd?
 e3 iocsh.bash will check whether iocInit is defined or not within a startup script. If not, it will add it automatically. However, please specify iocInit clearly, because some functions should be executed after iocInit. 
 
-
 * Can you see the Warning? And can you explain what kind of Warning do you have? 
 Note that each single line output of the ioc is important. One should make sure that each line is correct, and one should understand each line correctly. 
-
 
 ### 3-1.cmd
 
 * Run the following command
+
 ```
 ch4_supplementary_path (master)$ iocsh.bash cmds/3-1.cmd 
 ```
@@ -177,8 +179,8 @@ ch4_supplementary_path (master)$ iocsh.bash cmds/3-1.cmd
 * IOC is running, however, it doesn't connect to anywhere. Can you see the message which represents this situation? 
 Please remember, it runs at the end of your startup script whether it finds a hardware or not. In 3-1.cmd, we doesn't have db files which actually talk to the hardware. Thus, we don't see any error messages at all. I would like to emphasize the following one more time. Note that each single line output of the ioc is important. One should make sure that each line is correct, and one should understand each line correctly. 
 
+This script has the asyn configuration for the simulated device such as
 
-This script has the asyn configuration for the simulated device such as 
 ```
 drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
 ```
@@ -190,7 +192,7 @@ drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
 ```
 ch4_supplementary_path (master)$ iocsh.bash cmds/3-1.cmd
 
-......
+# --- snip snip ---
 
 iocshLoad 'cmds/3-1.cmd',''
 require stream,2.8.8
@@ -269,10 +271,10 @@ jhlee@faiserver: ch4_supplementary_path (master)$ bash simulator.bash
 [21:30:46.404] Status 'CPS, 4, CPM, 17, uSv/hr, 0.009, SLOW<0x0d><0x0a>' (Get Data) sent to client.
 [21:30:46.911] Status 'CPS, 4, CPM, 13, uSv/hr, 0.039, SLOW<0x0d><0x0a>' (Get Data) sent to client.
 [21:30:47.418] Status 'CPS, 3, CPM, 15, uSv/hr, 0.017, SLOW<0x0d><0x0a>' (Get Data) sent to client.
-
 ```
 
 ### 3-2.cmd
+
 Please make sure that the simulator is running.
 This script has the full information on the single IOC running. Please evaluate all components in 
 
@@ -308,24 +310,27 @@ If you would like to play few commands within IOC, feel free to try them out.
 
 
 * help
+
 ```
 350b5cb.kaffee.12199 > help
 
 ```
 
 * dbl
+
 ```
 350b5cb.kaffee.12199 > dbl
 
 ```
 
 * date
+
 ```
 350b5cb.kaffee.12199 > date
 ```
 
-
 ### 4.cmd
+
 Please make sure that the simulator is running.
 
 From ```3.cmd```, we have the running IOC which can communicate with the simulated device. Moreover, generally, we will add more generic EPICS modules into that IOC, such as iocStats, autosave, recsync, and so on. 
@@ -333,27 +338,32 @@ From ```3.cmd```, we have the running IOC which can communicate with the simulat
 In this case, we do require the individual module name, and its version, and its corresponding configuration files (EPICS db files, etc).
 
 0. Run the 4.cmd
+
 ```
  ch4_supplementary_path$ iocsh.bash cmds/4.cmd
 ```
+
 1. Type dbl to check which PVs can be found.
+
 ```
 350b5cb.kaffee.4355 > dbl
 ```
 
-2. Get the HEARTBEAT of your IOC
+1. Get the HEARTBEAT of your IOC
 
 ```
 350b5cb.kaffee.4355 > dbpr IOC-80159276:IocStat:HEARTBEAT
 ```
+
 , where the number 80159276 is the random number. One should see the different number in your IOC. If you have the same number, you have a good luck today!
 
 3. Run one more times, the same command to see that the HEARTBEAT is increasing.
+
 ```
 350b5cb.kaffee.4355 > dbpr IOC-80159276:IocStat:HEARTBEAT
 ```
 
-4. Please spend some time to look at the following:
+1. Please spend some time to look at the following:
 
 * epicsEnvSet : can you see two different ways to be used? 
 
@@ -361,12 +371,10 @@ In this case, we do require the individual module name, and its version, and its
 
 Can you rewrite all startup script with only one method? 
 
-
 ### 5.cmd
 Please make sure that the simulator is running.
 
 Here we add the IocStats in the slightly different way, and add more modules exist within e3 by default. 
-
 
 0. Please go **E3_TOP**, and run the following commands:
 ```
@@ -379,17 +387,14 @@ Can we see the *.iocsh files with the installation path of e3?
 The e3 function **loadIocsh** is a similar function which EPICS function **iocshLoad**, but it acts differently. However, it gives us a modularized startup script which we can reuse in order to build up a startup script without considering technical details a lot. Even if we can use **loadIocsh**, **iocshLoad** is highly recommended. 
 
 1. Please run the following commands to see which PVs exist in your IOC
+
 ```
 ch4_supplementary_path$ bash ../tools/caget_pvs.bash -l IOC-NNNNNNNN_PVs.list 
 ```
+
 , where NNNNNNNN is the random number. 
 
-
 ## Reference 
-[1] Kameleon Simulator https://bitbucket.org/europeanspallationsource/kameleon
-
-[2] Forked Kameleon  https://github.com/jeonghanlee/kameleon 
-
 [3] EPICS Application Developer's Guide, IOC Initialization https://epics.anl.gov/base/R3-15/5-docs/AppDevGuide/IOCInitialization.html#x8-2750007.4
 
 [4] EPICS iocStats module http://www.slac.stanford.edu/comp/unix/package/epics/site/devIocStats/
@@ -399,11 +404,7 @@ ch4_supplementary_path$ bash ../tools/caget_pvs.bash -l IOC-NNNNNNNN_PVs.list
 [6] EPICS recsync module https://github.com/ChannelFinder/recsync
 
 
-
-
 ------------------
 [:arrow_backward:](chapter3.md)  | [:arrow_up_small:](chapter4.md)  | [:arrow_forward:](chapter5.md)
 :--- | --- |---: 
-[Chapter 3 : Install a module with the different version number](chapter3.md) | [Chapter 4](chapter4.md) | [Chapter 5 : Take the deployment or the development](chapter5.md)
-
-
+[Chapter 3: Installing modules with different version number](chapter3.md) | [Chapter 4](chapter4.md) | [Chapter 5: Take the deployment or the development](chapter5.md)

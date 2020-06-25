@@ -14,14 +14,30 @@ In this lesson, you'll learn how to do the following:
 
 ## Downloading e3
 
-*ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 whilst exercising this tutorial. You may be prompted to add additional packages while trying things out.*
+*N.B.! ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 whilst exercising this tutorial.*
+
+If you're on a mostly blank CentOS7 machine, you can copy, paste, and run the following code segment before beginning:
+
+```bash
+sudo yum install -y git tree ipmitool autoconf libtool automake m4 re2c tclx \
+coreutils graphviz patch readline-devel libXt-devel libXp-devel libXmu-devel \
+libXpm-devel lesstif-devel gcc-c++ ncurses-devel perl-devel net-snmp net-snmp-utils \
+net-snmp-devel libxml2-devel libpng12-devel libzip-devel libusb-devel \
+python-devel darcs hdf5-devel boost-devel pcre-devel opencv-devel \
+libcurl-devel blosc-devel libtiff-devel libjpeg-turbo-devel \
+libusbx-devel systemd-devel libraw1394.x86_64 hg libtirpc-devel \
+liberation-fonts-common liberation-narrow-fonts \
+liberation-mono-fonts liberation-serif-fonts liberation-sans-fonts \
+logrotate xorg-x11-fonts-misc cpan kernel-devel symlinks \
+dkms procServ curl netcdf netcdf-devel
+```
 
 Start by downloading e3 from GitHub:
 ```console
 [iocuser@host:~]$ git clone https://github.com/icshwi/e3 
 ```
 
-Note that e3 by design can have multiple different configurations in a host, and it is therefore recommended to use self-explanatory source directory names. This will allow you to easily switch between e.g. EPICS base versions 3.15.5 and 7.0.3 during development. For example, if one would like to use EPICS base 3.15.5, it is preferred to clone like:
+> As e3 by design can have multiple different configurations in a host, it is recommended to use self-explanatory source directory names. This will allow you to easily switch between e.g. EPICS base versions 3.15.5 and 7.0.3 during development. For example, if one would like to use EPICS base 3.15.5, it is preferred to clone like:
 
 ```console
 [iocuser@host:~]$ git clone https://github.com/icshwi/e3 e3-3.15.5
@@ -29,7 +45,7 @@ Note that e3 by design can have multiple different configurations in a host, and
 
 The e3 root directory (`/home/iocuser/e3-3.15.5/` in the most recent example) will henceforth be referred to as **E3_TOP**.
 
-*Note: typical paths for EPICS installations tend to be `/epics` or `/opt/epics`. For this tutorial series, e3 will be cloned to `$HOME` and EPICS will be installed at `/epics`.*
+> Typical paths for EPICS installations tend to be `/epics` or `/opt/epics`. For this tutorial series, e3 will be cloned to `$HOME` and EPICS will be installed at `/epics`.
 
 ## Configure e3
 
@@ -39,10 +55,14 @@ Configuring an e3 build with default settings can be done like:
 [iocuser@host:e3]$ ./e3_building_config.bash setup
 ```
 
-The utility can however be launched with a number of arguments (to see these, simply run the script without any arguments, i.e. `./e3_building_config.bash`); you can modify the building path (e.g. `-t <where-you-want-to-install>`) as well as define versions. And on that note, always pay close attention to especially:
+> The utility can be launched with a number of arguments. To see these, simply run the script without any arguments, i.e. `./e3_building_config.bash`; you can modify the building path (e.g. `-t <where-you-want-to-install>`) as well as define versions.
+
+As always with EPICS, versions are important. Especially pay attention to:
 
 * The version of EPICS base
 * The version of require
+
+---
 
 Examples:
 
@@ -126,11 +146,11 @@ For EPICS base and require, it's as simple as running:
 
 ## Module packs
 
-In e3, there are module groups to aid with development. These are:
+As with installing EPICS base and require, you can use the `e3.bash` utility to install common module groups. These are:
 
 ### Common group
 
-This group contains the common EPICS modules. 
+This group contains the common EPICS modules, and is more or less a standard install.
 
 ```console
 [iocuser@host:e3]$ ./e3.bash -c vars
@@ -173,7 +193,7 @@ This group contains modules important for fast timestamping.
 
 ### EPICS V4 group
 
-*Note that this group is not necessary for EPICS base 7 as they already are included.*
+*N.B.! This group is not necessary for EPICS base 7 as they already are included.*
 
 ```console
 [iocuser@host:e3]$ ./e3.bash -4 vars
@@ -189,6 +209,8 @@ This group contains modules important for fast timestamping.
 ```
 
 ### EtherCAT / Motion group
+
+*N.B.! You will need an ESS' Bitbucket account to access some of the modules in this group.*
 
 This group contains modules commonly used with motion contol. Note here that if a group has depencies upon other modules, these will be added automatically:
 
@@ -223,21 +245,19 @@ This group contains modules commonly used with motion contol. Note here that if 
    23 : e3-ecmctraining
 ```
 
-You can however exclude the dependency modules by adding an `-o` flag, like:
-
-```console
-[iocuser@host:e3]$ ./e3.bash -eo vars
->> Vertical display for the selected modules :
-
- Modules List 
-    0 : e3-exprtk
-    1 : e3-motor
-    2 : e3-ecmc
-    3 : e3-ethercatmc
-    4 : e3-ecmctraining
-```
-
-*Note that you need an ESS Bitbucket account in order to access these.*
+> While installing module groups, dependencies are added automatically. You can choose to exclude the dependency modules by adding an `-o` flag, like:
+> 
+> ```console
+> [iocuser@host:e3]$ ./e3.bash -eo vars
+> >> Vertical display for the selected modules :
+> 
+>  Modules List 
+>     0 : e3-exprtk
+>     1 : e3-motor
+>     2 : e3-ecmc
+>     3 : e3-ethercatmc
+>     4 : e3-ecmctraining
+> ```
 
 ### PSI module group
 
@@ -256,7 +276,7 @@ You can however exclude the dependency modules by adding an `-o` flag, like:
 
 ### IFC Module Group
 
-*Note: You need an ESS bitbucket account in order to access these.*
+*N.B.! You need an ESS Bitbucket account in order to access some of these modules.*
 
 ```console
 [iocuser@host:e3]$ ./e3.bash -fo vars
@@ -333,16 +353,12 @@ You download, build, and install a group by using the `mod` argument. For exampl
 
 The mod argument contain these---individually accessible---steps:
  
-* Clean  
-  `cmod`
-* Clone  
-  `gmod`
-* Initiate  
-  `imod`
-* Build and install  
-  `bmod`
+* `cmod` Clean  
+* `gmod` Clone  
+* `imod` Initiate  
+* `bmod` Build and install  
 
-The MAKEFILE rules that can be used for a module are:
+And the makefile rules that can be used for a module are:
 
 * `make clean`
 * `make init`
@@ -356,8 +372,7 @@ The following command will load all installed modules within a single `iocsh.bas
 
 ```console
 [iocuser@host:e3]$ ./e3.bash -c load
-
-......
+# --- snip snip ---
 require: fillModuleListRecord
 require: REQMOD-791F5F3:FAISERV-21664:MODULES[0] = "require"
 require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[0] = "3.0.5"

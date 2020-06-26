@@ -14,7 +14,7 @@ For some of the chapters there are supplementary directories containing code, so
 
 ##### Chapter 1: [Installing e3](chapter1.md) :book:
 ##### Chapter 2: [Your first running e3 IOC](chapter2.md) :book:
-##### Chapter 3: [Installing a module with a different version number](chapter3.md) :book:
+##### Chapter 3: [Installing other versions of modules](chapter3.md) :book:
 ##### Chapter 4: [Delve into e3 with startup scripts](chapter4.md) :book:
 ##### Chapter 5: [Deployment and development](chapter5.md) :book:
 ##### Chapter 6: [Variables and parameters within e3](chapter6.md) :book:

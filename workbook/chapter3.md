@@ -1,4 +1,4 @@
-# Chapter 3: Installing a module with a different version number
+# Chapter 3: Installing other versions of modules
 
 [Return to Table of Contents](README.md)
 
@@ -135,7 +135,14 @@ Time to try out some makefile rules. See if you can spot the difference between 
   2. `make install`
 
 
-------------------
+---
+
+[Next: Chapter 4 - Delve into e3 with startup scripts](chapter4.md)
+
+[Return to Table of Contents](README.md)
+
+<!--
 [:arrow_backward:](chapter2.md)  | [:arrow_up_small:](chapter3.md)  | [:arrow_forward:](chapter4.md)
 :--- | --- |---: 
 [Chapter 2: Your first running e3 IOC](chapter2.md) | [Chapter 3](chapter3.md) | [Chapter 4: Delve into e3 with startup scripts](chapter4.md)
+-->

@@ -109,7 +109,14 @@ Please explain the following jargon by yourself---these are mixed EPICS and e3 t
 - `<` 
 
 
-------------------
+---
+
+[Next: Chapter 3 - Installing other versions of modules](chapter3.md)
+
+[Return to Table of Contents](README.md)
+
+<!--
 [:arrow_backward:](chapter1.md)  | [:arrow_up_small:](chapter2.md)  | [:arrow_forward:](chapter3.md)
 :--- | --- |---: 
 [Chapter 1: Installing e3](chapter1.md) | [Chapter 2](chapter2.md) | [Chapter 3: Installing a module with a different version number](chapter3.md)
+-->

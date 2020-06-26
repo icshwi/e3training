@@ -82,7 +82,7 @@ Execute the first script:
 
 #### Variables
 
-* Can you see the two variables `E3_IOCSH_TOP` and `E3_CMD_TOP`?
+* Can you see `E3_IOCSH_TOP` and `E3_CMD_TOP`?
 * How are these two variables changed if you instead execute `iocsh.bash` from within `cmds/`?:
 
 ```console
@@ -223,7 +223,7 @@ Execute the next script:
    350b5cb.kaffee.4355 > dbpr IOC-80159276:IocStat:HEARTBEAT
    ```
 
-   > The number `80159276` is here random. If you see the same number on your machine, today is your lucky day!
+   > The number `80159276` is here randomly generated. If you happen to see the same number on your machine, today is your lucky day!
 
 3. Get the heartbeat again. Is it the same? Why not?
 
@@ -262,7 +262,14 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
    (, where `NNNNNNNN` is your IOC's random number.) 
 
 
-------------------
+---
+
+[Next: Chapter 5 - Deployment and development](chapter5.md)
+
+[Return to Table of Contents](README.md)
+
+<!--
 [:arrow_backward:](chapter3.md)  | [:arrow_up_small:](chapter4.md)  | [:arrow_forward:](chapter5.md)
 :--- | --- |---: 
 [Chapter 3: Installing modules with different version number](chapter3.md) | [Chapter 4](chapter4.md) | [Chapter 5: Take the deployment or the development](chapter5.md)
+-->

@@ -446,9 +446,3 @@ iocRun: All initialization complete
 [Next: Chapter 2 - Your first running e3 IOC](chapter2.md)
 
 [Return to Table of Contents](README.md)
-
-<!--
-[:arrow_backward:](README.md)  | [:arrow_up_small:](chapter1.md)  | [:arrow_forward:](chapter2.md)
-:--- | --- |---: 
-[README](README.md) | [Chapter 1](chapter1.md) | [Chapter 2: Your first running e3 IOC](chapter2.md)
--->

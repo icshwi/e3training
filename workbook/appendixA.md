@@ -69,11 +69,6 @@ make: *** [/epics/base-7.0.3/require/3.1.1/configure/RULES_E3:88: opcua] Error 2
 ```
 
 
+---
 
-------------------
-[:arrow_backward:](README.md)  | [:arrow_up_small:](appendixA.md)  | [:arrow_forward:](appendixB.md)
-:--- | --- |---: 
-[README](README.md) | [Chapter 2](appendixA.md) | [Appendix B](appendixB.md)
-
-
-
+[Return to Table of Contents](README.md)

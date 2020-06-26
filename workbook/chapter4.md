@@ -267,9 +267,3 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
 [Next: Chapter 5 - Deployment and development](chapter5.md)
 
 [Return to Table of Contents](README.md)
-
-<!--
-[:arrow_backward:](chapter3.md)  | [:arrow_up_small:](chapter4.md)  | [:arrow_forward:](chapter5.md)
-:--- | --- |---: 
-[Chapter 3: Installing modules with different version number](chapter3.md) | [Chapter 4](chapter4.md) | [Chapter 5: Take the deployment or the development](chapter5.md)
--->

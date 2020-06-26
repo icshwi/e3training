@@ -1,5 +1,4 @@
-Chapter 6 : Variables, Parameters and Environment Variables within e3
-==
+# Chapter 6 : Variables, Parameters and Environment Variables within e3
 
 ## Lesson Overview
 

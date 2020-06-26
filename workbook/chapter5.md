@@ -1,7 +1,7 @@
-Chapter 5 : Take the Deployment or the Development
-==
+# Chapter 5 : Take the Deployment or the Development
 
 ## Lesson Overview
+
 In this lesson, you'll learn how to do the following:
 * Understand why e3 doesn't hold any source codes
 * Understand the anatomy of e3 module directory
@@ -10,15 +10,13 @@ In this lesson, you'll learn how to do the following:
 * Understand two repositories within e3 
 * Understand why there is a Patch path within e3
 
-
-
 ## No Source Codes, Yes Configuration Files!
+
 By default, each e3 module and application has no source codes within e3-module repository, but it only has the e3 configuration files and additional files. These files allow us to build the consistent user environment and building rules in terms of source codes, modules, applications, kernel drivers, and so on, which we may get from anywhere in any forms. 
 
 Therefore, e3 doesn't care each single change in a source code repository, but care much about a snapshot (an interesting release version) which will be selected by one of release versions, user requests, or both. For example, at t=t0, we select the stream 2.7.14 version as the stable release within e3. At t=t1, we will select the stream 2.8.8, because a subsystem needs it. At this moment, we don't care about 2.8.0, 2.8.1, 2.8.2, 2.8.3, 2.8.4, 2.8.5, 2.8.6, and 2.8.7. We don't need to sync their changes into a master branch of a local repository, which we have to clone or fork. Simply, we don't need to do any maintenance jobs. The concept is that to select what we would like to use when we need it. In Atomic Physics, it is the similar concept of an atomic electron transition [1], which is a change of an electron from one energy level to another, which is known as quantum jump or quantum leap. Once e3 has the absorption of energies from user requests, it will release **jumps** version of each module. This approach is called as **Quantized or Quantum Release**. We will describe how we release a specific version of e3 module in [Chapter 11](chapter11.md).
 
 Currently, it actually reduces unnecessary maintenance works to sync source code repositories and allows one single maintainer to use his valuable time to focus e3 functionalities instead of them. However, an e3 module can hold source files also, is known as *local* mode, which will be discussed later. 
-
 
 ## Anatomy
 
@@ -37,7 +35,6 @@ e3-iocStats (master)$ tree -L 1
 ├──  patch
 └──  README.md
 ```
-
 
 Each module has the slightly difference directory structure and files, but most of them are the same. 
 
@@ -105,7 +102,6 @@ $ make existent
 $ make clean
 ```
 
-
 ## Development Mode
 
 The deployment mode is nice if one has enough domain knowledge on `git submodule` and proper permission on a source repository. As one knows, it is not always the case where we work on Earth. Thus, the e3 has the development mode, which resolve these conflicts by using `git clone`. Please look at `configure` path. One can find few files have the suffix `_DEV`.
@@ -148,7 +144,6 @@ One can see the following line `This branch is 1 commit ahead, 1 commit behind e
 |![Import Example](ch5_supplementary_path/fig2.png)|
 | :---: |
 |**Figure 2** The screenshot for the forked and modified icshwi iocStats GitHub site. |
-
 
 3. `make devvars`
 
@@ -234,13 +229,11 @@ $ git remote -v
 
 ...By default *-dev path within an e3-module is ignored, which can be found in the .gitignore file. With this work-flow, we can expand our repository up to unlimited user cases. We can change them easily without worrying about other repositories. 
 
-
 ### Consistent Building and Installing Envrionment
 
 One should remember that e3 is the environment which provides users a similar and consistent interface for downloading, configuring, building, and installing a module and application. Thus the difference between the deployment and the development is only valid up to the configuring a module. Building and installing a module, we exactly the same way to do so. During building, we use the exactly same module.Makefile and its variables which defined in different configuration files. Moreover, during installing, we install a module based on the variables which we define in different configuration files.
 
 Since it is highly flexible and configurable, it will create more degree of freedom on your working environment. Please be careful to define all important variables within `CONFIG_MODULE` and `RELEASE` if one would like to use the deployment mode, and `CONFIG_MODULE_DEV` and `RELEASE_DEV` if one would like to use the development mode. One should consider also which EPICS base version and require version, and any dependent module versions are used within two modes carefully. 
-
 
 ## Patch, Patch, and Patch Files
 
@@ -275,8 +268,6 @@ EPICS base, the community provides patch files for the significant problems. ESS
 * **Site-specific Patch Files** `e3-base/patch/Site/R3.15.5`
 At the same time, we also have several patch files for ESS specific customization and discuss-in-progress with the community for EPICS base. In case, we have to hold our own patch files, we put them into a corresponding EPICS base release folder. 
 
-
-
 #### How to apply the EPICS base patch files
 
 ```
@@ -301,9 +292,7 @@ There are four functions are defined in `configure/E3/DEFINES_FT` for e3-base.
 * patch_site
 * patch_revert_site
 
-
 ### e3 Module
-
 
 Please go **E3_TOP**, and run `find . -name *.p0.patch`. For example, one can see the following :
 
@@ -326,7 +315,6 @@ $ find . -name *.p0.patch |grep -v base | sort -n
 ```
 
 Each patch file has the unique prefix which is the `E3_MODULE_VERSION`. We might think why we use patch files instead of `clone` or `fork`. Technically, we can use all available methods within e3. Thus, users can decide what is the best way to do for them. For the e3 modules, we would like to minimize any further maintenance, because specific patch files could be no more valid if we use the latest `E3_MODULE_VERSION`. There are many difference types of scenarios which one can work with external EPICS community about its modifications. For example, please check `e3-mrfioc2` and `e3-StreamDevice`. The simple golden rule is to use our own `forked` version if we have to change many files which will or may merge into the EPICS community version, and to use our own `patch` files if we have few files to be changed and no idea or have a bit complicated situation how we handle with the community module. 
-
 
 #### How to apply specific module patch files
 ```
@@ -360,7 +348,6 @@ There are four functions are defined in ` e3-require/configure/modules/DEFINES_F
 
 Note that these function names are the same as the e3-base ones, but it is slightly different. Can you find out which parts are different from each other?
 
-
 ## Questions
 
 * Can you override the default `E3_MODULE_DEV_GITURL` with your own forked repository without any `git status` changes in e3-iocStats? 
@@ -381,8 +368,6 @@ nothing to commit, working directory clean
 
 * We have an 1.0.0-awesome.p0.patch file. How do we apply it to Development mode source files?
 
-* 
-
 ## Reference 
 [1] Atomic electron transition : https://en.wikipedia.org/wiki/Atomic_electron_transition
 
@@ -399,9 +384,8 @@ nothing to commit, working directory clean
 [7] https://epics.anl.gov/base/R3-15/5-docs/KnownProblems.html
 
 
+---
 
-------------------
-[:arrow_backward:](chapter4.md)  | [:arrow_up_small:](chapter5.md)  | [:arrow_forward:](chapter6.md)
-:--- | --- |---: 
-[Chapter 4 : Delve into e3 with startup scripts](chapter4.md) | [Chapter 5](chapter5.md) | [Chapter 6 : Variables, Parameters and Environment Variables within e3](chapter6.md)
+[Next: Chapter 6 - Variables and parameters within e3](chapter6.md)
 
+[Return to Table of Contents](README.md)

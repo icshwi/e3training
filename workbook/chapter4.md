@@ -5,6 +5,7 @@
 ## Lesson overview
 
 In this lesson, you'll learn how to do the following:
+
 * Build the startup script for an IOC in e3
 * Understand different methods of using EPICS functions within startup scripts
 * Understand the local setup for `.db` and `.protocol` files
@@ -15,7 +16,7 @@ In this lesson, you'll learn how to do the following:
 We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europeanspallationsource/kameleon)* to simulate a serial device, accessible by use of e.g. telnet. More specifically, we will use a forked version, which is already linked into this workbook repository as a git submodule. To fetch it, run:
 
 ```console
-[iocuser@host:e3training]$ git submodule init && git submodule update
+[iocuser@host:e3training]$ git submodule update --init
 ```
 
 > The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi. However, all files necessary for this lesson are already included in this workbook.

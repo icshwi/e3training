@@ -17,7 +17,7 @@ For some of the chapters there are supplementary directories containing code, so
 ##### Chapter 7: [Understanding module dependence](chapter7.md)
 ##### Chapter 8: [Building an e3 Application](chapter8.md)
 ##### Chapter 9: [Building an e3 Module](chapter9.md) :construction:
-##### Chapter 10: [Understanding e3 directory structure](chapter10.md) :construction: 
+##### Chapter 10: [Understanding e3's directory structure](chapter10.md) :construction: 
 
 ## Part 2
 

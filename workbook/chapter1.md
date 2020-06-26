@@ -5,6 +5,7 @@
 ## Lesson overview
 
 In this lesson, you'll learn how to do the following:
+
 * Download e3 using git
 * Configure the e3 environment
 * Set up e3 EPICS base

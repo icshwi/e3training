@@ -12,33 +12,39 @@ In this lesson, you'll learn how to do the following:
 
 ## A simulated serial device
 
-We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europeanspallationsource/kameleon)* to simulate a serial device, accessible by use of e.g. telnet. This chapter will use [this](https://github.com/jeonghanlee/kameleon) fork of the original repository. The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi. <!-- verify this, to see exactly what needs to be cloned -->
+We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europeanspallationsource/kameleon)* to simulate a serial device, accessible by use of e.g. telnet. More specifically, we will use a forked version, which is already linked into this workbook repository as a git submodule. To fetch it, run:
+
+```console
+[iocuser@host:e3training]$ git submodule init && git submodule update
+```
+
+> The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi. All files necessary for this lesson are already included in this workbook.
 
 *N.B.! Kameleon was written for Python2 (tested on 2.7), so make sure you have that installed.*
 
 > Before continuing, you should clone this very tutorial's repository if you haven't already:
 > 
 > ```console
-> [iocuser@host:~]$ git clone https://github.com/icshwi/e3training
+> [iocuser@host:~]$ git clone --recurse-submodules https://github.com/icshwi/e3training
 > ```
 
-0. Open a new terminal and go to `~/e3training/ch4_supplementary_path`.
+1. Open a new terminal and go to `~/e3training/ch4_supplementary_path`.
 
-1. Run:
+2. Run:
 
    ```console
    [iocuser@host:ch4_supplementary_training]$ ./simulator.bash
    ```
 
-2. Open another terminal, and connect to the simulator using telnet:
+3. Open another terminal, and connect to the simulator using telnet:
 
    ```console
    [iocuser@host:ch4_supplementary_training]$ telnet 127.0.0.1 9999
    ```
 
-3. You should be able to interact with the simulator. <!-- try out first -->
+4. You should be able to interact with the simulator. <!-- try out first -->
 
-4. End the telnet connection 
+5. End the telnet connection 
 
    ```console
    ^]

@@ -18,7 +18,7 @@ We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europe
 [iocuser@host:e3training]$ git submodule init && git submodule update
 ```
 
-> The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi. All files necessary for this lesson are already included in this workbook.
+> The device that the simulator is based on as well as an EPICS IOC to go with it can be found at https://github.com/jeonghanlee/gconpi. However, all files necessary for this lesson are already included in this workbook.
 
 *N.B.! Kameleon was written for Python2 (tested on 2.7), so make sure you have that installed.*
 
@@ -54,6 +54,8 @@ We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europe
 
    (, where ^ is the Ctrl key.)
 
+> The simulator in question has shown a tendency to die every now and then, so before trying out a script go back to verify that the simulator is working---and restart it if not.
+
 ## Startup scripts
 
 In `ch4_supplementary_path/cmds`, you will find a number of startup scripts that will be used for the following steps.
@@ -67,8 +69,6 @@ In `ch4_supplementary_path/cmds`, you will find a number of startup scripts that
 > ```
 
 ### 0.cmd
-
-> For all subsequent steps, ensure that the simulator is running.
 
 Execute the first script:
 
@@ -241,7 +241,7 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
 
 0. Go to **E3_TOP** and run the following commands:
 
-    ```bash
+    ```console
    [iocuser@host:e3-3.15.5]$ make -C e3-iocStats/ existent
    [iocuser@host:e3-3.15.5]$ make -C e3-recsync/  existent
    [iocuser@host:e3-3.15.5]$ make -C e3-autosave/ existent

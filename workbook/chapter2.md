@@ -68,7 +68,7 @@ Thus, one can easily switch between environments. For example:
 
 ## Play around with the example IOC
 
-* Have a look at the contents of `cmds/iocStats.cmd` and make sure you understand it:
+* Have a look at the contents of `cmds/iocStats.cmd` and make sure you understand all of it:
 
   ```bash
   require iocStats,ae5d083

@@ -22,7 +22,7 @@ Various environment variables are used in EPICS and e3, so it is important to be
 1. Go to `e3-StreamDevice/`
 2. Run the following rule:
 
-   ```bash
+   ```console
    [iocuser@host:e3-StreamDevice]$ make vars
    ```
 
@@ -39,14 +39,14 @@ These two variables are defined in `configure/CONFIG_MODULE` and `configure/CONF
 0. Make sure you are in `e3-StreamDevice/`
 1. Run the following rule:
 
-   ```bash
+   ```console
    [iocuser@host:e3-StreamDevice]$ make existent
    ```
 
 2. Look at the output.
    The result show the local version(s) of stream modules within e3:
    
-   ```bash
+   ```console
    /epics/base-3.15.5/require/3.0.5/siteMods/stream
    └── 2.8.8
        ├── dbd
@@ -61,7 +61,7 @@ These two variables are defined in `configure/CONFIG_MODULE` and `configure/CONF
 
 Let's see what our current version of StreamDevice is:
 
-```bash
+```console
 [iocuser@host:StreamDevice]$ git describe --tags
 ```
 

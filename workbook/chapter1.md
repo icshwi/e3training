@@ -35,6 +35,8 @@ logrotate xorg-x11-fonts-misc cpan kernel-devel symlinks \
 dkms procServ curl netcdf netcdf-devel telnet
 ```
 
+---
+
 Start by downloading e3 from GitHub:
 ```console
 [iocuser@host:~]$ git clone https://github.com/icshwi/e3 
@@ -146,6 +148,8 @@ For EPICS base and require, it's as simple as running:
 ```console
 [iocuser@host:e3]$ ./e3.bash req
 ```
+
+> Remember to run these with elevated status (`sudo`) if you want to install in `/opt`.
 
 ## Module packs
 

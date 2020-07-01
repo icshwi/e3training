@@ -3,26 +3,31 @@
 ## Lesson Overview
 
 In this lesson, you'll learn how to do the following:
-* Understand why e3 doesn't hold any source codes
-* Understand the anatomy of e3 module directory
+
+* Understand why e3 doesn't hold any source code
+* Understand the anatomy of an e3 module's directory
 * Understand the Deployment Mode through git submodule
 * Understand the Development Mode through git clone
 * Understand two repositories within e3 
 * Understand why there is a Patch path within e3
 
-## No Source Codes, Yes Configuration Files!
+## No source code - configuration files!
 
-By default, each e3 module and application has no source codes within e3-module repository, but it only has the e3 configuration files and additional files. These files allow us to build the consistent user environment and building rules in terms of source codes, modules, applications, kernel drivers, and so on, which we may get from anywhere in any forms. 
+By design, e3 modules and applications have no source code in their repositories, but only configuration files and utilities. These files allow us consistent building of environments from source code, modules, applications, kernel drivers, etc., that are hosted elsewhere.
 
-Therefore, e3 doesn't care each single change in a source code repository, but care much about a snapshot (an interesting release version) which will be selected by one of release versions, user requests, or both. For example, at t=t0, we select the stream 2.7.14 version as the stable release within e3. At t=t1, we will select the stream 2.8.8, because a subsystem needs it. At this moment, we don't care about 2.8.0, 2.8.1, 2.8.2, 2.8.3, 2.8.4, 2.8.5, 2.8.6, and 2.8.7. We don't need to sync their changes into a master branch of a local repository, which we have to clone or fork. Simply, we don't need to do any maintenance jobs. The concept is that to select what we would like to use when we need it. In Atomic Physics, it is the similar concept of an atomic electron transition [1], which is a change of an electron from one energy level to another, which is known as quantum jump or quantum leap. Once e3 has the absorption of energies from user requests, it will release **jumps** version of each module. This approach is called as **Quantized or Quantum Release**. We will describe how we release a specific version of e3 module in [Chapter 11](chapter11.md).
+Thus, e3 is not concerned with each change in a source code repository, but rather focuses on specific *snapshots* (a particular release version) needed for a certain implementation. For example, at a certain point in time we select stream version 2.7.14 as the stable release within e3. Later, we select stream version 2.8.8 because a subsystem requires it. At this moment, we don't really care about versions 2.8.0, 2.8.1, 2.8.2, 2.8.3, 2.8.4, 2.8.5, 2.8.6, and 2.8.7. We don't need to sync their changes into a master branch of a local repository, which we would have to clone or fork. Simply put, we don't need to do any maintenance job. The concept is to add dependencies only when we need them.
 
-Currently, it actually reduces unnecessary maintenance works to sync source code repositories and allows one single maintainer to use his valuable time to focus e3 functionalities instead of them. However, an e3 module can hold source files also, is known as *local* mode, which will be discussed later. 
+> We will describe how to release a specific version of an e3 module in [Chapter 11](chapter11.md). <!-- is this really correct? -->
 
-## Anatomy
+The intention is to reduce unecessary work for maintainers of the code base.
 
-Please go **E3_TOP**/e3-iocStats, and run the following command:
+> An e3 module **can**, however, hold source code. This is known as *local mode*, and will be discussed more in-depth later.
 
-```
+## Directory anatomy
+
+Let's have a look at `e3-iocStats/`:
+
+```console
 e3-iocStats (master)$ tree -L 1
 .
 ├──  cmds
@@ -36,61 +41,71 @@ e3-iocStats (master)$ tree -L 1
 └──  README.md
 ```
 
-Each module has the slightly difference directory structure and files, but most of them are the same. 
+Although different e3 modules can have slightly different directory structure, but the majority of them have the following directories:
 
-* cmds              : customized startup scripts should be located in
-* docs              : documents, log files or others should be located in
-* iocsh             : modularized startup scripts should be located in. They will be installed into e3 installation path. 
-* patch             : if we need to handle small changes of source codes, we can keep patch files within it. 
-* Makefile          : global e3 module makefile 
-* iocStats.Makefile : e3 makefile for iocStats
-* configure         : e3 configuration files
-* iocStats          : git submodule path to link to where iocStats source repository is
+* `cmds/` Customized startup scripts.
+
+* `configure/` Configuration files (for e3).
+
+* `docs/` For documentation, log files, and similar material.
+
+* `iocsh/` Modularized startup scripts should be located here. These will be added to the e3 installation path.
+
+* `iocStats/` A git submodule link to iocStats source repository.
+
+* `iocStats.Makefile` The (e3) makefile for iocStats.
+
+* `Makefile` The global e3 module makefile.
+
+*`patch/` For when we need to handle small changes of source codes. More on this later.
+
+* `template/` For template and substitution files.
 
 ### Git submodule
 
-In order to explain how e3 uses git submodules, we have to do the following exercise:
+> For a primer on submodules, see [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
-0. Run
+In order to explain how e3 uses git submodules, we will do the following exercise.
 
-```
-$ git submodule status
-```
-One may get the following output:
-```
-ae5d08388ca3d6c48ec0e37787c865c5db18dc8f iocStats (3.1.15-17-gae5d083)
-```
-Please spend some time to understand these three columns. The reference [2] may be useful. 
+0. Run:
 
-1. Check a GitHub site
+   ```console
+   [iocuser@host:e3-iocStats]$ git submodule status
+   ```
 
-Please visit https://github.com/icshwi/e3-iocStats, which is shown in **Figure 1**.
-The magic number is **ae5d083**. Please try to find where that number exists. After finding it, please check that number in the output of `git submodule status` also. 
+   You should be seeing something like `ae5d08388ca3d6c48ec0e37787c865c5db18dc8f iocStats (3.1.15-17-gae5d083)`.
 
-|![Import Example](ch5_supplementary_path/fig1.png)|
-| :---: |
-|**Figure 1** The screenshot for the iocStats GitHub site. |
+> Please spend some time to understand this output. Git's pages on [submodules](https://git-scm.com/docs/git-submodule) should be useful.
 
+1. Look at the repository on GitHub.
 
-2. Check its submodule configuration
+   Visit https://github.com/icshwi/e3-iocStats, which is shown in **Figure 1**.
 
-```
-$ more .gitmodules
-[submodule "iocStats"]
-        path = iocStats
-        url = https://github.com/epics-modules/iocStats
-        ignore = dirty
-```
+   The magic number is **ae5d083**---can you see what it refers to? After finding it, verify this number in the output of `git submodule status`. 
 
-## Deployment Mode
+   |![Import Example](ch5_supplementary_path/fig1.png)|
+   | :---: |
+   |**Figure 1** A screenshot from the iocStats' GitHub page. |
 
-As one sees now, `git  submodule` guides us to a new place where we can work and a new way to handle many different source files which are scattered over many difference facilities. However, in order to use it fully, one should have the proper permission and learn how it works precisely. With the current implementation and limited resources, we cannot use this rich features fully. Thus, e3 will use its minimal feature, which is related with the **magic** number that is the short version of the SHA-1 checksum by git [4]. 
+2. Check its submodule configuration:
 
-Therefore, we only use a specific commit version of iocStats within e3-iocStats in order to identify which version currently links to. And if source code repositories are stable enough, we can use `git submodule update --init` to download its specific version of source codes within e3 modules. By that means, we can pick a specific version of a module, which we would like to use for stable e3 system. 
+   ```console
+   [iocuser@host:e3-iocStats]$ more .gitmodules
+   [submodule "iocStats"]
+           path = iocStats
+           url = https://github.com/epics-modules/iocStats
+           ignore = dirty
+   ```
 
-However, when source code repositories are changed very frequently, it also create an additional maintenance work which one has to update the SHA-1 checksum in order to match a selected version of a module. Thus, with `make init`, it will download latest version of a module, and switch to a specific version defined in `configure/CONFIG_MODULE` through several git and other commands behind its building system. 
+## Deployment mode
 
-The following commands are used for the deployment mode of each module. They will use `git submodule` path to do their jobs properly. 
+As you just saw, `git submodule` imports one repository into another, which will allow us to handle source files scattered between different facilities. To make full use of this functionality however, we would need full permission for all repositories. Thus, e3 will use its minimal feature, which relates to the so-called *magic number*---the short version of the SHA-1 checksum used by git to track commits [4]. 
+
+So, we use a specific commit version of iocStats within e3-iocStats. And if new versions are stable enough, we can use `git submodule update --init` to update the link within an e3 module. We can thus pick which specific version of a module we would like to use for our release. 
+
+However, when source code repositories are changed very often, it also create additional maintenance work where one has to update the SHA-1 checksum in order to match a selected version of a module. Thus, with `make init`, we download the latest version of a module, or switch to a specific version (defined in `configure/CONFIG_MODULE` or in the corresponding `.local` file).. <!-- rewrite this -->
+
+The following commands utilize `git submodule` and are used for the deployment mode of a module. <!-- rewrite this -->
 
 ```
 $ make vars
@@ -102,23 +117,23 @@ $ make existent
 $ make clean
 ```
 
-## Development Mode
+## Development mode
 
-The deployment mode is nice if one has enough domain knowledge on `git submodule` and proper permission on a source repository. As one knows, it is not always the case where we work on Earth. Thus, the e3 has the development mode, which resolve these conflicts by using `git clone`. Please look at `configure` path. One can find few files have the suffix `_DEV`.
+The development mode is primarily intended to deal with cases where source code is hosted on repositories one lacks proper permissions to manipulate.
 
-```
-$ ls configure/*_DEV
-```
+Inside of `configure/`, you will find two files with the suffix `_DEV`. `CONFIG_MODULE_DEV` and `RELEASE_DEV` are the counterparts of `CONFIG_MODULE` and `RELEASE` used in the deployment mode. These counterpart files are nearly identical, except for:
 
-Two files (`CONFIG_MODULE_DEV` and `RELEASE_DEV`) are the counterpart of files (`CONFIG_MODULE` and `RELEASE`) in the deployment mode. Both files are almost identical except the suffix `_DEV` and following things in the development mode :
+* `E3_MODULE_DEV_GITURL`: The remote path to the repository which one would like to download into an e3 module.
 
-* `E3_MODULE_DEV_GITURL` : This shows the repository which one would like to download into an e3 module
-* `E3_MODULE_SRC_PATH` : This shows the source codes path for the deployment mode. It has the suffix `-dev`. For example, e3-iocStats has `iocStats` source path in the deployment, and `iocStats-dev` one in the development mode. Note that **-dev** will be generated automatically. Thus, you can use the same module name as the deployment mode. 
+* `E3_MODULE_SRC_PATH`: The local path used for the deployment mode, which with default settings is the module's name with the added suffix `-dev`; for example, `e3-iocStats` has `iocStats` source path in the deployment, and `iocStats-dev` one in the development mode. Note that since `-dev` will be added, you can use the same module name as in development mode.
 
-With `E3_MODULE_DEV_GITURL` variable in `configure/CONFIG_MODULE_DEV` with the most powerful feature of `git`, we may have a plenty of degree of freedom to develop an module without worrying about other system which may use this module. 
+Using development mode thus allows us to develop a module without having to worry about other systems which may be making use of the same module.
 
+---
 
-The following commands are used for the development mode of each module. They will use `git clone` path to do their jobs properly. There is one extra command which one can see `make devdistclean` will remove the clone source directory, for example, iocStats-dev when one would like to clone from scratch. And `make existent` and `make devexistent` are the same output, because it relies on **installed** module versions. 
+The following commands are the development mode equivalents of the commands listed above. There is one extra command `make devdistclean` which will remove the cloned source directory (e.g. `iocStats-dev`). 
+
+> `make existent` and `make devexistent` are identical as they relie on **installed** module versions. 
 
 ```
 $ make devvars
@@ -133,121 +148,98 @@ $ make devdistclean
 
 ### Git clone
 
-0. Fork your own copy from the community iocStats [5]
+1. Fork your own copy from the community [iocStats](https://github.com/epics-modules/iocStats)
 
-1. Update the `E3_MODULE_DEV_GITURL` in order to use your own repository. 
-For example, the default one is `https://github.com/icshwi/iocStats`
+2. Update the `E3_MODULE_DEV_GITURL` to point towards your fork.
 
-2. Check https://github.com/icshwi/iocStats whether it is the same as the original one or not. 
-One can see the following line `This branch is 1 commit ahead, 1 commit behind epics-modules:master. ` in **Figure 2**.
+3. Run `make devvars`. This will show the e3 module variables with the development mode:
 
-|![Import Example](ch5_supplementary_path/fig2.png)|
-| :---: |
-|**Figure 2** The screenshot for the forked and modified icshwi iocStats GitHub site. |
+   This example uses the icshwi fork and compares it against the community module. Your output will be different.
 
-3. `make devvars`
+   ```console
+   [iocuser@host:e3-iocStats]$ make devvars
 
-This will show the e3 module variables with the development mode. 
-```
-$ make devvars
-e3-iocStats$ make devvars
+   ------------------------------------------------------------
+   >>>>     Current EPICS and E3 Environment Variables     <<<<
+   ------------------------------------------------------------
 
-------------------------------------------------------------
->>>>     Current EPICS and E3 Environment Variables     <<<<
-------------------------------------------------------------
+   E3_MODULES_INSTALL_LOCATION = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee
+   E3_MODULES_INSTALL_LOCATION_BIN = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/bin
+   E3_MODULES_INSTALL_LOCATION_BIN_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_bin
+   E3_MODULES_INSTALL_LOCATION_DB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/db
+   E3_MODULES_INSTALL_LOCATION_DBD_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats.dbd.jhlee
+   E3_MODULES_INSTALL_LOCATION_DB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_db
+   E3_MODULES_INSTALL_LOCATION_INC = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/include
+   E3_MODULES_INSTALL_LOCATION_INC_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_include
+   E3_MODULES_INSTALL_LOCATION_LIB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/lib
+   E3_MODULES_INSTALL_LOCATION_LIB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_lib
+   E3_MODULES_LIBLINKNAME = libiocStats.so.jhlee
+   E3_MODULES_LIBNAME = libiocStats.so
+   E3_MODULES_PATH = /epics/base-3.15.5/require/3.0.4/siteMods
+   E3_MODULES_VENDOR_LIBS_LOCATION = /epics/base-3.15.5/require/3.0.4/siteLibs/vendor/iocStats/jhlee
+   E3_MODULE_DEV_GITURL = "https://github.com/icshwi/iocStats"
+   E3_MODULE_MAKEFILE = iocStats.Makefile
+   E3_MODULE_MAKE_CMDS = make -C iocStats-dev -f iocStats.Makefile LIBVERSION="jhlee" PROJECT="iocStats" EPICS_MODULES="/epics/base-3.15.5/require/3.0.4/siteMods" EPICS_LOCATION="/epics/base-3.15.5" BUILDCLASSES="Linux" E3_SITEMODS_PATH="/epics/base-3.15.5/require/3.0.4/siteMods" E3_SITEAPPS_PATH="/epics/base-3.15.5/require/3.0.4/siteApps" E3_SITELIBS_PATH="/epics/base-3.15.5/require/3.0.4/siteLibs"
+   E3_MODULE_NAME = iocStats
+   E3_MODULE_SRC_PATH = iocStats-dev
+   E3_MODULE_VERSION = jhlee
+   E3_REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
+   E3_REQUIRE_TOOLS = /epics/base-3.15.5/require/3.0.4/tools
+   EPICS_MODULE_NAME = iocStats
+   EPICS_MODULE_TAG = master
+   EXPORT_VARS = E3_MODULES_VENDOR_LIBS_LOCATION E3_MODULES_INSTALL_LOCATION_LIB_LINK EPICS_HOST_ARCH EPICS_BASE MSI E3_MODULE_VERSION E3_SITEMODS_PATH E3_SITEAPPS_PATH E3_SITELIBS_PATH E3_REQUIRE_MAKEFILE_INPUT_OPTIONS E3_REQUIRE_NAME E3_REQUIRE_DB E3_REQUIRE_CONFIG E3_REQUIRE_LOCATION E3_REQUIRE_DBD E3_REQUIRE_VERSION E3_REQUIRE_TOOLS E3_REQUIRE_INC E3_REQUIRE_LIB E3_REQUIRE_BIN QUIET   SUDO2 SUDO_INFO SUDOBASH SUDO
+   INIT_E3_MODULE_SRC = 1
+   INSTALLED_EPICS_BASE_ARCHS = linux-ppc64e6500 linux-x86_64
+   MSI = /epics/base-3.15.5/bin/linux-x86_64/msi
+   PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_bin/linux-x86_64
+   REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
+   ```
 
-E3_MODULES_INSTALL_LOCATION = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee
-E3_MODULES_INSTALL_LOCATION_BIN = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/bin
-E3_MODULES_INSTALL_LOCATION_BIN_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_bin
-E3_MODULES_INSTALL_LOCATION_DB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/db
-E3_MODULES_INSTALL_LOCATION_DBD_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats.dbd.jhlee
-E3_MODULES_INSTALL_LOCATION_DB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_db
-E3_MODULES_INSTALL_LOCATION_INC = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/include
-E3_MODULES_INSTALL_LOCATION_INC_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_include
-E3_MODULES_INSTALL_LOCATION_LIB = /epics/base-3.15.5/require/3.0.4/siteMods/iocStats/jhlee/lib
-E3_MODULES_INSTALL_LOCATION_LIB_LINK = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_lib
-E3_MODULES_LIBLINKNAME = libiocStats.so.jhlee
-E3_MODULES_LIBNAME = libiocStats.so
-E3_MODULES_PATH = /epics/base-3.15.5/require/3.0.4/siteMods
-E3_MODULES_VENDOR_LIBS_LOCATION = /epics/base-3.15.5/require/3.0.4/siteLibs/vendor/iocStats/jhlee
-E3_MODULE_DEV_GITURL = "https://github.com/icshwi/iocStats"
-E3_MODULE_MAKEFILE = iocStats.Makefile
-E3_MODULE_MAKE_CMDS = make -C iocStats-dev -f iocStats.Makefile LIBVERSION="jhlee" PROJECT="iocStats" EPICS_MODULES="/epics/base-3.15.5/require/3.0.4/siteMods" EPICS_LOCATION="/epics/base-3.15.5" BUILDCLASSES="Linux" E3_SITEMODS_PATH="/epics/base-3.15.5/require/3.0.4/siteMods" E3_SITEAPPS_PATH="/epics/base-3.15.5/require/3.0.4/siteApps" E3_SITELIBS_PATH="/epics/base-3.15.5/require/3.0.4/siteLibs"
-E3_MODULE_NAME = iocStats
-E3_MODULE_SRC_PATH = iocStats-dev
-E3_MODULE_VERSION = jhlee
-E3_REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
-E3_REQUIRE_TOOLS = /epics/base-3.15.5/require/3.0.4/tools
-EPICS_MODULE_NAME = iocStats
-EPICS_MODULE_TAG = master
-EXPORT_VARS = E3_MODULES_VENDOR_LIBS_LOCATION E3_MODULES_INSTALL_LOCATION_LIB_LINK EPICS_HOST_ARCH EPICS_BASE MSI E3_MODULE_VERSION E3_SITEMODS_PATH E3_SITEAPPS_PATH E3_SITELIBS_PATH E3_REQUIRE_MAKEFILE_INPUT_OPTIONS E3_REQUIRE_NAME E3_REQUIRE_DB E3_REQUIRE_CONFIG E3_REQUIRE_LOCATION E3_REQUIRE_DBD E3_REQUIRE_VERSION E3_REQUIRE_TOOLS E3_REQUIRE_INC E3_REQUIRE_LIB E3_REQUIRE_BIN QUIET   SUDO2 SUDO_INFO SUDOBASH SUDO
-INIT_E3_MODULE_SRC = 1
-INSTALLED_EPICS_BASE_ARCHS = linux-ppc64e6500 linux-x86_64
-MSI = /epics/base-3.15.5/bin/linux-x86_64/msi
-PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/iocStats_jhlee_bin/linux-x86_64
-REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
-```
+5. Run `make devinit`. This will clone your fork into a directory with the name of `iocStats-dev`. This is what the file tree will look like after:
 
-4. `make devinit`
+   ```console
+   $ tree -L 1
+   .
+   ├── cmds
+   ├── configure
+   ├── docs
+   ├── iocsh
+   ├── iocStats
+   ├── iocStats-dev
+   ├── iocStats.Makefile
+   ├── Makefile
+   ├── patch
+   └── README.md
+   ```
 
-This will clone the source code with the name of `iocStats-dev`. One can check it by the `tree -L 1` command.
+6. Execute `git status`. Can you see the difference? 
 
-```
-$ make devinit
-$ tree -L 1
-.
-├── cmds
-├── configure
-├── docs
-├── iocsh
-├── iocStats
-├── iocStats-dev
-├── iocStats.Makefile
-├── Makefile
-├── patch
-└── README.md
+Have a look at both of the iocStats directories to see where they're pointing:
+
+```console
+[iocuser@host:iocStats]$ git remote -v
 ```
 
-5. `git status`
-
-Can you see the difference? 
-
-6. `git remote -v`
-
-Please go `iocStats` path, and run the command to check where your source code repository. 
-
-```
-$ cd iocStats
-$ git remote -v
+```console
+[iocuser@host:iocStats-dev]$ git remote -v 
 ```
 
-Please go `iocStats-dev` path, and run the command to check where your source code repository. 
-```
-$ cd iocStats-dev
-$ git remote -v 
-```
+> By default, the `*-dev` path within an e3-module is ignored (which you can see in the `.gitignore`). With this workflow, we can expand our repository up to any number of use cases.
 
-...By default *-dev path within an e3-module is ignored, which can be found in the .gitignore file. With this work-flow, we can expand our repository up to unlimited user cases. We can change them easily without worrying about other repositories. 
+### Consistent build environment
 
-### Consistent Building and Installing Envrionment
+Remember that e3 strives to provide user with a consistent interface for downloading, configuring, building, and installing modules and applications. Thus, the difference between the deployment mode and the development mode is only valid while configuring a module. We build and install modules in the exact same way. During building, we use the same `module.Makefile` and the same variables that we have defined in configuration files, and while installing, we install a module based on the variables defined in the same configuration files.
 
-One should remember that e3 is the environment which provides users a similar and consistent interface for downloading, configuring, building, and installing a module and application. Thus the difference between the deployment and the development is only valid up to the configuring a module. Building and installing a module, we exactly the same way to do so. During building, we use the exactly same module.Makefile and its variables which defined in different configuration files. Moreover, during installing, we install a module based on the variables which we define in different configuration files.
+## Patch files
 
-Since it is highly flexible and configurable, it will create more degree of freedom on your working environment. Please be careful to define all important variables within `CONFIG_MODULE` and `RELEASE` if one would like to use the deployment mode, and `CONFIG_MODULE_DEV` and `RELEASE_DEV` if one would like to use the development mode. One should consider also which EPICS base version and require version, and any dependent module versions are used within two modes carefully. 
+> If you are not have not been introduced to patch files, it is advised to have a look at [this](https://en.wikipedia.org/wiki/Patch_(Unix)) wikipedia page. In short, differences between two versions of a file can be saved separate from the file and applied when necessary.
 
-## Patch, Patch, and Patch Files
+There are a number of patch files in EPICS; in EPICS base, in e3, as well as in modules. To deal with these, as well as to deal with the generic issue of straying away from a code base managed by others, we have some utilities to work with patches in e3. Let's have a look at some patch files, as well as what tools we have for what cases.
 
-If one has no experience on patch files, please look at the refenece [6] in order to get minimal glimpse on this within an e3 module. Pratically, e3 has many patch files. 
+### Patch files in EPICS (e3) base
 
-There are two types of patch files defined in e3. 
-
-### EPICS Base
-
-Please go **E3_TOP**, and run the following commad :
-
-```
-$ find e3-base/* -name *.patch |grep 3.15.5
-
+```console
+$ find e3-base/* -name *.patch | grep 3.15.5
 e3-base/patch/R3.15.5/fix-ipAddrToAscii_p0.patch
 e3-base/patch/R3.15.5/fix-1699445_p0.patch
 e3-base/patch/R3.15.5/fix-1678494_p0.patch
@@ -256,48 +248,26 @@ e3-base/patch/R3.15.5/dbCa-warning_p0.patch
 e3-base/patch/Site/R3.15.5/enable_new_dtags.p0.patch
 e3-base/patch/Site/R3.15.5/ppc64e6500_epics_host_arch.p0.patch
 e3-base/patch/Site/R3.15.5/os_class.p0.patch
-....
-
+# --- snip snip ---
 ```
 
-Please carefully check these patch files in `e3-base/patch/R3.15.5` and `e3-base/patch/Site/R3.15.5`. The first one is a space for the EPICS community patch files and the second one is a space for the ESS site-specific patch files. 
+Files in `e3-base/patch/R3.15.5` are EPICS community patch files, those in `e3-base/patch/Site/R3.15.5` are for ESS site-specific patches.
 
-* **Community Distributed Patch Files** `e3-base/patch/R3.15.5`
-EPICS base, the community provides patch files for the significant problems. ESS uses the point release of EPICS base, we also need a method to handle this scenario as well. Accidentally, the community use **p0** patch for Base 3.15.5 and **p1** patch for Base 3.16.X. However, e3 use the only **p0** patch in order to minimize any issues about any compatibility. 
+**N.B.! While the EPICS community use `p0` files for base 3.15.5, and `p1` files for base 3.16.x, e3 only supports use of `p0` files for compatability reasons.**
 
-* **Site-specific Patch Files** `e3-base/patch/Site/R3.15.5`
-At the same time, we also have several patch files for ESS specific customization and discuss-in-progress with the community for EPICS base. In case, we have to hold our own patch files, we put them into a corresponding EPICS base release folder. 
+#### Patch functions for EPICS base
 
-#### How to apply the EPICS base patch files
+There are four functions defined in `configure/E3/DEFINES_FT` for e3-base: 
 
-```
-e3-base$ make patch
-```
+* `patch_base`
+* `patch_revert_base`
+* `patch_site`
+* `patch_revert_site`
 
-#### How to revert the applied the EPICS base patch files
+### Patch files in e3 modules
 
-```
-e3-base$ make patchrevert
-```
-If one see the following messages, your base has already all patch files. 
-```
-Reversed (or previously applied) patch detected!  Assume -R? [n] 
-```
-
-#### Patch and Patch Revert Functions
-
-There are four functions are defined in `configure/E3/DEFINES_FT` for e3-base. 
-* patch_base
-* patch_revert_base
-* patch_site
-* patch_revert_site
-
-### e3 Module
-
-Please go **E3_TOP**, and run `find . -name *.p0.patch`. For example, one can see the following :
-
-```
-$ find . -name *.p0.patch |grep -v base | sort -n
+```console
+[iocuser@host:e3]$ find . -name *.p0.patch | grep -v base | sort -n
 ./e3-ADAndor3/patch/Site/2.2.0-include-stdlin.h.p0.patch
 ./e3-ADSupport/patch/Site/1.4.0-tiff_extern_rename.p0.patch
 ./e3-calc/patch/Site/3.7.1-cc_linking_release_local.p0.patch
@@ -314,74 +284,62 @@ $ find . -name *.p0.patch |grep -v base | sort -n
 ./e3-tsclib/patch/Site/2.3.1-include-headers-driver-makefile.p0.patch
 ```
 
-Each patch file has the unique prefix which is the `E3_MODULE_VERSION`. We might think why we use patch files instead of `clone` or `fork`. Technically, we can use all available methods within e3. Thus, users can decide what is the best way to do for them. For the e3 modules, we would like to minimize any further maintenance, because specific patch files could be no more valid if we use the latest `E3_MODULE_VERSION`. There are many difference types of scenarios which one can work with external EPICS community about its modifications. For example, please check `e3-mrfioc2` and `e3-StreamDevice`. The simple golden rule is to use our own `forked` version if we have to change many files which will or may merge into the EPICS community version, and to use our own `patch` files if we have few files to be changed and no idea or have a bit complicated situation how we handle with the community module. 
+As you can see, every patch file begins with `E3_MODULE_VERSION`, followed by a description of the change, and ending with a level.
 
-#### How to apply specific module patch files
-```
-$ make patch
-```
+The purpose of these e3-module patch files is essentially to minimize maintenance work whenever we switch to a new module version. Two good examples would be `e3-mrfioc2` and `e3-StreamDevice`, where there is plenty of community usage. (`p#`)
 
-#### How to revert apply specific module patch files
+> A rule of thumb is to fork and attempt to merge into the community version wherever feasible, and to patch if the changes are very specific to us or if we are unsure if the community want these changes.
 
-```
-$ make patchrevert
-```
-If one see the following messages, your module has already all patch files. 
+#### Patch functions for e3 modules
+
+There are four functions defined in `e3-require/configure/modules/DEFINES_FT` which are used for all e3 modules. This file will be located in
+`${EPICS_BASE}/require/${E3_REQUIRE_VERSION}/configure/modules` after the require module has been installed.
+
+* `patch_site`
+* `patch_revert_site`
+
+> Although these function names are the same as the e3-base ones, but they are actually slightly different. Can you find out which parts are different from each other?
+
+### How to apply and revert patches
+
+You apply patches with `make patch`, and you revert them with `make patchrevert`.
+
+If you see the following messages, your module already has all patch files applied:
+
 ```
 Reversed (or previously applied) patch detected!  Assume -R? [n] 
 ```
-#### How to create a patch file
 
-We will show a very short description for how to create a patch file. And it will be explained in detail later. 
+### How to create a patch file
 
+If you want to create a patch file for an e3 module, run `git diff --no-prefix > ../patch/Site/` from the root directory of the module, e.g.:
+
+```console
+[iocuser@host:e3-iocStats]$ git diff --no-prefix > ../patch/Site/2.7.14p-add_more_stats.p0.patch
 ```
-$ cd ${E3_MODULE_SRC_PATH}
-$ git diff  --no-prefix > ../patch/Site/E3_MODULE_VERSION-what_ever_filename.p0.patch
-```
-#### Patch and Patch Revert Functions
 
-There are four functions are defined in ` e3-require/configure/modules/DEFINES_FT` for all e3-modules. This file will be located in
-`${EPICS_BASE}/require/${E3_REQUIRE_VERSION}/configure/modules` after the require module installation.
-
-* patch_site
-* patch_revert_site
-
-Note that these function names are the same as the e3-base ones, but it is slightly different. Can you find out which parts are different from each other?
+---
 
 ## Questions
 
-* Can you override the default `E3_MODULE_DEV_GITURL` with your own forked repository without any `git status` changes in e3-iocStats? 
-```
-$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
-nothing to commit, working directory clean
-```
+* Can you override the default `E3_MODULE_DEV_GITURL` with your own forked repository without any `git status` changes in `e3-iocStats`? 
 
-* Do we need `make devdistclean` always? Do we have another way to clean or remove a clone repository `iocStats-dev`? 
+   ```console
+   [iocuser@host:e3-iocstats]$ git status
+   On branch master
+   Your branch is up-to-date with 'origin/master'.
+   nothing to commit, working directory clean
+   ```
 
-* Can we distinguish between `make existent` and `make devexistent`? Is this different? 
+* Do we need `make devdistclean`? Is there any other way to clean or remove a cloned repository `iocStats-dev`? 
 
-* Can we overwrite the same version of a module from the Deployment and the Development Modes?
+* What's the difference between `make existent` and `make devexistent`?
+
+* Can we overwrite the same version of a module from the Deployment mode with one from the Development mode?
 
 * What is the difference `p0` patch and `p1` patch?
 
-* We have an 1.0.0-awesome.p0.patch file. How do we apply it to Development mode source files?
-
-## Reference 
-[1] Atomic electron transition : https://en.wikipedia.org/wiki/Atomic_electron_transition
-
-[2] https://git-scm.com/docs/git-submodule
-
-[3] Git Tools - Submodules : https://git-scm.com/book/en/v2/Git-Tools-Submodules
-
-[4] https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
-
-[5] https://github.com/epics-modules/iocStats
-
-[6] https://en.wikipedia.org/wiki/Patch_(Unix)
-
-[7] https://epics.anl.gov/base/R3-15/5-docs/KnownProblems.html
+* We have an `1.0.0-awesome.p0.patch` file. How would we apply it to Development mode source files?
 
 
 ---

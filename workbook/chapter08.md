@@ -580,7 +580,8 @@ We have the remote repository [4]. Can you build e3-ch8 application? And can you
 [5] https://github.com/icshwi/myexample
 
 
-------------------
-[:arrow_backward:](chapter7.md)  | [:arrow_up_small:](chapter8.md)  | [:arrow_forward:](chapter9.md)
-:--- | --- |---: 
-[Chapter 7 : Understand A Module Dependence](chapter7.md) | [Chapter 8](chapter8.md) | [Chapter 9 : Build an e3 module](chapter9.md)
+---
+
+[Next: Chapter 9 - Building an e3 module](chapter09.md)
+
+[Return to Table of Contents](README.md)

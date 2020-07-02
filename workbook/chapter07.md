@@ -291,8 +291,8 @@ e3-StreamDevice/StreamDevice/O.3.15.5_linux-x86_64/AsynDriverInterface.d:
 Note that `Dependent Environment Variables` in this chapter, without `ASYN_DEP_VERSION`, that `cflag` will not be shown in the compiling procedure. This is **one** of many dependence which one should understand in order to build an IOC properly. We will come back this subject later. 
 
 
+---
 
-------------------
-[:arrow_backward:](chapter6.md)  | [:arrow_up_small:](chapter7.md)  | [:arrow_forward:](chapter8.md)
-:--- | --- |---: 
-[Chapter 6 : Variables, Parameters and Environment Variables within e3](chapter6.md) | [Chapter 7](chapter7.md) | [Chapter 8 : Build an e3 application](chapter8.md)
+[Next: Chapter 7 - Building an e3 application](chapter08.md)
+
+[Return to Table of Contents](README.md)

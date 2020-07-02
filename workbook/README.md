@@ -8,15 +8,15 @@ For some of the chapters there are supplementary directories containing code, so
 
 ## Part 1
 
-##### Chapter 1: [Installing e3](chapter1.md)
-##### Chapter 2: [Your first running e3 IOC](chapter2.md)
-##### Chapter 3: [Installing other versions of modules](chapter3.md)
-##### Chapter 4: [Delve into e3 with startup scripts](chapter4.md)
-##### Chapter 5: [Deployment and development](chapter5.md)
-##### Chapter 6: [Variables and parameters within e3](chapter6.md)
-##### Chapter 7: [Understanding module dependence](chapter7.md)
-##### Chapter 8: [Building an e3 Application](chapter8.md)
-##### Chapter 9: [Building an e3 Module](chapter9.md) :construction:
+##### Chapter 1: [Installing e3](chapter01.md)
+##### Chapter 2: [Your first running e3 IOC](chapter02.md)
+##### Chapter 3: [Installing other versions of modules](chapter03.md)
+##### Chapter 4: [Delve into e3 with startup scripts](chapter04.md)
+##### Chapter 5: [Deployment and development](chapter05.md)
+##### Chapter 6: [Variables and parameters within e3](chapter06.md)
+##### Chapter 7: [Understanding module dependence](chapter07.md)
+##### Chapter 8: [Building an e3 Application](chapter08.md)
+##### Chapter 9: [Building an e3 Module](chapter09.md) :construction:
 ##### Chapter 10: [Understanding e3's directory structure](chapter10.md) :construction: 
 
 ## Part 2

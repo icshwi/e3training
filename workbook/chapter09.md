@@ -10,11 +10,8 @@ In this lesson, you'll learn how to do the following:
 * Compile a module with the standard EPICS building system
 
 
+---
 
+[Next: Chapter 7 - Understanding e3's directory structure](chapter10.md)
 
-
-------------------
-[:arrow_backward:](chapter8.md)  | [:arrow_up_small:](chapter9.md)  | [:arrow_forward:](chapter10.md)
-:--- | --- |---: 
-[Chapter 8 : Build an e3 Application](chapter8.md) | [Chapter 9](chapter9.md) | [Chapter 10 : e3 directory structure](chapter10.md)
-
+[Return to Table of Contents](README.md)

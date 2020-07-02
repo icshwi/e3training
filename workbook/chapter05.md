@@ -1,5 +1,7 @@
 # Chapter 5 : Take the Deployment or the Development
 
+[Return to Table of Contents](README.md)
+
 ## Lesson Overview
 
 In this lesson, you'll learn how to do the following:
@@ -344,6 +346,6 @@ If you want to create a patch file for an e3 module, run `git diff --no-prefix >
 
 ---
 
-[Next: Chapter 6 - Variables and parameters within e3](chapter6.md)
+[Next: Chapter 6 - Variables and parameters within e3](chapter06.md)
 
 [Return to Table of Contents](README.md)

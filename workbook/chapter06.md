@@ -1,37 +1,33 @@
 # Chapter 6 : Variables, Parameters and Environment Variables within e3
 
+[Return to Table of Contents](README.md)
+
 ## Lesson Overview
 
 In this lesson, you'll learn how to do the following:
+
 * Understand variables, parameters and environment variables within an IOC 
 * Run EPICS commands to access them within an IOC correctly
 * Understand EPICS and e3 environment variable when a module is configured
 * Combine variable commands to access path or files of any module within an IOC
 
-
-
 ## Running an IOC
 
 The following variables are defined when an IOC is running within startup scripts and iocsh. 
-
 
 ### General iocsh.bash Variables
 
 * ```REQUIRE_IOC```
 This is the read-only variable which is defined within the iocsh.bash
 
-
 * ```E3_CMD_TOP```
 This is the absolute path where a startup script (cmd file) is. 
-
 
 * ```E3_IOCSH_TOP```
 This is the absolute path where the iocsh.bash is executed.
 
-
 * ```IOCSH_PS1```
 This is the IOC Prompt String.
-
 
 ### Require Internal Variables
 
@@ -65,7 +61,6 @@ mrfioc2_TEMPLATES
 
 Please run the following startup script
 
-
 0. Run
 
 ```
@@ -73,7 +68,7 @@ $ iocsh.bash ch6_supplementary_path/ch6.cmd
 ```
 One may get the following output:
 ```
------ snip ----- snip -----
+# --- snip snip ---
 epicsEnvSet "EXECUTE_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook
 epicsEnvSet "STARTUP_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path
 epicsEnvSet "TOP"             /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path/..
@@ -82,7 +77,7 @@ epicsEnvSet "IOCSTATS_MODULE_VERSION"       ae5d083
 epicsEnvSet "IOCSTATS_MODULE_DB_PATH"       /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
 epicsEnvSet "IOCSTATS_MODULE_TEMPLATE_PATH" /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
 
------ snip ----- snip -----
+# --- snip snip ---
 
 ## EPICS Base built Aug  5 2019
 ############################################################################
@@ -106,7 +101,7 @@ iocStats_DB        : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/d
 echo "iocStats_TEMPLATES : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db"
 iocStats_TEMPLATES : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
 #
------ snip ----- snip -----
+# --- snip snip ---
 ```
 
 It is important to remember these variables. Especially, `*_DB` variable, because one should use this variable as 
@@ -122,9 +117,7 @@ recsync, 1.3.0
 ```
 Please try to access four variables for recsync module. 
 
-
 ### EPICS Variables, Parameters, and Environment Variables
-
 
 * Check EPICS functions to access EPICS with the command ```epicsParamShow``` and ```epicsEnvShow``` within an IOC :
 
@@ -138,11 +131,7 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 
 * Run ```epicsPrtEnvParams```. Which command returns the same result?
 
-
-
 * How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the reference [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```? There are four commands (```date```, ```pwd```, ```cd```, and ```echo```) which one can use in the similar way in Linux shell environment.
-
-
 
 * What is the difference between ```$(TOP)``` and ```${TOP}```?
 
@@ -172,9 +161,6 @@ seqDLYprecision = 2
 ```
 
 * Can you explain answers of the following questions to others? 1) Difference among them and 2) Where are they defined. 
-
-
-
 
 * In the running ioc, please require the recsync with the installed version through:
 
@@ -229,7 +215,6 @@ Now, it is the self-evidence that ```var``` is defined as a variable within a re
 ```
 Note that the upper and lower keys can be used to catch the command list which were used before. 
 
-
 ## Building a Module or An Application 
 
 In [Chapter3](chapter3.md), we already discussed two e3 variables : ```E3_MODULE_VERSION``` and  ```EPICS_MODULE_TAG```. In addition, there are many environment variables for e3 when we configure and install a module. 
@@ -275,7 +260,6 @@ PROD_BIN_PATH = /epics/base-3.15.5/require/3.0.4/siteLibs/caPutLog_3.6.0_bin/lin
 REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 ```
 
-
 ### Customized EPICS Environment Variables
 
 * ```EPICS_BASE``` is where the epics base is installed (EPICS Environment Variable).
@@ -286,12 +270,9 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 
 * ```EPICS_MODULE_TAG``` is a point release information of the remote source code repository. For example, it will be one of the following: ```master```, ```tags/R3.6```, ```ae5d083```, and any arguments which can be used with ```git checkout```. 
 
-
 * ```INSTALLED_EPICS_BASE_ARCHS``` shows the EPICS base archtecture installed within local system. Mostly, it is only ```linux-x86_64``` in our environment. 
 
-
 ### e3 Environment Variables
- 
 
 * ```E3_SITEMODS_PATH``` is the e3 site module installation path. 
 * ```E3_SITEAPPS_PATH``` is the e3 site application installation path. 
@@ -307,9 +288,7 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 * ```E3_REQUIRE_TOOLS``` is the require tools path. 
 * ```REQUIRE_CONFIG``` is the require configuration path, which is used for each module configuration. It is the same as ```E3_REQUIRE_CONFIG```, however, it is defined before ```E3_REQUIRE_CONFIG```. 
 
-
 ### e3 Module Core Environment Variables
-
 
 * `E3_MODULE_NAME` is the module name used for `require E3_MODULE_NAME` within an IOC startup script. Usually, it is the same as ```EPICS_MODULE_NAME```. **Note that this name should be letters (upper and lower case) and digits.** The underscore character `_` is also permitted. Technically, this name is coverted into char variable within c program. Thus, it should follow the c programming variable rule. 
 * ```E3_MODULE_SRC_PATH``` is the where your source codes are downloaded according to difference configurations such as the deployment mode, the development mode, the local mode, and the repository source directory name. 
@@ -341,34 +320,33 @@ The following variables are defined within a module or an application by default
 
 * ```EXPORT_VARS``` is the collection of exported environment variables within e3 building system in order to transfer them through different makefiles. 
 
-
-
 ##  Assignments
 
 ### Access DB files of a module within a running IOC
 
 With the following IOC,
+
 ```
 $ iocsh.bash ch6_supplementary_path/ch6.cmd
 ```
+
 print out all db files of the asyn module within an IOC with two command lines. Note that an IOC supports only few similar commands (date, exit, help, cd, pwd, and echo). Please remember a unique command to run Linux any commands within an IOC. 
 
-### Vendor Libraries
+### Vendor libraries
+
 Which Module is used for a specific vendor library? Why do we keep these files within e3 structure? 
 
-### Makefile Rules
+### Makefile rules
 
 Can you find out which file allow us to run ```make vars``` or ```make env``` within e3 building system? It is the same for all modules and applications, so where could be located?
-
-
 
 ## Reference
 
 [1] https://epics.anl.gov/base/R3-15/6-docs/AppDevGuide/IOCShell.html#x19-73300018
 
 
+---
 
-------------------
-[:arrow_backward:](chapter5.md)  | [:arrow_up_small:](chapter6.md)  | [:arrow_forward:](chapter7.md)
-:--- | --- |---: 
-[Chapter 5 : Take the Deployment or the Development](chapter5.md) | [Chapter 6](chapter6.md) |[Chapter 7 : Understand A Module Dependence](chapter7.md)
+[Next: Chapter 7 - Understanding module dependence](chapter07.md)
+
+[Return to Table of Contents](README.md)

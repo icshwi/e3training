@@ -138,6 +138,6 @@ Time to try out some makefile rules. See if you can spot the difference between 
 
 ---
 
-[Next: Chapter 4 - Delve into e3 with startup scripts](chapter4.md)
+[Next: Chapter 4 - Delve into e3 with startup scripts](chapter04.md)
 
 [Return to Table of Contents](README.md)

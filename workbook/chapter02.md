@@ -112,6 +112,6 @@ Please explain the following jargon by yourself---these are mixed EPICS and e3 t
 
 ---
 
-[Next: Chapter 3 - Installing other versions of modules](chapter3.md)
+[Next: Chapter 3 - Installing other versions of modules](chapter03.md)
 
 [Return to Table of Contents](README.md)

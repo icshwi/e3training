@@ -11,6 +11,8 @@ In this lesson, you'll learn how to do the following:
 * Understand the local setup for `.db` and `.protocol` files
 * Add common (global) modules to the IOC
 
+---
+
 ## A simulated serial device
 
 We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europeanspallationsource/kameleon)* to simulate a serial device, accessible by use of e.g. telnet. More specifically, we will use a forked version, which is already linked into this workbook repository as a git submodule. To fetch it, run:

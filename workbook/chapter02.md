@@ -10,6 +10,8 @@ In this lesson, you'll learn how to do the following:
 * Switch between different versions of e3
 * Run a simple IOC with an example startup script
 
+---
+
 ## The e3 environment
 
 In order to facilitate the development process, e3 supports using multiple EPICS environments. In other words, you can set the environment for a specific terminal by sourcing the relevant `setE3Env.bash`.

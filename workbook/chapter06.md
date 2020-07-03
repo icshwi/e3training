@@ -11,6 +11,8 @@ In this lesson, you'll learn how to do the following:
 * Understand EPICS and e3 environment variable when a module is configured
 * Combine variable commands to access path or files of any module within an IOC
 
+---
+
 ## Running an IOC
 
 The following variables are defined when an IOC is running within startup scripts and iocsh. 

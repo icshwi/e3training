@@ -13,6 +13,8 @@ In this lesson, you'll learn how to do the following:
 * Understand two repositories within e3 
 * Patch files in EPICS and e3
 
+---
+
 ## No source code - configuration files!
 
 By design, e3 modules and applications have no source code in their repositories, but only configuration files and utilities. These files allow us consistent building of environments from source code, modules, applications, kernel drivers, etc., that are hosted elsewhere.
@@ -59,7 +61,7 @@ Although different e3 modules can have slightly different directory structure, b
 
 * `Makefile` The global e3 module makefile.
 
-*`patch/` For when we need to handle small changes of source codes. More on this later.
+* `patch/` For when we need to handle small changes of source codes. More on this later.
 
 * `template/` For template and substitution files.
 
@@ -69,7 +71,7 @@ Although different e3 modules can have slightly different directory structure, b
 
 In order to explain how e3 uses git submodules, we will do the following exercise.
 
-0. Run:
+1. Run:
 
    ```console
    [iocuser@host:e3-iocStats]$ git submodule status
@@ -79,7 +81,7 @@ In order to explain how e3 uses git submodules, we will do the following exercis
 
 > Please spend some time to understand this output. Git's pages on [submodules](https://git-scm.com/docs/git-submodule) should be useful.
 
-1. Look at the repository on GitHub.
+2. Look at the repository on GitHub.
 
    Visit https://github.com/icshwi/e3-iocStats, which is shown in **Figure 1**.
 
@@ -87,9 +89,9 @@ In order to explain how e3 uses git submodules, we will do the following exercis
 
    |![Import Example](ch5_supplementary_path/fig1.png)|
    | :---: |
-   |**Figure 1** A screenshot from the iocStats' GitHub page. |
+   |**Figure 1 -** A screenshot from iocStats' GitHub page. |
 
-2. Check its submodule configuration:
+3. Check its submodule configuration:
 
    ```console
    [iocuser@host:e3-iocStats]$ more .gitmodules

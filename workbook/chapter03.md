@@ -11,6 +11,8 @@ In this lesson, you'll learn how to do the following:
 * Understand the difference between two important variables: `E3_MODULE_VERSION` and `EPICS_MODULE_TAG`
 * Install a different version of *StreamDevice* within e3
 
+---
+
 ## The variables within e3
 
 Various environment variables are used in EPICS and e3, so it is important to be aware of these and their difference(s). Please remember that e3 is a configuration tool around EPICS, and that we thus we have some variables which are unique to e3.

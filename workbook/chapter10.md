@@ -1,6 +1,6 @@
-# Chapter 10 : Understanding e3's directory structure
+# Chapter 10: Understanding e3's directory structure
 
-# Lesson Overview
+## Lesson Overview
 
 In this lesson, you'll learn how to do the following:
 
@@ -10,6 +10,13 @@ In this lesson, you'll learn how to do the following:
 * Use the template path according to its usage
 * Use other paths according their purpose
 * Understand hidden files
+
+---
+
+## e3 directory structure
+
+To be written.
+
 
 ---
 

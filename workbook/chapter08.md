@@ -1,15 +1,18 @@
-Chapter 8 : Build an e3 Application (Needed to be updated)
-==
+# Chapter 8: Building an e3 application
+
+[Return to Table of Contents](README.md)
 
 ## Lesson Overview
 
 In this lesson, you'll learn how to do the following:
+
 * Understand the difference between e3 Modules and its Applications
 * Understand the e3 installation directory structure
 * Can create an e3 application with a remote source repository with e3TemplateGenerator
 * Can create an e3 application with local source files with e3TemplateGenerator
 * Can edit a module makefile in order to build, and install its application into e3
 
+---
 
 ## Modules, Applications, and IOCs
 
@@ -554,14 +557,12 @@ Before finding the correct **ACTION**, one has to ask oneself the following ques
 
 - **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do **ACTION 2**. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
 
-
+---
 
 ##  Assignments
 
-
 ### Write two IOC startup scripts
 One can run each IOC for `e3-Clock` and `e3-fimscb`. Are you willing to take these challenges?
-
 
 ### Build an e3 application with a remote repository 
 

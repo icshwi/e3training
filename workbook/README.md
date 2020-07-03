@@ -4,7 +4,9 @@ This workbook is intended to introduce new users to ESS' EPICS environment e3. A
 
 As this workbook still is under construction, many chapters remain unfinished. Chapters marked with the icon :construction: are still being worked on.
 
-For some of the chapters there are supplementary directories containing code, so it's recommended to clone this repository.
+For some of the chapters there are supplementary directories containing code, so it's recommended to clone this repository. 
+
+---
 
 ## Part 1
 
@@ -26,7 +28,7 @@ For some of the chapters there are supplementary directories containing code, so
 ##### Chapter 13: Working with the EPICS community :construction:
 ##### Chapter 14: Supplementary tools :construction:
 
-## Appendix: Troubleshoting
+## Appendices
 
 ##### Appendix A: [Build system troubleshoting](appendixA.md)
 ##### Appendix B: [Segmentation fault with GDB](appendixB.md)

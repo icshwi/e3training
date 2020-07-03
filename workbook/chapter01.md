@@ -13,9 +13,11 @@ In this lesson, you'll learn how to do the following:
 * Set up common e3 module packs
 * Test your installation
 
+---
+
 ## Downloading e3
 
-*N.B.! ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended to use CentOS7 whilst exercising this tutorial.*
+*N.B.! ESS' EPICS environment e3 is developed primarily for CentOS, and it is thus recommended two use CentOS7 whilst exercising this tutorial.*
 
 > As e3 heavily relies on git, it's recommended to first be familiar with especially git submodules.
 

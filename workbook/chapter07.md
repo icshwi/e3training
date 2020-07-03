@@ -1,5 +1,6 @@
-Chapter 7 : Understand A Module Dependence
-==
+# Chapter 7: Understand module dependence
+
+[Return to Table of Contents](README.md)
 
 ## Lesson Overview
 
@@ -9,9 +10,9 @@ In this lesson, you'll learn how to do the following:
 * Change its dependency version when the module is needed to recompile.
 * Decide whether to keep old version or to keep new version of the module.
 
+---
 
 ## Dependent Environment Variables
-
 
 * Find variables `*_DEP_VERSION`
 

@@ -122,6 +122,8 @@ Time to try out some makefile rules. See if you can spot the difference between 
 7. `make vers`
 8. `make dep | head -1`
 
+---
+
 ## Assignments
 
 * Try out `make existent` with `LEVEL=4`.

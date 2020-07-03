@@ -1,4 +1,4 @@
-# Chapter 5 : Take the Deployment or the Development
+# Chapter 5: Deployment mode and Development mode
 
 [Return to Table of Contents](README.md)
 
@@ -8,10 +8,10 @@ In this lesson, you'll learn how to do the following:
 
 * Understand why e3 doesn't hold any source code
 * Understand the anatomy of an e3 module's directory
-* Understand the Deployment Mode through git submodule
-* Understand the Development Mode through git clone
+* Understand the Deployment mode
+* Understand the Development mode
 * Understand two repositories within e3 
-* Understand why there is a Patch path within e3
+* Patch files in EPICS and e3
 
 ## No source code - configuration files!
 
@@ -30,7 +30,7 @@ The intention is to reduce unecessary work for maintainers of the code base.
 Let's have a look at `e3-iocStats/`:
 
 ```console
-e3-iocStats (master)$ tree -L 1
+[iocuser@host:e3-iocStats]$ tree -L 1
 .
 ├──  cmds
 ├──  configure
@@ -197,10 +197,10 @@ $ make devdistclean
    REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
    ```
 
-5. Run `make devinit`. This will clone your fork into a directory with the name of `iocStats-dev`. This is what the file tree will look like after:
+4. Run `make devinit`. This will clone your fork into a directory with the name of `iocStats-dev`. This is what the file tree will look like after:
 
    ```console
-   $ tree -L 1
+   [iocuser@host:e3-iocStats]$ tree -L 1
    .
    ├── cmds
    ├── configure
@@ -214,19 +214,19 @@ $ make devdistclean
    └── README.md
    ```
 
-6. Execute `git status`. Can you see the difference? 
+5. Execute `git status`. Can you see the difference? 
 
-Have a look at both of the iocStats directories to see where they're pointing:
+6. Have a look at both of the iocStats directories to see where they're pointing.
 
-```console
-[iocuser@host:iocStats]$ git remote -v
-```
+   ```console
+   [iocuser@host:iocStats]$ git remote -v
+   ```
 
-```console
-[iocuser@host:iocStats-dev]$ git remote -v 
-```
+   ```console
+   [iocuser@host:iocStats-dev]$ git remote -v 
+   ```
 
-> By default, the `*-dev` path within an e3-module is ignored (which you can see in the `.gitignore`). With this workflow, we can expand our repository up to any number of use cases.
+   > By default, the `*-dev` path within an e3-module is ignored (which you can see in the `.gitignore`). With this workflow, we can expand our repository up to any number of use cases.
 
 ### Consistent build environment
 
@@ -255,7 +255,7 @@ e3-base/patch/Site/R3.15.5/os_class.p0.patch
 
 Files in `e3-base/patch/R3.15.5` are EPICS community patch files, those in `e3-base/patch/Site/R3.15.5` are for ESS site-specific patches.
 
-**N.B.! While the EPICS community use `p0` files for base 3.15.5, and `p1` files for base 3.16.x, e3 only supports use of `p0` files for compatability reasons.**
+*N.B.! While the EPICS community use `p0` files for base 3.15.5, and `p1` files for base 3.16.x, e3 only supports use of `p0` files for compatability reasons.*
 
 #### Patch functions for EPICS base
 
@@ -322,9 +322,9 @@ If you want to create a patch file for an e3 module, run `git diff --no-prefix >
 
 ---
 
-## Questions
+## Assignments
 
-* Can you override the default `E3_MODULE_DEV_GITURL` with your own forked repository without any `git status` changes in `e3-iocStats`? 
+* Can you override the default `E3_MODULE_DEV_GITURL` with your own forked repository without any `git status` changes in `e3-iocStats`? Try it.
 
    ```console
    [iocuser@host:e3-iocstats]$ git status
@@ -339,7 +339,7 @@ If you want to create a patch file for an e3 module, run `git diff --no-prefix >
 
 * Can we overwrite the same version of a module from the Deployment mode with one from the Development mode?
 
-* What is the difference `p0` patch and `p1` patch?
+* What is the difference between a `p0` patch and `p1` patch? Is it the same in EPICS as generally with UNIX patch files?
 
 * We have an `1.0.0-awesome.p0.patch` file. How would we apply it to Development mode source files?
 

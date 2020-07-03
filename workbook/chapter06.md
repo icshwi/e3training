@@ -1,4 +1,4 @@
-# Chapter 6 : Variables, Parameters and Environment Variables within e3
+# Chapter 6 : Variables and parameters within e3
 
 [Return to Table of Contents](README.md)
 
@@ -7,7 +7,7 @@
 In this lesson, you'll learn how to do the following:
 
 * Understand variables, parameters and environment variables within an IOC 
-* Run EPICS commands to access them within an IOC correctly
+* Run EPICS commands to access access variables and parameters from within an IOC
 * Understand EPICS and e3 environment variable when a module is configured
 * Combine variable commands to access path or files of any module within an IOC
 
@@ -15,7 +15,7 @@ In this lesson, you'll learn how to do the following:
 
 The following variables are defined when an IOC is running within startup scripts and iocsh. 
 
-### General iocsh.bash Variables
+### General `iocsh.bash` variables
 
 * ```REQUIRE_IOC```
 This is the read-only variable which is defined within the iocsh.bash
@@ -29,11 +29,11 @@ This is the absolute path where the iocsh.bash is executed.
 * ```IOCSH_PS1```
 This is the IOC Prompt String.
 
-### Require Internal Variables
+### Variables used by **require**
 
 It is very useful to access the absolute path when an IOC starts within startup scripts. 
 
-The following variables are very powerful. For example, if one uses mrfioc2 as ```MODULE```
+The following variables are very powerful. For example, if one uses mrfioc2 as `MODULE`:
 
 * *module_name*```_VERSION```
 
@@ -59,15 +59,10 @@ mrfioc2_DB
 mrfioc2_TEMPLATES
 ```
 
-Please run the following startup script
+0. Run:
 
-0. Run
-
-```
+```console
 $ iocsh.bash ch6_supplementary_path/ch6.cmd
-```
-One may get the following output:
-```
 # --- snip snip ---
 epicsEnvSet "EXECUTE_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook
 epicsEnvSet "STARTUP_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path
@@ -104,22 +99,24 @@ iocStats_TEMPLATES : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/d
 # --- snip snip ---
 ```
 
-It is important to remember these variables. Especially, `*_DB` variable, because one should use this variable as 
-`STREAM_PROTOCOL_PATH` within a startup script if the script uses the `stream` module. For example,
+It is important to remember these variables. Perhaps especially the `*_DB` variable, as one should use this variable as the 
+`STREAM_PROTOCOL_PATH` within a startup script together with the `stream` module. For example:
 
 ```
 epicsEnvSet("STREAM_PROTOCOL_PATH", "$(AAAAAA_DIR)")
 ```
 
-One can try to add recsync into ch6.cmd to create ch6-local.cmd. Please enable it through
+One can try to add recsync into ch6.cmd to create ch6-local.cmd. Please enable it through:
+
 ```
 recsync, 1.3.0
 ```
+
 Please try to access four variables for recsync module. 
 
 ### EPICS Variables, Parameters, and Environment Variables
 
-* Check EPICS functions to access EPICS with the command ```epicsParamShow``` and ```epicsEnvShow``` within an IOC :
+* Check EPICS functions to access EPICS with the command `epicsParamShow` and `epicsEnvShow` within an IOC :
 
 ```
 # Set the IOC Prompt String One 
@@ -129,13 +126,13 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 58bef31.faiserv.18238 > epicsEnvShow 
 ```
 
-* Run ```epicsPrtEnvParams```. Which command returns the same result?
+* Run `epicsPrtEnvParams`. Which command returns the same result?
 
-* How do we access only one variable? For example, ```TOP```? Please check epicsEnvShow and epicsParamShow in the reference [1]. Moreover, one might try to use ```echo```. Can one access ```TOP``` with ```echo```? There are four commands (```date```, ```pwd```, ```cd```, and ```echo```) which one can use in the similar way in Linux shell environment.
+* How do we access only one variable? For example, `TOP`? Please check `epicsEnvShow` and `epicsParamShow` in the reference [1]. Moreover, one might try to use `echo`. Can one access `TOP` with `echo`? There are four commands (`date`, `pwd`, `cd`, and `echo`) which one can use in the similar way in Linux shell environment.
 
-* What is the difference between ```$(TOP)``` and ```${TOP}```?
+* What is the difference between `$(TOP)` and `${TOP}`?
 
-* In the shell, please try to run ```var```. What do you see? 
+* In the shell, please try to run `var`. What do you see? 
 
 ```
 58bef31.faiserv.18238 > var
@@ -164,66 +161,70 @@ seqDLYprecision = 2
 
 * In the running ioc, please require the recsync with the installed version through:
 
-0. Run
-```
-58bef31.faiserv.18238 > require recsync,1.3.0
-Module recsync version 1.3.0 found in /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/
-Loading library /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/lib/linux-x86_64/librecsync.so
-Loaded recsync version 1.3.0
-Loading dbd file /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/dbd/recsync.dbd
-Calling function recsync_registerRecordDeviceDriver
+0. Run:
 
-```
+   ```console
+   58bef31.faiserv.18238 > require recsync,1.3.0
+   Module recsync version 1.3.0 found in /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/
+   Loading library /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/lib/linux-x86_64/librecsync.so
+   Loaded recsync version 1.3.0
+   Loading dbd file /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/dbd/recsync.dbd
+   Calling function recsync_registerRecordDeviceDriver
+   ```
 
 1. Redo require again
-```
-58bef31.faiserv.18238 > require recsync,1.3.0
-Module recsync version 1.3.0 already loaded
 
-```
+   ```console
+   58bef31.faiserv.18238 > require recsync,1.3.0
+   Module recsync version 1.3.0 already loaded
+   ```
 
 2. Type the following:
-```
-58bef31.faiserv.18238 > var requireDebug 1
-```
+
+   ```console
+   58bef31.faiserv.18238 > var requireDebug 1
+   ```
 
 3. Redo require again
-```
-58bef31.faiserv.18238 > require recsync,1.3.0
-require: versionstr = "-1.3.0"
-require: module="recsync" version="1.3.0" args="(null)"
-require: searchpath=/epics/base-3.15.5/require/3.0.4/siteMods:/epics/base-3.15.5/require/3.0.4/siteApps
-require: compareVersions(found=1.3.0, request=1.3.0)
-require: compareVersions: MATCH exactly
-Module recsync version 1.3.0 already loaded
-require: library found in /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/
-require: putenv("MODULE=recsync")
-require: looking for template directory
-require: directory /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db exists
-require: found template directory /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db
-require: putenv("recsync_DB=/epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db")
-require: putenv("recsync_TEMPLATES=/epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db")
-require: putenv("TEMPLATES=/epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db")
-```
+
+   ```console
+   58bef31.faiserv.18238 > require recsync,1.3.0
+   require: versionstr = "-1.3.0"
+   require: module="recsync" version="1.3.0" args="(null)"
+   require: searchpath=/epics/base-3.15.5/require/3.0.4/siteMods:/epics/base-3.15.5/require/3.0.4/siteApps
+   require: compareVersions(found=1.3.0, request=1.3.0)
+   require: compareVersions: MATCH exactly
+   Module recsync version 1.3.0 already loaded
+   require: library found in /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/
+   require: putenv("MODULE=recsync")
+   require: looking for template directory
+   require: directory /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db exists
+   require: found template directory /epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db
+   require: putenv("recsync_DB=/epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db")
+   require: putenv("recsync_TEMPLATES=/epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db")
+   require: putenv("TEMPLATES=/epics/base-3.15.5/require/3.0.4/siteMods/recsync/1.3.0/db")
+   ```
 
 Now, it is the self-evidence that ```var``` is defined as a variable within a require module. This is a very interesting variable that can be used to change your own EPICS module dynamically. Usually, this variable is used as a debug message control variable. 
 
 4. Disable it
-```
-58bef31.faiserv.18238 > var requireDebug 0
-58bef31.faiserv.18238 > require recsync,1.3.0
-```
-Note that the upper and lower keys can be used to catch the command list which were used before. 
 
-## Building a Module or An Application 
+   ```
+   58bef31.faiserv.18238 > var requireDebug 0
+   58bef31.faiserv.18238 > require recsync,1.3.0
+   ```
 
-In [Chapter3](chapter3.md), we already discussed two e3 variables : ```E3_MODULE_VERSION``` and  ```EPICS_MODULE_TAG```. In addition, there are many environment variables for e3 when we configure and install a module. 
+> Note that the UP and DOWN keys can be used to navigate between historical commands.
+
+## Building a module or an application 
+
+Back in [Chapter 3](chapter03.md) we looked at the two e3 variables `E3_MODULE_VERSION` and  `EPICS_MODULE_TAG`. As you will see, there are many more environment variables that we can use with e3 when configuring and installing modules.
 
 ### e3 environment variables
 
-Once you print out all environment variables of each module via ```make vars``` as follows:
+Once you print out all environment variables of each module via `make vars` as follows:
 
-```
+```console
 e3-caPutLog$ make vars
 
 ------------------------------------------------------------
@@ -262,63 +263,65 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 
 ### Customized EPICS Environment Variables
 
-* ```EPICS_BASE``` is where the epics base is installed (EPICS Environment Variable).
+* ```EPICS_BASE``` is where EPICS base is installed (EPICS Environment Variable).
 
-* ```EPICS_HOST_ARCH``` is what the system host architecture is (EPICS Environment Variable).
+* `EPICS_HOST_ARCH` is what the system host architecture is defined (EPICS Environment Variable).
 
-* ```EPICS_MODULE_NAME``` is a module name which we would like to use within e3 (e3 Environment variable). Please see ```E3_MODULE_NAME```. **Note that this name should be letters (upper and lower case) and digits.**
+* `EPICS_MODULE_NAME` is a module name which we would like to use within e3 (e3 Environment variable). Please see `E3_MODULE_NAME`. 
 
-* ```EPICS_MODULE_TAG``` is a point release information of the remote source code repository. For example, it will be one of the following: ```master```, ```tags/R3.6```, ```ae5d083```, and any arguments which can be used with ```git checkout```. 
+  **N.B.! This name should only consist of letters (upper and lower case) and digits.**
 
-* ```INSTALLED_EPICS_BASE_ARCHS``` shows the EPICS base archtecture installed within local system. Mostly, it is only ```linux-x86_64``` in our environment. 
+* `EPICS_MODULE_TAG` is a point release information of the remote source code repository. For example, it will be one of the following: `master`, `tags/R3.6`, `ae5d083`, and any arguments which can be used with `git checkout`. 
+
+* `INSTALLED_EPICS_BASE_ARCHS` shows the EPICS base archtecture installed within local system. Mostly, it is only `linux-x86_64` in our environment. 
 
 ### e3 Environment Variables
 
-* ```E3_SITEMODS_PATH``` is the e3 site module installation path. 
-* ```E3_SITEAPPS_PATH``` is the e3 site application installation path. 
-* ```E3_SITELIBS_PATH``` is the e3 site library path.
-* ```E3_REQUIRE_NAME``` is the unique e3 module name **require**. Mostly, it is the static string. No one should change this variable. 
-* ```E3_REQUIRE_VERSION``` is the require version number. 
-* ```E3_REQUIRE_BIN``` is the require bin path. 
-* ```E3_REQUIRE_CONFIG``` is the require configure path, which is used for the require module. 
-* ```E3_REQUIRE_DB``` is the require db path. 
-* ```E3_REQUIRE_INC``` is the require include path. 
-* ```E3_REQUIRE_LIB``` is the require lib path.
-* ```E3_REQUIRE_LOCATION``` is the require path. 
-* ```E3_REQUIRE_TOOLS``` is the require tools path. 
-* ```REQUIRE_CONFIG``` is the require configuration path, which is used for each module configuration. It is the same as ```E3_REQUIRE_CONFIG```, however, it is defined before ```E3_REQUIRE_CONFIG```. 
+* `E3_SITEMODS_PATH` is the e3 site module installation path. 
+* `E3_SITEAPPS_PATH` is the e3 site application installation path. 
+* `E3_SITELIBS_PATH` is the e3 site library path.
+* `E3_REQUIRE_NAME` is the unique e3 module name **require**. Mostly, it is the static string. No one should change this variable. 
+* `E3_REQUIRE_VERSION` is the require version number. 
+* `E3_REQUIRE_BIN` is the require bin path. 
+* `E3_REQUIRE_CONFIG` is the require configure path, which is used for the require module. 
+* `E3_REQUIRE_DB` is the require db path. 
+* `E3_REQUIRE_INC` is the require include path. 
+* `E3_REQUIRE_LIB` is the require lib path.
+* `E3_REQUIRE_LOCATION` is the require path. 
+* `E3_REQUIRE_TOOLS` is the require tools path. 
+* `REQUIRE_CONFIG` is the require configuration path, which is used for each module configuration. It is the same as `E3_REQUIRE_CONFIG`, however, it is defined before `E3_REQUIRE_CONFIG`. 
 
 ### e3 Module Core Environment Variables
 
-* `E3_MODULE_NAME` is the module name used for `require E3_MODULE_NAME` within an IOC startup script. Usually, it is the same as ```EPICS_MODULE_NAME```. **Note that this name should be letters (upper and lower case) and digits.** The underscore character `_` is also permitted. Technically, this name is coverted into char variable within c program. Thus, it should follow the c programming variable rule. 
-* ```E3_MODULE_SRC_PATH``` is the where your source codes are downloaded according to difference configurations such as the deployment mode, the development mode, the local mode, and the repository source directory name. 
-* ```E3_MODULE_VERSION``` is the module version used for ```require E3_MODULE_NAME E3_MODULE_VERSION```. There is no limitation to select this version number.
-* ```E3_MODULE_MAKEFILE``` is the name of a module or an application makefile. 
-* ```E3_MODULES_PATH``` is the parent path of a final installation location of each module or each application.  It can be ```E3_SITEMODS_PATH``` or ```E3_SITEAPPS_PATH```. 
-* ```E3_MODULES_LIBNAME``` is the name of the shared library of each module or each application.
-* ```E3_MODULES_INSTALL_LOCATION``` is the installation parent path of a module or an application.
-* ```E3_MODULES_INSTALL_LOCATION_BIN``` is the installation bin path of a module or an application. 
-* ```E3_MODULES_INSTALL_LOCATION_DB```  is the installation db path of a module or an application. 
-* ```E3_MODULES_INSTALL_LOCATION_INC``` is the installation include path of a module or an application.
-* ```E3_MODULES_INSTALL_LOCATION_LIB``` is the installation lib path of a module or an application.
+* `E3_MODULE_NAME` is the module name used for `require E3_MODULE_NAME` within an IOC startup script. Usually, it is the same as `EPICS_MODULE_NAME`. **Note that this name should be letters (upper and lower case) and digits.** The underscore character `_` is also permitted. Technically, this name is coverted into char variable within c program. Thus, it should follow the c programming variable rule. 
+* `E3_MODULE_SRC_PATH` is the where your source codes are downloaded according to difference configurations such as the deployment mode, the development mode, the local mode, and the repository source directory name. 
+* `E3_MODULE_VERSION` is the module version used for `require E3_MODULE_NAME E3_MODULE_VERSION`. There is no limitation to select this version number.
+* `E3_MODULE_MAKEFILE` is the name of a module or an application makefile. 
+* `E3_MODULES_PATH` is the parent path of a final installation location of each module or each application.  It can be `E3_SITEMODS_PATH` or `E3_SITEAPPS_PATH`. 
+* `E3_MODULES_LIBNAME` is the name of the shared library of each module or each application.
+* `E3_MODULES_INSTALL_LOCATION` is the installation parent path of a module or an application.
+* `E3_MODULES_INSTALL_LOCATION_BIN` is the installation bin path of a module or an application. 
+* `E3_MODULES_INSTALL_LOCATION_DB`  is the installation db path of a module or an application. 
+* `E3_MODULES_INSTALL_LOCATION_INC` is the installation include path of a module or an application.
+* `E3_MODULES_INSTALL_LOCATION_LIB` is the installation lib path of a module or an application.
 
-### e3 Module Aux Environment Variables
+### e3 module aux environment variables
 
 The following variables are defined within a module or an application by default. However, they are not used for an application or if is not necessary to be used. 
 
-* ```E3_MODULES_LIBLINKNAME```  is the symbolic link name of a module with a module version. 
-* ```E3_MODULES_INSTALL_LOCATION_BIN_LINK``` is the symbolic link name of the module bin path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_bin```. 
-* ```E3_MODULES_INSTALL_LOCATION_DB_LINK``` is the symbolic link name of the module db path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_db```. 
-* ```E3_MODULES_INSTALL_LOCATION_INC_LINK``` is the symbolic link name of the module include path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_include```.
-* ```E3_MODULES_INSTALL_LOCATION_LIB_LINK``` is the symbolic link name of the module lib path located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_E3_MODULE_VERSION_lib```. 
-* ```E3_MODULES_INSTALL_LOCATION_DBD_LINK``` is the symbolic link name of the module dbd file located in ```E3_SITELIBS_PATH``` as the following form : ```E3_MODULE_NAME_dbd_E3_MODULE_VERSION```. 
+* `E3_MODULES_LIBLINKNAME`  is the symbolic link name of a module with a module version. 
+* `E3_MODULES_INSTALL_LOCATION_BIN_LINK` is the symbolic link name of the module bin path located in `E3_SITELIBS_PATH` as the following form: `E3_MODULE_NAME_E3_MODULE_VERSION_bin`. 
+* `E3_MODULES_INSTALL_LOCATION_DB_LINK` is the symbolic link name of the module db path located in `E3_SITELIBS_PATH` as the following form: `E3_MODULE_NAME_E3_MODULE_VERSION_db`. 
+* `E3_MODULES_INSTALL_LOCATION_INC_LINK` is the symbolic link name of the module include path located in `E3_SITELIBS_PATH` as the following form: `E3_MODULE_NAME_E3_MODULE_VERSION_include`.
+* `E3_MODULES_INSTALL_LOCATION_LIB_LINK` is the symbolic link name of the module lib path located in `E3_SITELIBS_PATH` as the following form: `E3_MODULE_NAME_E3_MODULE_VERSION_lib`. 
+* `E3_MODULES_INSTALL_LOCATION_DBD_LINK` is the symbolic link name of the module dbd file located in `E3_SITELIBS_PATH` as the following form: `E3_MODULE_NAME_dbd_E3_MODULE_VERSION`. 
 
-* ```E3_MODULES_VENDOR_LIBS_LOCATION``` is the vendor or 3rd party lib path located in ```E3_SITELIBS_PATH``` as the following form : ```vendor/E3_MODULE_NAME/E3_MODULE_VERSION```. 
-* ```PROD_BIN_PATH``` is the short bin path in case users would like to access module specific executable commands. 
+* `E3_MODULES_VENDOR_LIBS_LOCATION` is the vendor or 3rd party lib path located in `E3_SITELIBS_PATH` as the following form: `vendor/E3_MODULE_NAME/E3_MODULE_VERSION`. 
+* `PROD_BIN_PATH` is the short bin path in case users would like to access module specific executable commands. 
 
-* ```E3_MODULE_MAKE_CMDS``` is the command to execute to build / install each module. 
+* `E3_MODULE_MAKE_CMDS` is the command to execute to build / install each module. 
 
-* ```EXPORT_VARS``` is the collection of exported environment variables within e3 building system in order to transfer them through different makefiles. 
+* `EXPORT_VARS` is the collection of exported environment variables within e3 building system in order to transfer them through different makefiles. 
 
 ##  Assignments
 

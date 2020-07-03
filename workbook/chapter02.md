@@ -97,6 +97,8 @@ Thus, one can easily switch between environments. For example:
   - `echo ${IOCNAME}`
   - `epicsEnvShow`
 
+---
+
 ## Assignments
 
 Please explain the following jargon by yourself---these are mixed EPICS and e3 terms:

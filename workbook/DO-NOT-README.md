@@ -6,6 +6,8 @@ For coding standards see any of the early chapters. Keep it clean and tidy, and 
 
 Each lesson should start with a "Return to ToC", then an overview, and should end with a horizontal rule (`---`) and then a link to the next chapter as well as a "Return to ToC".
 
+For commands, the prompt (PS1) should be `[iocuser@host:cwd]`.
+
 Open code blocks should have language definitions for highlighting to whatever degree possible; when the language isn't available (GitHub markdown is quite limited), use whatever works.
 
 # To-Do
@@ -25,7 +27,8 @@ Open code blocks should have language definitions for highlighting to whatever d
 - Link to more external things; autosave, css phoebus, git submodules, etc.
 - Talk about the e3 wrapper
 - Possibly create separate mini-lessons for e3 users (non-devs)
-- Add glossary
+- Add glossary page (appendixC?)
+- Rename/reorganize supplementary dirs
 
 # LEGACY
 

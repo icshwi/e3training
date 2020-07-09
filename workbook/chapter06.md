@@ -244,9 +244,9 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 
 * `EPICS_MODULE_NAME` is the module name used by *require* and e3 (e3 environment variable). See also `E3_MODULE_NAME`. 
 
-  *N.B.! This name should only consist of letters (upper and lower case) and digits. Underscore is also allowed.
+  *N.B.! This name should only consist of letters (upper and lower case) and digits. Underscore is also allowed.*
   
-  > Technically, this name is coverted into a `char` in a C program, and much thus follow C programming rules. *
+  > Technically, this name is coverted into a `char` in a C program, and much thus follow C programming rules.
 
 * `EPICS_MODULE_TAG` is a point release information of the remote source code repository; i.e. what you would use together with `git checkout`, like: `master`, `tags/R3.6`, or `ae5d083`.
 
@@ -254,34 +254,56 @@ REQUIRE_CONFIG = /epics/base-3.15.5/require/3.0.4/configure
 
   > At ESS, this will almost always be `linux-x86_64`.
 
-### e3 Environment Variables
+### e3 environment variables
 
 * `E3_SITEMODS_PATH`: e3 site module installation path. 
+
 * `E3_SITEAPPS_PATH`: e3 site application installation path. 
+
 * `E3_SITELIBS_PATH`: e3 site library path.
+
 * `E3_REQUIRE_NAME`: unique e3 module name used by *require*. This variable should not be changed. 
+
 * `E3_REQUIRE_VERSION`: *require* version number. 
+
 * `E3_REQUIRE_BIN`: *require* binary path. 
+
 * `E3_REQUIRE_CONFIG`: *require* configure path.
+
 * `E3_REQUIRE_DB`: *require* database path. 
+
 * `E3_REQUIRE_INC`: *require* include path. 
+
 * `E3_REQUIRE_LIB`: *require* lib path.
+
 * `E3_REQUIRE_LOCATION`: *require* root directory path. 
+
 * `E3_REQUIRE_TOOLS`: *require* tools path. 
+
 * `REQUIRE_CONFIG`: *require* configuration path used for by module configurations. It is typically the same as `E3_REQUIRE_CONFIG`, but is defined before `E3_REQUIRE_CONFIG`. 
 
 ### e3 module/application core environment variables
 
 * `E3_MODULE_NAME`: Module name used by the command `require` within an IOC startup script, i.e. `require E3_MODULE_NAME, E3_MODULE_VERSION`. This is usually the same as `EPICS_MODULE_NAME`. 
+
 * `E3_MODULE_SRC_PATH`: Where your source code is downloaded. Note that the location and usage depends on which mode you use (deployment, development, or local).
+
 * `E3_MODULE_VERSION`: Module version used for `require E3_MODULE_NAME, E3_MODULE_VERSION`.
+
 * `E3_MODULE_MAKEFILE`: Name of the module/application makefile. 
+
 * `E3_MODULES_PATH`: Parent path of the installation location. This can be `E3_SITEMODS_PATH` or `E3_SITEAPPS_PATH`. 
+
 * `E3_MODULES_LIBNAME`: Name of shared libraries.
+
 * `E3_MODULES_INSTALL_LOCATION`: Parent path to installation directoriess.
+
 * `E3_MODULES_INSTALL_LOCATION_BIN`: Binary installation path. 
+
 * `E3_MODULES_INSTALL_LOCATION_DB`: Database installation path. 
+
 * `E3_MODULES_INSTALL_LOCATION_INC`: Include installation path.
+
 * `E3_MODULES_INSTALL_LOCATION_LIB`: Library installation path.
 
 ### e3 module/application auxilliary environment variables
@@ -291,13 +313,19 @@ The following variables are defined within a module or application by default.
 > These are only used when necessitated by an applicaton.
 
 * `E3_MODULES_LIBLINKNAME`: Symbolic link name to library files for a module. 
+
 * `E3_MODULES_INSTALL_LOCATION_BIN_LINK`: Symbolic link name of the module binary path located in `E3_SITELIBS_PATH`, in the following form: `${E3_MODULE_NAME}_${E3_MODULE_VERSION}_bin`. 
+
 * `E3_MODULES_INSTALL_LOCATION_DB_LINK`: Symbolic link name of the module database path located in `E3_SITELIBS_PATH`, in the following form: `${E3_MODULE_NAME}_${E3_MODULE_VERSION}_db`. 
+
 * `E3_MODULES_INSTALL_LOCATION_INC_LINK`: Symbolic link name of the module include path located in `E3_SITELIBS_PATH`, in the following form: `${E3_MODULE_NAME}_${E3_MODULE_VERSION}_include`.
+
 * `E3_MODULES_INSTALL_LOCATION_LIB_LINK`: Symbolic link name of the module library path located in `E3_SITELIBS_PATH`, in the following form: `${E3_MODULE_NAME}_${E3_MODULE_VERSION}_lib`. 
+
 * `E3_MODULES_INSTALL_LOCATION_DBD_LINK`: Symbolic link name of the module database definition file located in `E3_SITELIBS_PATH`, in the following form: `${E3_MODULE_NAME}_dbd_${E3_MODULE_VERSION}`. 
 
 * `E3_MODULES_VENDOR_LIBS_LOCATION`: Vendor or 3rd party library path located in `E3_SITELIBS_PATH`, in the following form: `vendor/E3_MODULE_NAME/E3_MODULE_VERSION`. 
+
 * `PROD_BIN_PATH`: Short binary path to be used if users want to access module-specific executable commands. 
 
 * `E3_MODULE_MAKE_CMDS`: Command to execute to build/install. 

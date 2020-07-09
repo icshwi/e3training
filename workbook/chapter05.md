@@ -109,15 +109,13 @@ However, when source code repositories are changed very often, it also create ad
 
 The following commands utilize `git submodule` and are used for the deployment mode of a module. <!-- todo: rewrite this -->
 
-```
-$ make vars
-$ make init
-$ make patch
-$ make build
-$ make install
-$ make existent
-$ make clean
-```
+- `make vars`
+- `make init`
+- `make patch`
+- `make build`
+- `make install`
+- `make existent`
+- `make clean`
 
 ## Development mode
 
@@ -137,16 +135,14 @@ The following commands are the development mode equivalents of the commands list
 
 > The two rules `make existent` and `make devexistent` are identical as they rely on **installed** module versions. 
 
-```
-$ make devvars
-$ make devinit
-$ make devpatch
-$ make devbuild
-$ make devinstall
-$ make devexistent
-$ make devclean
-$ make devdistclean
-```
+- `make devvars`
+- `make devinit`
+- `make devpatch`
+- `make devbuild`
+- `make devinstall`
+- `make devexistent`
+- `make devclean`
+- `make devdistclean`
 
 ### Git clone
 

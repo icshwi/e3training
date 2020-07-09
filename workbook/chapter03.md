@@ -13,9 +13,9 @@ In this lesson, you'll learn how to do the following:
 
 ---
 
-## The variables within e3
+## The version variables within e3
 
-Various environment variables are used in EPICS and e3, so it is important to be aware of these and their difference(s). Please remember that e3 is a configuration tool around EPICS, and that we thus we have some variables which are unique to e3.
+Various environment variables are used in EPICS and e3, and it is important to be aware of these and their difference(s). Please remember that e3 is a configuration tool around EPICS, and that we thus have some variables which are unique to e3.
 
 0. Make sure you are in **E3_TOP**
 
@@ -61,7 +61,7 @@ These two variables are defined in `configure/CONFIG_MODULE` and `configure/CONF
 
 ## Check the version of a module
 
-Let's see what our current version of StreamDevice is:
+Let's see what our current version of *StreamDevice* is:
 
 ```console
 [iocuser@host:StreamDevice]$ git describe --tags
@@ -69,7 +69,7 @@ Let's see what our current version of StreamDevice is:
 
 > Pay attention to the current working directory above!
 
-We could here download StreamDevice directly from PSI's GitHub account, and switch `EPICS_MODULE_TAG` when `make init` is executed:
+We could here download *StreamDevice* directly from PSI's GitHub account, and switch `EPICS_MODULE_TAG` when `make init` is executed:
 
 1. Go back to `e3-StreamDevice/`
 2. Run `make init` to see what kind of messages which you can see.
@@ -111,7 +111,7 @@ We could here download StreamDevice directly from PSI's GitHub account, and swit
 
 * Verify your configuration with `make vars`.
 
-## Build and install StreamDevice `master` (b84655e)
+## Build and install *StreamDevice* `master` (`b84655e`)
 
 Time to try out some makefile rules. See if you can spot the difference between before now. From `e3-StreamDevice/`, run:
 

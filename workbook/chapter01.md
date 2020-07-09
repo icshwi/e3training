@@ -67,7 +67,7 @@ Configuring an e3 build with default settings can be done like:
 As always with EPICS, versions are important. Especially pay attention to:
 
 * The version of EPICS base
-* The version of require
+* The version of *require*
 
 ---
 
@@ -141,7 +141,7 @@ These will help us to change base, require, and all modules' configuration witho
 
 ## Building and installing EPICS base and require
 
-For EPICS base and require, it's as simple as running:
+For EPICS base and *require*, it's as simple as running:
 
 ```console
 [iocuser@host:e3]$ ./e3.bash base
@@ -155,7 +155,7 @@ For EPICS base and require, it's as simple as running:
 
 ## Module packs
 
-As with installing EPICS base and require, you can use the `e3.bash` utility to install common module groups. These are:
+As with installing EPICS base and *require*, you can use the `e3.bash` utility to install common module groups. These are:
 
 ### Common group
 
@@ -367,7 +367,7 @@ The mod argument contain these---individually accessible---steps:
 * `imod` Initiate  
 * `bmod` Build and install  
 
-And the makefile rules that can be used for a module are:
+And the *makefile* rules that can be used for a module are:
 
 * `make clean`
 * `make init`
@@ -446,6 +446,15 @@ require: REQMOD-791F5F3:FAISERV-21664:MOD_VER+="MCoreUtils 1.2.1"
 iocRun: All initialization complete
 791f5f3.faiserv.21660 > 
 ```
+
+---
+
+## Assignments
+
+Please make sure you understand:
+
+- How GNU Make and Makefiles work.
+- How git submodules work.
 
 
 ---

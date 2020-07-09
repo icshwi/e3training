@@ -92,6 +92,7 @@ Thus, one can easily switch between environments. For example:
   ```
 
 * Try the following commands in the IOC shell:
+
   - `help`
   - `var`
   - `dbl`

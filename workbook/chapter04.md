@@ -220,7 +220,7 @@ Execute the next script:
 ```
 
 1. Type `dbl` to see the IOC's PVs.
-2. Get the heartbeat of your IOC:
+2. Get the *heartbeat* of your IOC:
 
    ```
    350b5cb.kaffee.4355 > dbpr IOC-80159276:IocStat:HEARTBEAT
@@ -228,7 +228,7 @@ Execute the next script:
 
    > The number `80159276` is here randomly generated. If you happen to see the same number on your machine, today is your lucky day!
 
-3. Get the heartbeat again. Is it the same? Why not?
+3. Look at the heartbeat again. Is it the same? Why not?
 
 Spend some time thinking about the following:
 

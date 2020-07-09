@@ -8,7 +8,7 @@ In this lesson, you'll learn how to do the following:
 
 * Understand variables and parameters within an IOC 
 * Run commands to access access variables and parameters from within an IOC
-* Understand EPICS and e3 environment variable when a module is configured
+* Understand EPICS and e3 environment variables used when a module is configured
 * Combine variable commands to access path or files of any module within an IOC
 
 ---

@@ -8,8 +8,8 @@ In this lesson, you'll learn how to do the following:
 
 * Understand why e3 doesn't hold any source code
 * Understand the anatomy of an e3 module's directory
-* Understand the Deployment mode
-* Understand the Development mode
+* Understand the *Deployment mode*
+* Understand the *Development mode*
 * Understand two repositories within e3 
 * Patch files in EPICS and e3
 
@@ -53,9 +53,9 @@ Although there is some variation amongst e3 modules, the majority of them have t
 
 * `iocsh/` Modularized startup scripts should be located here. These will be added to the e3 installation path.
 
-* `iocStats/` A git submodule link to iocStats source repository.
+* `MODULE_NAME/` A git submodule link to source repository.
 
-* `iocStats.Makefile` The (e3) makefile for iocStats.
+* `MODULE_NAME.Makefile` The (e3) makefile for the module.
 
 * `Makefile` The global e3 module makefile.
 
@@ -101,7 +101,7 @@ In order to explain how e3 uses *git submodules*, we will do the following exerc
 
 ## Deployment mode
 
-As you just saw, *git submodule* imports one repository into another, which will allow us to handle source files scattered between different facilities. To make full use of this functionality however, we would need full permission for all repositories; thus, e3 will use its minimal feature, which relates to the so-called *magic number*---the short version of the SHA-1 checksum used by git to track commits. 
+As you just saw, `git submodule` is used to import one repository into another, which will allow us to handle source files scattered between different facilities. To make full use of this functionality however, we would need full permission for all repositories; thus, e3 will use its minimal feature, which relates to the so-called *magic number*---the short version of the *SHA-1 checksum* used by git to identify commits. 
 
 So, we use a specific commit version of iocStats within e3-iocStats. And if new versions are stable enough, we can use `git submodule update --init` to update the link within an e3 module. We can thus pick which specific version of a module we would like to use for our release. 
 
@@ -146,13 +146,13 @@ The following commands are the development mode equivalents of the commands list
 
 ### Git clone
 
-1. Fork your own copy from the community [iocStats](https://github.com/epics-modules/iocStats)
+1. Fork your own copy from the community *[iocStats](https://github.com/epics-modules/iocStats)*.
 
 2. Update the `E3_MODULE_DEV_GITURL` to point towards your fork.
 
 3. Run `make devvars`. This will show the e3 module variables with the development mode:
 
-   This example uses the icshwi fork and compares it against the community module. Your output will be different.
+   This example uses the ESS ICSHWI fork and compares it against the community module. Your output will be different.
 
    ```console
    [iocuser@host:e3-iocStats]$ make devvars

@@ -186,7 +186,7 @@ More technical pitfalls exist when we are building or writing startup scripts. H
 
   > Remember: `iocsh.bash -r stream`.
 
-  And what happens if we do the same after `make install` and `make vars`?
+  And what happens if we do the same after `make install` and `make vars`? (Test it.)
 
   What you have just seen is the default behavior when a module version number isn't specified; loading a module with no specified version will **only** work when the system has a numeric `X.Y.Z` version. In our last example, the system has *StreamDevice* version `2.8.4`, which **is** numeric, but `2.7.14p` is **not** numeric.
   

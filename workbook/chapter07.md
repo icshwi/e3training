@@ -1,4 +1,4 @@
-# Chapter 7: Understand module dependence
+# Chapter 7: Understanding module dependence
 
 [Return to Table of Contents](README.md)
 
@@ -7,71 +7,59 @@
 In this lesson, you'll learn how to do the following:
 * Understand which e3 environment variables should be defined.
 * Understand the building dependency when a module is built. 
-* Change its dependency version when the module is needed to recompile.
-* Decide whether to keep old version or to keep new version of the module.
+* Change dependency versions when a module needs to be recompiled.
+* Decide when to move to a new version of a module.
 
 ---
 
-## Dependent Environment Variables
+## Dependent environment variables
 
-* Find variables `*_DEP_VERSION`
+Go to `e3-StreamDevice/`, run `make vars`, and try to find `*_DEP_VERSION` in the output.
 
-Please go **E3_TOP**/e3-StreamDevice and run the following:
+> These variables are defined in `configure/CONFIG_MODULE` and `StreamDevice.Makefile`.
 
-```
-$ make vars
-```
-
-And try to find `*_DEP_VERSION` in its output. They are defined in `configure/CONFIG_MODULE` and `StreamDevice.Makefile`. 
-
-```
-$ more configure/CONFIG_MODULE | grep "DEP"
+```console
+[iocuser@host:e3-StreamDevice]$ more configure/CONFIG_MODULE | grep "DEP"
 ASYN_DEP_VERSION:=4.33.0
 PCRE_DEP_VERSION:=8.41.0
+```
 
-$ more StreamDevice.Makefile | grep "DEP_VERSION"
+```console
+[iocuser@host:e3-StreamDevice]$ more StreamDevice.Makefile | grep "DEP_VERSION"
 ifneq ($(strip $(ASYN_DEP_VERSION)),)
 asyn_VERSION=$(ASYN_DEP_VERSION)
 ifneq ($(strip $(PCRE_DEP_VERSION)),)
 pcre_VERSION=$(PCRE_DEP_VERSION)
 ```
 
-Now one can see these variables, but where they are used is in the compiling process `make build`, and try to find the following line:
+You now know where these variables are defined, but where are they used in the compilation process (`make build`)? Have a look:
 
-```
+```console
 /usr/bin/gcc  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic     -m64 -fPIC                -I. -I../src/ -I.././src/    -I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include                        -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c .././src/StreamVersion.c
 /usr/bin/g++  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic                   -m64 -fPIC               -I. -I../src/ -I.././src/    -I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include                        -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c ../src/AsynDriverInterface.cc
 /usr/bin/g++  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic                   -m64 -fPIC               -I. -I../src/ -I.././src/    -I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include                        -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c ../src/RegexpConverter.cc
-........................
-........................
-
+# --- snip snip ---
 ```
 
-One should check the following information 
+Especially note: <!-- fixme: does this matter? -->
 
 ```
 -I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include
 -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include
 ```
 
+If we now unset one of these variables and rebuild;
 
-* Change a variable to set `NULL`
-
-```
-$ echo "ASYN_DEP_VERSION:=" > configure/CONFIG_MODULE.local
-```
-
-* Rebuild it
-
-```
-$ make clean
-$ make build
+```bash
+[iocuser@host:e3-StreamDevice]$ echo "ASYN_DEP_VERSION:=" > configure/CONFIG_MODULE.local
+[iocuser@host:e3-StreamDevice]$ make clean
+[iocuser@host:e3-StreamDevice]$ make build
 ```
 
+Can you compile this? No:
 
-Can you compile this? No you cannot compile them, because of the following error:
 ```
-......
+# --- snip snip ---
 Expanding stream.dbd
 /epics/base-3.15.5/require/3.0.4/tools/expandDBD.tcl -3.15 -I ./ -I /epics/base-3.15.5/dbd streamSup.dbd > stream.dbd
 /usr/bin/g++  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic                   -m64 -fPIC               -I. -I../src/ -I.././src/                            -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c ../src/AsynDriverInterface.cc
@@ -81,202 +69,171 @@ Expanding stream.dbd
 compilation terminated.
 ```
 
-Can you see `-I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include`? At this point, the building system cannot find where `asynDriver.h` is.  That header file is used in `src/AsynDriverInterface.cc`. 
+Can you see `-I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include`? At this point, the building system cannot find `asynDriver.h` (which is used in `src/AsynDriverInterface.cc`). 
 
+Roll back to the asyn version and rebuild:
 
-* Roll back to the asyn version and rebuild
-```
-$ rm configure/CONFIG_MODULE.local
-$ make clean
-$ make build
-```
-
-## New Dependent Module (Asyn) 
-
-There are many scenarios when the new dependent module is introduced as follows:
-
-* **scenario 1** : The same version of StreamDevice with non-existent version of Asyn (We assume that the asyn version is new one) 
-* **scenario 2** : The old version of StreamDevice with non-existent version of Asyn (We assume that the asyn version is new one) 
-* **scenario 3** : The new version of StreamDevice with non-existent version of Asyn (We assume that the asyn version is new one)
-* **scenario 4** : The same version of StreamDevice with existent but different version of Asyn 
-* **scenario 5** : The old version of StreamDevice with existent but different version of Asyn 
-* **scenario 6** : The new version of StreamDevice with existent but different version of Asyn
-
-We can think more scenarios as much as we can theoretically. However, if we limit these scenarios according to user requests. In most case, few scenarios will be applied. In this chapter, we consider the most frequent scenarios such as **scenario 3** and **scenario 6**. 
-
-### Scenario 3 and 6
-According to new requirements or critical bugs in an existent IOC, which is using StreamDevice 2.7.14p, we will need the StreamDevice 2.8.4. In that case, we have to consider about two dependent modules (Asyn and pcre). Here we consider the asyn dependence. We have to answer the question **Is the existent Asyn version enough for the StreamDevice 2.8.4?**
-
-* If yes, please check [Chapter 3](chapter3.md). Note that this step has the strong assumption that the list of all source files in 2.7.14p and 2.8.4 are the same with in both version. If some files are added or removed between the versions, we have to modify the StreamDevice.Makefile properly. However, if this is the case, please contact the maintainer of e3. 
-
-* If no, we have to install new Asyn version with the existent e3 environment. The procedure is the same as StreamDevice in [Chapter 3](chapter3.md). One should be in **E3_TOP**. In this case, there are no new files and no deleted files between Asyn 4.33 and 4.34. Thus, we can build the new version of asyn with the same `asyn.Makefile`. 
-
-```
-$ cd e3-asyn
-$ make vars
-$ make existent
-/epics/base-3.15.5/require/3.0.4/siteMods/asyn
-└── 4.33.0
-    ├── db
-    ├── dbd
-    ├── include
-    └── lib
-```
-```
-$ echo "EPICS_MODULE_TAG:=tags/R4-34" > configure/CONFIG_MODULE.local
-$ echo "E3_MODULE_VERSION:=4.34.0" >> configure/CONFIG_MODULE.local
-$ make vars
-$ make init
-$ make rebuild
+```console
+[iocuser@host:e3-StreamDevice]$ rm configure/CONFIG_MODULE.local
+[iocuser@host:e3-StreamDevice]$ make clean
+[iocuser@host:e3-StreamDevice]$ make build
 ```
 
-```
-$ make existent
-/epics/base-3.15.5/require/3.0.4/siteMods/asyn
-├── 4.33.0
-│   ├── db
-│   ├── dbd
-│   ├── include
-│   └── lib
-└── 4.34.0
-    ├── db
-    ├── dbd
-    ├── include
-    └── lib
+## New dependency module
 
-```
+Let's assume that we due to new requirements or critical bugs in an existent IOC, we need to swap from *StreamDevice* version `2.7.14p` to `2.8.4`. In that case, we have to consider two dependency modules (*Asyn* and *pcre*). Here we only consider the *Asyn* dependence. Before swapping, we have to ask if the existing *Asyn* module is sufficient for our needs and compatible with *StreamDevice* `2.8.4`.
 
-The next step is to install the StreamDevice 2.8.4 according to the asyn 4.34.0. This step is the exactly same as the step described in [Chapter 3](chapter3.md). One should be in **E3_TOP**. Now, we execute all commands in **E3_TOP** instead of `e3-StreamDevice`. 
+* If it is, recall what we did in [Chapter 3](chapter03.md).
 
+  > Note that this makes a strong assumption that the list of source files in `2.7.14p` and `2.8.4` are the same. If some files have been added or removed between the versions, we have to modify `StreamDevice.Makefile` accordingly. Whenever this is the case, contact the maintainer of e3.
 
-```
-$ make -C e3-StreamDevice/ existent
-make: Entering directory '/home/jhlee/e3-3.15.5/e3-StreamDevice'
-/epics/base-3.15.5/require/3.0.4/siteMods/stream
-└── 2.7.14p
-    ├── dbd
-    ├── include
-    ├── lib
-    └── SetSerialPort.iocsh
+* If it isn't, we have to install new *Asyn* version using our current e3 environment. The procedure is here the same with *StreamDevice* in [Chapter 3](chapter03.md). In our case, there are neither new files nor deleted files between *Asyn* versions `4.33` and `4.34`. Thus, we can build the new version of asyn with the same `asyn.Makefile`:
 
-4 directories, 1 file
-make: Leaving directory '/home/jhlee/e3-3.15.5/e3-StreamDevice'
+  ```console
+  [iocuser@host:e3-asyn]$ make vars
+  [iocuser@host:e3-asyn]$ make existent
+  /epics/base-3.15.5/require/3.0.4/siteMods/asyn
+  └── 4.33.0
+      ├── db
+      ├── dbd
+      ├── include
+      └── lib
+  [iocuser@host:e3-asyn]$ echo "EPICS_MODULE_TAG:=tags/R4-34" > configure/CONFIG_MODULE.local
+  [iocuser@host:e3-asyn]$ echo "E3_MODULE_VERSION:=4.34.0" >> configure/CONFIG_MODULE.local
+  [iocuser@host:e3-asyn]$ make vars
+  [iocuser@host:e3-asyn]$ make init
+  [iocuser@host:e3-asyn]$ make rebuild
+  [iocuser@host:e3-asyn]$ make existent
+  /epics/base-3.15.5/require/3.0.4/siteMods/asyn
+  ├── 4.33.0
+  │   ├── db
+  │   ├── dbd
+  │   ├── include
+  │   └── lib
+  └── 4.34.0
+      ├── db
+      ├── dbd
+      ├── include
+      └── lib
+  ```
 
-```
+  Next, we can install *StreamDevice* `2.8.4` which will be using *Asyn* `4.34.0`.
 
-```
-$ make -C e3-StreamDevice/ vars
-$ echo "EPICS_MODULE_TAG:=tags/2.8.4" > e3-StreamDevice/configure/CONFIG_MODULE.local
-$ echo "E3_MODULE_VERSION:=2.8.4" >> e3-StreamDevice/configure/CONFIG_MODULE.local
-$ echo "ASYN_DEP_VERSION:=4.34.0" >> e3-StreamDevice/configure/CONFIG_MODULE.local
-$ make -C e3-StreamDevice  vars 
-$ make -C e3-StreamDevice/ init
-$ make -C e3-StreamDevice/ rebuild
-```
-```
-$ make -C e3-StreamDevice/ existent
-make: Entering directory '/home/jhlee/e3-3.15.5/e3-StreamDevice'
-/epics/base-3.15.5/require/3.0.4/siteMods/stream
-├── 2.7.14p
-│   ├── dbd
-│   ├── include
-│   ├── lib
-│   └── SetSerialPort.iocsh
-└── 2.8.4
-    ├── dbd
-    ├── include
-    ├── lib
-    └── SetSerialPort.iocsh
+  > This step is exactly the same as we what did in [Chapter 3](chapter03.md).
 
-``` 
+  ```console
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ existent
+  make: Entering directory '/home/iocuser/e3-3.15.5/e3-StreamDevice'
+  /epics/base-3.15.5/require/3.0.4/siteMods/stream
+  └── 2.7.14p
+      ├── dbd
+      ├── include
+      ├── lib
+      └── SetSerialPort.iocsh
 
-* Please check the stream 2.8.4 within iocsh.
+  4 directories, 1 file
+  make: Leaving directory '/home/iocuser/e3-3.15.5/e3-StreamDevice'
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ vars
+  [iocuser@host:e3-3.15.5]$ echo "EPICS_MODULE_TAG:=tags/2.8.4" > e3-StreamDevice/configure/CONFIG_MODULE.local
+  [iocuser@host:e3-3.15.5]$ echo "E3_MODULE_VERSION:=2.8.4" >> e3-StreamDevice/configure/CONFIG_MODULE.local
+  [iocuser@host:e3-3.15.5]$ echo "ASYN_DEP_VERSION:=4.34.0" >> e3-StreamDevice/configure/CONFIG_MODULE.local
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice  vars 
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ init
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ rebuild
+  [iocuser@host:e3-3.15.5]$ $ make -C e3-StreamDevice/ existent
+  make: Entering directory '/home/iocuser/e3-3.15.5/e3-StreamDevice'
+  /epics/base-3.15.5/require/3.0.4/siteMods/stream
+  ├── 2.7.14p
+  │   ├── dbd
+  │   ├── include
+  │   ├── lib
+  │   └── SetSerialPort.iocsh
+  └── 2.8.4
+      ├── dbd
+      ├── include
+      ├── lib
+      └── SetSerialPort.iocsh
 
-```
-$ iocsh.bash -r stream,2.8.4
-```
-Can you seed the asyn version which you define? Can you check the old version within iocsh such as
+  8 directories, 2 files
+  make: Leaving directory '/home/iocuser/e3-3.15.5/e3-StreamDevice'
+  ``` 
 
-```
-$ iocsh.bash -r stream,2.7.14p
-```
+  Check to see that *StreamDevice* `2.8.4` can be loaded.
 
-The loading dependency module was selected as the exact version which we define when we compile the stream module. 
+  > Remember that you can initiate an IOC shell just like `iocsh.bash -r stream,2.8.4`.
 
+  > Can you see the *Asyn* version you've just set up in the output? Try loading *StreamDevice* version `2.7.14p` to compare.
 
-## Aggressive Tests
+  Our dependencies are defined when we compile the module.
 
-More technical pitfalls are existent when we are building or writing startup scripts. Here I would like to show which kind of combinations which the current `require` module  cannot handle properly. If one find more, please let me know. 
+## Aggressive tests
 
-* How `stream` can be loaded
+More technical pitfalls exist when we are building or writing startup scripts. Here we will see some combinations which the current *require* module fails to handle properly. (If you find more, please inform the e3 maintainer.*
 
-Now we would like to uninstall the stream 2.8.4 version
+* How modules are loaded.
 
-```
-$ make -C e3-StreamDevice/ uninstall
-$ make -C e3-StreamDevice/ existent
-```
+  Let's first uninstall the `2.8.4` version.
 
-Please try to run the following command
-```
-$ iocsh.bash -r stream,2.7.14p
-```
-Can you see the same as before? What if we don't define the specific version number of `stream` module? 
+  ```console
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ uninstall
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ existent
+  ```
 
-```
-$ iocsh.bash -r stream
-```
-That is the exactly what we expect. However, there is one more thing, which one should consider. 
+  If we now run:
 
-```
-$ make -C e3-StreamDevice/ install
-$ make -C e3-StreamDevice/ vars
-```
+  ```console
+  [iocuser@host:e3-3.15.5]$ iocsh.bash -r stream,2.7.14p
+  ```
 
-```
-$ iocsh.bash -r stream
-```
+  What do you see? What if we don't define a specific version number of the `stream` module?
 
-Can you see that the iocsh is running without any issue? This is the default behavior when the specific module version number is not defined. However, it only is valid **ONLY** when the system has the numeric `X.Y.Z` version number module. In this example, the system has the `stream 2.8.4`.  Note that `2.7.14p` is not the numeric version number. However, in any case, the stream module will use the exact version of asyn which we decide to use when we build the stream module. 
+  > Remember: `iocsh.bash -r stream`.
 
+  And what happens if we do the same after:
 
-* How we require dependency modules within startup scripts
+  ```console
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ install
+  [iocuser@host:e3-3.15.5]$ make -C e3-StreamDevice/ vars
+  ```
 
-Can you identify the difference among startup scripts in `ch7_supplementary_path`?
+  What you just saw is the default behavior when a module version number isn't specified. It will work **only** when the system has a numeric `X.Y.Z` version of a module. In our last example, the system has *StreamDevice* version `2.8.4`, which is numeric, but `2.7.14p` is **not** a numeric version number. Note that in either case, the *StreamDevice* module will use the exact version of *Asyn* which we decided to use when building the *StreamDevice* module. 
 
- 
-```
-$ iocsh.bash ch7_supplementary_path/7-1.cmd
-$ iocsh.bash ch7_supplementary_path/7-2.cmd
-```
+* How we require dependency modules within startup scripts.
 
+  Have a look at the differences between the startup scripts in `ch7_supplementary_path`:
 
-```
-$ iocsh.bash ch7_supplementary_path/7-3.cmd 
-$ iocsh.bash ch7_supplementary_path/7-4.cmd
-```
+  ```console
+  $ iocsh.bash ch7_supplementary_path/7-1.cmd
+  $ iocsh.bash ch7_supplementary_path/7-2.cmd
+  ```
 
-```
-$ iocsh.bash ch7_supplementary_path/7-5.cmd 
-$ iocsh.bash ch7_supplementary_path/7-6.cmd 
-```
+  ```console
+  $ iocsh.bash ch7_supplementary_path/7-3.cmd 
+  $ iocsh.bash ch7_supplementary_path/7-4.cmd
+  ```
 
-```
-$ iocsh.bash ch7_supplementary_path/7-7.cmd 
-$ iocsh.bash ch7_supplementary_path/7-8.cmd
-$ iocsh.bash ch7_supplementary_path/7-9.cmd
-```
+  ```console
+  $ iocsh.bash ch7_supplementary_path/7-5.cmd 
+  $ iocsh.bash ch7_supplementary_path/7-6.cmd 
+  ```
 
-## Identify potential risks before it fails
+  ```console
+  $ iocsh.bash ch7_supplementary_path/7-7.cmd 
+  $ iocsh.bash ch7_supplementary_path/7-8.cmd
+  $ iocsh.bash ch7_supplementary_path/7-9.cmd
+  ```
 
-As you see many failures scenarios in `Aggressive Tests`, it would be better to understand how this work all together before writing startup scripts. The current implementation within e3 (technically `require` version) cannot handle these all scenarios  properly, however, I think, it is good enough to accept this current limitation as it is, because we can reduce these risks if we follow the best practice to write a startup script.  At least, one should follow the first rule strictly and write at least a running IOC startup script one time, we don't have any further problems in future. 
+## Identify potential risks early
 
-* Use the specific version number of `modules`. If there is something wrong, you cannot start an IOC properly. Once you can start an IOC, then your IOC is restarted without any issues. 
-* Use the last dependent module name and version if one know its dependencies. In this example, use only `stream` and do not use `asyn` and `stream`. 
+The current implementation of e3 (technically within *require*) cannot handle these aforementioned cases properly. We must thus attempt to mitigate them, in part by following best practice when writing startup script. 
 
+* Use specific version numbers for modules. That way if something wrong you will not be able to start the IOC.
+
+* Use the highest version dependency module that you know will work. In the above examples, this would mean only using `stream`, and not both `asyn` and `stream` (as *StreamDevice* already depends on *Asyn*).
 
 ## Dependence, dependence, and dependence
-In this chapter, we only discuss the dependence when we compile a module. It is so-called **module header files** dependency. What does that means? It means the `stream` module uses several functions are defined in the `asyn` header files. That dependency file `*.d` is generated by the system compiler. For example, one can check that file as follows:
+
+In this chapter, we only discuss the dependency when compiling a module---the so-called *module header file* dependency; i.e., that the `stream` module uses functions which are defined in the `asyn` header files. That dependency file `*.d` is generated by the system compiler. We can look at that very file:
 
 ```
 e3-StreamDevice/StreamDevice/O.3.15.5_linux-x86_64/AsynDriverInterface.d: 
@@ -288,8 +245,6 @@ e3-StreamDevice/StreamDevice/O.3.15.5_linux-x86_64/AsynDriverInterface.d:
 /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.34.0/include/asynDriver.h \
 /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.34.0/include/asynInt32.h \
 ```
-
-Note that `Dependent Environment Variables` in this chapter, without `ASYN_DEP_VERSION`, that `cflag` will not be shown in the compiling procedure. This is **one** of many dependence which one should understand in order to build an IOC properly. We will come back this subject later. 
 
 
 ---

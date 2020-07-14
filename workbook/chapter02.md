@@ -6,9 +6,9 @@
 
 In this lesson, you'll learn how to do the following:
 
-* Load e3 using utility scripts
-* Switch between different versions of e3
-* Run a simple IOC with an example startup script
+* Load e3 using utility scripts.
+* Switch between different versions of e3.
+* Run a simple IOC with an example startup script.
 
 ---
 

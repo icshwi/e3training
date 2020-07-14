@@ -6,12 +6,12 @@
 
 In this lesson, you'll learn how to do the following:
 
-* Download e3 using git
-* Configure the e3 environment
-* Set up e3 EPICS base
-* Set up the e3 *require* module
-* Set up common e3 module packs
-* Test your installation
+* Download e3 using git.
+* Configure the e3 environment.
+* Set up e3 EPICS base.
+* Set up the e3 *require* module.
+* Set up common e3 module packs.
+* Test your installation.
 
 ---
 

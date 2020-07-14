@@ -6,10 +6,10 @@
 
 In this lesson, you'll learn how to do the following:
 
-* Build the startup script for an IOC in e3
-* Understand different methods of using EPICS functions within startup scripts
-* Understand the local setup for `.db` and `.protocol` files
-* Add common (global) modules to the IOC
+* Build the startup script for an IOC in e3.
+* Understand different methods of using EPICS functions within startup scripts.
+* Understand the local setup for `.db` and `.protocol` files.
+* Add common (global) modules to the IOC.
 
 ---
 

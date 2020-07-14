@@ -6,16 +6,16 @@
 
 In this lesson, you'll learn how to do the following:
 
-* Understand variables and parameters within an IOC 
-* Run commands to access access variables and parameters from within an IOC
-* Understand EPICS and e3 environment variables used when a module is configured
-* Combine variable commands to access path or files of any module within an IOC
+* Understand variables and parameters within an IOC.
+* Run commands to access access variables and parameters from within an IOC.
+* Understand EPICS and e3 environment variables used when a module is configured.
+* Combine variable commands to access path or files of any module within an IOC.
 
 ---
 
 ## Running an IOC
 
-The following variables are defined when an IOC is running within startup scripts and iocsh. 
+The following variables are defined when an IOC is running from within startup and iocsh scripts. 
 
 ### General `iocsh.bash` variables
 
@@ -27,9 +27,9 @@ The following variables are defined when an IOC is running within startup script
 
 * `IOCSH_PS1`: The IOC Prompt String.
 
-### Variables used by *require*
+> Note that it is generally useful to access the absolute path when an IOC starts within startup scripts.
 
-It is useful to access the absolute path when an IOC starts within startup scripts. <!-- fixme ??? -->
+### Variables used by *require*
 
 Require uses a few module specific variables, ending with `_VERSION`, `_DIR`, `_DB`, and `_TEMPLATES`. With `mrfioc2` as example, these would be:
 
@@ -41,8 +41,10 @@ Require uses a few module specific variables, ending with `_VERSION`, `_DIR`, `_
 Let's see these in action:
 
 ```console
-$ iocsh.bash ch6_supplementary_path/ch6.cmd
+[iocuser@host:e3training/workbook]$ iocsh.bash ch6_supplementary_path/ch6.cmd
+
 # --- snip snip ---
+
 epicsEnvSet "EXECUTE_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook
 epicsEnvSet "STARTUP_TOP"     /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path
 epicsEnvSet "TOP"             /home/jhlee/ics_gitsrc/e3training/workbook/ch6_supplementary_path/..
@@ -75,16 +77,17 @@ iocStats_DB        : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/d
 echo "iocStats_TEMPLATES : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db"
 iocStats_TEMPLATES : /epics/base-7.0.3/require/3.1.0/siteMods/iocStats/ae5d083/db
 #
+
 # --- snip snip ---
 ```
 
-> It is important to remember these variables. Perhaps especially the `*_DB` variable, as one should use this variable as the `STREAM_PROTOCOL_PATH` within a startup script together with the `stream` module. For example:
+> It is important to remember these variables. Perhaps especially the `*_DB` variable, as one should use this variable as the `STREAM_PROTOCOL_PATH` within startup scripts that utilize the `stream` module. For example:
 >
 > ```bash
 > epicsEnvSet("STREAM_PROTOCOL_PATH", "$(AAAAAA_DIR)")
 > ```
 
-Test this out yourself. Copy `ch6.cmd` to `ch6-local.cmd` and add *recsync* 1.3.0, then access the four aforementioned variables for the recsync module.
+Test this out yourself. Copy `ch6.cmd` to `ch6-local.cmd` and add *recsync* 1.3.0, then examine the four aforementioned variables for the recsync module.
 
 ### EPICS variables, parameters, and environment variables
 
@@ -136,7 +139,7 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 
 In the running IOC, let's require the recsync module.
 
-0. Run:
+1. Run:
 
    ```console
    58bef31.faiserv.18238 > require recsync,1.3.0
@@ -147,20 +150,20 @@ In the running IOC, let's require the recsync module.
    Calling function recsync_registerRecordDeviceDriver
    ```
 
-1. Redo require:
+2. Redo require:
 
    ```console
    58bef31.faiserv.18238 > require recsync,1.3.0
    Module recsync version 1.3.0 already loaded
    ```
 
-2. Type in the command `var requireDebug 1`:
+3. Type in the command `var requireDebug 1`:
 
    ```console
    58bef31.faiserv.18238 > var requireDebug 1
    ```
 
-3. Redo require again:
+4. Redo require again:
 
    ```console
    58bef31.faiserv.18238 > require recsync,1.3.0
@@ -182,7 +185,7 @@ In the running IOC, let's require the recsync module.
 
 As you can see, `var` is defined as a variable within the *require* module. This variable is usually used as a debug message control variable, but can be used for more. 
 
-4. Make sure to disable the debugging output again:
+5. Make sure to disable the debugging output again:
 
    ```console
    58bef31.faiserv.18238 > var requireDebug 0
@@ -336,19 +339,15 @@ The following variables are defined within a module or application by default.
 
 ##  Assignments
 
-* Access DB files of a module within a running IOC
-
-  Using the startup script in `ch6_supplementary_paht/ch6.cmd`, print out all database files of the *asyn* module within an IOC, using commands.
+* Using the startup script in `ch6_supplementary_paht/ch6.cmd`, print out all database files of the *asyn* module within an IOC.
 
   > If you get stuck, remember that there's a command to use any UNIX command from within an IOC shell. Can you remember what it is?
 
-* Vendor libraries
+* Which module is used for a specific vendor library? Why do we keep these files within the e3 structure? 
 
-  Which module is used for a specific vendor library? Why do we keep these files within the e3 structure? 
+* Can you find out which file it is that allows us to run `make vars` or `make env` within the e3 building system? 
 
-* `Makefile` rules
-
-  Can you find out which file it is that allow us to run `make vars` or `make env` within the e3 building system? It is the same for all modules and applications, so where could be located?
+  > It is the same for all modules and applications, so where could be located?
 
 
 ---

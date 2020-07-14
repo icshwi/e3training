@@ -6,20 +6,20 @@
 
 In this lesson, you'll learn how to do the following:
 
-* Understand why e3 doesn't hold any source code
-* Understand the anatomy of an e3 module's directory
-* Understand the *Deployment mode*
-* Understand the *Development mode*
-* Understand two repositories within e3 
-* Patch files in EPICS and e3
+* Understand why e3 doesn't hold any source code.
+* Understand the anatomy of an e3 module's directory.
+* Understand the *Deployment mode*.
+* Understand the *Development mode*.
+* Understand two repositories within e3. 
+* Patch files in EPICS and e3.
 
 ---
 
 ## No source code - configuration files!
 
-By design, e3 modules and applications have no source code in their repositories, only configuration files and utility scripts. These are what allow us consistent building of environments from source code, modules, applications, kernel drivers, etc., that are hosted elsewhere.
+By design, e3 modules and applications have no source code in their repositories, but only configuration files (and utility scripts). These are what allow us consistent building of environments from source code, modules, applications, kernel drivers, etc., which in turn can be hosted elsewhere.
 
-Thus, e3 is not concerned with each commit or release in a source code repository, but rather on specific *snapshots* (a particular release version) needed for a certain implementation. For example, at a certain point in time we select *stream* version `2.7.14` as the stable release within e3. Later, we select version `2.8.8` because a subsystem requires it. At that moment, we don't really care about versions `2.8.0`, `2.8.1`, and so forth. We don't need to sync their changes into a master branch of a local repository, which we would have to clone or fork. Simply put, we don't need to do any maintenance job. The point is to add dependencies only when we need them, and to reduce unecessary work for maintainers of the code base.
+Therefore, e3 is not concerned with each commit nor release in a source code repository, but rather on specific *snapshots* (a particular release version) needed for a certain implementation. For example, at a certain point in time we select *stream* version `2.7.14` as the stable release within e3. Later, we select version `2.8.8` because a subsystem requires it. At that moment, we don't really care about versions `2.8.0`, `2.8.1`, and so forth. We don't need to sync their changes into a master branch of a local repository, which we would have to clone or fork. Simply put, we don't need to do any maintenance job. The point is to add dependencies only when we need them, and to reduce unecessary work for maintainers of the code base.
 
 > We will describe how to release a specific version of an e3 module in [Chapter 11](chapter11.md). <!-- is this really correct? -->
 
@@ -101,11 +101,13 @@ In order to explain how e3 uses *git submodules*, we will do the following exerc
 
 ## Deployment mode
 
-As you just saw, `git submodule` is used to import one repository into another, which will allow us to handle source files scattered between different facilities. To make full use of this functionality however, we would need full permission for all repositories; thus, e3 will use its minimal feature, which relates to the so-called *magic number*---the short version of the *SHA-1 checksum* used by git to identify commits. 
+As you just saw, `git submodule` is used to import one repository into another, which will allow us to handle source files scattered between different facilities. You also saw that we rely on tags where applicable, albeit as this would require full permissions for all source repositories e3 often uses a more minimalistic feature: the so-called *magic number*--the short version of the *SHA-1 checksum* used by git to identify commits.
 
-So, we use a specific commit version of iocStats within e3-iocStats. And if new versions are stable enough, we can use `git submodule update --init` to update the link within an e3 module. We can thus pick which specific version of a module we would like to use for our release. 
+> An intrinsic property of this architecture is that this essentially makes the source module repository static (as it's a submodule).
 
-However, when source code repositories are changed very often, it also create additional maintenance work where one has to update the SHA-1 checksum in order to match a selected version of a module. Thus, with `make init`, we download the latest version of a module, or switch to a specific version (defined in `configure/CONFIG_MODULE` or in the corresponding `.local` file). <!-- todo: rewrite this -->
+So, we use a specific commit version of *iocStats* within *e3-iocStats*. And if new versions are stable enough, we can use `git submodule update --init` to update the link within an e3 module. We can thus pick which specific version of a module we would like to use for our release. 
+
+This however also means that when source code repositories are changed very often, it creates additional maintenance work where one has to update the SHA-1 checksum in order to match a selected version of a module. Thus, with `make init`, we download the latest version of a module, or switch to a specific version (defined in `configure/CONFIG_MODULE` or in the corresponding `.local` file). <!-- todo: rewrite this -->
 
 The following commands utilize `git submodule` and are used for the deployment mode of a module. <!-- todo: rewrite this -->
 
@@ -119,9 +121,9 @@ The following commands utilize `git submodule` and are used for the deployment m
 
 ## Development mode
 
-The development mode is primarily intended to deal with cases where source code is hosted on repositories one lacks proper permissions to manipulate.
+The development mode is instead intended to allow the developer to modify the source module, and utilizes `git clone` over `git submodule`.
 
-Inside of `configure/`, you will find two files with the suffix `_DEV`. `CONFIG_MODULE_DEV` and `RELEASE_DEV` are the counterparts of `CONFIG_MODULE` and `RELEASE` used in the deployment mode. These counterpart files are nearly identical, except for:
+Inside of `configure/`, you will find two files with the suffix `_DEV`: `CONFIG_MODULE_DEV` and `RELEASE_DEV` are the counterparts of `CONFIG_MODULE` and `RELEASE` used in the deployment mode. These counterpart files are nearly identical, except for:
 
 * `E3_MODULE_DEV_GITURL`: The remote path to the repository which one would like to download into an e3 module.
 

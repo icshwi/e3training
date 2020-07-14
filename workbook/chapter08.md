@@ -21,7 +21,6 @@ There is no clear boundary among modules, applications, and IOCs. Thus, we shoul
 ### Modules 
 We can define generic EPICS modules, which we usually get from the EPICS community or in-house development. For example, `iocStats`, `mrfioc2`, `asyn`, or `autosave`. The installation location is defined as `E3_SITEMODS_PATH` discussed before in [Chapter 6](chapter6.md). The corresponding symbolic links are created within `E3_SITELIBS_PATH`. **Modules** within e3 are the core component in order to build a specific EPICS application. And in order to build the system IOC, one may need to combine **Modules** and **Applications** altogether. One needs to design e3-module_name repository and setup them via `e3TemplateGenerator`. We will discuss this subject in [Chapter 9](chapter9.md) and one can `require` any modules within e3. 
 
-
 * Check `E3_SITEMODS_PATH`
 
 We assume that one should be in **E3_TOP**. 

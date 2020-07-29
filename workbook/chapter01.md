@@ -114,8 +114,7 @@ Examples:
 Configuring EPICS per above directions will generate the following three `*.local` files.
 
 * `CONFIG_BASE.local`
-
-<!-- So yeah this is obviously not python, but now syntax highlighting works -->
+  
   ```python
   E3_EPICS_PATH:=/epics
   EPICS_BASE_TAG:=tags/r3.15.5
@@ -125,14 +124,14 @@ Configuring EPICS per above directions will generate the following three `*.loca
   ```
 
 * `RELEASE.local`
-
+  
   ```python
   EPICS_BASE:=/epics/base-3.15.5
   E3_REQUIRE_VERSION:=3.0.5
   ```
 
 * `REQUIRE_CONFIG_MODULE.local`
-
+  
   ```python
   EPICS_MODULE_TAG:=tags/v3.0.5
   ```

@@ -361,10 +361,10 @@ You download, build, and install a group by using the `mod` argument (as in **mo
 
 The mod argument contain these---individually accessible---steps:
  
-* `cmod` Clean  
-* `gmod` Clone  
-* `imod` Initiate  
-* `bmod` Build and install  
+* `cmod`: Clean  
+* `gmod`: Clone  
+* `imod`: Initiate  
+* `bmod`: Build and install  
 
 And the *makefile* rules that can be used for a module are:
 

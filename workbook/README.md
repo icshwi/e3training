@@ -24,11 +24,11 @@ For some of the chapters there are supplementary directories containing code, so
 ## Part 2
 
 ##### Chapter 11: [Other dependencies](chapter11.md)
-##### Chapter 12: Release rules :construction:
-##### Chapter 13: Working with the EPICS community :construction:
-##### Chapter 14: Supplementary tools :construction:
+##### Chapter 12: [Release rules](chapter12.md) :construction:
+##### Chapter 13: [Working with the EPICS community](chapter13.md) :construction:
+##### Chapter 14: [Supplementary tools](chapter14.md) :construction:
 
 ## Appendices
 
-##### Appendix A: [Build system troubleshoting](appendixA.md)
-##### Appendix B: [Segmentation fault with GDB](appendixB.md)
+##### Appendix A: [Build system troubleshoting](appendixA.md) :construction:
+##### Appendix B: [Segmentation fault with GDB](appendixB.md) :construction:

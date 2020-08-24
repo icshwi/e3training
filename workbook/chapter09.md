@@ -1,5 +1,7 @@
 # Chapter 9: Building an e3 Module
 
+[Return to Table of Contents](README.md)
+
 ## Lesson Overview
 
 In this lesson, you'll learn how to do the following:

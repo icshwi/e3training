@@ -2,13 +2,12 @@
 
 [Return to Table of Contents](README.md)
 
-On chapter 7 we presented "module header files dependency", but as we've 
-seen this is just one of many possible dependencies. On this chapter we
-present some of the other possible dependencies.
+On chapter 7 we presented "module header files dependency", but as we've seen this is just one of many possible dependencies. On this chapter we present some of the other possible dependencies.
 
 ## Lessons overview
 
 In this lesson, you'll learn how to do the following:
+
 * Use a new record type from other module on your module
 * Use a db or template file from other module to generate a new db file on your module
 
@@ -210,5 +209,7 @@ files are the same used on tutorial.
 
 
 ---
+
+[Next: Chapter 12 - Release rules](chapter12.md)
 
 [Return to Table of Contents](README.md)

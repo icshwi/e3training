@@ -6,578 +6,366 @@
 
 In this lesson, you'll learn how to do the following:
 
-* Understand the difference between e3 Modules and its Applications
-* Understand the e3 installation directory structure
-* Can create an e3 application with a remote source repository with e3TemplateGenerator
-* Can create an e3 application with local source files with e3TemplateGenerator
-* Can edit a module makefile in order to build, and install its application into e3
+* Understand the difference between modules and applications.
+* Understand the e3 wrapper directory structure.
+* Create an e3 wrapper using the e3TemplateGenerator.
+* Edit a module makefile in order to build and install it into e3.
 
 ---
 
 ## Modules, Applications, and IOCs
 
-There is no clear boundary among modules, applications, and IOCs. Thus, we should define them according to what we would like to distinguish. However, to use them differently gives us more clear ideas how to handle the entire system concisely in terms of the ESS lifecycle. 
+> There is no clear boundary between modules, applications, and IOCs in EPICS, so usage of these terms tend to vary between facilities.
+
+Modules within e3 are essentially the core component that enables building of an application, and consist of source code for e.g. specific communication protocols. Modules will often be collected from the EPICS community (and sometimes modified), but are also developed in-house. Typically, modules and applications are both needed to build an IOC. Applications are, however, not strongly defined at ESS, which is why we mainly will talk about modules and IOCs. We will, however, often use the term EPICS application, by which we typically refer to both applications and modules.
+
+> Applications are otherwise often modules with customized features, e.g. unique sequencer files, or database files for specific software.
 
 ### Modules 
-We can define generic EPICS modules, which we usually get from the EPICS community or in-house development. For example, `iocStats`, `mrfioc2`, `asyn`, or `autosave`. The installation location is defined as `E3_SITEMODS_PATH` discussed before in [Chapter 6](chapter6.md). The corresponding symbolic links are created within `E3_SITELIBS_PATH`. **Modules** within e3 are the core component in order to build a specific EPICS application. And in order to build the system IOC, one may need to combine **Modules** and **Applications** altogether. One needs to design e3-module_name repository and setup them via `e3TemplateGenerator`. We will discuss this subject in [Chapter 9](chapter9.md) and one can `require` any modules within e3. 
 
-* Check `E3_SITEMODS_PATH`
+Most e3 modules originate from the EPICS community, like `iocStats`, `mrfioc2`, `asyn`, and `autosave`. In e3, the installation location for modules is defined in `E3_SITEMODS_PATH`, as discussed earlier in [Chapter 6](chapter06.md). Corresponding symbolic links are created and defined in `E3_SITELIBS_PATH`.
 
-We assume that one should be in **E3_TOP**. 
-```
-e3-3.15.5 (master)$ source tools/setenv
-e3-3.15.5 (master)$ echo ${E3_SITEMODS_PATH}
-e3-3.15.5 (master)$ tree -L 2 ${E3_SITEMODS_PATH}
-```
+> You should have a look at these aforementioned variables:
+>
+> ```console
+> [iocuser@host:e3-3.15.5]$ source tools/setenv
+> [iocuser@host:e3-3.15.5]$ echo ${E3_SITEMODS_PATH}
+> [iocuser@host:e3-3.15.5]$ tree -L 2 ${E3_SITEMODS_PATH}
+> [iocuser@host:e3-3.15.5]$ echo ${E3_SITELIBS_PATH}
+> [iocuser@host:e3-3.15.5]$ tree -L 4 ${E3_SITELIBS_PATH}
+> ```
 
-We can check `E3_SITELIBS_PATH` also.
-```
-e3-3.15.5 (master)$ echo ${E3_SITELIBS_PATH}
-e3-3.15.5 (master)$ tree -L 4 ${E3_SITELIBS_PATH}
-```
+So---as you've seen previously---e3's design is based on having *wrappers* for modules. These wrappers essentially contain our site specific modifications to "common" EPICS modules; in part to support collaboration with the EPICS community while still suporting novel functionality.
 
 ### Applications
 
-We can define applications within e3 as a module which has customized features, i.e., unique sequencer files, and database files for an unique system. One needs to design e3-module_name repository and setup them via `e3TemplateGenerator` and one can `require` any application within e3. 
-
-* Check `E3_SITEAPPS_PATH`
-
-```
-e3-3.15.5 (master)$ echo ${E3_SITEMODS_PATH}
-e3-3.15.5 (master)$ tree -L 4 ${E3_SITEAPPS_PATH}
-```
-
-If one doesn't know which category can used for EPICS module or IOC, we can define that this case is in the **applications** if we have to install binary and scripts, or compile source files. In most cases, we can use the applications. 
-
+Although ESS "doesn't have applications", there is still built-in support into e3 for differentiation of modules and applications, available upon need. Praxis is to name e3 applications with the same notation as modules (`e3-applicationName`), and there is a `E3_SITEAPPS_PATH` available for possible future needs. Applications can then be loaded just as modules (`require application,version`).
 
 ### IOCs
 
-With e3, IOC has only start up scripts. It may has its own repository, but not necessary to be generated by using `e3TemplateGenerator`. 
+In e3, IOCs are primarily just startup scripts. You therefore don't need to use a utility like the `e3TemplateGenerator`, but can just create a directory with a standardised structure (with some variation as per your requirements). This will commonly look like:
 
+```console
+[iocuser@host:iocs]$ tree e3-ioc-<iocname>
+e3-ioc-<iocname>
+├── iocsh
+│   └── .keep
+├── env
+│   └── .keep
+├── opi
+│   └── .keep
+├── .gitignore
+├── README.me
+└── st.cmd
 
-## How to build an Application
+3 directories, 6 files
+```
 
-There are many scenarios to build an application. However, we explain few scenarios, because one can customize it once one understand them correctly. And we introduce few **ACTION**s which help users how to build an application by using `e3Templategenerator`. 
+> If you have no need for `iocsh/` or `env/` you can of course skip these, just as you can add directories (e.g. `docs/`).
 
-Before finding the correct **ACTION**, one has to ask oneself the following questions:
+## How to build a module/application
 
-### Questions 
+> For convenience, we will henceforth refer to the e3 module or application as an e3 wrapper.
 
-- **Q00** : Do you have source codes?
-  - YES : Go to Q01
-  - NO  : Go to Q03
+How you build your e3 wrapper will depend on how your module's code is arranged. You can have the wrapper contain the module, you can source control the wrapper separately, and if there is an existing module already available in git (see e.g. [epics-modules](https://github.com/epics-modules)), you can simply point towards this. We will now go through how to create wrappers for these cases.
 
-- **Q01** : Is your source codes in a remote (git) repository?
-  - YES : Go to Q10
-  - NO  : You have source codes locally, Go to Q02
+> The purpose of e3 wrappers is to have a standardised interface to modules and applications using the standard EPICS structure. Our wrapper is essentially a front-end for the module/application.
 
-- **Q02** : Do you want to keep these source codes in a separated remote repository? 
-  - YES : Create your own repository, and push all local files to that repository. And go to ACTION 1
-  - NO  : ACTION 2
+To create an e3 wrapper (`e3-moduleName`), we will use a utility called the `e3TemplateGenerator` (which is part of [this repository](https://github.com/icshwi/e3-tools)). Clone this repository and inspect it before continuing.
 
-- **Q03** : You don't have any source codes, in this case, I would recommend to use the standard EPICS structure. Do you want to accept this suggestion? 
-  - YES : Follow ACTION 3, put all source files into application-loc path
-  - NO : Follow ACTION 2, and put all source files into application-loc path
+### Module/application already on git
 
-- **Q10** : Do you want to keep the old repository with its original forms?
-  - YES : Follow ACTION 1
-  - NO : ACTION 0
+In `e3-tools/e3TemplateGenerator`, there is a `modules_conf/` directory. Inspect some of the configuration files in this directory:
 
+```console
+[iocuser@host:e3TemplateGenerator]$ cat modules_conf/genesysGEN5kWPS.conf 
+EPICS_MODULE_NAME:=genesysGEN5kWPS
+EPICS_MODULE_URL:=https://github.com/icshwi
+E3_TARGET_URL:=https://github.com/icshwi
+E3_MODULE_SRC_PATH:=genesysGEN5kWPS
+```
 
-### ACTIONS 
- 
-- **ACTION 1** : this ACTION has the following answers in Questions : Q00(YES), Q01(YES), and Q10(YES). We will use one EPICS Application [1] has the standard EPICS Application or IOC structure. We highly recommend users to use the standard EPICS structure, because it gives us backward compatibility to the standard EPICS if we, EPICS community, or both need it. 
+> You may here recognize the variables `EPICS_MODULE_NAME` and `E3_MODULE_SRC_PATH` from [Chapter 6](chapter06.md).
 
-  - Download e3-tools, please remember README.md [2] is your friend. Please spend some time in order to look around within. 
-    ```
-    $ mkdir ${HOME}/ics_gitsrc
-    $ cd ${HOME}/ics_gitsrc
-    $ git clone https://github.com/icshwi/e3-tools
-    $ cd e3-tools/e3TemplateGenerator/
-    $ e3TemplateGenerator (master)$ tree -L 2
-      .
-      ├──  e3TemplateGenerator.bash
-      ├──  modules_conf
-      │   ├──  caputlog.conf
-      │   ├──  genesysGEN5kWPS.conf
-      │   ├──  local.conf
-      │   ├──  localexample.conf
-      │   └──  MCoreUtils.conf
-      └──  README.md
-    ```
-  - Check `modules_conf/genesysGEN5kWPS.conf`
-    ```
-    e3TemplateGenerator (master)$ more modules_conf/genesysGEN5kWPS.conf 
-    EPICS_MODULE_NAME:=genesysGEN5kWPS
-    EPICS_MODULE_URL:=https://github.com/icshwi
-    E3_TARGET_URL:=https://github.com/icshwi
-    E3_MODULE_SRC_PATH:=genesysGEN5kWPS
-    ```
+* `EPICS_MODULE_NAME`: The module name.
 
-  - Four Variables one should understand. Two variables `EPICS_MODULE_NAME` and `E3_MODULE_SRC_PATH` are already defined in [Chapter 6](chapter6.md)
-    - `EPICS_MODULE_NAME` : used for the E3 module name, where one use it as its name
-    - `EPICS_MODULE_URL`  : shown as the module source repository URL
-    - `E3_TARGET_URL`     : used for the E3 module repository 
-    - `E3_MODULE_SRC_PATH`: shown as the source code directory name in `EPICS_MODULE_URL`
+* `EPICS_MODULE_URL`: The git project where the module is hosted; the URI to the repository with the module name stripped.
 
-    The remote repository url of the source files is `https://github.com/icshwi/genesysGEN5kWPS`. Thus, the remote repository url can be translated into `EPICS_MODULE_URL/E3_MODULE_SRC_PATH`.
-	
+* `E3_TARGET_URL`: The git project that the e3 wrapper should be hosted under.
 
-  - Run the following command :
-    ```
-    e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf -d ~/e3-trainings/siteApps
-    >>
-    fimscb is used as module name.
-    >>
-    >> Your sources are located in https://github.com/icshwi.
-    >> git submodule will be used.
-    >>
-	EPICS_MODULE_NAME  : genesysGEN5kWPS           
-	E3_MODULE_SRC_PATH : genesysGEN5kWPS           
-	EPICS_MODULE_URL   : https://github.com/icshwi 
-	E3_TARGET_URL      : https://github.com/icshwi 
-    >>
-	e3 module name     : e3-genesysGEN5kWPS                              
-	e3 module url full : https://github.com/icshwi/genesysGEN5kWPS       
-	e3 target url full : https://github.com/icshwi/e3-genesysGEN5kWPS.git
-    >>
-    Initialized empty Git repository in /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/.git/
-    https://github.com/icshwi/genesysGEN5kWPS is adding as submodule...
-    Cloning into 'genesysGEN5kWPS'...
-    
-    ......
-    >>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS.git for the remote repository?
-     In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEaN5kWPS.git.
+* `E3_MODULE_SRC_PATH`: The name of the e3 wrapper.
 
-	     If yes, the script will push the local e3-fimscb to the remote repository. (y/N)? 
-    ```
-  - Type `N` or `Enter`
-    ```
-    >>>> Skipping add the remote repository url. 
-         And skipping push the e3-genesysGEN5kWPS to the remote also.
+Our config file above thus specifies that we (already) have a standard EPICS module at https://github.com/icshwi/genesysGEN5kWPS, and that we want to create a wrapper for this at https://github.com/icshwi/e3-genesysGEN5kWPS.
 
-    In case, one would like to push this e3 module to git repositories,
-    Please use the following commands within e3-fimscb/ :
-       * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
-       * git commit -m "First commit"
-       * git push -u origin master
-		
-    The following files should be modified according to the module : 
-       * /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/configure/CONFIG_MODULE
-       * /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/configure/RELEASE
-       * /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS/genesysGEN5kWPS.Makefile
+Let's now try to run the e3TemplateGenerator with this configuration.
 
-    One can check the e3- template works via 
-	cd /home/jhlee/e3-trainings/siteApps/e3-genesysGEN5kWPS
-	make init
-	make vars
-    ```
-	
-  - Check how `e3-genesysGEN5kWPS`, which can be translated into `e3-EPICS_MODULE_NAME`
-  
-    ```
-    e3TemplateGenerator (master)$ cd e3-genesysGEN5kWPS/
-    e3-genesysGEN5kWPS (master)$ tree -L 1
-    .
-    |-- cmds
-    |-- configure
-    |-- docs
-    |-- genesysGEN5kWPS                         ---> E3_MODULE_SRC_PATH
-    |-- iocsh
-    |-- opi
-    |-- patch
-    |-- template
-    |-- genesysGEN5kWPS.Makefile                ---> EPICS_MODULE_NAME.Makefile
-    |-- Makefile
-    `-- README.md
-    ```
-	
-  - What do you see? And do you understand how we use the above four variables? 
-  
-  - We selected `N` or `Enter` to skip to push the local e3-genesysGEN5kWPS to the remote repository `https://github.com/icshwi/e3-genesysGEN5kWPS`, can you translated the remote repository url by using some of four variables?
-	
-  - What if `Y` is selected? Are you ready to see? Please try the following commands:
-    ```
-    e3TemplateGenerator (master)$ rm -rf e3-genesysGEN5kWPS/
-    e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf
-      
-    ......
-    ......
-      
-    >>>> Do you want to add the URL https://github.com/icshwi/e3-genesysGEN5kWPS.git for the remote repository?
-         In that mean, you already create an empty repository at https://github.com/icshwi/e3-genesysGEN5kWPS.git.
-	     If yes, the script will push the local e3-genesysGEN5kWPS to the remote repository. (y/N)? y
+* Run the following command (press `N` when asked if you want to push the local `e3-genesysGEN5kWPS` to the remote repository)):
 
-    >>>> Repository exists!!!     Are you sure this is your first push?
-         You should aware what you are doing now ....
-	     If you are not sure, please stop this procedure immediately!
+  > To create the structure elsewhere than `$HOME`, replace `~/` with your target destination of choice.
 
-    >> Do you want to continue (y/N)?
-    ```
-    Yes, the remote repository for `https://github.com/icshwi/e3-genesysGEN5kWPS` exists, so it will ask us one more question. If you select `N` or `enter`, it will print out the following messages:
+  ```console
+  [iocuser@host:e3TemplateGenerator]$ ./e3TemplateGenerator.bash -m modules_conf/genesysGEN5kWPS.conf -d ~/
+  ```
 
-    ```
-    >> Skip here. 
+* Look at the file structure of the new wrapper directory:
 
-    >>>> Skipping add the remote repository url. 
-         And skipping push the e3-genesysGEN5kWPS to the remote also.
+  ```console
+  [iocuser@host:e3TemplateGenerator]$ tree -L 1 ~/e3-genesysGEN5kWPS
+  .
+  |-- cmds
+  |-- configure
+  |-- docs
+  |-- genesysGEN5kWPS                     # ---> E3_MODULE_SRC_PATH
+  |-- iocsh
+  |-- opi
+  |-- patch
+  |-- template
+  |-- genesysGEN5kWPS.Makefile            # ---> EPICS_MODULE_NAME.Makefile
+  |-- Makefile
+  `-- README.md
+  ```
 
-    In case, one would like to push this e3 module to git repositories,
-    Please use the following commands within e3-genesysGEN5kWPS/ :
-      * git remote add origin https://github.com/icshwi/e3-genesysGEN5kWPS.git
-      * git commit -m "First commit"
-      * git push -u origin master
-    ```
-    If you select `y`, which means that this push is the first one. In this case you can push the just created e3 structure into the repository. We will explain this more with the real example later.  You may try to select `y` to see how it works if you want. Now let's do one real example.
-	  
-  - Build an e3 application, with the remote repository [1].
-  
-    - **ACTION 1.1** Define four variables in fimscb.conf as follows:
-      ```
-      EPICS_MODULE_NAME:=fimscb
-      EPICS_MODULE_URL:=https://github.com/icshwi
-      E3_TARGET_URL:=https://github.com/jeonghanlee
-      E3_MODULE_SRC_PATH:=fimscb
-      #
-      ```
-    - **ACTION 1.2** Create the e3-fimscb in your target url. In this example, the target url `E3_TARGET_URL` is https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
-	 
-      | ![Creation Repository 1](ch8_supplementary_path/fig8-1.png) |    
-      | :---: |    
-      | **Figure 8.1** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. | 
+Do you understand how the four environment variables mentioned earlier are used here?
 
-      |![Creation Repository 2](ch8_supplementary_path/fig8-2.png)  |    
-      | :---: |     
-      | **Figure 8.2** The screenshot for the after repository creation. |   
+Let's now build an e3 wrapper with a remote repository. The repository we will be using is for ESS' RF FIM SCB monitoring system.
 
-      Please, run e3TemplateGenerator.bash with that file
-      ```
-      e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/fimscb.conf -d ~/e3-trainings/siteApps
-      ......
-      ......
-      
-      The following files should be modified according to the module : 
-      
-         * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/CONFIG_MODULE
-         * /home/jhlee/e3-trainings/siteApps/e3-fimscb/configure/RELEASE
-         * /home/jhlee/e3-trainings/siteApps/e3-fimscb/fimscb.Makefile
+1. Open `fimscb.conf` and modify the `E3_TARGET_URL` to point towards your personal GitHub account.
 
-      One can check the e3- template works via
-         cd /home/jhlee/e3-trainings/siteApps/e3-fimscb
-         make init
-         make vars
-      ```
-      , where `-d` option allows us to define the target directory which has e3-fimscb locally. And Please select `y` to push all changes into `E3_TARGET_URL`/e3-`EPICS_MODULE_NAME`. Can you see the same result shown in Figure 8.3?
-	  	  
-      |![Creation Repository 3](ch8_supplementary_path/fig8-3.png) |    
-      | :---: |    
-      | **Figure 8.3** The screenshot for the repository after the first push all codes. |   
+2. Open GitHub in a browser and create a new repository called `e3-fimscb`.
 
-    - **ACTION 1.3** Check your created e3 application. `e3-fimscb` is located in `${HOME}/e3-trainings/siteApps` now. 
-      ```
-      e3TemplateGenerator (master)$ tree -L 1 ~/e3-trainings/siteApps/e3-fimscb
-      e3TemplateGenerator (master)$ make -C  ~/e3-trainings/siteApps/e3-fimscb/ vars
-      ```
-	  
-    - **ACTION 1.4** Modifiy few files in order to build, and install them within the existent e3 environment. 
-      ```
-      e3TemplateGenerator (master)$ cd ~/e3-trainings/siteApps/e3-fimscb/
-      e3-fimscb (master)$ make init
-      ```
-      Now you have the e3 structure and its configuration. The next step is to change few files. There are three files you should change. The `configure/CONFIG_MODULE` and `configure/RELEASE` were discussed in earlier chapters. The most important thing is `fimscb.Makefile`, which is generated by `e3TemplateGenerator` and has only default options. Please edit the makefile as follows:
-      ```
-      where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-      include $(E3_REQUIRE_TOOLS)/driver.makefile
-      include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
-      
-      APP:=fimscbApp
-      APPDB:=$(APP)/Db
-      
-      TEMPLATES += $(APPDB)/fimscb.db
-      TEMPLATES += $(APPDB)/fimscb.proto
-      
-      db:
-      
-      .PHONY: db 
-      
-      vlibs:
-      
-      .PHONY: vlibs
-      ```
-      Let's build `e3-fimscb` now. 
-      ```
-      e3-fimscb (master)$ make build
-      e3-fimscb (master)$ make install
-      e3-fimscb (master)$ make existent LEVEL=3
-      /epics/base-3.15.5/require/3.0.4/siteApps/fimscb
-      └── master
-            ├── db
-			│   ├── fimscb.db
-			│   └── fimscb.proto
-			└── lib
-				└── linux-x86_64
-      ```
-      Let's explore it within `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as
-      ```
-      $ bash /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash
-      ```
-      
-      If not, please go to **E3_TOP**, and `source tools/setenv`.  Let's assume that you are in iocsh.bash such as
-      ```
-      
-      effbc10.kaffee.4837 >
-      effbc10.kaffee.4837 > require fimscb,master
-      Module fimscb version master found in /epics/base-3.15.5/require/3.0.4/siteApps/fimscb/master/
-      Module fimscb has no library
-      effbc10.kaffee.4837 > require fimscb,master
-      Module fimscb version master already loaded
-      effbc10.kaffee.4837 > cd $(fimscb_DB)
-      effbc10.kaffee.4837 > system (ls)
-      effbc10.kaffee.4837 > pwd
-      ```
-      Here you can find answers for one of assignments in [Chapter 6](chapter6.md). 
+3. Run e3TemplateGenerator using the `fimscb.conf` configuration file. This time, press `Y` at the first prompt to push all changes to `E3_TARGET_URL`/e3-`EPICS_MODULE_NAME`.
 
-    - **ACTION 1.5** Commit your changes into the e3 remote repository.
-      ```
-      e3-fimscb (master)$ git status
-      .....
-      modified:   fimscb.Makefile
-      e3-fimscb (master)$ git add fimscb.Makefile
-      e3-fimscb (master)$ git commit -m "update makefile"
-      e3-fimscb (master)$ git push
-      ```
- 
-	 
-- **ACTION 2** : e3TemplateGenerator with the local mode 
-  There are many ways one can hold files within e3. Here I would like to show the most recommend way. This is not the mandatory, but you will see the potential advantage in near future if you works with local files in long time. Here is the _fake_ scenario: I find the interesting EPICS application which I would like to integrate into e3. And I don't know how I can handle these source files, because the file is _tar.gz_ file. However, I would like to change their source codes while I am going to study them. 
-  
-  Now we can build an e3 application, with the local files that can be downloaded from the original site [3].
+4. Inspect (and initialize) your new e3-wrapper:
 
-  - **ACTION 2.1**  Define three variables in Clock.conf as follows:
-    ```
-    EPICS_MODULE_NAME:=Clock
-    E3_TARGET_URL:=https://github.com/jeonghanlee
-    E3_MODULE_SRC_PATH:=Clock
-    #
-    ```
-  - **ACTION 2.2**  Create e3-Clock in your target url. In this example, the target url `E3_TARGET_URL` is  https://github.com/jeonghanlee. Note that you have the write permission for `E3_TARGET_URL`. 
-  
-    | ![Creation Repository 4](ch8_supplementary_path/fig8-4.png)      |    
-    | :---: |    
-    | **Figure 8.4** The screenshot for the before repository creation based on `E3_TARGET_URL`. Note that no options are selected. |   
+   ```console
+   [iocuser@host:e3TemplateGenerator]$ tree -L 1 ~/e3-fimscb
+   ```
 
+   > Of course modify the path if you chose a different target destination (`-d path/to/dir`).
 
-    | ![Creation Repository 5](ch8_supplementary_path/fig8-5.png)      |    
-    | :---: |    
-    | **Figure 8.5** The screenshot for the after repository creation. |   
+   *N.B.! Before initializing, modify your `configure/RELEASE` and `configure/CONFIG_MODULE` as we've gone through in previous chapters.*
 
-    Please run e3TemplateGenerator.bash with that file
-    ```
-     e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/Clock.conf -d ~/e3-trainings/siteApps
-     >>
-     Clock is used as module name.
-     >>
-     >> Your sources are located in e3-Clock.
-     >>
-     EPICS_MODULE_NAME  : Clock
-     E3_MODULE_SRC_PATH : Clock
-     E3_TARGET_URL      : https://github.com/jeonghanlee
-     >>
-     e3 module name     : e3-Clock
-     e3 target url full : https://github.com/jeonghanlee/e3-Clock.git
-     >>
-     Initialized empty Git repository in /home/jhlee/e3-trainings/siteApps/e3-Clock/.git/
-     Clock-loc
-     
-     >>>> Do you want to add the URL https://github.com/jeonghanlee/e3-Clock.git for the remote repository?
-          In that mean, you already create an empty repository at https://github.com/jeonghanlee/e3-Clock.git.
-          If yes, the script will push the local e3-Clock to the remote repository. (y/N)? y
-   
-     >>>> Repository exists!!!     Are you sure this is your first push?
-          You should aware what you are doing now ....
-		  If you are not sure, please stop this procedure immediately!
-	   
-     >> Do you want to continue (y/N)? y
-      
-     >>>> We are going to the further process ...... [master (root-commit) 13536c5] Init..e3-Clock
-      
-     ......
-     ......
-      
-     * [new branch]      master -> master
-     Branch master set up to track remote branch master from origin.
-     
-     The following files should be modified according to the module :
-        * /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/CONFIG_MODULE
-	    * /home/jhlee/e3-trainings/siteApps//e3-Clock/configure/RELEASE
-        * /home/jhlee/e3-trainings/siteApps//e3-Clock/Clock.Makefile
-	
-     One can check the e3- template works via
-        cd /home/jhlee/e3-trainings/siteApps//e3-Clock
-	    make init
-	    make vars
-     ```
-      
-  - **ACTION 2.3** Check your created e3 application. `e3-Clock` is located in `${HOME}/e3-trainings/siteApps` now. 
-    ```
-    e3TemplateGenerator (master)$ cd  ~/e3-trainings/siteApps/e3-Clock/
-    e3-Clock (master)$ tree -L 1
-    .
-    |-- Clock-loc
-    |-- cmds
-    |-- configure
-    |-- docs
-    |-- iocsh
-    |-- opi
-    |-- patch
-    |-- template
-    |-- Clock.Makefile
-    |-- Makefile
-    `-- README.md
-    ```
-   
-    The structure is the exact same as **ACTION 1** except **Clock-loc**. In that directory, now, you can copy or extract all your codes. If you don't want to keep the standard EPICS structure, you can simply copy them all into **Clock-loc** path.
-   
-    ```
-    e3-Clock (master)$ cd Clock-loc/
-    Clock-loc (master)$ wget -c http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
-    Clock-loc (master)$ tar xvzf second-devsup.tar.gz
-    ```
-   
-    The source codes has `Clock1App` instead of `ClockApp`. We can use either Clock1App or ClockApp. Here, I will use `Clock1App`, so
-    ```
-    Clock-loc (master)$ rm -rf ClockApp/
-    ```
-    And check what they are in that path, and go back to e3-Clock
-    ```
-    Clock-loc (master)$ tree Clock1App/
-    Clock-loc (master)$ cd ..
-    e3-Clock  (master)$ make vars
-    ```
-   
-    One can check `git status` also. 
-		
-  - **ACTION 2.4** Modify few files in order to build, and install them within the existent e3 environment.
-    The initiation command or rule has no effect on the local mode.
-    ```
-    e3-Clock (master)$ make init
-    >> You are in the local source mode.
-    >> Nothing happens.
-    ```
-    
-    Now you have the e3 structure and its configuration. The next step is to change few files. There are three files you should change. The `configure/CONFIG_MODULE` and `configure/RELEASE` were discussed in earlier chapters. We keep all source files locally, so one can select `E3_MODULE_VERSION` and `EPICS_MODULE_TAG` based on what one would like to do. Here I uses simply `master` as the default values are. The most important thing is `Clock.Makefile`, which is generated by `e3TemplateGenerator` and has only default options. Please edit the makefile as follows:
-    
-    ```
-    where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-    include $(E3_REQUIRE_TOOLS)/driver.makefile
-    include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
-    
-    APP:=Clock1App
-    APPDB:=$(APP)/Db
-    APPSRC:=$(APP)/src
-    
-    USR_INCLUDES += -I$(where_am_I)$(APPSRC)
-    
-    TEMPLATES += $(wildcard $(APPDB)/*.db)
-    SOURCES += $(APPSRC)/devAiSecond.c
-    
-    DBDS += $(APPSRC)/aiSecond.dbd
-    
-    db:
-    
-    .PHONY: db
-    
-    vlibs:
-    
-    .PHONY: vlibs
-    ```
-    Let's build `e3-Clock` now.
-    ```
-    e3-Clock (master)$ make build
-    e3-Clock (master)$ make install
-    e3-Clock (master)$ make existent LEVEL=4
-    /epics/base-3.15.5/require/3.0.4/siteApps/Clock
-    └── master
-    	├── db
-		│   └── aiSecond.db
-		├── dbd
-		│   └── Clock.dbd
-		└── lib
-			└── linux-x86_64
-	   		├── Clock.dep
-			└── libClock.so
-    ```
-    
-    Let's explore it within `iocsh.bash`. With latest require configuration, one can execute the iocsh.bash if one knows the exact path, such as 
-    ```
-    $ bash /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash
-    ```
-    
-    If not, please go to **E3_TOP**, and `source tools/setenv`.  Let's assume that you are in iocsh.bash such as 
-    ```
-    effbc10.kaffee.10034 >
-    effbc10.kaffee.10034 > require Clock,master
-    Module Clock version master found in /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/
-    Loading library /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/lib/linux-x86_64/libClock.so
-    Loaded Clock version master
-    Loading dbd file /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/dbd/Clock.dbd
-    Calling function Clock_registerRecordDeviceDriver
-    ```
+   ```console
+   [iocuser@host:e3-fimscb]$ make init
+   [iocuser@host:e3-fimscb]$ make vars
+   ```
 
-  - **ACTION 2.5** Commit your changes into the e3 remote repository.
+You now have the e3 wrapper and configuration set up. Next is to modify the `.Makefile` (in this case, `fimscb.Makefile`). The e3TemplateGenerator initiates the wrapper with a boilerplate makefile, that only contains default values. For now, set it up as follows:
 
+```console
+[iocuser@host:e3-fimscb]$ cat fimscb.Makefile
+where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+include $(E3_REQUIRE_TOOLS)/driver.makefile
+include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 
-- **ACTION 3** : Create your source structure with the standard EPICS way.
+APP:=fimscbApp
+APPDB:=$(APP)/Db
 
-  - **ACTION 3.1** Define three variables in epicsEx.conf as follows:
-    ```
-    E3_TARGET_URL:=https://github.com/jeonghanlee
-    EPICS_MODULE_NAME:=epicsEx
-    E3_MODULE_SRC_PATH:=epicsEx
-    ```
-    
-  - **ACTION 3.2**  Create e3-epicsEx in your target url. And please run e3TemplateGenerator.bash with that file such as
+TEMPLATES += $(APPDB)/fimscb.db
+TEMPLATES += $(APPDB)/fimscb.proto
 
-    ```
-	e3TemplateGenerator (master)$ ./e3TemplateGenerator.bash -m modules_conf/epicsEx.conf -d ~/e3-trainings/siteApps/
+db:
 
-	e3TemplateGenerator (master)$ cd ~/e3-trainings/siteApps/e3-epicsEx/
-	e3-epicsEx (master)$ cd epicsEx-loc/
-	e3-epicsEx (master)$ rm -rf epicsExApp/
-	e3-epicsEx (master)$ makeBaseApp.pl -t ioc epicsEx
-	e3-epicsEx (master)$ makeBaseApp.pl -i -p epicsEx -t ioc epicsEx
-	e3-epicsEx (master)$ tree 
-	```
-	
-  - **ACTION 3.3** Copy your source, sequencer, and other files into `epicsExApp/src` and copy your db, and protocol files into `epicsExApp/Db`. 
+.PHONY: db 
 
-  - **ACTION 3.4** Modify few files in order to build, and to install them within the existent e3 environment. From here, you can follow **ACTION 2.4** and **ACTION 2.5**.
-  
+vlibs:
 
-- **ACTION 0** : You need to define how you migrate them into e3 template. The recommendation is to move them all into a local path, and do **ACTION 2**. If you don't like this recommendation, please contact the e3 mailing list or create the JIRA issue to get some helps. 
+.PHONY: vlibs
+```
+
+After this, we will be able to build the wrapper:
+
+```console
+[iocuser@host:e3-fimscb]$ make build
+[iocuser@host:e3-fimscb]$ make install
+[iocuser@host:e3-fimscb]$ make existent LEVEL=3
+/epics/base-3.15.5/require/3.0.4/siteApps/fimscb
+└── master
+    ├── db
+    │   ├── fimscb.db
+    │   └── fimscb.proto
+    └── lib
+        └── linux-x86_64
+
+4 directories, 2 files
+```
+
+And to finish off, let's explore it in `iocsh.bash`:
+
+> Don't forget to source your EPICS environment.
+
+```console
+[iocuser@host:e3-fimscb] iocsh.bash
+effbc10.kaffee.4837 > require fimscb,master
+Module fimscb version master found in /epics/base-3.15.5/require/3.0.4/siteApps/fimscb/master/
+Module fimscb has no library
+effbc10.kaffee.4837 > require fimscb,master
+Module fimscb version master already loaded
+effbc10.kaffee.4837 > cd $(fimscb_DB)
+effbc10.kaffee.4837 > system (ls)
+effbc10.kaffee.4837 > pwd
+```
+
+> If working on a real module, don't forget proper version control here:
+>
+> ```console
+> [iocuser@host:e3-fimscb]$ git commit -am "update makefile"
+> [iocuser@host:e3-fimscb]$ git push
+> ```
+
+### Module/application with local source code
+
+Let's assume that we have found an EPICS application that we would like to integrate into e3, where the source is an archive (e.g. `.tar.gz`) that we received from a collaborator or that we downloaded from a (non-git) internet source.
+
+> We will be using an example from http://www-linac.kek.jp/cont/epics/second.
+
+1. Create a new configuration file:
+
+   ```console
+   [iocuser@host:e3TemplateGenerator]$ cat modules_conf/Clock.conf
+   EPICS_MODULE_NAME:=Clock
+   E3_TARGET_URL:=https://github.com/jeonghanlee
+   E3_MODULE_SRC_PATH:=Clock
+   ```
+
+   > Change `E3_TARGET_URL` to point to your own account.
+
+2. Create a repository called e3-Clock on your GitHub (or GitLab or whatever else you prefer and use) account.
+
+3. Run e3TemplateGenerator just as earlier:
+
+   ```console
+   [iocuser@host:e3TemplateGenerator]$ bash e3TemplateGenerator -m modules_conf/Clock.conf -d ~
+   ```
+
+4. Inspect your application:
+
+   ```console
+   [iocuser@host:e3TemplateGenerator]$ tree -L 1 ~/e3-Clock
+   .
+   |-- Clock-loc
+   |-- cmds
+   |-- configure
+   |-- docs
+   |-- iocsh
+   |-- opi
+   |-- patch
+   |-- template
+   |-- Clock.Makefile
+   |-- Makefile
+   `-- README.md
+   ```
+
+As you may notice, we now have a directory called `Clock-loc/` in the wrapper (which contains a standard EPICS structure with `ClockApp/Db/` and `ClockApp/src/`). In this directory, you can place your source code. This could be something like:
+
+```console
+[iocuser@host:Clock-loc]$ wget -c http://www-linac.kek.jp/cont/epics/second/second-devsup.tar.gz
+[iocuser@host:Clock-loc]$ tar xvzf second-devsup.tar.gz
+```
+
+> This above example contains a `Clock1App` instead of `ClockApp`. To make things easy, we can just delete `ClockApp`.
+
+Modify configuration files as earlier. If you were to try to `make init` here, you would find that it does nothing:
+
+```console
+[iocuser@host:e3-Clock]$ make init
+>> You are in the local source mode.
+>> Nothing happens
+```
+
+> As we now have all of our source code locally, we can choose `E3_MODULE_VERSION` and `EPICS_MODULE_TAG` rather freely.
+
+If you want to continue with this example, follow these steps:
+
+1. Edit the makefile:
+
+   ```console
+   [iocuser@host:e3-Clock]$ cat Clock.Makefile
+   where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+   include $(E3_REQUIRE_TOOLS)/driver.makefile
+   include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
+
+   APP:=Clock1App
+   APPDB:=$(APP)/Db
+   APPSRC:=$(APP)/src
+
+   USR_INCLUDES += -I$(where_am_I)$(APPSRC)
+
+   TEMPLATES += $(wildcard $(APPDB)/*.db)
+   SOURCES += $(APPSRC)/devAiSecond.c
+
+   DBDS += $(APPSRC)/aiSecond.dbd
+
+   db:
+
+   .PHONY: db
+
+   vlibs:
+
+   .PHONY: vlibs
+   ```
+
+2. Build and install the app:
+
+   ```console
+   [iocuser@host:e3-Clock]$ make build
+   [iocuser@host:e3-Clock]$ make install
+   ```
+
+3. Inspect with `iocsh.bash`:
+
+   ```console
+   effbc10.kaffee.10034 > require Clock,master
+   Module Clock version master found in /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/
+   Loading library /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/lib/linux-x86_64/libClock.so
+   Loaded Clock version master
+   Loading dbd file /epics/base-3.15.5/require/3.0.4/siteApps/Clock/master/dbd/Clock.dbd
+   Calling function Clock_registerRecordDeviceDriver
+   ```
+
+### Module/application created in the standard EPICS way
+
+This is basically the same as with the local source code example above.
+
+1. Create a configuration file:
+
+   ```console
+   [iocuser@host:e3TemplateGenerator]$ cat modules_conf/epicsExample.conf
+   E3_TARGET_URL:=https://github.com/icshwi
+   EPICS_MODULE_NAME:=epicsExample
+   E3_MODULE_SRC_PATH:=epicsExample
+   ```
+
+2. Create repository in your target URL.
+
+3. Run e3TemplateGenerator.
+
+4. Create application:
+
+   ```console
+   [iocuser@host:epicsExample-loc]$ rm -rf epicsExampleApp/
+   [iocuser@host:epicsExample-loc]$ makeBaseApp.pl -t ioc epicsExample
+   [iocuser@host:epicsExample-loc]$ makeBaseApp.pl -i -p epicsExample -t ioc epicsExample
+   ```
+
+5. Copy your source, sequencer, etc. files to `epicsExampleApp/src/`, and your database (and protocol) files to `episcExampleApp/Db/`.
+
+6. Modify `configure/RELEASE`, `configure/MODULE_RELEASE`, and `epicsExample.Makefile`.
+
+7. Commit and push.
+
 
 ---
 
 ##  Assignments
 
-### Write two IOC startup scripts
-One can run each IOC for `e3-Clock` and `e3-fimscb`. Are you willing to take these challenges?
+* Write startup scripts for `e3-Clock` and for `e3-fimscb`.
 
-### Build an e3 application with a remote repository 
+* Build an e3 application with a remote repository 
 
-We have the remote repository [4]. Can you build e3-ch8 application? And can you build the startup script to make this application running within e3?
+  Can you build (e3-ch8)[https://github.com/icswi/ch8] as an application? Try to create a startup script for it too
 
-### Build an additional e3 application with a remote repository
-
-**Warning** This is very challenging  work. We have the remote repository about the EPICS example [5], which can be generated by `makeBaseApp`. Can you build e3-myexample? And can you build the running ioc? 
-
-
-## Reference
-[1] https://github.com/icshwi/fimscb : EPICS IOC for ESS RF FIM SCB Monitoring System  
-[2] [e3TemplateGenerator README.md](https://github.com/icshwi/e3-tools/tree/master/e3TemplateGenerator)  
-[3] http://www-linac.kek.jp/cont/epics/second  
-[4] https://github.com/icshwi/ch8     
-[5] https://github.com/icshwi/myexample
+* Build (e3-myexample)[https://github.com/icshwi/myexample] and an associated IOC. *N.B.! This is a challenging task.*
 
 
 ---

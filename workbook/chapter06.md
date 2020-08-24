@@ -104,7 +104,7 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 
 * Run `epicsPrtEnvParams`. Which other command returns the same result?
 
-* How do we access only one variable---for example `TOP`?
+* How do we access only one variable - for example `TOP`?
 
   > For questions on EPICS functions, the [App Developers Guide](https://epics.anl.gov/base/R3-15/6-docs/AppDevGuide/IOCShell.html#x19-73300018) will usually have your answers.
 
@@ -340,13 +340,12 @@ The following variables are defined within a module or application by default.
 ##  Assignments
 
 * Using the startup script in `ch6_supplementary_paht/ch6.cmd`, print out all database files of the *asyn* module within an IOC.
-
+  
   > If you get stuck, remember that there's a command to use any UNIX command from within an IOC shell. Can you remember what it is?
 
 * Which module is used for a specific vendor library? Why do we keep these files within the e3 structure? 
-
 * Can you find out which file it is that allows us to run `make vars` or `make env` within the e3 building system? 
-
+  
   > It is the same for all modules and applications, so where could be located?
 
 

@@ -8,7 +8,7 @@ In this lesson, you'll learn how to do the following:
 
 * Build the startup script for an IOC in e3.
 * Understand different methods of using EPICS functions within startup scripts.
-* Understand the local setup for `.db` and `.protocol` files.
+* Understand the local setup for *database* and *protocol* files.
 * Add common (global) modules to the IOC.
 
 ---
@@ -61,11 +61,11 @@ We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europe
 
 ## Startup scripts
 
-In `ch4_supplementary_path/cmds`, you will find a number of startup scripts that will be used for the following steps.
+In `ch4_supplementary_path/cmds`, you will find a number of (incrementally named) startup scripts that will be used for the following steps.
 
-> For each of these scripts, you should attempt to first figure out what is happening before continuing reading this tutorial. And whenever a question is asked, attempt to answer it before reading the next sentence.
+> For each of these scripts, you should attempt to first figure out what is happening, or what will happen, before continuing this tutorial. And whenever a question is asked, attempt to answer it before reading the next sentence.
 
-> Before the running `iocsh.bash`, don't forget to load your e3 environment:
+> Before running `iocsh.bash`, don't forget to load your e3 environment:
 > 
 > ```console
 > [iocuser@host:ch4_supplementary_training]$ source ~/e3-3.15.5/tools/setenv
@@ -159,7 +159,7 @@ Execute the next script.
   [iocuser@host:e3-StreamDevice]$ make vars
   ```
 
-  Look at `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. These dependencies will be described in more detail later on.
+  Note `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. These dependencies will be described in more detail later on.
 
   > We can print these variables more easily with `make dep`.
 
@@ -177,7 +177,7 @@ Execute the next script:
 
 * What is the difference between `1.cmd` and `2.cmd`?
 
-  > e3's `iocsh.bash` will check if `iocInit` is defined within a startup script. If it isn't, it will be added automatically You should however always specify `iocInit` clearly as some functions should be executed after `iocInit`. 
+  > e3's `iocsh.bash` will check if `iocInit` is defined within a startup script, and, if it isn't, it will be added automatically. You should, however, always specify `iocInit` explicitly as some functions should be executed after `iocInit`. 
 
 * Can you spot the warning? And can you explain what kind of warning it is?
 
@@ -191,11 +191,11 @@ Execute the next command:
 [iocuser@host:ch4_supplementary_training]$ iocsh.bash cmds/3-1.cmd 
 ```
 
-* The IOC is running, but it doesn't connect to anything. Can you see the message which represents this situation?
+* The IOC is running, but it doesn't connect to anything. Can you see anything in the output that explains this?
 
   > Beware that the application launches regardless of if it finds hardware or not. In `3-1.cmd` there are no `.db.`-files to specify records and fields, which is why no errors appear.
 
-This script contains the correct asyn configuration for the simulated device:
+This script contains the correct *Asyn* configuration for the simulated device:
 
 ```bash
 drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
@@ -207,11 +207,11 @@ This script contains a fully working IOC---inspect it thouroughly.
 
 * Can you find the warning? 
 * How does this script use `E3_CMD_TOP`? Is it useful to define where other files are? 
-* What is the stream protocol file? 
+* What is the *stream protocol* file? 
 
 ### 4.cmd
 
-Since `3-2.cmd` we have a functioning IOC which can communicate with our simulated device. We would, however, generally want to tie more EPICS modules into that IOC, such as `iocStats`, `autosave`, and `recsync`. For this, we will need the specific module's name, its' version, as well as its' corresponding configuration files (`.db` files and so forth).
+By now we have a functioning IOC which can communicate with our simulated device. We would, however, generally want to tie more EPICS modules into that IOC, such as `iocStats`, `autosave`, and `recsync`. For this, we will need the specific module's name, its' version, as well as its' corresponding configuration files (database files and so forth).
 
 Execute the next script:
 

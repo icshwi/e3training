@@ -1,4 +1,6 @@
-This file is only meant to outline the structure of this repo, and to host some information prior to rework of this learning series.
+# Maintainers' notes
+
+This file is meant to outline the structure of this repo, and to host some information useful prior to rework of this learning series.
 
 # Standard template for lessons
 
@@ -6,13 +8,13 @@ For coding standards see any of the early chapters. Keep it clean and tidy, and 
 
 Each lesson should start with a "Return to ToC", then an overview, and should end with a horizontal rule (`---`) and then a link to the next chapter as well as a "Return to ToC".
 
-For commands, the prompt (PS1) should be `[iocuser@host:cwd]`.
+For commands, the prompt (PS1) should be `[iocuser@host:pwd]`.
 
-Open code blocks should have language definitions for highlighting to whatever degree possible; when the language isn't available (GitHub markdown is quite limited), use whatever works.
+Open code blocks should have language definitions for highlighting to whatever degree possible; when the language isn't available (GitHub markdown is quite limited), use whatever works the best.
 
 # To-Do
 
-[ ] Clean up all existing chapters
+[x] Clean up all existing chapters
 [ ] Do the full tutorial to ensure all steps work
 [ ] Clean up all complementary material
 [x] Outline what had been thought-up by Han previously for future chapters
@@ -30,25 +32,16 @@ Open code blocks should have language definitions for highlighting to whatever d
 - Add glossary page (appendixC?)
 - Rename/reorganize supplementary dirs
 
-# LEGACY
 
-Below is some information on code and notes left by Han.
-
-## 9.md
-
-Seems like an early version of the dependency chapter. Slightly different approach so might be worth having a look.
-
-## Han's notes on lesson content
-
-### Other subjects
+## Other subjects/content to add
 * Multiple e3s in a host
 * Hidden makefile rules (db, hdrs, vlibs, epics, and so on)
 * setE3env.bash
 * e3.bash
 * supplement tools (epics_NIOCs, pkg_automation, pciids, etherlabmaster, etc)
 * sequencer
-* db, template, subst files (inflating...)
+* db, template, subst files (msi and inflation)
 * e3 configuration variables
 * e3 building system
-* systemd 
+* systemd, procServ, and conserver 
 * require 

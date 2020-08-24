@@ -450,10 +450,10 @@ iocRun: All initialization complete
 
 ## Assignments
 
-Please make sure you understand:
-
-- How GNU Make and Makefiles work.
-- How git submodules work.
+* Make sure you understand:
+  
+  1. How GNU Make and Makefiles work.
+  2. How git submodules work.
 
 
 ---

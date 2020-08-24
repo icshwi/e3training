@@ -34,7 +34,9 @@ The variables of interest here are:
 
 * `EPICS_MODULE_TAG` is the *snapshot* of the source code repository, e.g. `tags/stream_2_7_14`, `tags/2.8.8`, `master`, `branch_name`, or `e0a24fe`.
 
-These two variables are defined in `configure/CONFIG_MODULE` and `configure/CONFIG_MODULE_DEV`.
+These two variables are defined in `configure/CONFIG_MODULE` (and in `configure/CONFIG_MODULE_DEV`).
+
+> `_DEV` files will be covered later as we go through the different modes of e3.
 
 ## List the installed version(s) of a module
 
@@ -57,7 +59,7 @@ These two variables are defined in `configure/CONFIG_MODULE` and `configure/CONF
        └── SetSerialPort.iocsh
    ```
 
-   > The default argument to `make existent` is LEVEL 2---i.e. `make existent` is identical to `make LEVEL=2 existent`.
+   > The default argument to `make existent` is LEVEL 2 - i.e. `make existent` is identical to `make LEVEL=2 existent`.
 
 ## Check the version of a module
 
@@ -72,14 +74,14 @@ Let's see what our current version of *StreamDevice* is:
 We could here download *StreamDevice* directly from PSI's GitHub account, and switch `EPICS_MODULE_TAG` when `make init` is executed:
 
 1. Go back to `e3-StreamDevice/`
-2. Run `make init` to see what kind of messages which you can see.
+2. Run `make init` to see what kind of output you get.
 
    Can you guess what kind of process that is happening behind scenes?
 
 3. Check `EPICS_MODULE_TAG` with `make vars`
-4. Check the `configure/CONFIG_MODULE` file
+4. Have a look at the `configure/CONFIG_MODULE` file
 
-> Running `make init` will download all source files within StreamDevice as a git submodule, and will switch back to the `2.8.8` version of StreamDevice.
+> Running `make init` will download all source files within StreamDevice as a git submodule, and will in our case switch back to the `2.8.8` version of StreamDevice.
 > 
 > *N.B.! You may have different versions than the author of these instructions.*
 
@@ -131,13 +133,11 @@ Time to try out some makefile rules. See if you can spot the difference between 
 ## Assignments
 
 * Try out `make existent` with `LEVEL=4`.
-* Try `iocsh.bash -r stream,e3training`.
-  
-  Can you explain what is happening here?
-
+* Try `iocsh.bash -r stream,e3training`. Can you explain what is happening here?
 * Do `make init` in **E3_TOP**. What do you see?
 * Which kind of make rule allows us to uninstall the installed module?
 * Can we combine the following two steps? 
+  
   1. `make build`
   2. `make install`
 

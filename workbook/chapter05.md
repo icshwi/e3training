@@ -83,7 +83,7 @@ In order to explain how e3 uses *git submodules*, we will do the following exerc
 
    Visit https://github.com/icshwi/e3-iocStats, which is shown in **Figure 1**.
 
-   The magic number is **ae5d083**---can you see what it refers to? After finding it, verify this number in the output of `git submodule status`. 
+   The magic number is **ae5d083** - can you see what it refers to? After finding it, verify this number in the output of `git submodule status`. 
 
    |![Import Example](ch5_supplementary_path/fig1.png)|
    | :---: |
@@ -323,22 +323,18 @@ If you want to create a patch file for an e3 module, run `git diff --no-prefix >
 ## Assignments
 
 * Can you override the default `E3_MODULE_DEV_GITURL` with your own forked repository without any `git status` changes in `e3-iocStats`? Try it.
-
-   ```console
-   [iocuser@host:e3-iocstats]$ git status
-   On branch master
-   Your branch is up-to-date with 'origin/master'.
-   nothing to commit, working directory clean
-   ```
+  
+  ```console
+  [iocuser@host:e3-iocstats]$ git status
+  On branch master
+  Your branch is up-to-date with 'origin/master'.
+  nothing to commit, working directory clean
+  ```
 
 * Do we need `make devdistclean`? Is there any other way to clean or remove a cloned repository `iocStats-dev`? 
-
 * What's the difference between `make existent` and `make devexistent`?
-
 * Can we overwrite the same version of a module from the Deployment mode with one from the Development mode?
-
 * What is the difference between a `p0` patch and `p1` patch? Is it the same in EPICS as generally with UNIX patch files?
-
 * We have an `1.0.0-awesome.p0.patch` file. How would we apply it to Development mode source files?
 
 

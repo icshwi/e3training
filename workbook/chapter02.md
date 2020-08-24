@@ -18,7 +18,7 @@ In order to facilitate the development process, e3 supports using multiple EPICS
 
 > Using a default configuration (presently base 3.15.5 with require 3.0.5 installed at `/epics`) the full path for this script would then be `/epics/base-3.15.5/require/3.0.5/bin/setE3Env.bash`.
 
-For your convenience, the e3 building system---at the end of installation procedure of require and modules---creates a utility script within the `tools/` directory called `setenv`:
+For your convenience, the e3 building system - at the end of installation procedure of require and modules - creates a utility script within the `tools/` directory called `setenv`:
 
 ```console
 [iocuser@host:e3]$ source tools/setenv
@@ -104,15 +104,15 @@ Thus, one can easily switch between environments. For example:
 
 ## Assignments
 
-Please explain the following jargon by yourself---these are mixed EPICS and e3 terms:
+Please explain the following jargon by yourself - these are mixed EPICS and e3 terms:
 
-- `require`
-- `E3_CMD_TOP`
-- `system`
-- `iocshLoad`
-- `iocInit`
-- `>`
-- `<` 
+* `require`
+* `E3_CMD_TOP`
+* `system`
+* `iocshLoad`
+* `iocInit`
+* `>`
+* `<` 
 
 
 ---

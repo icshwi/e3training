@@ -12,6 +12,4 @@ ESS' EPICS Environment, also known as e3, is essentially a configuration managem
 
 This workbook is a work-in-progress and is therefore still missing information. Please create an issue or submit a pull request with a suggested change if you noticy something being awry or have an improvement in mind.
 
-Please keep in mind that new releases may have happened since the writing of this workbook, and that default versions may be different for you compared to the author(s) of this tutorial.
-
 [Continue (Table of Contents)](workbook/README.md)

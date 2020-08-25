@@ -1,4 +1,4 @@
-# Chapter 8: Building an e3 application
+# Chapter 8: Building an e3 module
 
 [Return to Table of Contents](README.md)
 
@@ -8,7 +8,7 @@ In this lesson, you'll learn how to do the following:
 
 * Understand the difference between modules and applications.
 * Understand the e3 wrapper directory structure.
-* Create an e3 wrapper using the e3TemplateGenerator.
+* Create an e3 wrapper using the *e3TemplateGenerator*.
 * Edit a module makefile in order to build and install it into e3.
 
 ---

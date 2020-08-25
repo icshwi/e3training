@@ -15,7 +15,7 @@ Open code blocks should have language definitions for highlighting to whatever d
 # To-Do
 
 [x] Clean up all existing chapters
-[ ] Do the full tutorial to ensure all steps work
+[x] Do the full tutorial to ensure all steps work
 [ ] Clean up all complementary material
 [x] Outline what had been thought-up by Han previously for future chapters
 [ ] Balance the chapters better
@@ -32,10 +32,11 @@ Open code blocks should have language definitions for highlighting to whatever d
 - Add glossary page (appendixC?)
 - Rename/reorganize supplementary dirs
 
-
 ## Other subjects/content to add
 * Multiple e3s in a host
 * Hidden makefile rules (db, hdrs, vlibs, epics, and so on)
+* siteLibs, handling vendor libraries
+* compiling a module
 * setE3env.bash
 * e3.bash
 * supplement tools (epics_NIOCs, pkg_automation, pciids, etherlabmaster, etc)

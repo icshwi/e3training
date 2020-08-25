@@ -23,6 +23,6 @@ To be written.
 
 **END OF BOOK 1**
 
-[Next (Book 2): Chapter 11 - Other dependencies](chapter11.md)
+[Next (Book 2): Chapter 11 - Release rules](chapter11.md)
 
 [Return to Table of Contents](README.md)

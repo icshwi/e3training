@@ -161,10 +161,125 @@ As you can see from the unit file, most of the parameters are fairly generic, an
 
 2. Create a simple startup script at `/opt/iocs/` with the format `e3-ioc-<iocname>/st.cmd`:
 
+<!-- get a startup script from earlier exercise -->
 
 ## Managing your IOCs with conserver
 
-To be written.
+[Conserver](https//www.conserver.com) is an application that allows multiple users to watch and interact with a serial console at the same time. We will thus use conserver instead of telnet or netcat to attach to our consoles. Conserver consists of a server and a client. The server will run as a system daemon on our IOC machine, but the client could be either local to that machine or remote.
+
+Conserver requires a bit of boilerplate code for its setup. We will first have a quick look at the two programs and the main configuration files necessary for setup.
+
+```console
+[iocuser@host:~]$ conserver -V
+conserver: conserver.com version 8.2.1
+conserver: default access type `r'
+conserver: default escape sequence `^Ec'
+conserver: default configuration in `/etc/conserver.cf'
+conserver: default password in `/etc/conserver.passwd'
+conserver: default logfile is `/var/log/conserver'
+conserver: default pidfile is `/var/run/conserver.pid'
+conserver: default limit is 16 members per group
+conserver: default primary port referenced as `782'
+conserver: default secondary base port referenced as `0'
+conserver: options: freeipmi, libwrap, openssl, pam
+conserver: freeipmi version: 1.2.2
+conserver: openssl version: OpenSSL 1.0.1e-fips 11 Feb 2013
+conserver: built with `./configure --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --program-prefix= --disable-dependency-tracking --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib64 --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/var/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-libwrap --with-openssl --with-pam --with-freeipmi --with-gssapi --with-striprealm --with-port=782'
+```
+
+The main two things to notice above is the location of the default configuration file and the default password file (`/etc/conserver.cf` and `/etc/conserver.passwd` respectively). If you were to look at these two files on your machine, you will find that they already contain some (commented out) example settings.
+
+We will now modify these two files for our setup. As we do not need access control, we will simply allow all users to access conserver without any password:
+
+```console
+[iocuser@host:~]$ cat /etc/conserver.passwd
+*any*:
+```
+
+For the configuration file, we will set up some default values, and then we will use an include directive (`#include`) to be able to inventorize our consoles in a separate file:
+
+```console
+[iocuser@host:~]$ cat /etc/conserver.cf
+config * {
+}
+
+default full { rw *; }
+default * {
+        timestamp "";
+        include full;
+        master localhost;
+}
+
+#include /etc/conserver/procs.cf
+
+access * {
+        trusted 127.0.0.1;
+        allowed 127.0.0.1;
+}
+```
+
+Thus we are allowing only local access, and we are specifying to include the file `/etc/conserver/procs.cf` into this configuration file (we could otherwise just take whatever contents we soon will put in `procs.cf` and instead have them in `conserver.cf` - but we will modularize this a bit).
+
+Now create the above included `procs.cf`, and populate it with data to describe one of our already-running IOCs:
+
+```console
+[iocuser@host:~]$ cat /etc/conserver/procs.cf
+console test-ioc {
+    type uds;
+    uds /var/run/procServ/test-ioc/control;
+}
+```
+
+> We could have inventorized also a console on a TCP port, in which we would set type to `host`, and port to `2000`.
+
+As we are making changes to the configuration of an already-running system daemon (conserver), we will need to do a soft restart of the systemd manager:
+
+```console
+[iocuser@host:~]$ systemctl daemon-reload
+[iocuser@host:~]$ systemctl status conserver.service
+```
+
+> Should conserver not already be running on your machine, make sure to start and enable the service: `systemctl start conserver.service`, `systemctl enable conserver.service`.
+
+We now have conserver running, managing a console on a UDS at `/var/run/procServ/test-ioc/control`. To test, we can attach to this using socat again:
+
+```console
+[iocuser@host:~]$ socat - UNIX-CONNET:/var/run/procServ/test-ioc/control
+```
+
+As we will want to use conserver client, also known as *console*, to attach to IOCs, we will need to set it up too. Let's first look at its' settings:
+
+```console
+[iocuser@host:~]$ console -V
+console: conserver.com version 8.2.1
+console: default initial master server `console'
+console: default port referenced as `782'
+console: default escape sequence `^Ec'
+console: default site-wide configuration in `/etc/console.cf'
+console: default per-user configuration in `$HOME/.consolerc'
+console: options: libwrap, openssl, gssapi
+console: openssl version: OpenSSL 1.0.1e-fips 11 Feb 2013
+console: built with `./configure --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --program-prefix= --disable-dependency-tracking --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib64 --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/var/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-libwrap --with-openssl --with-pam --with-freeipmi --with-gssapi --with-striprealm --with-port=782'
+```
+
+As you can see, site-wide configurations are kept in `/etc/console.cf`. All we will need to do now to use the service is to define where console should look for consoles:
+
+```console
+[iocuser@host:~]$ cat /etc/console.cf
+config * {
+        master localhost;
+}
+```
+
+And voilá ! If we just do a soft reload of the systemd manager again, we should be able to both see and attach to our IOC.
+
+```console
+[iocuser@host:~]$ systemctl daemon-reload
+[iocuser@host:~]$ console -u  # to list available consoles
+[iocuser@host:~]$ console test-ioc
+```
+
+> You can detach from a console by pressing `^E c .`.
 
 
 ---

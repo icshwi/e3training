@@ -57,7 +57,7 @@ We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europe
 
    (, where ^ is the Ctrl key.)
 
-> The simulator in question has shown a tendency to die every now and then, so go back to verify that the simulator is working before trying out a script---and restart it if not.
+> The simulator in question has shown a tendency to die every now and then, so go back to verify that the simulator is working before trying out a script - and restart it if not.
 
 ## Startup scripts
 
@@ -203,7 +203,7 @@ drvAsynIPPortConfigure("CGONPI", "127.0.0.1:9999", 0, 0, 0)
 
 ### 3-2.cmd
 
-This script contains a fully working IOC---inspect it thouroughly.
+This script contains a fully working IOC - inspect it thouroughly.
 
 * Can you find the warning? 
 * How does this script use `E3_CMD_TOP`? Is it useful to define where other files are? 

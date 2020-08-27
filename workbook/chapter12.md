@@ -11,7 +11,11 @@ In this lesson, you'll learn how to do the following:
 
 ---
 
-## EPICS online resources.
+## EPICS online resources
+
+To be written.
+
+## Good Practice
 
 To be written.
 

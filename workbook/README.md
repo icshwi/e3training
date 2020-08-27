@@ -25,7 +25,7 @@ For some of the chapters there are supplementary directories containing code, so
 
 ##### Chapter 11: [Release rules](chapter11.md) :construction:
 ##### Chapter 12: [Working with the EPICS community](chapter12.md) :construction:
-##### Chapter 13: [Supplementary tools](chapter13.md) :construction:
+##### Chapter 13: [Supplementary tools](chapter13.md)
 
 ## Appendices
 

@@ -303,7 +303,15 @@ And voilá ! If we just do a soft reload of the systemd manager again, we should
 [iocuser@host:~]$ console test-ioc
 ```
 
-> You can detach from a console by pressing `^E c .`.
+> You can detach from a console by pressing `^E c .` (note the dot at the end).
+
+---
+
+## Assignments
+
+* Something on procServ
+* Something on systemd
+* Something on conserver
 
 
 ---

@@ -1,25 +1,23 @@
-# Chapter 11: Other dependencies
+# Chapter 9: Other dependencies
 
 [Return to Table of Contents](README.md)
-
-On chapter 7 we presented "module header files dependency", but as we've seen this is just one of many possible dependencies. On this chapter we present some of the other possible dependencies.
 
 ## Lessons overview
 
 In this lesson, you'll learn how to do the following:
 
-* Use a new record type from other module on your module
-* Use a db or template file from other module to generate a new db file on your module
+* Use a record type from another module in your module.
+* Use a db or template file from another module to generate a new db file in your module.
 
 ---
 
 ## Using a new record type
 
-Example of acalcout use, from module [calc](https://github.com/epics-modules/calc), for linear conversion of an existent waveform
+Example of acalcout use, from module [calc](https://github.com/epics-modules/calc), for linear conversion of an existent waveform.
 
 ### Create a new module 
 
-Please follow the instructions on [Chapter 8](chapter8.md), we will consider the module name is `linconv` and the e3 module `e3-linconv`.
+Use this as an exercise. If you need to, go back to the instructions in [Chapter 8](chapter8.md). We will consider the module name is `linconv` and the e3 module `e3-linconv`.
 
 ### Create the database file with linear conversion
 
@@ -101,7 +99,6 @@ endif
 ```
 Here is the key point is **`REQUIRED`**, which allows the building system to add its dependency directly to a generated `dep` file in addition to a compiler calculated dependency. 
 
-
 Now you should compile and install the module:
 
 ```
@@ -140,7 +137,7 @@ To start this you will need to create a new module, to do this follow the instru
 
 ### Create a substitution file
 
-Now we will create in our module a substitution file that uses the `pid_control.db` file as a template file [1]. You should create a `pid.substitutions` file within this content:
+Now we will create in our module a substitution file that uses the `pid_control.db` file as a template file (find the file [here](https://github.com/epics-modules/std/blob/master/stdApp/Db/pid_control.db)). You should create a `pid.substitutions` file within this content:
 
 ```
 file "pid_control.db"
@@ -150,7 +147,6 @@ file "pid_control.db"
     {mypid:,  PID1,    pidDemoInp,   pidDemoOut,   0,    100,     0,    5,     3,     0.2,  3.,   0.,  ".1 second"}
     
 }
-
 ```
 
 This file is just an example, and uses as `INP` and `OUT` in existent PVs, but for our test is enough. Note that there is no hard-code path or variable within the substitution file. 
@@ -160,6 +156,7 @@ If you change the `mypid.Makefile` and try to compile this module you should rec
 ```
 msi: Can't open file 'pid_control.db'
 ```
+
 This is because `MSI` has no idea where `pid_control.db` file is. One should tell the building system where it is. 
 
 ### Add std as a dependency
@@ -167,16 +164,17 @@ This is because `MSI` has no idea where `pid_control.db` file is. One should tel
 To solve this, the first step is to set std as a dependency. As we see on previous lesson you should edit `mypid.Makefile` and `CONFIGURE_MODULE` files.
 
 On `mypid.Makefile` you should add:
+
 ``` 
 REQUIRED += std
 
 ifneq ($(strip $(STD_DEP_VERSION)),)
 std_VERSION=$(STD_DEP_VERSION)
 endif
-
 ```
 
 And add the following line into `CONFIG_MODULE`:
+
 ```
 STD_DEP_VERSION:=3.5.0
 ```
@@ -195,17 +193,11 @@ This line will tell to `MSI` where find the `pid_control.db`.
 
 After these changes you can compile again your module and you shouldn't see any error. If you would like to check, you can go to your module folder and see the `pid.db` generated file, the file should be at `$(E3_REQUIRE_LOCATION)/siteMods/mypid/master/db/pid.db`
 
-
 ## Example files
 
 The example files showed in this tutorial could be found at 
-[e3-moduleexample](https://gitlab.esss.lu.se/epics-examples/e3-moduleexample.git)
-and [moduleexample](https://gitlab.esss.lu.se/epics-examples/moduleexample.git).
-Note that the module name is moduleexample, but the db and substitutions
+[e3-moduleexample](https://gitlab.esss.lu.se/epics-examples/e3-moduleexample.git) and [moduleexample](https://gitlab.esss.lu.se/epics-examples/moduleexample.git). Note that the module name is moduleexample, but the db and substitutions
 files are the same used on tutorial.
-
-## Reference
-[1] https://github.com/epics-modules/std/blob/master/stdApp/Db/pid_control.db
 
 
 ---

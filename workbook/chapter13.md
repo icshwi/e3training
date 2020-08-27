@@ -69,7 +69,7 @@ What we just did was thus to start a procServ server, set it to listen to TCP po
 
 , where we specify to ignore end of file (`^D`) and SIGINT (`^C`), to log all output to a file `procServ.log`, to use a UNIX domain socket (UDS) at `/var/run/procServ/my-ioc`, and to use a startup script at `/path/to/st.cmd`.
 
-> If you want to easily connect to a UDS, you can use *socat*: `socat - UNIX-CONNET:/var/run/procServ/my-ioc`.
+> If you want to easily connect to a UDS, you can use *socat*: `socat - UNIX-CONNECT:/var/run/procServ/my-ioc`.
 
 ## Letting the system manage our processes
 
@@ -161,7 +161,31 @@ As you can see from the unit file, most of the parameters are fairly generic, an
 
 2. Create a simple startup script at `/opt/iocs/` with the format `e3-ioc-<iocname>/st.cmd`:
 
-<!-- get a startup script from earlier exercise -->
+   ```console
+   [iocuser@host:~]$ cat /opt/iocs/e3-ioc-test-ioc/st.cmd
+   require stream,2.8.4
+
+   iocInit()
+
+   dbl > PV.list
+   ```
+
+3. Start an instantiated system daemon:
+
+   ```console
+   [iocuser@host:~]$ systemctl start ioc@test-ioc.service
+   ```
+
+   > Here you could also *enable* the service so that it autostarts on boot.
+
+4. Check the status of the process:
+
+   ```console
+   [iocuser@host:~]$ systemctl status ioc@test-ioc.service
+   ```
+   <!-- todo: add output from status -->
+
+As you saw, we added no specifics to our templated unit file, but instead used essentially macros. By having a template, we can instantiate as many IOCs as we want and have them appear and behave consistently.
 
 ## Managing your IOCs with conserver
 

@@ -296,15 +296,30 @@ And voilá ! If we just do a soft reload of the systemd manager again, we should
 [iocuser@host:~]$ console test-ioc
 ```
 
-> You can detach from a console by pressing `^E c .` (note the dot at the end).
+> You can detach from a console by pressing `^E c .` (note the dot at the end). 
+
+## How to monitor your IOC and related processes
+
+So, as we've set things up, systemd starts and manages procServ processes that run our IOC(s). A conserver server is also run as a system daemon, and currently we have conserver client (also a daemon) attach to local IOCs. In our templated unit file, we specified that logging from procServ would go to `/var/log/procServ/<iocname>` (which we inspect with e.g. `less` or could monitor like `tail -f /path/to/logfile`), and since we included `dbl > PV.list` in the startup script, we will also print out a database list upon IOC initialization. This will be placed in `/var/run/procServ/<iocname>` since we executed procServ with `--chdir=/var/run/procServ/%i` in the unit file.
+
+As we're now dealing with multiple system daemons, yet another useful troubleshooting utility is *journalctl*, which is used to query the contents of the systemd journal. We will not go in-depth into how to use journalctl, but here are some examples of how we could use it to troubleshoot our services:
+
+```console
+[iocuser@host:~]$ sudo journalctl --since yesterday
+[iocuser@host:~]$ sudo journalctl -u ioc@test-ioc.service
+[iocuser@host:~]$ sudo journalctl conserver.service --since today
+[iocuser@host:~]$ sudo journalctl _UID=1001 -n 10 -f
+```
+
+In the above examples, 1001 is the user ID of this author's `iocuser` account.
 
 ---
 
 ## Assignments
 
-* Something on procServ
-* Something on systemd
-* Something on conserver
+* Try to set up a unit file to execute procServ to listen to a TCP socket instead of an UDS. Can you also get conserver to work with this?
+* Let's assume you had your e3 installation on a NFS server. Explain to yourself what you would modify to get above examples to work with this.
+* The template unit file we created could be improved in many ways. Can you think of a few?
 
 
 ---

@@ -1,4 +1,4 @@
-# Appendix B : Segmentation Fault 
+# Appendix B: Segmentation Fault 
 
 [Return to Table of Contents](README.md)
 

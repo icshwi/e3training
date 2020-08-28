@@ -1,4 +1,4 @@
-# Appendix A : Build System Troubleshoting 
+# Appendix A: Build System Troubleshoting 
 
 [Return to Table of Contents](README.md)
 

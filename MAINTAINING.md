@@ -19,7 +19,7 @@ Open code blocks should have language definitions for highlighting to whatever d
 - There should probably be a contact listed for questions
 - Link to more external things; autosave, css phoebus, git submodules, etc.
 - Possibly create separate mini-lessons for e3 users (non-devs)
-- Add glossary page (appendixD?)
+- Add glossary page (appendixC?)
 - Rename/reorganize supplementary dirs
 - Complementary material should be cleaned up (and possibly removed)
 - Chapters need to be better balanced

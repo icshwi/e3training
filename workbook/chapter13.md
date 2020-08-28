@@ -311,7 +311,7 @@ As we're now dealing with multiple system daemons, yet another useful troublesho
 [iocuser@host:~]$ sudo journalctl _UID=1001 -n 10 -f
 ```
 
-In the above examples, 1001 is the user ID of this author's `iocuser` account.
+> In the above examples, 1001 is the user ID of this author's `iocuser` account.
 
 ---
 

@@ -31,3 +31,4 @@ For some of the chapters there are supplementary directories containing code, so
 
 ##### Appendix A: [Build system troubleshoting](appendixA.md) :construction:
 ##### Appendix B: [Segmentation fault with GDB](appendixB.md) :construction:
+##### Appendix C: [Installing e3 on Windows 10 (WSL)](appendixC.mb) :construction:

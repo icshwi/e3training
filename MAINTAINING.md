@@ -4,22 +4,13 @@ This file is meant to outline the structure of this repo, and to host some infor
 
 # Standard template for lessons
 
-For coding standards see any of the early chapters. Keep it clean and tidy, and see how different elements (e.g. `> Some text.`) have been used previously.
+For coding standards see any of the early chapters. Keep it clean and tidy, and look at already written chapters to deduce structure as well as to see how chapters are stylicized, and how different elements (e.g. `> Some text.`) have been used previously.
 
-Each lesson should start with a "Return to ToC", then an overview, and should end with a horizontal rule (`---`) and then a link to the next chapter as well as a "Return to ToC".
+Each lesson should start with a "Return to ToC", then an overview, and should end with a horizontal rule (`---`) and then a link to the next chapter as well as a "Return to ToC". Each chapter should preferably also contain some assignments.
 
 For commands, the prompt (PS1) should be `[iocuser@host:pwd]`.
 
-Open code blocks should have language definitions for highlighting to whatever degree possible; when the language isn't available (GitHub markdown is quite limited), use whatever works the best.
-
-# To-Do
-
-[x] Clean up all existing chapters
-[x] Do the full tutorial to ensure all steps work
-[ ] Clean up all complementary material
-[x] Outline what had been thought-up by Han previously for future chapters
-[ ] Balance the chapters better
-[ ] Add assignments to all chapters
+Open code blocks should have language definitions for highlighting to whatever degree possible; when the language isn't available (GitHub markdown is quite limited), use whatever works the best (see existing chapters for guidance).
 
 ## Loose notes
 
@@ -28,8 +19,10 @@ Open code blocks should have language definitions for highlighting to whatever d
 - There should probably be a contact listed for questions
 - Link to more external things; autosave, css phoebus, git submodules, etc.
 - Possibly create separate mini-lessons for e3 users (non-devs)
-- Add glossary page (appendixC?)
+- Add glossary page (appendixD?)
 - Rename/reorganize supplementary dirs
+- Complementary material should be cleaned up (and possibly removed)
+- Chapters need to be better balanced
 
 ## Other subjects/content to add
 * Multiple e3s in a host

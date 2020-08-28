@@ -67,6 +67,8 @@ e3-ioc-<iocname>
 
 How you build your e3 wrapper will depend on how your application's (or module's) code is arranged. You can have the wrapper contain the application, you can source control the wrapper separately, and if there is an existing application already available in git (see e.g. [epics-modules](https://github.com/epics-modules)), you can simply point towards this. We will now go through how to create wrappers for these cases.
 
+A small note here is that if you're creating from scratch, the recommendation is to use the standard EPICS framework (for consistency with the wider EPICS community), i.e. `makeBaseApp.pl`.
+
 > The purpose of e3 wrappers is to have a standardised interface to modules and applications using the standard EPICS structure. Our wrapper is essentially a front-end for the module/application.
 
 To create an e3 wrapper (`e3-moduleName`), we will use a utility called the *e3TemplateGenerator* (which is part of the [e3-tools](https://github.com/icshwi/e3-tools) repository). Clone e3-tools and inspect it (especially the README.md as always) before continuing.

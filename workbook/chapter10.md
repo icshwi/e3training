@@ -7,9 +7,9 @@
 In this lesson, you'll learn how to do the following:
 
 * Understand all directories within e3.
-* Use the cmds path.
-* Use the patch path.
-* Use the template path.
+* Know how to use `cmds/`.
+* Know how to use `patch/`.
+* Know how to use `template/`.
 * Understand hidden files.
 
 ---

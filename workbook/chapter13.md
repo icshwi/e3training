@@ -79,7 +79,7 @@ We will now set up a simplistic system daemon to run an IOC.
 
 1. Create a text file and save it as `/etc/systemd/system/test-ioc.service`, with the following contents:
 
-   ```yaml
+   ```cs
    [Unit]
    Description=procServ container for test IOC
    After=network.target remote-fs.target
@@ -119,7 +119,7 @@ As you can see from the unit file, most of the parameters are fairly generic, an
 
 1. Create a template file called `ioc@.service`:
 
-   ```yaml
+   ```cs
    [Unit]
    Description=procServ container for IOC %i
    Documentation=file:/opt/iocs/e3-ioc-%i/README.md

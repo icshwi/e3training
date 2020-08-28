@@ -212,13 +212,13 @@ The main two things to notice above is the location of the default configuration
 
 We will now modify these two files for our setup. As we do not need access control, we will simply allow all users to access conserver without any password. Modify your `conserver.passwd` to look like this:
 
-```bash
+```cs
 *any*:
 ```
 
 For the configuration file, we will set up some default values, and then we will use an include directive (`#include`) to be able to inventorize our consoles in a separate file. Modify your `conserver.cf` to look like this:
 
-```json
+```cs
 config * {
 }
 
@@ -241,7 +241,7 @@ Thus we are allowing only local access, and we are specifying to include the fil
 
 Now create the above included `procs.cf`, and populate it with data to describe one of our already-running IOCs:
 
-```json
+```cs
 console test-ioc {
     type uds;
     uds /var/run/procServ/test-ioc/control;
@@ -282,7 +282,7 @@ console: built with `./configure --build=x86_64-redhat-linux-gnu --host=x86_64-r
 
 As you can see, site-wide configurations are kept in `/etc/console.cf`. All we will need to do now to use the service is to define where console should look for consoles:
 
-```json
+```cs
 config * {
         master localhost;
 }

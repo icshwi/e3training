@@ -19,7 +19,7 @@ In this lesson, you'll learn how to do the following:
 
 By design, e3 modules and applications have no source code in their repositories, but only configuration files (and utility scripts). These are what allow us consistent building of environments from source code, modules, applications, kernel drivers, etc., which in turn can be hosted elsewhere.
 
-Therefore, e3 is not concerned with each commit nor release in a source code repository, but rather on specific *snapshots* (a particular release version) needed for a certain implementation. For example, at a certain point in time we select *stream* version `2.7.14` as the stable release within e3. Later, we select version `2.8.8` because a subsystem requires it. At that moment, we don't really care about versions `2.8.0`, `2.8.1`, and so forth. We don't need to sync their changes into a master branch of a local repository, which we would have to clone or fork. Simply put, we don't need to do any maintenance job. The point is to add dependencies only when we need them, and to reduce unecessary work for maintainers of the code base.
+Following the above, e3 is not concerned with each commit nor release in a source code repository, but rather on specific *snapshots* (a particular release version) needed for a certain implementation. For example, at a certain point in time we select *stream* version `2.7.14` as the stable release within e3. Later, we select version `2.8.8` because a subsystem requires it. At that moment, we don't really care about versions `2.8.0`, `2.8.1`, `2.8.2` - and so forth. We don't need to sync their changes into a master branch of a local repository, which we would have to clone or fork. Simply put, we don't need to do any maintenance job. The point is to add dependencies only when we need them, and to reduce unecessary work for maintainers of the code base.
 
 > We will describe how to release a specific version of an e3 module in [Chapter 11](chapter11.md). <!-- is this really correct? -->
 
@@ -121,7 +121,7 @@ The following commands utilize `git submodule` and are used for the deployment m
 
 ## Development mode
 
-The development mode is instead intended to allow the developer to modify the source module, and utilizes `git clone` over `git submodule`.
+The development mode is instead intended to allow the developer to modify the source module, and utilizes `git clone` over `git submodule`. This allows us to make commits to the repository.
 
 Inside of `configure/`, you will find two files with the suffix `_DEV`: `CONFIG_MODULE_DEV` and `RELEASE_DEV` are the counterparts of `CONFIG_MODULE` and `RELEASE` used in the deployment mode. These counterpart files are nearly identical, except for:
 
@@ -248,6 +248,7 @@ e3-base/patch/R3.15.5/dbCa-warning_p0.patch
 e3-base/patch/Site/R3.15.5/enable_new_dtags.p0.patch
 e3-base/patch/Site/R3.15.5/ppc64e6500_epics_host_arch.p0.patch
 e3-base/patch/Site/R3.15.5/os_class.p0.patch
+
 # --- snip snip ---
 ```
 

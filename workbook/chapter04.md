@@ -42,7 +42,7 @@ We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europe
 3. Open another terminal, and connect to the simulator using telnet:
 
    ```console
-   [iocuser@host:ch4_supplementary_training]$ telnet 127.0.0.1 9999
+   [iocuser@host:~]$ telnet 127.0.0.1 9999
    ```
 
 4. You should be able to interact with the simulator. <!-- try out first -->
@@ -70,6 +70,8 @@ In `ch4_supplementary_path/cmds`, you will find a number of (incrementally named
 > ```console
 > [iocuser@host:ch4_supplementary_training]$ source ~/e3-3.15.5/tools/setenv
 > ```
+>
+> (or by sourcing `SetE3Env.bash` - do you remember where that was located?) 
 
 ### 0.cmd
 
@@ -94,11 +96,11 @@ Execute the first script:
 
 * What is `0.cmd` in this context?
 
-  `0.cmd` is used as an argument for `iocshLoad` internally. Inspect the following line:
-
-  ```bash
-  iocshLoad '0.cmd',''
-  ```
+  > `0.cmd` is used as an argument for `iocshLoad` internally. Inspect the following line:
+  >
+  > ```bash
+  > iocshLoad '0.cmd',''
+  > ```
 
 ### 1.cmd
 
@@ -155,11 +157,11 @@ Execute the next script.
 
 * Is it what we defined? How would we check that?
 
-  ```console
-  [iocuser@host:e3-StreamDevice]$ make vars
-  ```
+  > ```console
+  > [iocuser@host:e3-StreamDevice]$ make vars
+  > ```
 
-  Note `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. These dependencies will be described in more detail later on.
+  *Note `ASYN_DEP_VERSION` and `PCRE_DEP_VERSION`. These dependencies will be described in more detail later on.*
 
   > We can print these variables more easily with `make dep`.
 
@@ -263,6 +265,12 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
    ```
 
    (, where `NNNNNNNN` is your IOC's random number.) 
+
+---
+
+## Assignments
+
+* Could you improve on the startup script further? Explain to yourself how.
 
 
 ---

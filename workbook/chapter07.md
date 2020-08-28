@@ -39,7 +39,6 @@ You now know where these variables are defined, but where are they used in the c
 /usr/bin/gcc  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic     -m64 -fPIC                -I. -I../src/ -I.././src/    -I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include                        -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c .././src/StreamVersion.c
 /usr/bin/g++  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic     -m64 -fPIC               -I. -I../src/ -I.././src/    -I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include                        -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c ../src/AsynDriverInterface.cc
 /usr/bin/g++  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic     -m64 -fPIC               -I. -I../src/ -I.././src/    -I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include                        -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c ../src/RegexpConverter.cc
-# --- snip snip ---
 ```
 
 Especially note:
@@ -55,7 +54,9 @@ And if we unset one of these variables and try to rebuild:
 [iocuser@host:e3-StreamDevice]$ echo "ASYN_DEP_VERSION:=" > configure/CONFIG_MODULE.local
 [iocuser@host:e3-StreamDevice]$ make clean
 [iocuser@host:e3-StreamDevice]$ make build
+
 # --- snip snip ---
+
 Expanding stream.dbd
 /epics/base-3.15.5/require/3.0.4/tools/expandDBD.tcl -3.15 -I ./ -I /epics/base-3.15.5/dbd streamSup.dbd > stream.dbd
 /usr/bin/g++  -D_GNU_SOURCE -D_DEFAULT_SOURCE         -DUSE_TYPED_RSET               -DUSE_TYPED_RSET   -D_X86_64_  -DUNIX  -Dlinux                 -MD   -O3 -g   -Wall                    -mtune=generic                   -m64 -fPIC               -I. -I../src/ -I.././src/                            -I/epics/base-3.15.5/require/3.0.4/siteMods/pcre/8.41.0/include         -I/epics/base-3.15.5/include  -I/epics/base-3.15.5/include/compiler/gcc -I/epics/base-3.15.5/include/os/Linux                                    -c ../src/AsynDriverInterface.cc
@@ -240,6 +241,13 @@ e3-StreamDevice/StreamDevice/O.3.15.5_linux-x86_64/AsynDriverInterface.d:
 /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.34.0/include/asynDriver.h \
 /epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.34.0/include/asynInt32.h \
 ```
+
+---
+
+## Assignments
+
+* Think about how you figure out which versions of modules are available to you.
+* What would a version that looks like `2.8.4-1` mean and imply?
 
 
 ---

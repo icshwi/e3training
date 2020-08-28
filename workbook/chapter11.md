@@ -12,7 +12,7 @@ In this lesson, you'll learn how to do the following:
 
 ---
 
-## Proper workflows
+## How to version your module
 
 To be written.
 

@@ -20,7 +20,6 @@ Open code blocks should have language definitions for highlighting to whatever d
 [x] Outline what had been thought-up by Han previously for future chapters
 [ ] Balance the chapters better
 [ ] Add assignments to all chapters
-[ ] Think of a logical separation for parts 1 and 2 or remove separation; best option currently seems to be 1) e3 core, 2) e3 advanced and ESS-tools
 
 ## Loose notes
 
@@ -44,5 +43,4 @@ Open code blocks should have language definitions for highlighting to whatever d
 * db, template, subst files (msi and inflation)
 * e3 configuration variables
 * e3 building system
-* systemd, procServ, and conserver 
 * require 

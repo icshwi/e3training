@@ -369,6 +369,6 @@ Now we will set up, build, and install our application.
 
 ---
 
-[Next: Chapter 9 - Building an e3 module](chapter09.md)
+[Next: Chapter 9 - Other dependencies](chapter09.md)
 
 [Return to Table of Contents](README.md)

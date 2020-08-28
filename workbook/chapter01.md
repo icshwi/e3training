@@ -380,7 +380,9 @@ The following command will load all installed modules within a single `iocsh.bas
 
 ```console
 [iocuser@host:e3]$ ./e3.bash -c load
+
 # --- snip snip ---
+
 require: fillModuleListRecord
 require: REQMOD-791F5F3:FAISERV-21664:MODULES[0] = "require"
 require: REQMOD-791F5F3:FAISERV-21664:VERSIONS[0] = "3.0.5"
@@ -454,6 +456,9 @@ iocRun: All initialization complete
   
   1. How GNU Make and Makefiles work.
   2. How git submodules work.
+
+* Install both EPICS base 3.15.4 and 7.0.3.1 (separately) on your host.
+* See if you can find where the module groups are specified, and try to figure out how you could change these.
 
 
 ---

@@ -104,7 +104,7 @@ Thus, one can easily switch between environments. For example:
 
 ## Assignments
 
-Please explain the following jargon by yourself - these are mixed EPICS and e3 terms:
+Please explain the following jargon to yourself - these are mixed EPICS and e3 terms:
 
 * `require`
 * `E3_CMD_TOP`

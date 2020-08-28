@@ -36,7 +36,7 @@ The variables of interest here are:
 
 These two variables are defined in `configure/CONFIG_MODULE` (and in `configure/CONFIG_MODULE_DEV`).
 
-> `_DEV` files will be covered later as we go through the different modes of e3.
+> Files with a `_DEV` suffix will be explained later when we go through the different modes of e3.
 
 ## List the installed version(s) of a module
 

@@ -79,8 +79,7 @@ We will now set up a simplistic system daemon to run an IOC.
 
 1. Create a text file and save it as `/etc/systemd/system/test-ioc.service`, with the following contents:
 
-   ```console
-   [iocuser@host:~]$ cat /etc/systemd/system/test-ioc.service
+   ```yaml
    [Unit]
    Description=procServ container for test IOC
    After=network.target remote-fs.target
@@ -120,8 +119,7 @@ As you can see from the unit file, most of the parameters are fairly generic, an
 
 1. Create a template file called `ioc@.service`:
 
-   ```console
-   [iocuser@host:~]$ cat /etc/systemd/system/ioc@.service
+   ```yaml
    [Unit]
    Description=procServ container for IOC %i
    Documentation=file:/opt/iocs/e3-ioc-%i/README.md
@@ -161,8 +159,7 @@ As you can see from the unit file, most of the parameters are fairly generic, an
 
 2. Create a simple startup script at `/opt/iocs/` with the format `e3-ioc-<iocname>/st.cmd`:
 
-   ```console
-   [iocuser@host:~]$ cat /opt/iocs/e3-ioc-test-ioc/st.cmd
+   ```bash
    require stream,2.8.4
 
    iocInit()
@@ -213,17 +210,15 @@ conserver: built with `./configure --build=x86_64-redhat-linux-gnu --host=x86_64
 
 The main two things to notice above is the location of the default configuration file and the default password file (`/etc/conserver.cf` and `/etc/conserver.passwd` respectively). If you were to look at these two files on your machine, you will find that they already contain some (commented out) example settings.
 
-We will now modify these two files for our setup. As we do not need access control, we will simply allow all users to access conserver without any password:
+We will now modify these two files for our setup. As we do not need access control, we will simply allow all users to access conserver without any password. Modify your `conserver.passwd` to look like this:
 
-```console
-[iocuser@host:~]$ cat /etc/conserver.passwd
+```bash
 *any*:
 ```
 
-For the configuration file, we will set up some default values, and then we will use an include directive (`#include`) to be able to inventorize our consoles in a separate file:
+For the configuration file, we will set up some default values, and then we will use an include directive (`#include`) to be able to inventorize our consoles in a separate file. Modify your `conserver.cf` to look like this:
 
-```console
-[iocuser@host:~]$ cat /etc/conserver.cf
+```json
 config * {
 }
 
@@ -246,8 +241,7 @@ Thus we are allowing only local access, and we are specifying to include the fil
 
 Now create the above included `procs.cf`, and populate it with data to describe one of our already-running IOCs:
 
-```console
-[iocuser@host:~]$ cat /etc/conserver/procs.cf
+```json
 console test-ioc {
     type uds;
     uds /var/run/procServ/test-ioc/control;
@@ -288,8 +282,7 @@ console: built with `./configure --build=x86_64-redhat-linux-gnu --host=x86_64-r
 
 As you can see, site-wide configurations are kept in `/etc/console.cf`. All we will need to do now to use the service is to define where console should look for consoles:
 
-```console
-[iocuser@host:~]$ cat /etc/console.cf
+```json
 config * {
         master localhost;
 }

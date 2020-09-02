@@ -20,7 +20,7 @@ Check where `core.xxxxx` file is.
 
 Excute the following command:
 
-```
+```console
 [iocuser@host:path/to/dir/]$ iocsh_gdb.bash core.18208 
 ```
 

@@ -45,7 +45,7 @@ Let's have a look at `e3-iocStats/`:
 
 Although there is some variation amongst e3 modules, the majority of them have the following directories:
 
-* `cmds/` Customized startup scripts.
+* `cmds/` Customized (typically example) startup scripts.
 
 * `configure/` Configuration files (for e3).
 
@@ -59,9 +59,9 @@ Although there is some variation amongst e3 modules, the majority of them have t
 
 * `Makefile` The global e3 module makefile.
 
-* `patch/` For when we need to handle small changes of source codes. More on this later.
+* `patch/` For when we need to handle small changes in source code. More on this later.
 
-* `template/` For template and substitution files.
+* `template/` Database, template and substitution files.
 
 ### Git submodule
 

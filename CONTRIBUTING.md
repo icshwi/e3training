@@ -2,7 +2,7 @@
 
 Improvements to this training series are appreciated, especially if you notice commands being incorrect or out-of-date. Ensure that you try the steps on a fairly blank machine, having performed all the earlier steps of the tutorial, prior to making the change.
 
-Changes shall as usual be done in a separate branch or on a pork, after which a pull or merge request can be made.
+Changes shall as usual be done in a separate branch or on a pork, after which a pull or merge request can be made. Optimally, you would register an issue in the repository prior to starting work, and would refer to this in your merge/pull request.
 
 If you want advice on intended changes, contact one of the earlier contributors.
 

@@ -16,6 +16,12 @@ In this lesson, you'll learn how to do the following:
 
 To be written.
 
+<!-- version 0.1.0 (IIRC) for just created wrappers, 1.0.0 when released -->
+
+<!-- discuss semver, build numbers, and release candidates -->
+
+<!-- discuss how to version e3 wrappers in the context of module versions -->
+
 
 ---
 

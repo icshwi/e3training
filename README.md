@@ -10,6 +10,8 @@ ESS' EPICS Environment, also known as e3, is essentially a configuration managem
 
 ## Workbook
 
+Note that this workbook is intended for e3 app developers and integrators at ESS (and consequently also contains some site specific processes and standards); if you simply want to use EPICS to read or manipulate PVs you can either run the first two installation commands, or e.g. install EPICS base using conda from conda-forge.
+
 This workbook is a work-in-progress and is therefore still missing information. Please create an issue or submit a pull request with a suggested change if you noticy something being awry or have an improvement in mind.
 
 [Continue (Table of Contents)](workbook/README.md)

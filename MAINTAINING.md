@@ -19,21 +19,25 @@ Open code blocks should have language definitions for highlighting to whatever d
 - There should probably be a contact listed for questions
 - Link to more external things; autosave, css phoebus, git submodules, etc.
 - Possibly create separate mini-lessons for e3 users (non-devs)
-- Add glossary page (appendixC?)
+- Add glossary page (appendix?)
 - Rename/reorganize supplementary dirs
 - Complementary material should be cleaned up (and possibly removed)
 - Chapters need to be better balanced
+- More/better assignments needed
 
 ## Other subjects/content to add
-* Multiple e3s in a host
-* Hidden makefile rules (db, hdrs, vlibs, epics, and so on)
-* siteLibs, handling vendor libraries
-* compiling a module
-* setE3env.bash
-* e3.bash
-* supplement tools (epics_NIOCs, pkg_automation, pciids, etherlabmaster, etc)
-* sequencer
-* db, template, subst files (msi and inflation)
-* e3 configuration variables
-* e3 building system
-* require 
+
+- Multiple e3s in a host
+- Hidden makefile rules (db, hdrs, vlibs, epics, and so on)
+- siteLibs, handling vendor libraries
+- compiling a module
+- setE3env.bash
+- e3.bash
+- more tools (epics_NIOCs, pciids, etherlabmaster, etc)
+- sequencer
+- db, template, subst files (msi and inflation)
+- e3 configuration variables
+- e3 building system
+- require 
+- simulators (lewis, kameleon)
+- cellinstall

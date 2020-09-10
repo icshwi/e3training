@@ -104,7 +104,7 @@ epicsEnvSet IOCSH_PS1 "58bef31.faiserv.18238 > "
 
 * Run `epicsPrtEnvParams`. Which other command returns the same result?
 
-* How do we access only one variable - for example `TOP`?
+* How do we print only one variable - for example `TOP`?
 
   > For questions on EPICS functions, the [App Developers Guide](https://epics.anl.gov/base/R3-15/6-docs/AppDevGuide/IOCShell.html#x19-73300018) will usually have your answers.
 

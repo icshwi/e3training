@@ -68,7 +68,7 @@ compilation terminated.
 
 If you look at this output, you'll find that `-I/epics/base-3.15.5/require/3.0.4/siteMods/asyn/4.33.0/include` now is missing. At this point, the building system cannot find `asynDriver.h` (which is used in `src/AsynDriverInterface.cc`). 
 
-Roll back the *asynDriver* (henceforth *Asyn*) version and rebuild:
+Roll back the *asynDriver* (henceforth *asyn*) version and rebuild:
 
 ```console
 [iocuser@host:e3-StreamDevice]$ rm configure/CONFIG_MODULE.local
@@ -78,13 +78,13 @@ Roll back the *asynDriver* (henceforth *Asyn*) version and rebuild:
 
 ## New dependency module
 
-If we postulate that we (due to new requirements or critical bugs in an existent IOC) need to swap from *StreamDevice* version `2.7.14p` to `2.8.4`, we have to consider two dependency modules (*Asyn* and *pcre*). Here, for the sake of brevity, we will only consider the *Asyn* dependence. Before swapping, we need to consider if the existing *Asyn* module is both sufficient for our needs and compatible with *StreamDevice* `2.8.4`.
+If we postulate that we (due to new requirements or critical bugs in an existent IOC) need to swap from *StreamDevice* version `2.7.14p` to `2.8.4`, we have to consider two dependency modules (*asyn* and *pcre*). Here, for the sake of brevity, we will only consider the *asyn* dependence. Before swapping, we need to consider if the existing *asyn* module is both sufficient for our needs and compatible with *StreamDevice* `2.8.4`.
 
 * If it is, recall what we did in [Chapter 3](chapter03.md).
 
   > Note that this makes a strong assumption that the list of source files in `2.7.14p` and `2.8.4` are the same. If some files have been added or removed between the versions, we have to modify `StreamDevice.Makefile` accordingly. Whenever this is the case, contact the maintainer of e3.
 
-* If it isn't, we have to install a new *Asyn* version using our current e3 environment. The procedure is here the same with *StreamDevice* in [Chapter 3](chapter03.md). In our case, there are neither new files nor deleted files between *Asyn* versions `4.33` and `4.34`, and we can thus build the new version of asyn with the same `asyn.Makefile`:
+* If it isn't, we have to install a new *asyn* version using our current e3 environment. The procedure is here the same with *StreamDevice* in [Chapter 3](chapter03.md). In our case, there are neither new files nor deleted files between *asyn* versions `4.33` and `4.34`, and we can thus build the new version of asyn with the same `asyn.Makefile`:
 
   ```console
   [iocuser@host:e3-asyn]$ make vars
@@ -114,7 +114,7 @@ If we postulate that we (due to new requirements or critical bugs in an existent
       └── lib
   ```
 
-  Next, we can install *StreamDevice* `2.8.4`, which will be using *Asyn* `4.34.0`.
+  Next, we can install *StreamDevice* `2.8.4`, which will be using *asyn* `4.34.0`.
 
   > This step is exactly the same as we what did in [Chapter 3](chapter03.md).
 
@@ -159,7 +159,7 @@ If we postulate that we (due to new requirements or critical bugs in an existent
 
   > Remember that you can initiate an IOC shell just like `iocsh.bash -r stream,2.8.4`.
 
-  > Can you see the *Asyn* version you've just set up in the output? Try loading *StreamDevice* version `2.7.14p` to compare.
+  > Can you see the *asyn* version you've just set up in the output? Try loading *StreamDevice* version `2.7.14p` to compare.
 
   As you have just seen, dependencies are defined when we compile the module.
 
@@ -192,7 +192,7 @@ More technical pitfalls exist when we are building or writing startup scripts. H
 
   What you have just seen is the default behavior when a module version number isn't specified; loading a module with no specified version will **only** work when the system has a numeric `X.Y.Z` version. In our last example, the system has *StreamDevice* version `2.8.4`, which **is** numeric, but `2.7.14p` is **not** numeric.
   
-  > Also note that, in either of these cases, the *StreamDevice* module will use the version of *Asyn* which was specified when building the *StreamDevice* module. 
+  > Also note that, in either of these cases, the *StreamDevice* module will use the version of *asyn* which was specified when building the *StreamDevice* module. 
 
 * How we require dependency modules within startup scripts.
 
@@ -225,7 +225,7 @@ The current implementation of e3 can't handle these aforementioned cases properl
 
 * Use specific version numbers for modules. That way if something wrong you will not be able to start the IOC.
 
-* Use the highest version dependency module that you know will work. In the above examples, this would mean only using `stream`, and not both `asyn` and `stream` (as *StreamDevice* already depends on *Asyn*).
+* Use the highest version dependency module that you know will work. In the above examples, this would mean only using `stream`, and not both `asyn` and `stream` (as *StreamDevice* already depends on *asyn*).
 
 ## Dependence, dependence, and dependence
 

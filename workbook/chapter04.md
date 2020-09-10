@@ -264,7 +264,7 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
    [iocuser@home:ch4_supplementary_path]$ bash ../tools/caget_pvs.bash -l IOC-NNNNNNNN_PVs.list 
    ```
 
-   (, where `NNNNNNNN` is your IOC's random number.) 
+   (where `NNNNNNNN` is your IOC's random number.) 
 
 ---
 

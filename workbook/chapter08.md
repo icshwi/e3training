@@ -361,7 +361,7 @@ Now we will set up, build, and install our application.
 * Write startup scripts for `e3-Clock` and for `e3-fimscb`.
 * Build an e3 application with a remote repository:
   
-  1. Can you build [e3-ch8](https://github.com/icswi/ch8) as an application?
+  1. Can you build [e3-ch8](https://github.com/icshwi/ch8) as an application?
   2. Try to create a startup script for it.
 
 * Build [e3-myexample](https://github.com/icshwi/myexample) and an associated IOC. 

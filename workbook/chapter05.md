@@ -294,7 +294,7 @@ The purpose of these e3-module patch files is essentially to minimize maintenanc
 #### Patch functions for e3 modules
 
 There are four functions defined in `e3-require/configure/modules/DEFINES_FT` which are used for all e3 modules. This file will be located in
-`${EPICS_BASE}/require/${E3_REQUIRE_VERSION}/configure/modules` after the require module has been installed.
+`${EPICS_BASE}/require/${E3_REQUIRE_VERSION}/configure/` after the require module has been installed.
 
 * `patch_site`
 * `patch_revert_site`

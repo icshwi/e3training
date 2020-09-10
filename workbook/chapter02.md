@@ -45,7 +45,7 @@ Thus, one can easily switch between environments. For example:
 2. Check the IOC name:
 
    ```console
-   [iocuser@host:e3-3.15.5]$ echo ${IOCNAME}
+   localhost-31462> echo ${IOCNAME}
    ```
 
    (Which should output IOC-9999.)
@@ -59,7 +59,7 @@ Thus, one can easily switch between environments. For example:
 4. Print all of the PVs to a file and skim through it:
 
    ```console
-   [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l ${IOCNAME}_PVs.list
+   [iocuser@host:e3-3.15.5]$ bash caget_pvs.bash -l IOC-9999_PVs.list
    ```
 
 5. Check the heartbeat of your IOC.

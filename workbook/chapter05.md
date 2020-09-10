@@ -343,4 +343,5 @@ If you want to create a patch file for an e3 module, run `git diff --no-prefix >
 
 [Next: Chapter 6 - Variables and parameters within e3](chapter06.md)
 
+[Previous chapter](chapter04.md)
 [Return to Table of Contents](README.md)

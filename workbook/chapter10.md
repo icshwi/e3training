@@ -34,4 +34,5 @@ To be written.
 
 [Next (Book 2): Chapter 11 - Release rules](chapter11.md)
 
+[Previous chapter](chapter09.md)
 [Return to Table of Contents](README.md)

@@ -119,4 +119,5 @@ Please explain the following jargon to yourself:
 
 [Next: Chapter 3 - Installing other versions of modules](chapter03.md)
 
+[Previous chapter](chapter01.md)
 [Return to Table of Contents](README.md)

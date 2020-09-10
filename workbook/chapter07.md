@@ -254,4 +254,5 @@ e3-StreamDevice/StreamDevice/O.3.15.5_linux-x86_64/AsynDriverInterface.d:
 
 [Next: Chapter 8 - Building an e3 application](chapter08.md)
 
+[Previous chapter](chapter06.md)
 [Return to Table of Contents](README.md)

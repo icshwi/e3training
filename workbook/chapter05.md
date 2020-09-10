@@ -121,7 +121,7 @@ The following commands utilize `git submodule` and are used for the deployment m
 
 ## Development mode
 
-The development mode is instead intended to allow the developer to modify the source module, and utilizes `git clone` over `git submodule`. This allows us to make commits to the repository.
+The development mode is instead intended to allow the developer to modify the source module, and utilizes `git clone` over `git submodule`. This provides a method to use a forked copy of the source module, which allows you to commit changes even if you lack permission to push to the remote repository.
 
 Inside of `configure/`, you will find two files with the suffix `_DEV`: `CONFIG_MODULE_DEV` and `RELEASE_DEV` are the counterparts of `CONFIG_MODULE` and `RELEASE` used in the deployment mode. These counterpart files are nearly identical, except for:
 

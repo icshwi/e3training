@@ -19,7 +19,7 @@ The following variables are defined when an IOC is running from within startup a
 
 ### General `iocsh.bash` variables
 
-* `REQUIRE_IOC`: A read-only variable which is defined within `iocsh.bash`. <!-- fixme: verify what it does -->
+* `REQUIRE_IOC`: A unique name of the IOC that can be used to track certain variables in a certain IOC. For example, there are PVs called `$(REQUIRE_IOC):MODULES` that list the modules that are loaded in a given IOC.
 
 * `E3_CMD_TOP`: The absolute path to the startup script (cmd file).
 

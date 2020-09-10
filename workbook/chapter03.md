@@ -48,7 +48,7 @@ These two variables are defined in `configure/CONFIG_MODULE` (and in `configure/
    ```
 
 2. Look at the output.
-   The result show the local version(s) of stream modules within e3:
+   The result show the installed version(s) of stream modules within e3:
    
    ```console
    /epics/base-3.15.5/require/3.0.5/siteMods/stream
@@ -115,7 +115,7 @@ We could here download *StreamDevice* directly from PSI's GitHub account, and sw
 
 * Verify your configuration with `make vars`.
 
-## Build and install *StreamDevice* `master` (`b84655e`)
+## Build and install *StreamDevice* `b84655e`
 
 Time to try out some makefile rules. See if you can spot the difference between before now. From `e3-StreamDevice/`, run:
 

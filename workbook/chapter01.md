@@ -220,7 +220,7 @@ This group contains modules important for fast timestamping.
 
 ### EtherCAT / Motion group
 
-*N.B.! You will need an ESS' Bitbucket account to access some of the modules in this group.*
+*N.B.! You will need an ESS' Bitbucket account to access some of the modules in this group. Furthermore, *ethercatmaster* must be installed before e3-ecmc can be installed.*
 
 This group contains modules commonly used with motion contol. Note here that if a group has depencies upon other modules, these will be added automatically:
 

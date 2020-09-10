@@ -63,7 +63,7 @@ We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europe
 
 In `ch4_supplementary_path/cmds`, you will find a number of (incrementally named) startup scripts that will be used for the following steps.
 
-> For each of these scripts, you should attempt to first figure out what is happening, or what will happen, before continuing this tutorial. And whenever a question is asked, attempt to answer it before reading the next sentence.
+For each of these scripts, you should attempt to first figure out what is happening, or what will happen, before continuing this tutorial. And whenever a question is asked, attempt to answer it before reading the next sentence.
 
 > Before running `iocsh.bash`, don't forget to load your e3 environment:
 > 

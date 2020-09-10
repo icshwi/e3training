@@ -343,7 +343,6 @@ The following variables are defined within a module or application by default.
   
   > If you get stuck, remember that there's a command to use any UNIX command from within an IOC shell. Can you remember what it is?
 
-* Which module is used for a specific vendor library? Why do we keep these files within the e3 structure? 
 * Can you find out which file it is that allows us to run `make vars` or `make env` within the e3 building system? 
   
   > It is the same for all modules and applications, so where could be located?

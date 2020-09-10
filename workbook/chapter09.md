@@ -62,7 +62,7 @@ Besides the db file itself is expected that you change the `linconv.Makefile` to
 So, now with that db file, if you try to run an startup script like this:
 
 ```bash
-require lineonv, 0.0.1
+require linconv, 0.0.1
 dbLoadRecords("linconv.db")
 ```
 
@@ -118,7 +118,7 @@ calc 3.7.1
 Having changed this configuration you can try the same startup script:
 
 ```bash
-require lineonv, 0.0.1
+require linconv, 0.0.1
 dbLoadRecords("linconv.db")
 ```
 

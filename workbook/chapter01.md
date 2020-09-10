@@ -138,6 +138,8 @@ Configuring EPICS per above directions will generate the following three `*.loca
 
 These will help us to change base, require, and all modules' configuration without having to change any source files.
 
+*N.B.! Modifying versions in the `*.local` files above will override versions listed in the module configuration files.*
+
 ## Building and installing EPICS base and require
 
 For EPICS base and *require*, it's as simple as running:

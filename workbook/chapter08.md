@@ -23,7 +23,7 @@ Modules within e3 are essentially the core component that enables building of an
 
 ### Modules 
 
-Most e3 modules originate from the EPICS community, like [iocStats](https://github.com/epics-modules/iocStats), [mrfioc2](https://github.com/epics-modules/mrfioc2), [asyn](https://github.com/epics-modules/asyn), and [autosave](https://github.com/epics-modules/autosave). In e3, the installation location for modules is defined in `E3_SITEMODS_PATH`, as discussed earlier in [Chapter 6](chapter06.md). Corresponding symbolic links are created and defined in `E3_SITELIBS_PATH`.
+Most e3 modules originate from the EPICS community, like [iocStats](https://github.com/epics-modules/iocStats), [mrfioc2](https://github.com/epics-modules/mrfioc2), [asyn](https://github.com/epics-modules/asyn), and [autosave](https://github.com/epics-modules/autosave). In e3, the installation location for modules is defined in `E3_SITEMODS_PATH`, as discussed earlier in [Chapter 6](chapter06.md).
 
 > You should have a look at these aforementioned variables:
 >

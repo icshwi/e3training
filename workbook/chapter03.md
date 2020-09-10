@@ -128,6 +128,8 @@ Time to try out some makefile rules. See if you can spot the difference between 
 7. `make vers`
 8. `make dep | head -1`
 
+And it seldom hurts to try `make help` for new projects.
+
 ---
 
 ## Assignments

@@ -236,7 +236,7 @@ Spend some time thinking about the following:
 
 * `epicsEnvSet` Can you see two different ways for it to be used? 
 
-* `dbLoadRecords` Can you see two different ways for it to be used?
+* Can you think of another syntax by which you can call `dbLoadRecords`?
 
 * Could you rewrite startup scripts using only one method? 
 

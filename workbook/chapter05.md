@@ -77,7 +77,7 @@ In order to explain how e3 uses *git submodules*, we will do the following exerc
 
    You should be seeing something like `ae5d08388ca3d6c48ec0e37787c865c5db18dc8f iocStats (3.1.15-17-gae5d083)`.
 
-> Please spend some time to understand this output. Git's pages on [submodules](https://git-scm.com/docs/git-submodule) should be useful.
+> Please spend some time to make sure you understand this output.
 
 2. Look at the repository on GitHub.
 

@@ -55,7 +55,7 @@ We will use a simple simulator based on *[Kameleon](https://bitbucket.org/europe
    Connection closed.
    ```
 
-   (, where ^ is the Ctrl key.)
+   (where ^ is the Ctrl key.)
 
 > The simulator in question has shown a tendency to die every now and then, so go back to verify that the simulator is working before trying out a script - and restart it if not.
 

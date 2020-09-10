@@ -133,7 +133,6 @@ Time to try out some makefile rules. See if you can spot the difference between 
 ## Assignments
 
 * Try out `make existent` with `LEVEL=4`.
-* Try `iocsh.bash -r stream,e3training`. Can you explain what is happening here?
 * Do `make init` in **E3_TOP**. What do you see?
 * Which kind of make rule allows us to uninstall the installed module?
 * Can we combine the following two steps? 

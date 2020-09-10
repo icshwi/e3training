@@ -316,7 +316,7 @@ Reversed (or previously applied) patch detected!  Assume -R? [n]
 If you want to create a patch file for an e3 module, run `git diff --no-prefix > ../patch/Site/` from the root directory of the module, e.g.:
 
 ```console
-[iocuser@host:e3-iocStats]$ git diff --no-prefix > ../patch/Site/2.7.14p-add_more_stats.p0.patch
+[iocuser@host:iocStats]$ git diff --no-prefix > ../patch/Site/2.7.14p-add_more_stats.p0.patch
 ```
 
 ---

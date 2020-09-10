@@ -73,13 +73,11 @@ Thus, one can easily switch between environments. For example:
 * Have a look at the contents of `cmds/iocStats.cmd` and make sure you understand all of it:
 
   ```bash
-  require iocStats,ae5d083
+  require iocStats,3.1.16
 
   epicsEnvSet("TOP", "$(E3_CMD_TOP)")
 
-  system "bash $(TOP)/random.bash"
-
-  iocshLoad "$(TOP)/random.cmd"
+  epicsEnvSet("NUM", "9999")
 
   epicsEnvSet("P", "IOC-$(NUM)")
   epicsEnvSet("IOCNAME", "$(P)")

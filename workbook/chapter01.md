@@ -361,7 +361,7 @@ You download, build, and install a group by using the `mod` argument (as in **mo
 
 ### Options
 
-The mod argument contain these---individually accessible---steps:
+The mod argument contain these - individually accessible - steps:
  
 * `cmod`: Clean  
 * `gmod`: Clone  

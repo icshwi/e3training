@@ -271,6 +271,7 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
 ## Assignments
 
 * Could you improve on the startup script further? Explain to yourself how.
+* What does the `-C` flag do when used with make rules?
 
 
 ---

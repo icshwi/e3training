@@ -133,7 +133,7 @@ Configuring EPICS per above directions will generate the following three `*.loca
 * `REQUIRE_CONFIG_MODULE.local`
   
   ```python
-  EPICS_MODULE_TAG:=tags/v3.0.5
+  EPICS_MODULE_TAG:=tags/3.0.5
   ```
 
 These will help us to change base, require, and all modules' configuration without having to change any source files.

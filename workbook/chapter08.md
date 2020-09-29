@@ -373,5 +373,8 @@ Now we will set up, build, and install our application.
 
 [Next: Chapter 9 - Other dependencies](chapter09.md)
 
+---
+
 [Previous chapter](chapter07.md)
+
 [Return to Table of Contents](README.md)

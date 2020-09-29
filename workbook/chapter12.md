@@ -26,5 +26,8 @@ To be written.
 
 [Next: Chapter 13 - Supplementary tools](chapter13.md)
 
+---
+
 [Previous chapter](chapter11.md)
+
 [Return to Table of Contents](README.md)

@@ -352,5 +352,8 @@ The following variables are defined within a module or application by default.
 
 [Next: Chapter 7 - Understanding module dependence](chapter07.md)
 
+---
+
 [Previous chapter](chapter05.md)
+
 [Return to Table of Contents](README.md)

@@ -210,5 +210,8 @@ files are the same as the ones used in this tutorial.
 
 [Next: Chapter 10 - Understanding e3's file structure](chapter10.md)
 
+---
+
 [Previous chapter](chapter09.md)
+
 [Return to Table of Contents](README.md)

@@ -147,5 +147,8 @@ And it seldom hurts to try `make help` for new projects.
 
 [Next: Chapter 4 - Delve into e3 with startup scripts](chapter04.md)
 
+---
+
 [Previous chapter](chapter02.md)
+
 [Return to Table of Contents](README.md)

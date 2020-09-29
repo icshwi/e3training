@@ -27,5 +27,8 @@ To be written.
 
 [Next: Chapter 12 - Working with the EPICS community](chapter12.md)
 
+---
+
 [Previous chapter](chapter10.md)
+
 [Return to Table of Contents](README.md)

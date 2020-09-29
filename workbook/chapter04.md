@@ -278,5 +278,8 @@ Here we add `iocStats` in a slightly different way, and have furthermore added m
 
 [Next: Chapter 5 - Deployment mode and development mode](chapter05.md)
 
+---
+
 [Previous chapter](chapter03.md)
+
 [Return to Table of Contents](README.md)

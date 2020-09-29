@@ -212,6 +212,6 @@ files are the same as the ones used in this tutorial.
 
 ---
 
-[Previous chapter](chapter09.md)
+[Previous chapter](chapter08.md)
 
 [Return to Table of Contents](README.md)

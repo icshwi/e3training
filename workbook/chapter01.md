@@ -34,7 +34,7 @@ libusbx-devel systemd-devel libraw1394.x86_64 hg libtirpc-devel \
 liberation-fonts-common liberation-narrow-fonts \
 liberation-mono-fonts liberation-serif-fonts liberation-sans-fonts \
 logrotate xorg-x11-fonts-misc cpan kernel-devel symlinks \
-dkms procServ curl netcdf netcdf-devel telnet
+dkms procServ curl netcdf netcdf-devel telnet glib2-devel
 ```
 
 ---

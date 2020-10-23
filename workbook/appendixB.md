@@ -1,29 +1,32 @@
-# Appendix B : Segmentation Fault 
+# Appendix B: Segmentation Fault 
 
+[Return to Table of Contents](README.md)
+
+---
 
 ## Case 1
 
-* Problem : Segmentation fault when iocsh.bash starts
+### Problem
 
-```
+Segmentation fault when iocsh.bash starts:
 
+```console
 /epics/base-3.15.5/require/3.0.4/bin/iocsh.bash: line 131: 18208 Segmentation fault      (core dumped) softIoc${_PVA_} -D ${EPICS_BASE}/dbd/softIoc${_PVA_}.dbd "${IOC_STARTUP}" 2>&1
 ```
 
-* Check where core.xxxxx file is
+### Solution
 
-* Excute the following command
+Check where `core.xxxxx` file is.
+
+Excute the following command:
+
+```console
+[iocuser@host:path/to/dir/]$ iocsh_gdb.bash core.18208 
 ```
-iocsh_gdb.bash core.18208 
 
-......
-.....
+You will notice it crashes.
 
-```
-
-* it will be crashed!
-
-```
+```console
 Program received signal SIGSEGV, Segmentation fault.
 [Switching to Thread 0x7fffcfdfe700 (LWP 18940)]
 epicsMutexLock (pmutexNode=0x0) at ../../../src/libCom/osi/epicsMutex.cpp:143
@@ -32,9 +35,9 @@ Missing separate debuginfos, use: debuginfo-install glibc-2.17-260.el7.x86_64 li
 (gdb) 
 ```
 
-* backtrace 
+Backtrace:
 
-```
+```console
 (gdb) bt
 #0  epicsMutexLock (pmutexNode=0x0) at ../../../src/libCom/osi/epicsMutex.cpp:143
 #1  0x00007ffff796c9d9 in casStatsFetch (pChanCount=0x7fffcfdfdd10, pCircuitCount=0x7fffcfdfdce0) at ../../../src/ioc/rsrv/caservertask.c:1466
@@ -47,7 +50,8 @@ Missing separate debuginfos, use: debuginfo-install glibc-2.17-260.el7.x86_64 li
 #8  0x00007ffff6639dd5 in start_thread () from /lib64/libpthread.so.0
 #9  0x00007ffff694bead in clone () from /lib64/libc.so.6
 ```
-```
+
+```console
 (gdb) bt full
 #0  epicsMutexLock (pmutexNode=0x0) at ../../../src/libCom/osi/epicsMutex.cpp:143
 No locals.
@@ -79,12 +83,10 @@ No symbol table info available.
 No symbol table info available.
 ```
 
-
-* check the current thread
+Check the current thread:
 
 ```
-
-info threads
+(gdb) info threads
   Id   Target Id         Frame 
   26   Thread 0x7fffceef6700 (LWP 18948) "scan-0.1" 0x00007ffff663dd12 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
   25   Thread 0x7fffcf0f7700 (LWP 18947) "scan-0.2" 0x00007ffff663dd12 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
@@ -95,10 +97,9 @@ info threads
   20   Thread 0x7fffcfafc700 (LWP 18942) "scan-10" 0x00007ffff663dd12 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
   19   Thread 0x7fffcfcfd700 (LWP 18941) "scanOnce" 0x00007ffff663d965 in pthread_cond_wait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
 * 18   Thread 0x7fffcfdfe700 (LWP 18940) "timerQueue" epicsMutexLock (pmutexNode=0x0) at ../../../src/libCom/osi/epicsMutex.cpp:143
-
 ```
 
-* Quit gdb
+Quit gdb.
 
 ```
 (gdb) quit
@@ -108,3 +109,8 @@ A debugging session is active.
 
 Quit anyway? (y or n) y
 ```
+
+
+---
+
+[Return to Table of Contents](README.md)

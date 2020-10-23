@@ -1,60 +1,31 @@
-European Spallation Source EPICS Environment Workbook
-==
-* The meaning of :book: is ready for your self-training.
-* The meaning of :pencil: is currently the writing chapter.
-* The meaning of :construction: does have only a file.
+# European Spallation Source EPICS Environment Workbook
 
-# Part 1 : 
+This workbook still is under construction and several chapters remain unfinished. Chapters marked with the icon :construction: are still being worked on.
 
-[Part 1 Introduction](intropart1.md)
+For some of the chapters there are supplementary directories containing code and utilities, so it's recommended to clone this repository prior to starting.
 
-### Chapter 1 : [e3 installation](chapter1.md) :book:
-### Chapter 2 : [Your First Running e3 IOC](chapter2.md) :book:
-### Chapter 3 : [Install a Module with the different version number](chapter3.md) :book:
-### Chapter 4 : [Delve into e3 with startup scripts](chapter4.md) :book:
-### Chapter 5 : [Take the Deployment or the Development](chapter5.md) :book:
-### Chapter 6 : [Variables, Parameters and Environment Variables within e3](chapter6.md) :book:
-### Chapter 7 : [Understand A Module Dependence](chapter7.md) :book:
-### Chapter 8 : [Build an e3 Application](chapter8.md) :book:
-### Chapter 9 : [Build an e3 Module](chapter9.md) :pencil:
-### Chapter 10 : [e3 Directory Structure](chapter10.md) :construction: 
+---
 
+## Part 1
 
-# Part 2 : 
+##### Chapter 1: [Installing e3](chapter01.md)
+##### Chapter 2: [Your first running e3 IOC](chapter02.md)
+##### Chapter 3: [Installing other versions of modules](chapter03.md)
+##### Chapter 4: [Delve into e3 with startup scripts](chapter04.md)
+##### Chapter 5: [Deployment mode and development mode](chapter05.md)
+##### Chapter 6: [Variables and parameters within e3](chapter06.md)
+##### Chapter 7: [Understanding module dependence](chapter07.md)
+##### Chapter 8: [Building an e3 module](chapter08.md)
+##### Chapter 9: [Other dependencies](chapter09.md) :construction:
+##### Chapter 10: [Understanding e3's file structure](chapter10.md) :construction: 
 
-[Part 2 Introduction](intropart2.md) :construction: 
+## Part 2
 
-### Chapter 11 : [Other Dependencies](chapter11.md) :book:
+##### Chapter 11: [Release rules](chapter11.md) :construction:
+##### Chapter 12: [Working with the EPICS community](chapter12.md) :construction:
+##### Chapter 13: [Supplementary tools](chapter13.md)
 
-# Appendix : Troubleshoting
+## Appendices
 
-### Appendix A : [Build System Troubleshoting](appendixA.md)
-### Appendix B : [Segmentation Fault with GDB](appendixB.md)
-
-<!-- # Part 2 :  -->
-
-<!-- ## Chapter 10 -->
-<!-- [Dependence, Dependence, and Dependence](9.md) -->
-
-
-<!-- ## Chapter X -->
-<!-- [Release Rule](11.md) -->
-
-<!-- ## Chapter X -->
-<!-- [Work with EPICS Community](12.md) -->
-
-
-
-
-<!-- ## Other Subjects  -->
-<!-- * Multiple e3s in a host -->
-<!-- * Hidden makefile rules (db, hdrs, vlibs, epics, and so on) -->
-<!-- * setE3env.bash -->
-<!-- * e3.bash -->
-<!-- * supplement tools (epics_NIOCs, pkg_automation, pciids, etherlabmaster, etc) -->
-<!-- * sequencer -->
-<!-- * db, template, subst files (inflating...) -->
-<!-- * e3 configuration variables -->
-<!-- * e3 building system -->
-<!-- * systemd  -->
-<!-- * require  -->
+##### Appendix A: [Build system troubleshoting](appendixA.md) :construction:
+##### Appendix B: [Segmentation fault with GDB](appendixB.md) :construction:

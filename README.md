@@ -1,5 +1,6 @@
 # DEPRECATION NOTICE
 
-## 2020-10-27
+## 2021-11-15
 
-This remote has been deprecated. New target available at: https://gitlab.esss.lu.se/e3/e3training
+This remote has been deprecated, and this training series has since been integrated in the homepage for e3: http://e3.pages.esss.lu.se
+
